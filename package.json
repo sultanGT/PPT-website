@@ -1,0 +1,23 @@
+{
+  "name": "ppt-website",
+  "proxy": "http://127.0.0.1:5000",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "start":"nodemon --watch backend --exec node --experimental-modules backend/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sultanGT/PPT-website/issues"
+  },
+  "homepage": "https://github.com/sultanGT/PPT-website#readme"
+}
