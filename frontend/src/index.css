@@ -98,6 +98,12 @@ a.brand {
   justify-content: space-between;
   align-items: center;
 }
+.navbar-fixed {
+  padding: 2rem 0 2rem 0;
+  z-index: 100;
+  position: fixed;
+  width: 100%;
+}
 .row.center {
   justify-content: center;
 }
