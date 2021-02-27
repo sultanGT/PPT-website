@@ -16,7 +16,7 @@ const {cartItems} = cart;
         <header className="row navbar-fixed">
           <div>
             <Link className="brand" to="/">
-              amazona
+              PPT Web App
             </Link>
           </div>
           <div>
