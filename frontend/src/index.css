@@ -115,7 +115,7 @@ a.brand {
   align-items: center;
 }
 .navbar-fixed {
-  padding: 2rem 0 2rem 0;
+  padding: 1rem 0 1rem 0;
   z-index: 100;
   position: fixed;
   width: 100%;
@@ -242,4 +242,18 @@ img.large {
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+/* Checkout Steps*/
+.checkout-steps > div {
+  border-top: 0.3rem #c0c0c0 solid;
+  color: #c0c0c0;
+  flex: 1;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.checkout-steps > div.active {
+  border-top-color: #f08080;
+  color: #f08080;
 }
