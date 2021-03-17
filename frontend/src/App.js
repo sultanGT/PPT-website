@@ -9,56 +9,58 @@ import OrderScreen from './screens/OrderScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProductScreen from './screens/ProductScreen';
+import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 
 function App() {
-
-const cart = useSelector(state => state.cart);
-const {cartItems} = cart;
-const userSignin = useSelector((state) => state.userSignin);
-const { userInfo } = userSignin;
-const dispatch = useDispatch();
-const signoutHandler = () => {
-  dispatch(signout());
-}
-
-
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const dispatch = useDispatch();
+  const signoutHandler = () => {
+    dispatch(signout());
+  };
   return (
     <BrowserRouter>
       <div className="grid-container">
-        <header className="row navbar-fixed">
+        <header className="row">
           <div>
             <Link className="brand" to="/">
               PPT Web App
             </Link>
           </div>
           <div>
-            <Link to="/cart">Cart
-            {cartItems.length > 0 && (
-              <span className="badge">{cartItems.length}</span>
-            )}
+            <Link to="/cart">
+              Cart
+              {cartItems.length > 0 && (
+                <span className="badge">{cartItems.length}</span>
+              )}
             </Link>
-            {
-              userInfo ? (
+            {userInfo ? (
               <div className="dropdown">
-                <Link to='#'>
-                  {userInfo.name} <i className="fa fa-caret-down"></i>
+                <Link to="#">
+                  {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/orderhistory">Order Histroy</Link>
+                    <Link to="/profile">User Profile</Link>
                   </li>
-                  <Link to="#signout" onClick={signoutHandler}>
-                    Sign out
-                  </Link>
+                  <li>
+                    <Link to="/orderhistory">Order History</Link>
+                  </li>
+                  <li>
+                    <Link to="#signout" onClick={signoutHandler}>
+                      Sign Out
+                    </Link>
+                  </li>
                 </ul>
               </div>
-
-          ) : (
-                <Link to="/signin">Sign In</Link>
-          )}
+            ) : (
+              <Link to="/signin">Sign In</Link>
+            )}
           </div>
         </header>
         <main>
@@ -66,11 +68,12 @@ const signoutHandler = () => {
           <Route path="/product/:id" component={ProductScreen}></Route>
           <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
-          <Route path="/shipping" component={ShippingAddressScreen} exact></Route>
-          <Route path="/payment" component={PaymentMethodScreen} exact></Route>
-          <Route path="/placeorder" component={PlaceOrderScreen} exact></Route>
+          <Route path="/shipping" component={ShippingAddressScreen}></Route>
+          <Route path="/payment" component={PaymentMethodScreen}></Route>
+          <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/order/:id" component={OrderScreen}></Route>
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
+          <Route path="/profile" component={ProfileScreen}></Route>
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
         <footer className="row center">All right reserved</footer>
