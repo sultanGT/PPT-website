@@ -5,6 +5,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sultanGT/PPT-website/issues"
+  },
+  "homepage": "https://github.com/sultanGT/PPT-website#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
@@ -20,15 +30,5 @@
   "engines": {
     "node":"12.4.0",
      "npm": "6.9.0"
-  },
-  "scripts": {
-    "build": "cd frontend && npm install && npm run build",
-    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sultanGT/PPT-website/issues"
-  },
-  "homepage": "https://github.com/sultanGT/PPT-website#readme"
+  }
 }
