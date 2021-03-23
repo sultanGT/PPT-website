@@ -28,6 +28,13 @@ body {
 header {
   grid-area: header;
   background-color: #203040;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 0 10px 0;
+}
+.active { 
+  background-color: #fff
 }
 main {
   grid-area: main;
@@ -50,7 +57,9 @@ h2 {
 
 a {
   text-decoration: none;
+  color: #404040;
 }
+
 a:hover {
   color: #ff8000;
 }
@@ -95,11 +104,11 @@ button.small {
 }
 /* Header */
 header a {
-  color: #ffffff;
+  color: white;
   padding: 1rem;
 }
 a.brand {
-  color: #ffffff;
+  color: white;
   font-size: 3rem;
   font-weight: bold;
 }
@@ -137,6 +146,31 @@ a.brand {
 }
 .min-30{
   min-width: 30rem;
+}
+.navbar {
+  grid-area: header;
+  background: #203060;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 0 10px 0;
+}
+
+.navbar.active {
+  background-color: #203040;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 0 10px 0;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
 }
 
 /* Image */
