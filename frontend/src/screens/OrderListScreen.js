@@ -14,11 +14,14 @@ export default function OrderListScreen(props) {
     error: errorDelete,
     success: successDelete,
   } = orderDelete;
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: ORDER_DELETE_RESET });
-    dispatch(listOrders());
-  }, [dispatch, successDelete]);
+    dispatch(listOrders( userInfo._id ));
+  }, [dispatch, successDelete, userInfo._id]);
   const deleteHandler = (order) => {
     if (window.confirm('Are you sure to delete?')) {
       dispatch(deleteOrder(order._id));
