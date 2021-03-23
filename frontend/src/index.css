@@ -57,9 +57,7 @@ h2 {
 
 a {
   text-decoration: none;
-  color: #404040;
 }
-
 a:hover {
   color: #ff8000;
 }
@@ -71,8 +69,8 @@ ul {
 li {
   margin-top: 1rem;
 }
-input, 
-select, 
+input,
+select,
 textarea,
 button {
   padding: 1rem;
@@ -87,8 +85,8 @@ button {
   background-color: #f8f8f8;
   cursor: pointer;
 }
-input:hover, 
-select:hover, 
+input:hover,
+select:hover,
 textarea:hover,
 button:hover {
   border: 0.1rem #404040 solid;
@@ -104,15 +102,15 @@ button.small {
 }
 /* Header */
 header a {
-  color: white;
+  color: #ffffff;
   padding: 1rem;
 }
 a.brand {
-  color: white;
+  color: #ffffff;
   font-size: 3rem;
   font-weight: bold;
 }
-.badge{
+.badge {
   background-color: #f02020;
   color: #ffffff;
   border-radius: 50%;
@@ -138,14 +136,23 @@ a.brand {
 .row.top {
   align-items: flex-start;
 }
+.row.start {
+  justify-content: flex-start;
+}
 .col-1 {
   flex: 1 1 25rem;
 }
 .col-2 {
   flex: 2 1 50rem;
 }
-.min-30{
+.col-3 {
+  flex: 32 1 75rem;
+}
+.min-30 {
   min-width: 30rem;
+}
+.p-1 {
+  padding: 1rem;
 }
 .navbar {
   grid-area: header;
@@ -159,7 +166,6 @@ a.brand {
 .navbar.active {
   background-color: #203040;
 }
-
 /* The sticky class is added to the header with JS when it reaches its scroll position */
 .sticky {
   position: fixed;
@@ -172,16 +178,14 @@ a.brand {
 .sticky + .content {
   padding-top: 102px;
 }
-
 /* Image */
 img {
   border-radius: 0.5rem;
 }
-img.small{
+img.small {
   max-width: 5rem;
   width: 100%;
 }
-
 img.medium {
   max-width: 29rem;
   width: 100%;
@@ -244,27 +248,22 @@ img.large {
   color: #20a020;
   background-color: #eeffe0;
 }
-
-/* form */
-
+/* Form */
 .form {
   max-width: 60rem;
   margin: 0 auto;
 }
-
 .form > div {
   display: flex;
   flex-direction: column;
-  margin: rem;
+  margin: 1rem;
 }
-
 .form label {
-  margin: 1rem 0;
-  display: block;
+  margin: 1rem 0;  
+  display: block;  
 }
-
 /* Dropdown */
-.dropdown{
+.dropdown {
   display: inline-block;
   position: relative;
 }
@@ -278,14 +277,12 @@ img.large {
   background-color: #203040;
   margin: 0;
   margin-top: 0.4rem;
-  border-radius: 0.5rem;;
+  border-radius: 0.5rem;
 }
-
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
-/* Checkout Steps*/
+/* Checkout Steps */
 .checkout-steps > div {
   border-top: 0.3rem #c0c0c0 solid;
   color: #c0c0c0;
@@ -293,12 +290,10 @@ img.large {
   padding: 1rem;
   font-weight: bold;
 }
-
 .checkout-steps > div.active {
-  border-top-color: #f08080;
-  color: #f08080;
+  border-top-color: #f08000;
+  color: #f08000;
 }
-
 /* Table */
 .table {
   width: 100%;
@@ -307,11 +302,24 @@ img.large {
 .table tbody tr:nth-of-type(odd) {
   background-color: #f4f4f4;
 }
-.table td, .table th{
+.table td,
+.table th {
   text-align: left;
   border: 0.1rem solid #e4e4e4;
   padding: 0.5rem;
 }
 .table button {
   margin: 0 0.2rem;
+}
+
+/* Search */
+.search button {
+  border-radius: 0 0.5rem 0.5rem 0;
+  border-right: none;
+  margin-right: 0.5rem;
+}
+.search input {
+  border-radius: 0.5rem 0 0 0.5rem;
+  border-right: none;
+  margin-left: 0.5rem;
 }
