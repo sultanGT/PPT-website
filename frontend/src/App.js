@@ -59,7 +59,7 @@ function App() {
               <i className="fa fa-bars"></i>
             </button>
             <Link className="brand" to="/">
-              PPT webapp
+              PPT Webapp
             </Link>
           </div>
           <div>
@@ -98,7 +98,7 @@ function App() {
             ) : (
               <Link to="/signin">Sign In</Link>
             )}
-            
+
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
                 <Link to="#admin">
@@ -153,7 +153,6 @@ function App() {
           </ul>
         </aside>
         <main>
-
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>
           <Route
@@ -184,7 +183,7 @@ function App() {
             exact
           ></Route>
           <Route
-            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
+            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
           ></Route>
@@ -198,6 +197,11 @@ function App() {
             exact
           ></AdminRoute>
           <AdminRoute
+            path="/productlist/pageNumber/:pageNumber"
+            component={ProductListScreen}
+            exact
+          ></AdminRoute>
+          <AdminRoute
             path="/orderlist"
             component={OrderListScreen}
             exact
@@ -207,7 +211,6 @@ function App() {
             path="/user/:id/edit"
             component={UserEditScreen}
           ></AdminRoute>
-
 
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
