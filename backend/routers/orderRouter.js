@@ -87,7 +87,7 @@ orderRouter.put(
         .messages()
         .send(
           {
-            from: 'PPT website<ppt-website@mg.pptwebsite.herokuapp.com',
+            from: 'PPT website<pptwebsite@mg.pptwebsite.herokuapp.com',
             to: `${order.user.name} <${order.user.email}>`,
             subject: `New order ${order._id}`,
             html: payOrderEmailTemplate(order),
