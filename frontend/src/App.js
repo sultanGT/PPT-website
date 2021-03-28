@@ -98,7 +98,7 @@ function App() {
             ) : (
               <Link to="/signin">Sign In</Link>
             )}
- 
+            
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
                 <Link to="#admin">
@@ -153,6 +153,7 @@ function App() {
           </ul>
         </aside>
         <main>
+
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>
           <Route
@@ -179,6 +180,11 @@ function App() {
           ></Route>
           <Route
             path="/search/category/:category/name/:name"
+            component={SearchScreen}
+            exact
+          ></Route>
+          <Route
+            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
             component={SearchScreen}
             exact
           ></Route>
