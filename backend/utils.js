@@ -49,8 +49,6 @@ export const mailgun = () => mg ({
   domain: process.env.MAILGUN_DOMAIN,
 });
 
-// 
-
 export const payOrderEmailTemplate = (order) => {
   return `<h1>Thanks for shopping with us</h1>
   <p>

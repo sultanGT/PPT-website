@@ -1,7 +1,8 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
-import { isAdmin, isAuth, mailgun, payOrderEmailTemplate } from '../utils.js';
+import { isAdmin, isAuth, mailgun, payOrderEmailTemplate,
+} from '../utils.js';
 
 const orderRouter = express.Router();
 orderRouter.get(
@@ -87,7 +88,7 @@ orderRouter.put(
         .messages()
         .send(
           {
-            from: 'PPT website <pptwebsite@mg.pptwebsite.herokuapp.com',
+            from: 'PPT website <ppt-website@mg.pptwebsite.herokuapp.com',
             to: `${order.user.name} <${order.user.email}>`,
             subject: `New order ${order._id}`,
             html: payOrderEmailTemplate(order),
