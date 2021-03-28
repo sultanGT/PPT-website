@@ -11,6 +11,7 @@ export default function ProfileScreen() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const userDetails = useSelector((state) => state.userDetails);
@@ -37,7 +38,15 @@ export default function ProfileScreen() {
     if (password !== confirmPassword) {
       alert('Password and Confirm Password Are Not Matched');
     } else {
-      dispatch(updateUserProfile({ userId: user._id, name, email, password }));
+      dispatch(
+        updateUserProfile({
+          userId: user._id,
+          name,
+          email,
+          password,
+     
+        })
+      );
     }
   };
   return (
@@ -99,7 +108,9 @@ export default function ProfileScreen() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               ></input>
             </div>
-            <div>
+
+                <div>
+
               <label />
               <button className="primary" type="submit">
                 Update

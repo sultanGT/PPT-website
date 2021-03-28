@@ -7,6 +7,8 @@ import { generateToken, isAdmin, isAuth } from '../utils.js';
 
 const userRouter = express.Router();
 
+
+
 userRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {

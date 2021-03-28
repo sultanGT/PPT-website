@@ -30,7 +30,8 @@ export default function ProductListScreen(props) {
     error: errorDelete,
     success: successDelete,
   } = productDelete;
-
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const dispatch = useDispatch();
   useEffect(() => {
     if (successCreate) {
@@ -40,11 +41,18 @@ export default function ProductListScreen(props) {
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
-    dispatch(listProducts());
-  }, [createdProduct, dispatch, props.history, successCreate, successDelete]);
+    dispatch(listProducts(userInfo._id));
+  }, [
+    createdProduct,
+    dispatch,
+    props.history,
+    successCreate,
+    successDelete,
+    userInfo._id,
+  ]);
 
   const deleteHandler = (product) => {
-    if (window.confirm('Are you sure want to delete?')) {
+    if (window.confirm('Are you sure you want to delete?')) {
       dispatch(deleteProduct(product._id));
     }
   };
