@@ -65,7 +65,7 @@ export const signin = (email, password) => async (dispatch) => {
 export const signout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
   localStorage.removeItem('cartItems');
-  localStorage.removeItem('shippingAddress');
+  localStorage.removeItem('deliveryAddress');
   dispatch({ type: USER_SIGNOUT });
   document.location.href = '/signin';
 };

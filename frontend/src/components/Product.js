@@ -3,21 +3,21 @@ import { Link } from 'react-router-dom';
 import Rating from './Rating';
 
 export default function Product(props) {
-  const { product } = props;
+  const { item } = props;
   return (
-    <div key={product._id} className="card">
-      <Link to={`/product/${product._id}`}>
-        <img className="medium" src={product.image} alt={product.name} />
+    <div key={item._id} className="card">
+      <Link to={`/item/${item._id}`}>
+        <img className="medium" src={item.picture} alt={item.name} />
       </Link>
       <div className="card-body">
-        <Link to={`/product/${product._id}`}>
-          <h2>{product.name}</h2>
+        <Link to={`/item/${item._id}`}>
+          <h2>{item.name}</h2>
         </Link>
         <Rating
-          rating={product.rating}
-          numReviews={product.numReviews}
+          rating={item.rating}
+          numReviews={item.numReviews}
         ></Rating>
-        <div className="price">£{product.price}</div>
+        <div className="price">£{item.price}</div>
       </div>
     </div>
   );

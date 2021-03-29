@@ -10,9 +10,9 @@ import { PRODUCT_REVIEW_CREATE_RESET } from '../constants/productConstants';
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
   const productId = props.match.params.id;
-  const [qty, setQty] = useState(1);
+  const [quantity, setQty] = useState(1);
   const productDetails = useSelector((state) => state.productDetails);
-  const { loading, error, product } = productDetails;
+  const { loading, error, item } = productDetails;
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
@@ -36,7 +36,7 @@ export default function ProductScreen(props) {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId, successReviewCreate]);
   const addToCartHandler = () => {
-    props.history.push(`/cart/${productId}?qty=${qty}`);
+    props.history.push(`/cart/${productId}?quantity=${quantity}`);
   };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -61,25 +61,25 @@ export default function ProductScreen(props) {
             <div className="col-2">
               <img
                 className="large"
-                src={product.image}
-                alt={product.name}
+                src={item.picture}
+                alt={item.name}
               ></img>
             </div>
             <div className="col-1">
               <ul>
                 <li>
-                  <h1>{product.name}</h1>
+                  <h1>{item.name}</h1>
                 </li>
                 <li>
                   <Rating
-                    rating={product.rating}
-                    numReviews={product.numReviews}
+                    rating={item.rating}
+                    numReviews={item.numReviews}
                   ></Rating>
                 </li>
-                <li>Price : £{product.price}</li>
+                <li>Price : £{item.price}</li>
                 <li>
                   Description:
-                  <p>{product.description}</p>
+                  <p>{item.description}</p>
                 </li>
               </ul>
             </div>
@@ -89,14 +89,14 @@ export default function ProductScreen(props) {
                   <li>
                     <div className="row">
                       <div>Price</div>
-                      <div className="price">${product.price}</div>
+                      <div className="price">${item.price}</div>
                     </div>
                   </li>
                   <li>
                     <div className="row">
                       <div>Status</div>
                       <div>
-                        {product.countInStock > 0 ? (
+                        {item.countInStock > 0 ? (
                           <span className="success">In Stock</span>
                         ) : (
                           <span className="danger">Unavailable</span>
@@ -104,17 +104,17 @@ export default function ProductScreen(props) {
                       </div>
                     </div>
                   </li>
-                  {product.countInStock > 0 && (
+                  {item.countInStock > 0 && (
                     <>
                       <li>
                         <div className="row">
                           <div>Qty</div>
                           <div>
                             <select
-                              value={qty}
+                              value={quantity}
                               onChange={(e) => setQty(e.target.value)}
                             >
-                              {[...Array(product.countInStock).keys()].map(
+                              {[...Array(item.countInStock).keys()].map(
                                 (x) => (
                                   <option key={x + 1} value={x + 1}>
                                     {x + 1}
@@ -141,11 +141,11 @@ export default function ProductScreen(props) {
           </div>
           <div>
             <h2 id="reviews">Reviews</h2>
-            {product.reviews.length === 0 && (
+            {item.reviews.length === 0 && (
               <MessageBox>There is no review</MessageBox>
             )}
             <ul>
-              {product.reviews.map((review) => (
+              {item.reviews.map((review) => (
                 <li key={review._id}>
                   <strong>{review.name}</strong>
                   <Rating rating={review.rating} caption=" "></Rating>

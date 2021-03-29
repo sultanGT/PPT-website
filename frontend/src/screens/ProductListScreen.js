@@ -23,7 +23,7 @@ export default function ProductListScreen(props) {
     loading: loadingCreate,
     error: errorCreate,
     success: successCreate,
-    product: createdProduct,
+    item: createdProduct,
   } = productCreate;
 
   const productDelete = useSelector((state) => state.productDelete);
@@ -38,7 +38,7 @@ export default function ProductListScreen(props) {
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });
-      props.history.push(`/product/${createdProduct._id}/edit`);
+      props.history.push(`/item/${createdProduct._id}/edit`);
     }
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
@@ -57,9 +57,9 @@ export default function ProductListScreen(props) {
     pageNumber,
   ]);
 
-  const deleteHandler = (product) => {
+  const deleteHandler = (item) => {
     if (window.confirm('Are you sure you want to delete?')) {
-      dispatch(deleteProduct(product._id));
+      dispatch(deleteProduct(item._id));
     }
   };
   const createHandler = () => {
@@ -97,19 +97,19 @@ export default function ProductListScreen(props) {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.brand}</td>
+              {products.map((item) => (
+                <tr key={item._id}>
+                  <td>{item._id}</td>
+                  <td>{item.name}</td>
+                  <td>{item.price}</td>
+                  <td>{item.category}</td>
+                  <td>{item.brand}</td>
                   <td>
                     <button
                       type="button"
                       className="small"
                       onClick={() =>
-                        props.history.push(`/product/${product._id}/edit`)
+                        props.history.push(`/item/${item._id}/edit`)
                       }
                     >
                       Edit
@@ -117,7 +117,7 @@ export default function ProductListScreen(props) {
                     <button
                       type="button"
                       className="small"
-                      onClick={() => deleteHandler(product)}
+                      onClick={() => deleteHandler(item)}
                     >
                       Delete
                     </button>

@@ -66,8 +66,8 @@ productRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
     // await Product.remove({});
-    const products = data.products.map((product) => ({
-        ...product,
+    const products = data.products.map((item) => ({
+        ...item,
         
       }));
       const createdProducts = await Product.insertMany(products);
@@ -79,9 +79,9 @@ productRouter.get(
 productRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
-    if (product) {
-      res.send(product);
+    const item = await Product.findById(req.params.id);
+    if (item) {
+      res.send(item);
     } else {
       res.status(404).send({ message: 'Product Not Found' });
     }
@@ -93,9 +93,9 @@ productRouter.post(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    const product = new Product({
+    const item = new Product({
       name: 'sample name ' + Date.now(),
-      image: '/images/p1.jpg',
+      picture: '/images/p1.jpg',
       price: 0,
       category: 'sample category',
       brand: 'sample brand',
@@ -104,8 +104,8 @@ productRouter.post(
       numReviews: 0,
       description: 'sample description',
     });
-    const createdProduct = await product.save();
-    res.send({ message: 'Product Created', product: createdProduct });
+    const createdProduct = await item.save();
+    res.send({ message: 'Product Created', item: createdProduct });
   })
 );
 productRouter.put(
@@ -114,17 +114,17 @@ productRouter.put(
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
-    const product = await Product.findById(productId);
-    if (product) {
-      product.name = req.body.name;
-      product.price = req.body.price;
-      product.image = req.body.image;
-      product.category = req.body.category;
-      product.brand = req.body.brand;
-      product.countInStock = req.body.countInStock;
-      product.description = req.body.description;
-      const updatedProduct = await product.save();
-      res.send({ message: 'Product Updated', product: updatedProduct });
+    const item = await Product.findById(productId);
+    if (item) {
+      item.name = req.body.name;
+      item.price = req.body.price;
+      item.picture = req.body.picture;
+      item.category = req.body.category;
+      item.brand = req.body.brand;
+      item.countInStock = req.body.countInStock;
+      item.description = req.body.description;
+      const updatedProduct = await item.save();
+      res.send({ message: 'Product Updated', item: updatedProduct });
     } else {
       res.status(404).send({ message: 'Product Not Found' });
     }
@@ -136,10 +136,10 @@ productRouter.delete(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
-    if (product) {
-      const deleteProduct = await product.remove();
-      res.send({ message: 'Product Deleted', product: deleteProduct });
+    const item = await Product.findById(req.params.id);
+    if (item) {
+      const deleteProduct = await item.remove();
+      res.send({ message: 'Product Deleted', item: deleteProduct });
     } else {
       res.status(404).send({ message: 'Product Not Found' });
     }
@@ -151,9 +151,9 @@ productRouter.post(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
-    const product = await Product.findById(productId);
-    if (product) {
-      if (product.reviews.find((x) => x.name === req.user.name)) {
+    const item = await Product.findById(productId);
+    if (item) {
+      if (item.reviews.find((x) => x.name === req.user.name)) {
         return res
           .status(400)
           .send({ message: 'You already submitted a review' });
@@ -163,12 +163,12 @@ productRouter.post(
         rating: Number(req.body.rating),
         comment: req.body.comment,
       };
-      product.reviews.push(review);
-      product.numReviews = product.reviews.length;
-      product.rating =
-        product.reviews.reduce((a, c) => c.rating + a, 0) /
-        product.reviews.length;
-      const updatedProduct = await product.save();
+      item.reviews.push(review);
+      item.numReviews = item.reviews.length;
+      item.rating =
+        item.reviews.reduce((a, c) => c.rating + a, 0) /
+        item.reviews.length;
+      const updatedProduct = await item.save();
       res.status(201).send({
         message: 'Review Created',
         review: updatedProduct.reviews[updatedProduct.reviews.length - 1],

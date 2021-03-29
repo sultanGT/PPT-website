@@ -152,8 +152,8 @@ export default function SearchScreen(props) {
                 <MessageBox>No Product Found</MessageBox>
               )}
               <div className="row center">
-                {products.map((product) => (
-                  <Product key={product._id} product={product}></Product>
+                {products.map((item) => (
+                  <Product key={item._id} item={item}></Product>
                 ))}
               </div>
               <div className="row center pagination">

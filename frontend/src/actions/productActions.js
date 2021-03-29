@@ -88,7 +88,7 @@ export const createProduct = () => async (dispatch, getState) => {
     );
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
-      payload: data.product,
+      payload: data.item,
     });
   } catch (error) {
     const message =
@@ -98,13 +98,13 @@ export const createProduct = () => async (dispatch, getState) => {
     dispatch({ type: PRODUCT_CREATE_FAIL, payload: message });
   }
 };
-export const updateProduct = (product) => async (dispatch, getState) => {
-  dispatch({ type: PRODUCT_UPDATE_REQUEST, payload: product });
+export const updateProduct = (item) => async (dispatch, getState) => {
+  dispatch({ type: PRODUCT_UPDATE_REQUEST, payload: item });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.put(`/api/products/${product._id}`, product, {
+    const { data } = await Axios.put(`/api/products/${item._id}`, item, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });

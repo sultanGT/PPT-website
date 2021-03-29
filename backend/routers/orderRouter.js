@@ -32,15 +32,15 @@ orderRouter.post(
   '/',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    if (req.body.orderItems.length === 0) {
+    if (req.body.orderProducts.length === 0) {
       res.status(400).send({ message: 'Cart is empty' });
     } else {
       const order = new Order({
-        orderItems: req.body.orderItems,
-        shippingAddress: req.body.shippingAddress,
-        paymentMethod: req.body.paymentMethod,
+        orderProducts: req.body.orderProducts,
+        deliveryAddress: req.body.deliveryAddress,
+        paymentPPorS: req.body.paymentPPorS,
         itemsPrice: req.body.itemsPrice,
-        shippingPrice: req.body.shippingPrice,
+        deliveryPrice: req.body.deliveryPrice,
         taxPrice: req.body.taxPrice,
         totalPrice: req.body.totalPrice,
         user: req.user._id,
@@ -75,9 +75,9 @@ orderRouter.put(
       'email name'
     );
     if (order) {
-      order.isPaid = true;
-      order.paidAt = Date.now();
-      order.paymentResult = {
+      order.paymentConfirmed = true;
+      order.paymentDate = Date.now();
+      order.paymentComplete = {
         id: req.body.id,
         status: req.body.status,
         update_time: req.body.update_time,
@@ -128,8 +128,8 @@ orderRouter.put(
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
     if (order) {
-      order.isDelivered = true;
-      order.deliveredAt = Date.now();
+      order.deliveryConfirmed = true;
+      order.deliveryDate = Date.now();
 
       const updatedOrder = await order.save();
       res.send({ message: 'Order Delivered', order: updatedOrder });

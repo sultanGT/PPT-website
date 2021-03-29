@@ -54,7 +54,7 @@ export default function OrderScreen(props) {
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(detailsOrder(orderId));
     } else {
-      if (!order.isPaid) {
+      if (!order.paymentConfirmed) {
         if (!window.paypal) {
           addPayPalScript();
         } else {
@@ -64,8 +64,8 @@ export default function OrderScreen(props) {
     }
   }, [dispatch, orderId, sdkReady, successPay, successDeliver, order]);
 
-  const successPaymentHandler = (paymentResult) => {
-    dispatch(payOrder(order, paymentResult));
+  const successPaymentHandler = (paymentComplete) => {
+    dispatch(payOrder(order, paymentComplete));
   };
   const deliverHandler = () => {
     dispatch(deliverOrder(order._id));
@@ -85,15 +85,15 @@ export default function OrderScreen(props) {
               <div className="card card-body">
                 <h2>Shippring</h2>
                 <p>
-                  <strong>Name:</strong> {order.shippingAddress.fullName} <br />
-                  <strong>Address: </strong> {order.shippingAddress.address},
-                  {order.shippingAddress.city},{' '}
-                  {order.shippingAddress.postalCode},
-                  {order.shippingAddress.country}
+                  <strong>Name:</strong> {order.deliveryAddress.fullName} <br />
+                  <strong>Address: </strong> {order.deliveryAddress.address},
+                  {order.deliveryAddress.city},{' '}
+                  {order.deliveryAddress.postalCode},
+                  {order.deliveryAddress.county}
                 </p>
-                {order.isDelivered ? (
+                {order.deliveryConfirmed ? (
                   <MessageBox variant="success">
-                    Delivered at {order.deliveredAt}
+                    Delivered at {order.deliveryDate}
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Delivered</MessageBox>
@@ -104,11 +104,11 @@ export default function OrderScreen(props) {
               <div className="card card-body">
                 <h2>Payment</h2>
                 <p>
-                  <strong>Method:</strong> {order.paymentMethod}
+                  <strong>Method:</strong> {order.paymentPPorS}
                 </p>
-                {order.isPaid ? (
+                {order.paymentConfirmed ? (
                   <MessageBox variant="success">
-                    Paid at {order.paidAt}
+                    Paid at {order.paymentDate}
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Paid</MessageBox>
@@ -119,24 +119,24 @@ export default function OrderScreen(props) {
               <div className="card card-body">
                 <h2>Order Items</h2>
                 <ul>
-                  {order.orderItems.map((item) => (
-                    <li key={item.product}>
+                  {order.orderProducts.map((item) => (
+                    <li key={item.item}>
                       <div className="row">
                         <div>
                           <img
-                            src={item.image}
+                            src={item.picture}
                             alt={item.name}
                             className="small"
                           ></img>
                         </div>
                         <div className="min-30">
-                          <Link to={`/product/${item.product}`}>
+                          <Link to={`/item/${item.item}`}>
                             {item.name}
                           </Link>
                         </div>
 
                         <div>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
+                          {item.quantity} x ${item.price} = ${item.quantity * item.price}
                         </div>
                       </div>
                     </li>
@@ -161,7 +161,7 @@ export default function OrderScreen(props) {
               <li>
                 <div className="row">
                   <div>Shipping</div>
-                  <div>${order.shippingPrice.toFixed(2)}</div>
+                  <div>${order.deliveryPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
@@ -180,7 +180,7 @@ export default function OrderScreen(props) {
                   </div>
                 </div>
               </li>
-              {!order.isPaid && (
+              {!order.paymentConfirmed && (
                 <li>
                   {!sdkReady ? (
                     <LoadingBox></LoadingBox>
@@ -199,7 +199,7 @@ export default function OrderScreen(props) {
                   )}
                 </li>
               )}
-              {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+              {userInfo.isAdmin && order.paymentConfirmed && !order.deliveryConfirmed && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
                   {errorDeliver && (

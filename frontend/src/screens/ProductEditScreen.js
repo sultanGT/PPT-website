@@ -10,14 +10,14 @@ export default function ProductEditScreen(props) {
   const productId = props.match.params.id;
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [image, setImage] = useState('');
+  const [picture, setImage] = useState('');
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
 
   const productDetails = useSelector((state) => state.productDetails);
-  const { loading, error, product } = productDetails;
+  const { loading, error, item } = productDetails;
 
   const productUpdate = useSelector((state) => state.productUpdate);
   const {
@@ -31,28 +31,28 @@ export default function ProductEditScreen(props) {
     if (successUpdate) {
       props.history.push('/productlist');
     }
-    if (!product || product._id !== productId || successUpdate) {
+    if (!item || item._id !== productId || successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
       dispatch(detailsProduct(productId));
     } else {
-      setName(product.name);
-      setPrice(product.price);
-      setImage(product.image);
-      setCategory(product.category);
-      setCountInStock(product.countInStock);
-      setBrand(product.brand);
-      setDescription(product.description);
+      setName(item.name);
+      setPrice(item.price);
+      setImage(item.picture);
+      setCategory(item.category);
+      setCountInStock(item.countInStock);
+      setBrand(item.brand);
+      setDescription(item.description);
     }
-  }, [product, dispatch, productId, successUpdate, props.history]);
+  }, [item, dispatch, productId, successUpdate, props.history]);
   const submitHandler = (e) => {
     e.preventDefault();
-    // TODO: dispatch update product
+    // TODO: dispatch update item
     dispatch(
       updateProduct({
         _id: productId,
         name,
         price,
-        image,
+        picture,
         category,
         brand,
         countInStock,
@@ -68,7 +68,7 @@ export default function ProductEditScreen(props) {
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
-    bodyFormData.append('image', file);
+    bodyFormData.append('picture', file);
     setLoadingUpload(true);
     try {
       const { data } = await Axios.post('/api/uploads', bodyFormData, {
@@ -120,12 +120,12 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="image">Image</label>
+              <label htmlFor="picture">Image</label>
               <input
-                id="image"
+                id="picture"
                 type="text"
-                placeholder="Enter image"
-                value={image}
+                placeholder="Enter picture"
+                value={picture}
                 onChange={(e) => setImage(e.target.value)}
               ></input>
             </div>
