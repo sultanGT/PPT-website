@@ -25,6 +25,7 @@ import SearchScreen from './screens/SearchScreen';
 import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
+import '@fortawesome/fontawesome-free/js/all.js';
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -36,6 +37,27 @@ function App() {
   const signoutHandler = () => {
     dispatch(signout());
   };
+  const [navbar, setNavbar] = useState(false);
+
+  const changeBackground = () => {
+    if (window.scrollY >= 10) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+
+  // const [searchBar, setSearchBar] = useState(false);
+  // const changeSearchBackground = () => {
+  //   if (window.scrollY >= 300) {
+  //     setSearchBar(true);
+  //   } else {
+  //     setSearchBar(false);
+  //   }
+  // };
+  // 
+
+  window.addEventListener('scroll', changeBackground);
 
   const productCategoryList = useSelector((state) => state.productCategoryList);
   const {
@@ -49,20 +71,20 @@ function App() {
   return (
     <BrowserRouter>
       <div className="grid-container">
-        <header className="row">
-          <div>
+      <header className={navbar ? 'row navbar active' : 'row navbar'}>
+          <div className="row left">
             <button
               type="button"
-              className="open-sidebar"
+              className="open-sidebar menuIcon"
               onClick={() => setSidebarIsOpen(true)}
             >
               <i className="fa fa-bars"></i>
             </button>
             <Link className="brand" to="/">
-              PPT Webapp
+              PEAK PERFORMANCE TAEKWONDO
             </Link>
           </div>
-          <div>
+          <div className="row">
             <Route
               render={({ history }) => (
                 <SearchBox history={history}></SearchBox>
@@ -71,26 +93,28 @@ function App() {
           </div>
           <div>
             <Link to="/cart">
-              Cart
+              {/* Cart*/}
+              <i className="fas fa-shopping-cart iconLarge"></i>
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}
             </Link>
             {userInfo ? (
               <div className="dropdown">
+                {/* {userInfo.name} */}
                 <Link to="#">
-                  {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
+                <i className="far fa-user iconLarge"></i> {' '} 
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/profile">User Profile</Link>
+                    <Link to="/profile">User Profile  <i className="fa fa-address-card iconSmall"></i></Link>
                   </li>
                   <li>
-                    <Link to="/orderhistory">Order History</Link>
+                    <Link to="/orderhistory">Order History  <i class="fa fa-history iconSmall"></i></Link>
                   </li>
                   <li>
-                    <Link to="#signout" onClick={signoutHandler}>
-                      Sign Out
+                    <Link to="#signout" onClick={signoutHandler} >
+                      Sign Out  <i class="fa fa-sign-out-alt"></i>
                     </Link>
                   </li>
                 </ul>
@@ -102,7 +126,7 @@ function App() {
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
                 <Link to="#admin">
-                  Admin <i className="fa fa-caret-down"></i>
+                <i class="fas fa-user-shield iconLarge"></i> {/*admin*/}
                 </Link>
                 <ul className="dropdown-content">
                   <li>
@@ -131,7 +155,7 @@ function App() {
                 className="close-sidebar"
                 type="button"
               >
-                <i className="fa fa-close"></i>
+                <i class="fas fa-times"></i>
               </button>
             </li>
             {loadingCategories ? (

@@ -86,7 +86,7 @@ orderRouter.put(
       const updatedOrder = await order.save();
       mailgun().messages().send(
           {
-            from: 'ppt-website <pptwebsite@pptwebsite.herokuapp.com',
+            from: 'ppt-website <ppt-website@pptwebsite.herokuapp.com',
             to: `${order.user.name} <${order.user.email}>`,
             subject: `New order ${order._id}`,
             html: payOrderEmailTemplate(order),
