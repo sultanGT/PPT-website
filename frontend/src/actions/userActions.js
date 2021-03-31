@@ -23,12 +23,12 @@ import {
   USER_UPDATE_FAIL,
 } from '../constants/userConstants';
 
-export const register = (name, email, password) => async (dispatch) => {
-  dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
+export const register = (name, userEmail, password) => async (dispatch) => {
+  dispatch({ type: USER_REGISTER_REQUEST, payload: { userEmail, password } });
   try {
     const { data } = await Axios.post('/api/users/register', {
       name,
-      email,
+      userEmail,
       password,
     });
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
@@ -45,10 +45,10 @@ export const register = (name, email, password) => async (dispatch) => {
   }
 };
 
-export const signin = (email, password) => async (dispatch) => {
-  dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
+export const signin = (userEmail, password) => async (dispatch) => {
+  dispatch({ type: USER_SIGNIN_REQUEST, payload: { userEmail, password } });
   try {
-    const { data } = await Axios.post('/api/users/signin', { email, password });
+    const { data } = await Axios.post('/api/users/signin', { userEmail, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {

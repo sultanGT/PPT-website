@@ -10,7 +10,7 @@ import { USER_UPDATE_RESET } from '../constants/userConstants';
 export default function UserEditScreen(props) {
   const userId = props.match.params.id;
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [userEmail, setEmail] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
 
   const userDetails = useSelector((state) => state.userDetails);
@@ -33,7 +33,7 @@ export default function UserEditScreen(props) {
       dispatch(detailsUser(userId));
     } else {
       setName(user.name);
-      setEmail(user.email);
+      setEmail(user.userEmail);
       setIsAdmin(user.isAdmin);
     }
   }, [dispatch, props.history, successUpdate, user, userId]);
@@ -41,7 +41,7 @@ export default function UserEditScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     // dispatch update user
-    dispatch(updateUser({ _id: userId, name, email, isAdmin }));
+    dispatch(updateUser({ _id: userId, name, userEmail, isAdmin }));
   };
   return (
     <div>
@@ -70,12 +70,12 @@ export default function UserEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="email">Email</label>
+              <label htmlFor="userEmail">Email</label>
               <input
-                id="email"
-                type="email"
-                placeholder="Enter email"
-                value={email}
+                id="userEmail"
+                type="userEmail"
+                placeholder="Enter userEmail"
+                value={userEmail}
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>

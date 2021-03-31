@@ -256,6 +256,7 @@ button.open-sidebar {
   background: none;
   color: #ffffff;
   cursor: pointer;
+  border: none;
 }
 button.open-sidebar:hover {
   border-color: #ffffff;

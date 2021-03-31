@@ -23,22 +23,22 @@ export const prices = [
   export const ratings = [
     {
       name: '4stars & up',
-      rating: 4,
+      userRating: 4,
     },
   
     {
       name: '3stars & up',
-      rating: 3,
+      userRating: 3,
     },
   
     {
       name: '2stars & up',
-      rating: 2,
+      userRating: 2,
     },
   
     {
       name: '1stars & up',
-      rating: 1,
+      userRating: 1,
     },
   ];
   

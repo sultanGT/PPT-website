@@ -11,10 +11,10 @@ export default function ProductEditScreen(props) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [picture, setImage] = useState('');
-  const [category, setCategory] = useState('');
+  const [productCategory, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
-  const [brand, setBrand] = useState('');
-  const [description, setDescription] = useState('');
+  const [productBrand, setProductBrand] = useState('');
+  const [productDescription, setDescription] = useState('');
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, item } = productDetails;
@@ -38,10 +38,10 @@ export default function ProductEditScreen(props) {
       setName(item.name);
       setPrice(item.price);
       setImage(item.picture);
-      setCategory(item.category);
+      setCategory(item.productCategory);
       setCountInStock(item.countInStock);
-      setBrand(item.brand);
-      setDescription(item.description);
+      setProductBrand(item.productBrand);
+      setDescription(item.productDescription);
     }
   }, [item, dispatch, productId, successUpdate, props.history]);
   const submitHandler = (e) => {
@@ -53,10 +53,10 @@ export default function ProductEditScreen(props) {
         name,
         price,
         picture,
-        category,
-        brand,
+        productCategory,
+        productBrand,
         countInStock,
-        description,
+        productDescription,
       })
     );
   };
@@ -143,23 +143,23 @@ export default function ProductEditScreen(props) {
               )}
             </div>
             <div>
-              <label htmlFor="category">Category</label>
+              <label htmlFor="productCategory">Category</label>
               <input
-                id="category"
+                id="productCategory"
                 type="text"
-                placeholder="Enter category"
-                value={category}
+                placeholder="Enter productCategory"
+                value={productCategory}
                 onChange={(e) => setCategory(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="brand">Brand</label>
+              <label htmlFor="productBrand">Brand</label>
               <input
-                id="brand"
+                id="productBrand"
                 type="text"
                 placeholder="Enter brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
+                value={productBrand}
+                onChange={(e) => setProductBrand(e.target.value)}
               ></input>
             </div>
             <div>
@@ -173,13 +173,13 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="description">Description</label>
+              <label htmlFor="productDescription">Description</label>
               <textarea
-                id="description"
+                id="productDescription"
                 rows="3"
                 type="text"
-                placeholder="Enter description"
-                value={description}
+                placeholder="Enter productDescription"
+                value={productDescription}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>

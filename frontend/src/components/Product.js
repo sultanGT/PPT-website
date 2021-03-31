@@ -14,7 +14,7 @@ export default function Product(props) {
           <h2>{item.name}</h2>
         </Link>
         <Rating
-          rating={item.rating}
+          userRating={item.userRating}
           numReviews={item.numReviews}
         ></Rating>
         <div className="price">£{item.price}</div>

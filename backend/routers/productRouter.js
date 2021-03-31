@@ -1,7 +1,7 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
-import Product from '../models/productModel.js';
+import Product from '../templates/productTemplate.js';
 import { isAdmin, isAuth } from '../utils.js';
 
 const productRouter = express.Router();
@@ -12,28 +12,28 @@ productRouter.get(
     const pageSize = 8;
     const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
-    const category = req.query.category || '';
+    const productCategory = req.query.productCategory || '';
     const order = req.query.order || '';
     const min =
       req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
     const max =
       req.query.max && Number(req.query.max) !== 0 ? Number(req.query.max) : 0;
-    const rating =
-      req.query.rating && Number(req.query.rating) !== 0
-        ? Number(req.query.rating)
+    const userRating =
+      req.query.userRating && Number(req.query.userRating) !== 0
+        ? Number(req.query.userRating)
         : 0;
 
     const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
-    const categoryFilter = category ? { category } : {};
+    const categoryFilter = productCategory ? { productCategory } : {};
     const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
-    const ratingFilter = rating ? { rating: { $gte: rating } } : {};
+    const ratingFilter = userRating ? { userRating: { $gte: userRating } } : {};
     const sortOrder =
       order === 'lowest'
         ? { price: 1 }
         : order === 'highest'
         ? { price: -1 }
         : order === 'toprated'
-        ? { rating: -1 }
+        ? { userRating: -1 }
         : { _id: -1 };
     const count = await Product.count({
       ...nameFilter,
@@ -57,7 +57,7 @@ productRouter.get(
 productRouter.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {
-    const categories = await Product.find().distinct('category');
+    const categories = await Product.find().distinct('productCategory');
     res.send(categories);
   })
 );
@@ -97,12 +97,12 @@ productRouter.post(
       name: 'sample name ' + Date.now(),
       picture: '/images/p1.jpg',
       price: 0,
-      category: 'sample category',
-      brand: 'sample brand',
+      productCategory: 'sample productCategory',
+      productBrand: 'sample productBrand',
       countInStock: 0,
-      rating: 0,
+      userRating: 0,
       numReviews: 0,
-      description: 'sample description',
+      productDescription: 'sample productDescription',
     });
     const createdProduct = await item.save();
     res.send({ message: 'Product Created', item: createdProduct });
@@ -119,10 +119,10 @@ productRouter.put(
       item.name = req.body.name;
       item.price = req.body.price;
       item.picture = req.body.picture;
-      item.category = req.body.category;
-      item.brand = req.body.brand;
+      item.productCategory = req.body.productCategory;
+      item.productBrand = req.body.productBrand;
       item.countInStock = req.body.countInStock;
-      item.description = req.body.description;
+      item.productDescription = req.body.productDescription;
       const updatedProduct = await item.save();
       res.send({ message: 'Product Updated', item: updatedProduct });
     } else {
@@ -160,13 +160,13 @@ productRouter.post(
       }
       const review = {
         name: req.user.name,
-        rating: Number(req.body.rating),
-        comment: req.body.comment,
+        userRating: Number(req.body.userRating),
+        userComment: req.body.userComment,
       };
       item.reviews.push(review);
       item.numReviews = item.reviews.length;
-      item.rating =
-        item.reviews.reduce((a, c) => c.rating + a, 0) /
+      item.userRating =
+        item.reviews.reduce((a, c) => c.userRating + a, 0) /
         item.reviews.length;
       const updatedProduct = await item.save();
       res.status(201).send({

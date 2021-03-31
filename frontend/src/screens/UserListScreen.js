@@ -56,7 +56,7 @@ export default function UserListScreen(props) {
               <tr key={user._id}>
                 <td>{user._id}</td>
                 <td>{user.name}</td>
-                <td>{user.email}</td>
+                <td>{user.userEmail}</td>
                 <td>{user.isAdmin ? 'YES' : 'NO'}</td>
                 <td>
                   <button

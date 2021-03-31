@@ -80,7 +80,7 @@ function App() {
             >
               <i className="fa fa-bars"></i>
             </button>
-            <Link className="brand" to="/">
+            <Link className="Brand" to="/">
               PEAK PERFORMANCE TAEKWONDO
             </Link>
           </div>
@@ -166,7 +166,7 @@ function App() {
               categories.map((c) => (
                 <li key={c}>
                   <Link
-                    to={`/search/category/${c}`}
+                    to={`/search/productCategory/${c}`}
                     onClick={() => setSidebarIsOpen(false)}
                   >
                     {c}
@@ -197,17 +197,17 @@ function App() {
             exact
           ></Route>
           <Route
-            path="/search/category/:category"
+            path="/search/productCategory/:productCategory"
             component={SearchScreen}
             exact
           ></Route>
           <Route
-            path="/search/category/:category/name/:name"
+            path="/search/productCategory/:productCategory/name/:name"
             component={SearchScreen}
             exact
           ></Route>
           <Route
-            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
+            path="/search/productCategory/:productCategory/name/:name/min/:min/max/:max/userRating/:userRating/order/:order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
           ></Route>

@@ -1,6 +1,6 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
-import Order from '../models/orderModel.js';
+import Order from '../templates/orderTemplate.js';
 import { isAdmin, isAuth, mailgun, payOrderEmailTemplate,
 } from '../utils.js';
 
@@ -72,7 +72,7 @@ orderRouter.put(
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id).populate(
       'user',
-      'email name'
+      'userEmail name'
     );
     if (order) {
       order.paymentConfirmed = true;
@@ -81,13 +81,13 @@ orderRouter.put(
         id: req.body.id,
         status: req.body.status,
         update_time: req.body.update_time,
-        email_address: req.body.email_address,
+        userEmail_address: req.body.userEmail_address,
       };
       const updatedOrder = await order.save();
       mailgun().messages().send(
           {
             from: 'ppt-website <ppt-website@pptwebsite.herokuapp.com',
-            to: `${order.user.name} <${order.user.email}>`,
+            to: `${order.user.name} <${order.user.userEmail}>`,
             subject: `New order ${order._id}`,
             html: payOrderEmailTemplate(order),
           },
