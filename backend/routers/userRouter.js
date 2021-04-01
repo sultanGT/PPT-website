@@ -3,7 +3,7 @@ import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
 import User from '../templates/userTemplate.js';
-import { generateToken, isAdmin, isAuth } from '../utils.js';
+import { generateToken, adminConfirmed, authenticationConfirmed } from '../utils.js';
 
 const userRouter = express.Router();
 
@@ -28,7 +28,7 @@ userRouter.post(
           _id: user._id,
           name: user.name,
           userEmail: user.userEmail,
-          isAdmin: user.isAdmin,
+          adminConfirmed: user.adminConfirmed,
           token: generateToken(user),
         });
         return;
@@ -51,7 +51,7 @@ userRouter.post(
       _id: createdUser._id,
       name: createdUser.name,
       userEmail: createdUser.userEmail,
-      isAdmin: createdUser.isAdmin,
+      adminConfirmed: createdUser.adminConfirmed,
       token: generateToken(createdUser),
     });
   })
@@ -70,7 +70,7 @@ userRouter.get(
 );
 userRouter.put(
   '/profile',
-  isAuth,
+  authenticationConfirmed,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
@@ -84,7 +84,7 @@ userRouter.put(
         _id: updatedUser._id,
         name: updatedUser.name,
         userEmail: updatedUser.userEmail,
-        isAdmin: updatedUser.isAdmin,
+        adminConfirmed: updatedUser.adminConfirmed,
         token: generateToken(updatedUser),
       });
     }
@@ -93,8 +93,8 @@ userRouter.put(
 
 userRouter.get(
   '/',
-  isAuth,
-  isAdmin,
+  authenticationConfirmed,
+  adminConfirmed,
   expressAsyncHandler(async (req, res) => {
     const users = await User.find({});
     res.send(users);
@@ -103,8 +103,8 @@ userRouter.get(
 
 userRouter.delete(
   '/:id',
-  isAuth,
-  isAdmin,
+  authenticationConfirmed,
+  adminConfirmed,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
@@ -122,15 +122,15 @@ userRouter.delete(
 
 userRouter.put(
   '/:id',
-  isAuth,
-  isAdmin,
+  authenticationConfirmed,
+  adminConfirmed,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
       user.name = req.body.name || user.name;
       user.userEmail = req.body.userEmail || user.userEmail;
-      user.isAdmin = Boolean(req.body.isAdmin);
-      // user.isAdmin = req.body.isAdmin || user.isAdmin;
+      user.adminConfirmed = Boolean(req.body.adminConfirmed);
+      // user.adminConfirmed = req.body.adminConfirmed || user.adminConfirmed;
       const updatedUser = await user.save();
       res.send({ message: 'User Updated', user: updatedUser });
     } else {

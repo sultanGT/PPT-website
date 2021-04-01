@@ -9,7 +9,7 @@ export default function AdminRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={(props) =>
-        userInfo && userInfo.isAdmin ? (
+        userInfo && userInfo.adminConfirmed ? (
           <Component {...props}></Component>
         ) : (
           <Redirect to="/signin" />

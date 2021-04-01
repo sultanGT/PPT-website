@@ -28,6 +28,7 @@ import MessageBox from './components/MessageBox';
 import '@fortawesome/fontawesome-free/js/all.js';
 import img from './constants/pptmenuicon.png';
 
+
 function App() {
   const cart = useSelector((state) => state.cart);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -125,7 +126,7 @@ function App() {
               <Link to="/signin"><i className="far fa-user iconLarge"></i></Link>
             )}
 
-            {userInfo && userInfo.isAdmin && (
+            {userInfo && userInfo.adminConfirmed && (
               <div className="dropdown">
                 <Link to="#admin">
                 <i class="fas fa-user-shield iconLarge"></i> {/*admin*/}

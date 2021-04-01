@@ -214,17 +214,18 @@ a.brand:hover {
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 2rem 0 2rem 0;
+  padding: 4rem 0 4rem 0;
   transition: all 0.3s;
 }
 
 .username {
   margin-left: 1rem;
-  margin-right: -2rem;
+  margin-right: 1rem;
 }
 .navbar.active {
   background-color: #000;
   transition: all 0.3s;
+  padding: 1rem;
 }
 .deactive {
   display: none;

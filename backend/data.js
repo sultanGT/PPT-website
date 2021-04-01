@@ -6,13 +6,13 @@ const data = {
             name:'Sultan',
             userEmail:'sultan.malik@city.ac.uk',
             password: bcrypt.hashSync('sultan', 8),
-            isAdmin: true,
+            adminConfirmed: true,
         },
         {
             name:'Mike',
             userEmail:'user@city.ac.uk',
             password: bcrypt.hashSync('mike', 8),
-            isAdmin: false,
+            adminConfirmed: false,
         },
     ],
     products: [

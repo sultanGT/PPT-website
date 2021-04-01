@@ -11,7 +11,7 @@ export default function UserEditScreen(props) {
   const userId = props.match.params.id;
   const [name, setName] = useState('');
   const [userEmail, setEmail] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminConfirmed, setIsAdmin] = useState(false);
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
@@ -34,14 +34,14 @@ export default function UserEditScreen(props) {
     } else {
       setName(user.name);
       setEmail(user.userEmail);
-      setIsAdmin(user.isAdmin);
+      setIsAdmin(user.adminConfirmed);
     }
   }, [dispatch, props.history, successUpdate, user, userId]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     // dispatch update user
-    dispatch(updateUser({ _id: userId, name, userEmail, isAdmin }));
+    dispatch(updateUser({ _id: userId, name, userEmail, adminConfirmed }));
   };
   return (
     <div>
@@ -80,11 +80,11 @@ export default function UserEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="isAdmin">Is Admin</label>
+              <label htmlFor="adminConfirmed">Is Admin</label>
               <input
-                id="isAdmin"
+                id="adminConfirmed"
                 type="checkbox"
-                checked={isAdmin}
+                checked={adminConfirmed}
                 onChange={(e) => setIsAdmin(e.target.checked)}
               ></input>
             </div>
