@@ -105,6 +105,11 @@ button.primary {
   transition: all 0.2s;
 }
 
+button.active {
+  background-color: #000;
+  border-color: #000;
+}
+
 button.primary:hover {
   color: rgb(216, 216, 216);
   background-color: #bd1616;
@@ -140,8 +145,8 @@ button:hover {
 /* Header */
 header a {
   color: #ffffff;
-  padding: 1rem;
   font-size: 1.1rem;
+  margin-right: 3rem;
 }
 a.brand {
   color: #ffffff;
@@ -179,12 +184,6 @@ a.brand:hover {
   margin: 0 auto 0 auto;
 }
 
-.navbar-fixed {
-  z-index: 100;
-  position: fixed;
-  background-color: #000;
-  width: 100%;
-}
 .row.center {
   justify-content: center;
 }
@@ -215,14 +214,17 @@ a.brand:hover {
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 5rem 0 5rem 0;
-  transition: all 0.2s;
+  padding: 2rem 0 2rem 0;
+  transition: all 0.3s;
+}
+
+.username {
+  margin-left: 1rem;
+  margin-right: -2rem;
 }
 .navbar.active {
   background-color: #000;
-  border-color: 2rem #000 solid;
-  padding: 2rem 0 2rem 0;
-  transition: all 0.2s;
+  transition: all 0.3s;
 }
 .deactive {
   display: none;
@@ -362,13 +364,14 @@ img.large {
 .dropdown {
   display: inline-block;
   position: relative;
+  padding: 2rem 0 2rem 0;
 }
 .dropdown-content {
   position: absolute;
   display: none;
   right: 0;
   min-width: 12rem;
-  padding: 1rem;
+  padding: 2rem;
   z-index: 1;
   background-color: black;
   margin: 0;
@@ -429,9 +432,7 @@ img.large {
   border-radius: 0.4rem 0 0rem 0.4rem;
   width: 50rem;
 }
-.active {
-  font-weight: bold;
-}
+
 
 /* Map */
 .full-container {
@@ -469,6 +470,16 @@ img.large {
 }
 .pagination a.active {
   font-weight: bold;
+}
+
+.menuIconLarge {
+  width: 8rem;
+  height: 8rem;
+}
+
+.menuIconSmall {
+  width: 5rem;
+  height: 5rem;
 }
 
 .iconSmall{

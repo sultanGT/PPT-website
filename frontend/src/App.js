@@ -26,6 +26,7 @@ import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import '@fortawesome/fontawesome-free/js/all.js';
+import img from './constants/pptmenuicon.png';
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -78,7 +79,8 @@ function App() {
               className="open-sidebar menuIcon"
               onClick={() => setSidebarIsOpen(true)}
             >
-              <i className="fa fa-bars"></i>
+              <i className={ navbar ? 'fa fa-bars' : 'deactive'}></i>
+              <img className={navbar ? 'deactive' : ' menuIconLarge'} src={img} alt="PPTmenuIcon"></img>
             </button>
             <Link className="Brand" to="/">
               PEAK PERFORMANCE TAEKWONDO
@@ -101,9 +103,9 @@ function App() {
             </Link>
             {userInfo ? (
               <div className="dropdown">
-                {/* {userInfo.name} */}
+                
                 <Link to="#">
-                <i className="far fa-user iconLarge"></i> {' '} 
+                <i className="far fa-user iconLarge"></i>{'  '}<i className="username">{ userInfo.name }</i>
                 </Link>
                 <ul className="dropdown-content">
                   <li>
@@ -120,7 +122,7 @@ function App() {
                 </ul>
               </div>
             ) : (
-              <Link to="/signin">Sign In</Link>
+              <Link to="/signin"><i className="far fa-user iconLarge"></i></Link>
             )}
 
             {userInfo && userInfo.isAdmin && (
