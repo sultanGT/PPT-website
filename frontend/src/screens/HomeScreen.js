@@ -4,6 +4,8 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
+import ImageSlider from '../components/ImageSlider';
+import { SliderData } from '../components/SliderData';
 
 
 export default function HomeScreen() {
@@ -17,8 +19,11 @@ export default function HomeScreen() {
     dispatch(listProducts({}));
   }, [dispatch]);
   return (
-    <div>
-
+    <div className="top">
+{/* Carousel Slider */}
+<div className="row center"> 
+<ImageSlider slides={SliderData} />
+</div>    
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (

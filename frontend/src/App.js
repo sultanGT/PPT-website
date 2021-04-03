@@ -27,8 +27,7 @@ import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import '@fortawesome/fontawesome-free/js/all.js';
 import img from './constants/pptmenuicon.png';
-
-
+     
 function App() {
   const cart = useSelector((state) => state.cart);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -149,6 +148,9 @@ function App() {
             )}
           </div>
         </header>
+
+ 
+
         <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
             <li>
