@@ -68,7 +68,7 @@ export default function ProductEditScreen(props) {
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
-    bodyFormData.append('picture', file);
+    bodyFormData.append('image', file);
     setLoadingUpload(true);
     try {
       const { data } = await Axios.post('/api/uploads', bodyFormData, {
@@ -120,7 +120,7 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="picture">Image</label>
+            <label htmlFor="picture">Image</label>
               <input
                 id="picture"
                 type="text"
@@ -143,7 +143,7 @@ export default function ProductEditScreen(props) {
               )}
             </div>
             <div>
-              <label htmlFor="productCategory">Category</label>
+            <label htmlFor="productCategory">Category</label>
               <input
                 id="productCategory"
                 type="text"
@@ -173,7 +173,7 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="productDescription">Description</label>
+            <label htmlFor="productDescription">Description</label>
               <textarea
                 id="productDescription"
                 rows="3"
