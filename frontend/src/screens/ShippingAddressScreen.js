@@ -22,7 +22,7 @@ export default function ShippingAddressScreen(props) {
     dispatch(
       saveShippingAddress({ fullName, address, city, postCode, county })
     );
-    props.history.push('/payment');
+    props.history.push('/placeorder');
   };
   return (
     <div>
@@ -36,7 +36,7 @@ export default function ShippingAddressScreen(props) {
           <input
             type="text"
             id="fullName"
-            placeholder="Enter full name"
+            placeholder="Enter full username"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
