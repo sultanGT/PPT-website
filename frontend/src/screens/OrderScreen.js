@@ -10,6 +10,7 @@ import {
   ORDER_DELIVER_RESET,
   ORDER_PAY_RESET,
 } from '../constants/orderConstants';
+import CheckoutSteps from '../components/CheckoutSteps';
 
 export default function OrderScreen(props) {
   const orderId = props.match.params.id;
@@ -76,7 +77,8 @@ export default function OrderScreen(props) {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <div className="pager">
+      <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <h1>Order {order._id}</h1>
       <div className="row top">
         <div className="col-2">

@@ -3,9 +3,21 @@ import { Link } from 'react-router-dom';
 import Rating from './Rating';
 
 export default function Product(props) {
+  
+
+ 
+
   const { item } = props;
+
   return (
-    <div key={item._id} className="card">
+  <div>
+    {/* <Link to={`/search/productCategory/${item.productCategory}`} >
+    <div className="row center">
+        <h1>{item.productCategory}</h1>
+        </div>
+    </Link> */}
+
+    <div key={item._id} className="card2">
       <Link to={`/item/${item._id}`}>
         <img className="medium" src={item.picture} alt={item.name} />
       </Link>
@@ -19,6 +31,7 @@ export default function Product(props) {
         ></Rating>
         <div className="price">£{item.price}</div>
       </div>
+    </div>
     </div>
   );
 }

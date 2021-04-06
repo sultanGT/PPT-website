@@ -25,7 +25,7 @@ export default function ShippingAddressScreen(props) {
     props.history.push('/placeorder');
   };
   return (
-    <div>
+    <div className="pager">
       <CheckoutSteps step1 step2></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
         <div>

@@ -44,7 +44,7 @@ export default function UserEditScreen(props) {
     dispatch(updateUser({ _id: userId, name, userEmail, adminConfirmed }));
   };
   return (
-    <div>
+    <div className="pager">
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Edit User {name}</h1>

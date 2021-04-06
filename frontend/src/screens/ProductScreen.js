@@ -23,8 +23,8 @@ export default function ProductScreen(props) {
     success: successReviewCreate,
   } = productReviewCreate;
 
-  const [userRating, setRating] = useState(0);
-  const [userComment, setComment] = useState('');
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState('');
 
   useEffect(() => {
     if (successReviewCreate) {
@@ -40,9 +40,9 @@ export default function ProductScreen(props) {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    if (userComment && userRating) {
+    if (comment && rating) {
       dispatch(
-        createReview(productId, { userRating, userComment, name: userInfo.name })
+        createReview(productId, { rating, comment, name: userInfo.name })
       );
     } else {
       alert('Please enter comment and rating');
@@ -72,14 +72,14 @@ export default function ProductScreen(props) {
                 </li>
                 <li>
                   <Rating
-                    userRating={item.userRating}
+                    rating={item.rating}
                     numReviews={item.numReviews}
                   ></Rating>
                 </li>
                 <li>Price : £{item.price}</li>
                 <li>
                   Description:
-                  <p>{item.productDescription}</p>
+                  <p>{item.description}</p>
                 </li>
               </ul>
             </div>
@@ -148,9 +148,9 @@ export default function ProductScreen(props) {
               {item.reviews.map((review) => (
                 <li key={review._id}>
                   <strong>{review.name}</strong>
-                  <Rating userRating={review.userRating} caption=" "></Rating>
+                  <Rating rating={review.rating} caption=" "></Rating>
                   <p>{review.createdAt.substring(0, 10)}</p>
-                  <p>{review.userComment}</p>
+                  <p>{review.comment}</p>
                 </li>
               ))}
               <li>
@@ -160,10 +160,10 @@ export default function ProductScreen(props) {
                       <h2>Write a customer review</h2>
                     </div>
                     <div>
-                      <label htmlFor="userRating">Rating</label>
+                      <label htmlFor="rating">Rating</label>
                       <select
-                        id="userRating"
-                        value={userRating}
+                        id="rating"
+                        value={rating}
                         onChange={(e) => setRating(e.target.value)}
                       >
                         <option value="">Select...</option>
@@ -175,10 +175,10 @@ export default function ProductScreen(props) {
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="userComment">Comment</label>
+                      <label htmlFor="comment">Comment</label>
                       <textarea
-                        id="userComment"
-                        value={userComment}
+                        id="comment"
+                        value={comment}
                         onChange={(e) => setComment(e.target.value)}
                       ></textarea>
                     </div>

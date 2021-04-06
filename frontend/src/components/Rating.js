@@ -10,8 +10,8 @@ export default function Rating(props) {
             userRating >= 1
               ? 'fa fa-star'
               : userRating >= 0.5
-              ? 'fa fa-star-half-o'
-              : 'fa fa-star-o'
+              ? 'fas fa-star-half-alt'
+              : 'far fa-star'
           }
         ></i>
       </span>
@@ -22,7 +22,7 @@ export default function Rating(props) {
               ? 'fa fa-star'
               : userRating >= 1.5
               ? 'fa fa-star-half-o'
-              : 'fa fa-star-o'
+              : 'far fa-star'
           }
         ></i>
       </span>
@@ -32,8 +32,8 @@ export default function Rating(props) {
             userRating >= 3
               ? 'fa fa-star'
               : userRating >= 2.5
-              ? 'fa fa-star-half-o'
-              : 'fa fa-star-o'
+              ? 'fas fa-star-half-alt'
+              : 'far fa-star'
           }
         ></i>
       </span>
@@ -43,8 +43,8 @@ export default function Rating(props) {
             userRating >= 4
               ? 'fa fa-star'
               : userRating >= 3.5
-              ? 'fa fa-star-half-o'
-              : 'fa fa-star-o'
+              ? 'fas fa-star-half-alt'
+              : 'far fa-star'
           }
         ></i>
       </span>
@@ -54,8 +54,8 @@ export default function Rating(props) {
             userRating >= 5
               ? 'fa fa-star'
               : userRating >= 4.5
-              ? 'fa fa-star-half-o'
-              : 'fa fa-star-o'
+              ? 'fas fa-star-half-alt'
+              : 'far fa-star'
           }
         ></i>
       </span>

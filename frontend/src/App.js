@@ -25,8 +25,6 @@ import SearchScreen from './screens/SearchScreen';
 import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
-import ImageSlider from './components/ImageSlider';
-import { SliderData } from './components/SliderData';
 import '@fortawesome/fontawesome-free/js/all.js';
 import img from './constants/pptmenuicon.png';
 
@@ -45,7 +43,7 @@ function App() {
   const [navbar, setNavbar] = useState(false);
 
   const changeBackground = () => {
-    if (window.scrollY >= 10) {
+    if (window.scrollY >= 100) {
       setNavbar(true);
     } else {
       setNavbar(false);
