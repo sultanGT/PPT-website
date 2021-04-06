@@ -23,7 +23,6 @@ body {
     'footer';
   grid-template-columns: 1fr;
   grid-template-rows: 5rem 1fr 5rem;
-  margin-top: 10rem;
   height: 100%;
 }
 
@@ -41,6 +40,8 @@ header {
 main {
   grid-area: main;
   padding: 1rem;
+  padding-top: 13rem;
+  background: black;
 }
 footer {
   grid-area: footer;
@@ -508,9 +509,7 @@ img.large {
   justify-content: center;
   align-items: center;
 }
-.sliderImage:hover {
-  border: 0.1rem #fff solid;
-}
+
 
 .sliderImage {
   width: 1000px;
@@ -561,5 +560,12 @@ img.large {
   transform: scale(1.08);
   background: #000;
 }
+ .pages {
+   background: #fff;
+ }
 
-
+ @media only screen and (max-width: 1026px) {
+  .responsive {
+      display: none;
+  }
+}

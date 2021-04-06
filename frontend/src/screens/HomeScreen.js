@@ -21,7 +21,7 @@ export default function HomeScreen() {
   return (
     <div className="top">
 {/* Carousel Slider */}
-<div className="row center"> 
+<div className="row center responsive"> 
 <ImageSlider slides={SliderData} />
 </div>    
       {loading ? (

@@ -25,8 +25,12 @@ import SearchScreen from './screens/SearchScreen';
 import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
+import ImageSlider from './components/ImageSlider';
+import { SliderData } from './components/SliderData';
 import '@fortawesome/fontawesome-free/js/all.js';
 import img from './constants/pptmenuicon.png';
+
+
      
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -148,9 +152,6 @@ function App() {
             )}
           </div>
         </header>
-
- 
-
         <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
             <li>
@@ -182,64 +183,104 @@ function App() {
           </ul>
         </aside>
         <main>
+        <div className="pages">
           <Route path="/cart/:id?" component={CartScreen}></Route>
+          </div>
+          <div className="pages">
           <Route path="/item/:id" component={ProductScreen} exact></Route>
+          </div>
+          <div className="pages">
           <Route
             path="/item/:id/edit"
             component={ProductEditScreen}
             exact
           ></Route>
+          </div>
+          <div className="pages">
           <Route path="/signin" component={SigninScreen}></Route>
+          </div>
+          <div className="pages">
           <Route path="/register" component={RegisterScreen}></Route>
+          </div>
+          <div className="pages">
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
+          </div>
+          <div className="pages">
           <Route path="/payment" component={PaymentMethodScreen}></Route>
+          </div>
+          <div className="pages">
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
+          </div>
+          <div className="pages">
           <Route path="/order/:id" component={OrderScreen}></Route>
+          </div>
+          <div className="pages">
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
+          </div>
+          <div className="pages">
           <Route
             path="/search/name/:name?"
             component={SearchScreen}
             exact
           ></Route>
+          </div>
+          <div className="pages">
           <Route
             path="/search/productCategory/:productCategory"
             component={SearchScreen}
             exact
           ></Route>
+          </div>
+          <div className="pages">
           <Route
             path="/search/productCategory/:productCategory/name/:name"
             component={SearchScreen}
             exact
           ></Route>
+          </div>
+          <div className="pages">
           <Route
             path="/search/productCategory/:productCategory/name/:name/min/:min/max/:max/userRating/:userRating/order/:order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
           ></Route>
+          </div>
+          <div className="pages">
           <PrivateRoute
             path="/profile"
             component={ProfileScreen}
           ></PrivateRoute>
+          </div>
+          <div className="pages">
           <AdminRoute
             path="/productlist"
             component={ProductListScreen}
             exact
           ></AdminRoute>
+          </div>
+          <div className="pages">
           <AdminRoute
             path="/productlist/pageNumber/:pageNumber"
             component={ProductListScreen}
             exact
           ></AdminRoute>
+          </div>
+          <div className="pages">
           <AdminRoute
             path="/orderlist"
             component={OrderListScreen}
             exact
           ></AdminRoute>
+          </div>
+          <div className="pages">
           <AdminRoute path="/userlist" component={UserListScreen}></AdminRoute>
+          </div>
+          <div className="pages">
           <AdminRoute
             path="/user/:id/edit"
             component={UserEditScreen}
           ></AdminRoute>
+          </div>
 
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
