@@ -80,17 +80,17 @@ function App() {
           <div className="row left">
             <button
               type="button"
-              className="open-sidebar menuIcon"
+              className="open-sidebar menuIcon "
               onClick={() => setSidebarIsOpen(true)}
             >
               <i className={ navbar ? 'fa fa-bars' : 'deactive'}></i>
-              <img className={navbar ? 'deactive' : ' menuIconLarge'} src={img} alt="PPTmenuIcon"></img>
+              <img className={navbar ? 'deactive' : ' menuIconLarge responsive'} src={img} alt="PPTmenuIcon"></img>
             </button>
             <Link className="Brand" to="/">
               PEAK PERFORMANCE TAEKWONDO
             </Link>
           </div>
-          <div className="row">
+          <div className="row responsive">
             <Route
               render={({ history }) => (
                 <SearchBox history={history}></SearchBox>
