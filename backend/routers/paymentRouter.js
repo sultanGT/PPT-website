@@ -35,7 +35,7 @@ if (order) { order.paymentConfirmed = true; order.paymentDate = Date.now(); orde
 const updatedOrder = await order.save();
 mailgun().messages().send(
           {
-            from: 'ppt-website <mg.pptwebsite.co.uk>',
+            from: 'ppt-website <ppt-website@mg.pptwebsite.co.uk>',
             to: `${order.user.name} <${order.user.userEmail}>`,
             subject: `New order ${order._id}`,
             html: payOrderEmailTemplate(order),
