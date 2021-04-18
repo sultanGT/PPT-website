@@ -282,7 +282,17 @@ function App() {
 
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
-        <footer className="row center">All right reserved</footer>
+        <footer className="row center">
+        {/* <div className="row">1</div>
+        <div className="col-1">2</div>
+        <div className="col-1">3</div>
+        <div className="col-2">6</div>
+        <div className="col-3">7</div>
+        <div className="row">4</div>
+        <div className="row">5</div>
+        <div className="row">6</div> */}
+          
+          All right reserved</footer>
       </div>
     </BrowserRouter>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SliderData } from './SliderData';
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+import { BiArrowToRight, BiArrowToLeft } from 'react-icons/bi';
 
 const ImageSlider = ({ slides }) => {
   const [current, setCurrent] = useState(0);
@@ -19,9 +19,10 @@ const ImageSlider = ({ slides }) => {
   }
 
   return (
-    <section className='slider'>
-      <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
-      <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
+    <div>
+    <div className='row slider'>
+      <BiArrowToLeft className='left-arrow' onClick={prevSlide} />
+      <BiArrowToRight className='right-arrow' onClick={nextSlide} />
       {SliderData.map((slide, index) => {
         return (
           <div
@@ -34,7 +35,8 @@ const ImageSlider = ({ slides }) => {
           </div>
         );
       })}
-    </section>
+    </div>
+    </div>
   );
 };
 

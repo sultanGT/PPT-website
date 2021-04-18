@@ -19,7 +19,7 @@ export default function HomeScreen() {
     dispatch(listProducts({}));
   }, [dispatch]);
   return (
-    <div className="top">
+    <div>
 {/* Carousel Slider */}
 <div className="row center responsive"> 
 <ImageSlider slides={SliderData} />
