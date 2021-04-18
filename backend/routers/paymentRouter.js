@@ -3,6 +3,7 @@ import expressAsyncHandler from 'express-async-handler';
 import Order from '../templates/orderTemplate.js';
 import { adminConfirmed, authenticationConfirmed, mailgun, payOrderEmailTemplate, } from '../utils.js';
 
+
 //Payment Router for PPT
 const paymentRouter = express.Router();
 
@@ -34,7 +35,7 @@ if (order) { order.paymentConfirmed = true; order.paymentDate = Date.now(); orde
 const updatedOrder = await order.save();
 mailgun().messages().send(
           {
-            from: 'ppt-website <mg.pptwebsite.co.uk',
+            from: 'ppt-website <mg.pptwebsite.co.uk>',
             to: `${order.user.name} <${order.user.userEmail}>`,
             subject: `New order ${order._id}`,
             html: payOrderEmailTemplate(order),
