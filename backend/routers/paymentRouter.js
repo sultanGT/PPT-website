@@ -50,7 +50,7 @@ paymentRouter.put(
         .messages()
         .send(
           {
-            from: 'ppt-website <ppt-website@mg.pptwebsite.co.uk>',
+            from: 'ppt-website <sultan-malik@hotmail.co.uk>',
             to: `${order.user.name} <${order.user.email}>`,
             subject: `New order ${order._id}`,
             html: payOrderEmailTemplate(order),
