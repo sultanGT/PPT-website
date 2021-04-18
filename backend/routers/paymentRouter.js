@@ -27,16 +27,31 @@ res.status(201).send({ message: 'A New Order Has Been Created', order: createdOr
 //Function to find order using user id
 paymentRouter.get('/:id', authenticationConfirmed, expressAsyncHandler(async (req, res) => { const order = await Order.findById(req.params.id);
 if (order) { res.send(order); } else { res.status(404).send({ message: 'Order Has Not Been Found' });}}));
-
-//Function to send email to user using mailgun once payment has been completed
-paymentRouter.put( '/:id/pay', authenticationConfirmed, expressAsyncHandler(async (req, res) => { const order = await Order.findById(req.params.id).populate('user','userEmail name');
 //Update order details to payment is confirmed once payment has been confirmed
-if (order) { order.paymentConfirmed = true; order.paymentDate = Date.now(); order.paymentComplete = { id: req.body.id, status: req.body.status, update_time: req.body.update_time, userEmail_address: req.body.userEmail_address, };
-const updatedOrder = await order.save();
-mailgun().messages().send(
+paymentRouter.put(
+  '/:id/pay',
+  authenticationConfirmed,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id).populate(
+      'user',
+      'userEmail name'
+    );
+    if (order) {
+      order.paymentConfirmed = true;
+      order.paymentDate = Date.now();
+      order.paymentComplete = {
+        id: req.body.id,
+        status: req.body.status,
+        update_time: req.body.update_time,
+        userEmail_address: req.body.userEmail_address,
+      };
+      const updatedOrder = await order.save();
+      mailgun()
+        .messages()
+        .send(
           {
-            from: 'ppt-website <sultan-malik@hotmail.co.uk>',
-            to: 'sultan-malik@hotmail.co.uk',
+            from: 'ppt-website <ppt-website@mg.pptwebsite.co.uk>',
+            to: `${order.user.name} <${order.user.email}>`,
             subject: `New order ${order._id}`,
             html: payOrderEmailTemplate(order),
           },
