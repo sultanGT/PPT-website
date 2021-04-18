@@ -85,7 +85,7 @@ function App() {
               <img className={navbar ? 'deactive' : ' menuIconLarge responsive'} src={img} alt="PPTmenuIcon"></img>
             </button>
             <Link className="Brand" to="/">
-              PEAK PERFORMANCE TAEKWONDO TEST
+              PEAK PERFORMANCE TAEKWONDO
             </Link>
           </div>
           <div className="row responsive">
