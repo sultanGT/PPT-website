@@ -283,7 +283,7 @@ button.close-sidebar {
 
 /* Image */
 img {
-  border-radius: 0.5rem;
+  border-radius: 0.1rem;
 }
 img.small {
   max-width: 5rem;
@@ -312,6 +312,14 @@ img.large {
 .card-body {
   padding: 1rem;
 }
+
+.card-body2 {
+  padding: 1rem;
+    background: #f9f9f9;
+    margin-top: 0.5rem;
+    border-radius: 0.1rem;
+    
+}
 .card2 {
   border: 0.3rem solid transparent;
   background-color: #fff;
@@ -321,6 +329,7 @@ img.large {
 }
 .card2:hover {
   opacity: 0.5;
+  border: 0.3rem solid red;
 }
 .card2-body {
   padding: 1rem;

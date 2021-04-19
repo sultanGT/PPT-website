@@ -83,63 +83,7 @@ export default function ProductScreen(props) {
                 </li>
               </ul>
             </div>
-            <div className="col-1">
-              <div className="card card-body">
-                <ul>
-                  <li>
-                    <div className="row">
-                      <div>Price</div>
-                      <div className="price">${item.price}</div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="row">
-                      <div>Status</div>
-                      <div>
-                        {item.countInStock > 0 ? (
-                          <span className="success">In Stock</span>
-                        ) : (
-                          <span className="danger">Unavailable</span>
-                        )}
-                      </div>
-                    </div>
-                  </li>
-                  {item.countInStock > 0 && (
-                    <>
-                      <li>
-                        <div className="row">
-                          <div>Qty</div>
-                          <div>
-                            <select
-                              value={quantity}
-                              onChange={(e) => setQty(e.target.value)}
-                            >
-                              {[...Array(item.countInStock).keys()].map(
-                                (x) => (
-                                  <option key={x + 1} value={x + 1}>
-                                    {x + 1}
-                                  </option>
-                                )
-                              )}
-                            </select>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <button
-                          onClick={addToCartHandler}
-                          className="primary block"
-                        >
-                          Add to Cart
-                        </button>
-                      </li>
-                    </>
-                  )}
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div>
+            <div className="col-1 row">
             <h2 id="reviews">Reviews</h2>
             {item.reviews.length === 0 && (
               <MessageBox>There is no review</MessageBox>
@@ -204,6 +148,62 @@ export default function ProductScreen(props) {
                 )}
               </li>
             </ul>
+          </div>
+            <div className="col-1">
+              <div className="card card-body">
+                <ul>
+                  <li>
+                    <div className="row">
+                      <div>Price</div>
+                      <div className="price">${item.price}</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="row">
+                      <div>Status</div>
+                      <div>
+                        {item.countInStock > 0 ? (
+                          <span className="success">In Stock</span>
+                        ) : (
+                          <span className="danger">Unavailable</span>
+                        )}
+                      </div>
+                    </div>
+                  </li>
+                  {item.countInStock > 0 && (
+                    <>
+                      <li>
+                        <div className="row">
+                          <div>Qty</div>
+                          <div>
+                            <select
+                              value={quantity}
+                              onChange={(e) => setQty(e.target.value)}
+                            >
+                              {[...Array(item.countInStock).keys()].map(
+                                (x) => (
+                                  <option key={x + 1} value={x + 1}>
+                                    {x + 1}
+                                  </option>
+                                )
+                              )}
+                            </select>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <button
+                          onClick={addToCartHandler}
+                          className="primary block"
+                        >
+                          Add to Cart
+                        </button>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       )}

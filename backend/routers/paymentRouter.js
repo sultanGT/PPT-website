@@ -46,12 +46,11 @@ paymentRouter.put(
         userEmail_address: req.body.userEmail_address,
       };
       const updatedOrder = await order.save();
-      mailgun()
-        .messages()
-        .send(
+      
+      mailgun().messages().send(
           {
-            from: 'ppt-website <mg.pptwebsite.co.uk>',
-            to: `${order.user.name} <${order.user.userEmail}>`,
+            from: 'ppt-website <mailing.pptwebsite.co.uk>',
+            to: '<sultan-malik@hotmail.co.uk>',
             subject: `New order ${order._id}`,
             html: payOrderEmailTemplate(order),
           },
