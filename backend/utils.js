@@ -7,7 +7,7 @@ export const generateToken = (user) => {
       _id: user._id,
       name: user.name,
       userEmail: user.userEmail,
-      adminConfirmed: user.adminConfirmed,
+      userAdminstrator: user.userAdminstrator,
     },
     process.env.JWT_SECRET || 'somethingsecret',
     {
@@ -16,7 +16,7 @@ export const generateToken = (user) => {
   );
 };
 
-export const authenticationConfirmed = (req, res, next) => {
+export const userCredentialsAuthenticated = (req, res, next) => {
   const authorization = req.headers.authorization;
   if (authorization) {
     const token = authorization.slice(7, authorization.length); // Bearer XXXXXX
@@ -36,8 +36,8 @@ export const authenticationConfirmed = (req, res, next) => {
     res.status(401).send({ message: 'No Token' });
   }
 };
-export const adminConfirmed = (req, res, next) => {
-  if (req.user && req.user.adminConfirmed) {
+export const userAdminstrator = (req, res, next) => {
+  if (req.user && req.user.userAdminstrator) {
     next();
   } else {
     res.status(401).send({ message: 'Invalid Admin Token' });
@@ -50,7 +50,7 @@ export const mailgun = () =>
     domain: process.env.MAILGUN_DOMAIN,
   });
 
-export const payOrderEmailTemplate = (order) => {
+export const orderCompletionEmail = (order) => {
   return `<h1>Thanks for shopping with us</h1>
   <p>
   Hi ${order.user.name},</p>

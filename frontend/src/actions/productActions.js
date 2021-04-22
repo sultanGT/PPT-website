@@ -25,7 +25,6 @@ import {
 
 export const listProducts = ({
   pageNumber = '',
-  seller = '',
   name = '',
   productCategory = '',
   order = '',

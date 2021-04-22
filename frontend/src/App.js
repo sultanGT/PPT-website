@@ -29,6 +29,7 @@ import '@fortawesome/fontawesome-free/js/all.js';
 import img from './constants/pptmenuicon.png';
 
 
+
      
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -43,7 +44,7 @@ function App() {
   const [navbar, setNavbar] = useState(false);
 
   const changeBackground = () => {
-    if (window.scrollY >= 100) {
+    if (window.scrollY > 100) {
       setNavbar(true);
     } else {
       setNavbar(false);
@@ -61,7 +62,6 @@ function App() {
   // 
 
   window.addEventListener('scroll', changeBackground);
-
   const productCategoryList = useSelector((state) => state.productCategoryList);
   const {
     loading: loadingCategories,
@@ -71,6 +71,7 @@ function App() {
   useEffect(() => {
     dispatch(listProductCategories());
   }, [dispatch]);
+  
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -78,11 +79,11 @@ function App() {
           <div className="row left">
             <button
               type="button"
-              className="open-sidebar menuIcon "
+              className="open-sidebar"
               onClick={() => setSidebarIsOpen(true)}
             >
               <i className={ navbar ? 'fa fa-bars' : 'deactive'}></i>
-              <img className={navbar ? 'deactive' : ' menuIconLarge responsive'} src={img} alt="PPTmenuIcon"></img>
+              <img className={ navbar ? 'deactive' : ' menuIconLarge responsive'} src={img} alt="PPTmenuIcon"></img>
             </button>
             <Link className="Brand" to="/">
               PEAK PERFORMANCE TAEKWONDO
@@ -114,11 +115,11 @@ function App() {
                     <Link to="/profile">User Profile  <i className="fa fa-address-card iconSmall"></i></Link>
                   </li>
                   <li>
-                    <Link to="/orderhistory">Order History  <i class="fa fa-history iconSmall"></i></Link>
+                    <Link to="/orderhistory">Order History  <i className="fa fa-history iconSmall"></i></Link>
                   </li>
                   <li>
                     <Link to="#signout" onClick={signoutHandler} >
-                      Sign Out  <i class="fa fa-sign-out-alt"></i>
+                      Sign Out  <i className="fa fa-sign-out-alt"></i>
                     </Link>
                   </li>
                 </ul>
@@ -127,10 +128,10 @@ function App() {
               <Link to="/signin"><i className="far fa-user iconLarge"></i></Link>
             )}
 
-            {userInfo && userInfo.adminConfirmed && (
+            {userInfo && userInfo.userAdminstrator && (
               <div className="dropdown">
                 <Link to="#admin">
-                <i class="fas fa-user-shield iconLarge"></i> {/*admin*/}
+                <i className="fas fa-user-shield iconLarge"></i> {/*admin*/}
                 </Link>
                 <ul className="dropdown-content">
                   <li>
@@ -159,7 +160,7 @@ function App() {
                 className="close-sidebar"
                 type="button"
               >
-                <i class="fas fa-times"></i>
+                <i className="fas fa-times"></i>
               </button>
             </li>
             {loadingCategories ? (
@@ -279,7 +280,7 @@ function App() {
             component={UserEditScreen}
           ></AdminRoute>
           </div>
-
+                
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
         <footer className="row center">

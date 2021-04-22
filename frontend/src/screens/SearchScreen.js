@@ -53,8 +53,8 @@ export default function SearchScreen(props) {
     return `/search/productCategory/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/userRating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
-    <div>
-      <div className="row">
+    <div className="">
+      <div className="row pageS">
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
@@ -77,9 +77,9 @@ export default function SearchScreen(props) {
           </select>
         </div>
       </div>
-      <div className="row top">
-        <div className="col-1">
-          <h3>Department</h3>
+      <div className="row top pageS">
+        <div className="col-1 borders">
+          <h3 className="">Department</h3>
           <div>
             {loadingCategories ? (
               <LoadingBox></LoadingBox>
@@ -151,12 +151,12 @@ export default function SearchScreen(props) {
               {products.length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
               )}
-              <div className="row center">
+              <div className="row center pageS">
                 {products.map((item) => (
                   <Product key={item._id} item={item}></Product>
                 ))}
               </div>
-              <div className="row center pagination">
+              <div className="row center pagination pageS">
                 {[...Array(pages).keys()].map((x) => (
                   <Link
                     className={x + 1 === page ? 'active' : ''}

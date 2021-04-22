@@ -40,7 +40,6 @@ header {
 }
 main {
   grid-area: main;
-  padding: 1rem;
   padding-top: 13rem;
   background: black;
 }
@@ -181,7 +180,6 @@ a.brand:hover {
   justify-content: space-between;
   align-items: center;
 }
-
 .centered{
   margin: 0 auto 0 auto;
 }
@@ -214,6 +212,7 @@ a.brand:hover {
   grid-area: header;
   background-color: #000;
   position: fixed;
+  border-bottom: 0.3rem #f51818 solid;
   top: 0;
   width: 100%;
   padding: 4rem 0 4rem 0;
@@ -249,6 +248,9 @@ aside {
   z-index: 1000;
   transform: translateX(-35rem) translateY(-1.3rem);
   transition: all 0.5s;
+}
+.wide {
+  width: 100%;
 }
 aside.open {
   transform: translateX(0) translateY(-1.3rem);
@@ -317,19 +319,17 @@ img.large {
   padding: 1rem;
     background: #f9f9f9;
     margin-top: 0.5rem;
-    border-radius: 0.1rem;
-    
+
 }
 .card2 {
-  border: 0.3rem solid transparent;
+  border: 0.2rem solid transparent;
   background-color: #fff;
-  border-radius: 0.5rem;
   margin: 1rem;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 .card2:hover {
-  opacity: 0.5;
-  border: 0.3rem solid red;
+  border: 0.2rem solid grey;
+  opacity: 0.9;
 }
 .card2-body {
   padding: 1rem;
@@ -534,41 +534,47 @@ img.large {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -9rem;
 }
-
 
 .sliderImage {
   width: 100%;
-  max-width: 1300px;
+  max-width: 1340px;
   height: 600px;
   z-index: 10;
+  
+}
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: -53px;
+  font-size: 5rem;
+  background: #000;
+  color: rgb(75, 75, 75);
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
 }
 
 .right-arrow {
   position: absolute;
   top: 50%;
-  right: 32px;
+  right: -53px;
   font-size: 5rem;
+  background: #000;
   color: rgb(75, 75, 75);
   z-index: 10;
   cursor: pointer;
   user-select: none;
+}
 
+.arrowbox:hover {
+  background: rgba(42, 48, 58, 0.5);
+  transition: 0.2s;
 }
 .right-arrow:hover {
   color: #fff;
   transition: 0.2s;
-}
-
-.left-arrow {
-  position: absolute;
-  top: 50%;
-  left: 32px;
-  font-size: 5rem;
-  color: rgb(75, 75, 75);
-  z-index: 10;
-  cursor: pointer;
-  user-select: none;
 }
 
 .left-arrow:hover {
@@ -590,6 +596,10 @@ img.large {
  .pages {
    background: #fff;
  }
+ .pageS {
+  background: #000;
+}
+ 
 
  @media only screen and (max-width: 1400px) {
   .responsive {
@@ -607,4 +617,33 @@ img.large {
 
 .none {
   display: none;
+}
+
+.h2-title {
+  margin: 0 auto;
+  text-decoration: bold;
+  text-transform: uppercase;
+  color: #000;
+}
+.button-wide {
+  width: 100%;
+}
+
+.borders {
+  background: #e3e3e3;
+  border: 0.2rem #fff solid;
+}
+
+.return {
+  font-size: 5rem;
+  background-color: red;
+  transition: 0.2s;
+}
+
+.return:hover {
+  background-color: #bd1616;
+}
+
+.whites {
+  color: white;
 }

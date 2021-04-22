@@ -6,6 +6,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Rating from '../components/Rating';
 import { PRODUCT_REVIEW_CREATE_RESET } from '../constants/productConstants';
+import { GrReturn } from 'react-icons/gr';
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
@@ -56,7 +57,9 @@ export default function ProductScreen(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div>
-          <Link to="/">Back to result</Link>
+          <div>
+          <Link to="/"><GrReturn className="return" /></Link>
+          </div>
           <div className="row top">
             <div className="col-2">
               <img
@@ -84,10 +87,7 @@ export default function ProductScreen(props) {
               </ul>
             </div>
             <div className="col-1 row">
-            <h2 id="reviews">Reviews</h2>
-            {item.reviews.length === 0 && (
-              <MessageBox>There is no review</MessageBox>
-            )}
+            <h1 id="reviews">Reviews</h1>
             <ul>
               {item.reviews.map((review) => (
                 <li key={review._id}>
@@ -155,7 +155,7 @@ export default function ProductScreen(props) {
                   <li>
                     <div className="row">
                       <div>Price</div>
-                      <div className="price">${item.price}</div>
+                      <div className="price">£{item.price}</div>
                     </div>
                   </li>
                   <li>

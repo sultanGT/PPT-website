@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SliderData } from './SliderData';
-import { BiArrowToRight, BiArrowToLeft } from 'react-icons/bi';
+import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 
 const ImageSlider = ({ slides }) => {
   const [current, setCurrent] = useState(0);
@@ -18,11 +18,13 @@ const ImageSlider = ({ slides }) => {
     return null;
   }
 
+  
+
   return (
     <div>
     <div className='row slider'>
-      <BiArrowToLeft className='left-arrow' onClick={prevSlide} />
-      <BiArrowToRight className='right-arrow' onClick={nextSlide} />
+      <FiChevronLeft className='left-arrow arrowbox' onClick={prevSlide} />
+      <FiChevronRight className='right-arrow arrowbox' onClick={nextSlide} />
       {SliderData.map((slide, index) => {
         return (
           <div

@@ -1,22 +1,39 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from '../templates/orderTemplate.js';
-import { adminConfirmed, authenticationConfirmed, mailgun, payOrderEmailTemplate, } from '../utils.js';
+import { userAdminstrator, userCredentialsAuthenticated, mailgun, orderCompletionEmail, } from '../utils.js';
 
 
 //Payment Router for PPT
 const paymentRouter = express.Router();
 
 //Function for finding order details
-paymentRouter.get('/', authenticationConfirmed, adminConfirmed, expressAsyncHandler(async (req, res) => { const orders = await Order.find({}).populate('user', 'name');
+paymentRouter.get(
+  '/', 
+userCredentialsAuthenticated, 
+userAdminstrator, 
+expressAsyncHandler(async (req, res) => { 
+  const orders = await Order.find({})
+  .populate(
+    'user', 
+    'name');
 res.send(orders);}));
 
 //Function for authentication user
-paymentRouter.get('/mine', authenticationConfirmed, expressAsyncHandler(async (req, res) => { const orders = await Order.find({ user: req.user._id });
+paymentRouter.get(
+  '/mine', 
+userCredentialsAuthenticated, 
+expressAsyncHandler(async (req, res) => { 
+  const orders = await Order.find({ user: req.user._id });
 res.send(orders);}));
 
 //Function for completion of payment
-paymentRouter.post('/', authenticationConfirmed, expressAsyncHandler(async (req, res) => {if (req.body.orderProducts.length === 0) {res.status(400).send({ message: 'Cart is Currently Empty' });} else {
+paymentRouter.post('/', 
+userCredentialsAuthenticated, 
+expressAsyncHandler(async (req, res) => {
+  if (req.body.orderProducts.length === 0) {
+    res.status(400).send({ message: 'Cart is Currently Empty' });} 
+    else {
 //New order details
 const order = new Order({orderProducts: req.body.orderProducts, deliveryAddress: req.body.deliveryAddress, paymentPPorS: req.body.paymentPPorS, itemsPrice: req.body.itemsPrice, deliveryPrice: req.body.deliveryPrice, taxPrice: req.body.taxPrice, totalPrice: req.body.totalPrice, user: req.user._id,});
 //Save order details in datbase
@@ -25,12 +42,12 @@ const createdOrder = await order.save();
 res.status(201).send({ message: 'A New Order Has Been Created', order: createdOrder });}}));
 
 //Function to find order using user id
-paymentRouter.get('/:id', authenticationConfirmed, expressAsyncHandler(async (req, res) => { const order = await Order.findById(req.params.id);
+paymentRouter.get('/:id', userCredentialsAuthenticated, expressAsyncHandler(async (req, res) => { const order = await Order.findById(req.params.id);
 if (order) { res.send(order); } else { res.status(404).send({ message: 'Order Has Not Been Found' });}}));
 //Update order details to payment is confirmed once payment has been confirmed
 paymentRouter.put(
   '/:id/pay',
-  authenticationConfirmed,
+  userCredentialsAuthenticated,
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id).populate(
       'user',
@@ -53,7 +70,7 @@ paymentRouter.put(
             from: 'ppt-website <mailing.pptwebsite.co.uk>',
             to: `${order.user.name} <${order.user.userEmail}>`,
             subject: `New order ${order._id}`,
-            html: payOrderEmailTemplate(order),
+            html: orderCompletionEmail(order),
           },
           (error, body) => {
             if (error) {
@@ -71,13 +88,13 @@ paymentRouter.put(
 );
 
 //Function for admins to delete an order stored in the database
-paymentRouter.delete('/:id', authenticationConfirmed, adminConfirmed, expressAsyncHandler(async (req, res) => {const order = await Order.findById(req.params.id);
+paymentRouter.delete('/:id', userCredentialsAuthenticated, userAdminstrator, expressAsyncHandler(async (req, res) => {const order = await Order.findById(req.params.id);
 if (order) { const deleteOrder = await order.remove();
 res.send({ message: 'The Order Has Now Been Deleted', order: deleteOrder });
 } else { res.status(404).send({ message: 'Order Has Not Been Found' });}}));
 
 //Function to mark and update order as delivered
-paymentRouter.put('/:id/deliver', authenticationConfirmed, adminConfirmed, expressAsyncHandler(async (req, res) => {
+paymentRouter.put('/:id/deliver', userCredentialsAuthenticated, userAdminstrator, expressAsyncHandler(async (req, res) => {
 const order = await Order.findById(req.params.id);
 if (order) { order.deliveryConfirmed = true; 
 order.deliveryDate = Date.now();
