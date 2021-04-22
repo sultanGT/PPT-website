@@ -2,7 +2,7 @@ import multer from 'multer';
 import express from 'express';
 import { userCredentialsAuthenticated } from '../utils.js';
 
-const uploadRouter = express.Router();
+const route_load = express.Router();
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -15,8 +15,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-uploadRouter.post('/', userCredentialsAuthenticated, upload.single('image'), (req, res) => {
+route_load.post('/', userCredentialsAuthenticated, upload.single('image'), (req, res) => {
   res.send(`/${req.file.path}`);
 });
 
-export default uploadRouter;
+export default route_load;

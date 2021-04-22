@@ -227,7 +227,7 @@ a.brand:hover {
 .navbar.active {
   background-color: #000;
   transition: all 0.3s;
-  padding: 1rem;
+  padding: 0.3rem;
   z-index: 1000;
 }
 .deactive {

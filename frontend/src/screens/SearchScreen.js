@@ -11,7 +11,7 @@ import { prices, ratings } from '../utils';
 export default function SearchScreen(props) {
   const {
     name = 'all',
-    productCategory = 'all',
+    product_catergory = 'all',
     min = 0,
     max = 0,
     userRating = 0,
@@ -33,24 +33,24 @@ export default function SearchScreen(props) {
       listProducts({
         pageNumber,
         name: name !== 'all' ? name : '',
-        productCategory: productCategory !== 'all' ? productCategory : '',
+        product_catergory: product_catergory !== 'all' ? product_catergory : '',
         min,
         max,
         userRating,
         order,
       })
     );
-  }, [productCategory, dispatch, max, min, name, order, userRating, pageNumber]);
+  }, [product_catergory, dispatch, max, min, name, order, userRating, pageNumber]);
 
   const getFilterUrl = (filter) => {
     const filterPage = filter.page || pageNumber;
-    const filterCategory = filter.productCategory || productCategory;
+    const filterCategory = filter.product_catergory || product_catergory;
     const filterName = filter.name || name;
     const filterRating = filter.userRating || userRating;
     const sortOrder = filter.order || order;
     const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
     const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
-    return `/search/productCategory/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/userRating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
+    return `/search/product_catergory/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/userRating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
     <div className="">
@@ -89,8 +89,8 @@ export default function SearchScreen(props) {
               <ul>
                 <li>
                   <Link
-                    className={'all' === productCategory ? 'active' : ''}
-                    to={getFilterUrl({ productCategory: 'all' })}
+                    className={'all' === product_catergory ? 'active' : ''}
+                    to={getFilterUrl({ product_catergory: 'all' })}
                   >
                     Any
                   </Link>
@@ -98,8 +98,8 @@ export default function SearchScreen(props) {
                 {categories.map((c) => (
                   <li key={c}>
                     <Link
-                      className={c === productCategory ? 'active' : ''}
-                      to={getFilterUrl({ productCategory: c })}
+                      className={c === product_catergory ? 'active' : ''}
+                      to={getFilterUrl({ product_catergory: c })}
                     >
                       {c}
                     </Link>

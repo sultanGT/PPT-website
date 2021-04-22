@@ -7,7 +7,7 @@ import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 export default function ProfileScreen() {
   const [name, setName] = useState('');
-  const [userEmail, setEmail] = useState('');
+  const [user_email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -29,12 +29,12 @@ export default function ProfileScreen() {
       dispatch(detailsUser(userInfo._id));
     } else {
       setName(user.name);
-      setEmail(user.userEmail);
+      setEmail(user.user_email);
     }
   }, [dispatch, userInfo._id, user]);
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch update profile
+    // dispatch update credentials
     if (password !== confirmPassword) {
       alert('Password and Confirm Password Are Not Matched');
     } else {
@@ -42,7 +42,7 @@ export default function ProfileScreen() {
         updateUserProfile({
           userId: user._id,
           name,
-          userEmail,
+          user_email,
           password,
      
         })
@@ -81,12 +81,12 @@ export default function ProfileScreen() {
               ></input>
             </div>
             <div>
-              <label htmlFor="userEmail">Email</label>
+              <label htmlFor="user_email">Email</label>
               <input
-                id="userEmail"
-                type="userEmail"
-                placeholder="Enter userEmail"
-                value={userEmail}
+                id="user_email"
+                type="user_email"
+                placeholder="Enter user_email"
+                value={user_email}
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>

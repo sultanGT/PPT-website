@@ -102,7 +102,7 @@ export default function ProductListScreen(props) {
                   <td>{item._id}</td>
                   <td>{item.name}</td>
                   <td>{item.price}</td>
-                  <td>{item.productCategory}</td>
+                  <td>{item.product_catergory}</td>
                   <td>{item.productBrand}</td>
                   <td>
                     <button

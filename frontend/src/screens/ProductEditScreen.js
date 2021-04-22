@@ -11,7 +11,7 @@ export default function ProductEditScreen(props) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [picture, setImage] = useState('');
-  const [productCategory, setCategory] = useState('');
+  const [product_catergory, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [productBrand, setProductBrand] = useState('');
   const [productDescription, setDescription] = useState('');
@@ -38,7 +38,7 @@ export default function ProductEditScreen(props) {
       setName(item.name);
       setPrice(item.price);
       setImage(item.picture);
-      setCategory(item.productCategory);
+      setCategory(item.product_catergory);
       setCountInStock(item.countInStock);
       setProductBrand(item.productBrand);
       setDescription(item.productDescription);
@@ -53,7 +53,7 @@ export default function ProductEditScreen(props) {
         name,
         price,
         picture,
-        productCategory,
+        product_catergory,
         productBrand,
         countInStock,
         productDescription,
@@ -74,7 +74,7 @@ export default function ProductEditScreen(props) {
       const { data } = await Axios.post('/api/uploads', bodyFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${userInfo.user_token}`,
         },
       });
       setImage(data);
@@ -143,12 +143,12 @@ export default function ProductEditScreen(props) {
               )}
             </div>
             <div>
-            <label htmlFor="productCategory">Category</label>
+            <label htmlFor="product_catergory">Category</label>
               <input
-                id="productCategory"
+                id="product_catergory"
                 type="text"
-                placeholder="Enter productCategory"
-                value={productCategory}
+                placeholder="Enter product_catergory"
+                value={product_catergory}
                 onChange={(e) => setCategory(e.target.value)}
               ></input>
             </div>

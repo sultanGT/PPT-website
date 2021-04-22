@@ -2,17 +2,19 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 import Product from '../templates/productTemplate.js';
-import { userAdminstrator, userCredentialsAuthenticated } from '../utils.js';
+import { userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
 
-const productRouter = express.Router();
+//Variable Declarations
+const route_item = express.Router();
 
-productRouter.get(
+//Function for displaying item details - reused
+route_item.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const pageSize = 8;
+    const pageSize = 4;
     const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
-    const productCategory = req.query.productCategory || '';
+    const product_catergory = req.query.product_catergory || '';
     const order = req.query.order || '';
     const min =
       req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
@@ -23,8 +25,9 @@ productRouter.get(
         ? Number(req.query.userRating)
         : 0;
 
+//Search bar filters - reused copied
     const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
-    const categoryFilter = productCategory ? { productCategory } : {};
+    const categoryFilter = product_catergory ? product_catergory : {};
     const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
     const ratingFilter = userRating ? { userRating: { $gte: userRating } } : {};
     const sortOrder =
@@ -35,12 +38,14 @@ productRouter.get(
         : order === 'toprated'
         ? { userRating: -1 }
         : { _id: -1 };
+//Filter for counting items for filter results - reused copied
     const count = await Product.count({
       ...nameFilter,
       ...categoryFilter,
       ...priceFilter,
       ...ratingFilter,
     });
+//Function for finding items by filtered option - reused copied
     const products = await Product.find({
       ...nameFilter,
       ...categoryFilter,
@@ -54,15 +59,16 @@ productRouter.get(
   })
 );
 
-productRouter.get(
+//Function for finding items by catergory 
+route_item.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {
-    const categories = await Product.find().distinct('productCategory');
+    const categories = await Product.find().distinct('product_catergory');
     res.send(categories);
   })
 );
 
-productRouter.get(
+route_item.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
     // await Product.remove({});
@@ -76,7 +82,7 @@ productRouter.get(
   })
 );
 
-productRouter.get(
+route_item.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
     const item = await Product.findById(req.params.id);
@@ -88,16 +94,16 @@ productRouter.get(
   })
 );
 
-productRouter.post(
+route_item.post(
   '/',
   userCredentialsAuthenticated,
-  userAdminstrator,
+  userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
     const item = new Product({
       name: 'sample name ' + Date.now(),
       picture: '/images/p1.jpg',
       price: 0,
-      productCategory: 'sample productCategory',
+      product_catergory: 'sample product_catergory',
       productBrand: 'sample productBrand',
       countInStock: 0,
       userRating: 0,
@@ -108,10 +114,10 @@ productRouter.post(
     res.send({ message: 'Product Created', item: createdProduct });
   })
 );
-productRouter.put(
+route_item.put(
   '/:id',
   userCredentialsAuthenticated,
-  userAdminstrator,
+  userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const item = await Product.findById(productId);
@@ -119,7 +125,7 @@ productRouter.put(
       item.name = req.body.name;
       item.price = req.body.price;
       item.picture = req.body.picture;
-      item.productCategory = req.body.productCategory;
+      item.product_catergory = req.body.product_catergory;
       item.productBrand = req.body.productBrand;
       item.countInStock = req.body.countInStock;
       item.productDescription = req.body.productDescription;
@@ -131,10 +137,10 @@ productRouter.put(
   })
 );
 
-productRouter.delete(
+route_item.delete(
   '/:id',
   userCredentialsAuthenticated,
-  userAdminstrator,
+  userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
     const item = await Product.findById(req.params.id);
     if (item) {
@@ -146,7 +152,7 @@ productRouter.delete(
   })
 );
 
-productRouter.post(
+route_item.post(
   '/:id/reviews',
   userCredentialsAuthenticated,
   expressAsyncHandler(async (req, res) => {
@@ -179,4 +185,4 @@ productRouter.post(
   })
 );
 
-export default productRouter;
+export default route_item;

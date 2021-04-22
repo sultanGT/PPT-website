@@ -4,21 +4,21 @@ const data = {
     users: [
         {
             name:'admin',
-            userEmail:'admin@ppt',
+            user_email:'admin@ppt',
             password: bcrypt.hashSync('admin', 8),
-            userAdminstrator: true,
+            userCredentialsAdministrator: true,
         },
         {
             name:'Mike',
-            userEmail:'user@ppt',
+            user_email:'user@ppt',
             password: bcrypt.hashSync('mike', 8),
-            userAdminstrator: false,
+            userCredentialsAdministrator: false,
         },
     ],
     products: [
         {
             name: 'WTF Taekwondo Suit',
-            productCategory: 'Suits',
+            product_catergory: 'Suits',
             picture: '/images/p1.jpg',
             price:120,
             countInStock: 10,
@@ -29,7 +29,7 @@ const data = {
         },
         {
             name: 'Adidas Taekwondo Suit',
-            productCategory: 'Suits',
+            product_catergory: 'Suits',
             picture: '/images/p2.jpg',
             price:100,
             countInStock: 20,
@@ -40,7 +40,7 @@ const data = {
         },
         {
             name: 'Nike Taekwondo Suit',
-            productCategory: 'Suits',
+            product_catergory: 'Suits',
             picture: '/images/p3.jpg',
             price:220,
             countInStock: 30,
@@ -51,7 +51,7 @@ const data = {
         },
         {
             name: 'Adidas Taekwondo Belts',
-            productCategory: 'Belts',
+            product_catergory: 'Belts',
             picture: '/images/p4.jpg',
             price:70,
             countInStock: 5,
@@ -62,7 +62,7 @@ const data = {
         },
         {
             name: 'Adidas Red Body Armour',
-            productCategory: 'Body Armour',
+            product_catergory: 'Body Armour',
             picture: '/images/p5.jpg',
             price:80,
             countInStock: 0,
@@ -73,7 +73,7 @@ const data = {
         },
         {
             name: 'Adidas Blue Body Armour',
-            productCategory: 'Body Armour',
+            product_catergory: 'Body Armour',
             picture: '/images/p6.jpg',
             price:80,
             countInStock: 12,

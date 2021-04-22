@@ -2,10 +2,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
-import productRouter from './routers/productRouter.js';
-import userRouter from './routers/userRouter.js';
-import paymentRouter from './routers/paymentRouter.js';
-import uploadRouter from './routers/uploadRouter.js';
+import route_item from './route/route_item.js/index.js';
+import route_user from './route/route_user.js';
+import route_paid from './route/route_paid.js';
+import route_load from './route/route_load.js';
 
 dotenv.config();
 
@@ -18,10 +18,10 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/PPT-website', {
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
-app.use('/api/uploads', uploadRouter);
-app.use('/api/users', userRouter);
-app.use('/api/products', productRouter);
-app.use('/api/orders', paymentRouter);
+app.use('/api/uploads', route_load);
+app.use('/api/users', route_user);
+app.use('/api/products', route_item);
+app.use('/api/orders', route_paid);
 app.get('/api/config/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
