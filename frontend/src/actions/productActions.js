@@ -26,18 +26,18 @@ import {
 export const listProducts = ({
   pageNumber = '',
   name = '',
-  product_catergory = '',
-  customer_order = '',
-  minimum = 0,
-  maximum = 0,
-  user_rating = 0,
+  productCategory = '',
+  order = '',
+  min = 0,
+  max = 0,
+  userRating = 0,
 }) => async (dispatch) => {
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
     const { data } = await Axios.get(
-      `/api/products?pageNumber=${pageNumber}&name=${name}&product_catergory=${product_catergory}&minimum=${minimum}&maximum=${maximum}&user_rating=${user_rating}&customer_order=${customer_order}`
+      `/api/products?pageNumber=${pageNumber}&name=${name}&productCategory=${productCategory}&min=${min}&max=${max}&userRating=${userRating}&order=${order}`
     );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -82,7 +82,7 @@ export const createProduct = () => async (dispatch, getState) => {
       '/api/products',
       {},
       {
-        headers: { Authorization: `Bearer ${userInfo.user_token}` },
+        headers: { Authorization: `Bearer ${userInfo.token}` },
       }
     );
     dispatch({
@@ -104,7 +104,7 @@ export const updateProduct = (item) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.put(`/api/products/${item._id}`, item, {
-      headers: { Authorization: `Bearer ${userInfo.user_token}` },
+      headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
   } catch (error) {
@@ -123,7 +123,7 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
   try {
     // eslint-disable-next-line
     const { data } = Axios.delete(`/api/products/${productId}`, {
-      headers: { Authorization: `Bearer ${userInfo.user_token}` },
+      headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
   } catch (error) {
@@ -147,7 +147,7 @@ export const createReview = (productId, review) => async (
       `/api/products/${productId}/reviews`,
       review,
       {
-        headers: { Authorization: `Bearer ${userInfo.user_token}` },
+        headers: { Authorization: `Bearer ${userInfo.token}` },
       }
     );
     dispatch({

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { login } from '../actions/userActions';
+import { signin } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 export default function SigninScreen(props) {
-  const [user_email, setEmail] = useState('');
+  const [userEmail, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const redirect = props.location.search
@@ -19,7 +19,7 @@ export default function SigninScreen(props) {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(user_email, password));
+    dispatch(signin(userEmail, password));
   };
   useEffect(() => {
     if (userInfo) {
@@ -35,11 +35,11 @@ export default function SigninScreen(props) {
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="user_email">Email address</label>
+          <label htmlFor="userEmail">Email address</label>
           <input
-            type="user_email"
-            id="user_email"
-            placeholder="Enter user_email"
+            type="userEmail"
+            id="userEmail"
+            placeholder="Enter userEmail"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
@@ -64,7 +64,7 @@ export default function SigninScreen(props) {
           <label />
           <div>
             New customer?{' '}
-            <Link to={`/signup?redirect=${redirect}`}>
+            <Link to={`/register?redirect=${redirect}`}>
               Create your account
             </Link>
           </div>

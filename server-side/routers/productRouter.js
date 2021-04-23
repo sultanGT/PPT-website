@@ -2,50 +2,45 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 import Product from '../templates/productTemplate.js';
-import { userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
+import { userAdminstrator, userCredentialsAuthenticated } from '../utils.js';
 
-//Variable Declarations
-const route_item = express.Router();
+const productRouter = express.Router();
 
-//Function for displaying item details - reused
-route_item.get(
+productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const page_length = 4;
-    const pptpage = Number(req.query.pageNumber) || 1;
+    const pageSize = 8;
+    const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
-    const product_catergory = req.query.product_catergory || '';
-    const customer_order = req.query.customer_order || '';
-    const minimum =
-      req.query.minimum && Number(req.query.minimum) !== 0 ? Number(req.query.minimum) : 0;
-    const maximum =
-      req.query.maximum && Number(req.query.maximum) !== 0 ? Number(req.query.maximum) : 0;
-    const user_rating =
-      req.query.user_rating && Number(req.query.user_rating) !== 0
-        ? Number(req.query.user_rating)
+    const productCategory = req.query.productCategory || '';
+    const order = req.query.order || '';
+    const min =
+      req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
+    const max =
+      req.query.max && Number(req.query.max) !== 0 ? Number(req.query.max) : 0;
+    const userRating =
+      req.query.userRating && Number(req.query.userRating) !== 0
+        ? Number(req.query.userRating)
         : 0;
 
-//Search bar filters - reused copied
     const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
-    const categoryFilter = product_catergory ? product_catergory : {};
-    const priceFilter = minimum && maximum ? { price: { $gte: minimum, $lte: maximum } } : {};
-    const ratingFilter = user_rating ? { user_rating: { $gte: user_rating } } : {};
+    const categoryFilter = productCategory ? { productCategory } : {};
+    const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
+    const ratingFilter = userRating ? { userRating: { $gte: userRating } } : {};
     const sortOrder =
-    customer_order === 'lowest'
+      order === 'lowest'
         ? { price: 1 }
-        : customer_order === 'highest'
+        : order === 'highest'
         ? { price: -1 }
-        : customer_order === 'toprated'
-        ? { user_rrating: -1 }
+        : order === 'toprated'
+        ? { userRating: -1 }
         : { _id: -1 };
-//Filter for counting items for filter results - reused copied
     const count = await Product.count({
       ...nameFilter,
       ...categoryFilter,
       ...priceFilter,
       ...ratingFilter,
     });
-//Function for finding items by filtered option - reused copied
     const products = await Product.find({
       ...nameFilter,
       ...categoryFilter,
@@ -53,22 +48,21 @@ route_item.get(
       ...ratingFilter,
     })
       .sort(sortOrder)
-      .skip(page_length * (pptpage - 1))
-      .limit(page_length);
-    res.send({ products, pptpage, pages: Math.ceil(count / page_length) });
+      .skip(pageSize * (page - 1))
+      .limit(pageSize);
+    res.send({ products, page, pages: Math.ceil(count / pageSize) });
   })
 );
 
-//Function for finding items by catergory 
-route_item.get(
+productRouter.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {
-    const categories = await Product.find().distinct('product_catergory');
+    const categories = await Product.find().distinct('productCategory');
     res.send(categories);
   })
 );
 
-route_item.get(
+productRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
     // await Product.remove({});
@@ -82,7 +76,7 @@ route_item.get(
   })
 );
 
-route_item.get(
+productRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
     const item = await Product.findById(req.params.id);
@@ -94,19 +88,19 @@ route_item.get(
   })
 );
 
-route_item.post(
+productRouter.post(
   '/',
   userCredentialsAuthenticated,
-  userCredentialsAdministrator,
+  userAdminstrator,
   expressAsyncHandler(async (req, res) => {
     const item = new Product({
       name: 'sample name ' + Date.now(),
       picture: '/images/p1.jpg',
       price: 0,
-      product_catergory: 'sample product_catergory',
+      productCategory: 'sample productCategory',
       productBrand: 'sample productBrand',
       countInStock: 0,
-      user_rating: 0,
+      userRating: 0,
       numReviews: 0,
       productDescription: 'sample productDescription',
     });
@@ -114,10 +108,10 @@ route_item.post(
     res.send({ message: 'Product Created', item: createdProduct });
   })
 );
-route_item.put(
+productRouter.put(
   '/:id',
   userCredentialsAuthenticated,
-  userCredentialsAdministrator,
+  userAdminstrator,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const item = await Product.findById(productId);
@@ -125,7 +119,7 @@ route_item.put(
       item.name = req.body.name;
       item.price = req.body.price;
       item.picture = req.body.picture;
-      item.product_catergory = req.body.product_catergory;
+      item.productCategory = req.body.productCategory;
       item.productBrand = req.body.productBrand;
       item.countInStock = req.body.countInStock;
       item.productDescription = req.body.productDescription;
@@ -137,10 +131,10 @@ route_item.put(
   })
 );
 
-route_item.delete(
+productRouter.delete(
   '/:id',
   userCredentialsAuthenticated,
-  userCredentialsAdministrator,
+  userAdminstrator,
   expressAsyncHandler(async (req, res) => {
     const item = await Product.findById(req.params.id);
     if (item) {
@@ -152,7 +146,7 @@ route_item.delete(
   })
 );
 
-route_item.post(
+productRouter.post(
   '/:id/reviews',
   userCredentialsAuthenticated,
   expressAsyncHandler(async (req, res) => {
@@ -166,13 +160,13 @@ route_item.post(
       }
       const review = {
         name: req.user.name,
-        user_rating: Number(req.body.use_r_rating),
+        userRating: Number(req.body.userRating),
         userComment: req.body.userComment,
       };
       item.reviews.push(review);
       item.numReviews = item.reviews.length;
-      item.user_rating =
-        item.reviews.reduce((a, c) => c.user_rating + a, 0) /
+      item.userRating =
+        item.reviews.reduce((a, c) => c.userRating + a, 0) /
         item.reviews.length;
       const updatedProduct = await item.save();
       res.status(201).send({
@@ -185,4 +179,4 @@ route_item.post(
   })
 );
 
-export default route_item;
+export default productRouter;

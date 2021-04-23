@@ -24,7 +24,7 @@ export default function CartScreen(props) {
   };
 
   const checkoutHandler = () => {
-    props.history.push('/login?redirect=shipping');
+    props.history.push('/signin?redirect=shipping');
   };
   return (
     <div className="row top pager">
@@ -47,7 +47,7 @@ export default function CartScreen(props) {
                       className="small"
                     ></img>
                   </div>
-                  <div className="minimum-30">
+                  <div className="min-30">
                     <Link to={`/item/${item.item}`}>{item.name}</Link>
                   </div>
                   <div>

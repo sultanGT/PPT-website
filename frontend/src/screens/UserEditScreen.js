@@ -10,8 +10,8 @@ import { USER_UPDATE_RESET } from '../constants/userConstants';
 export default function UserEditScreen(props) {
   const userId = props.match.params.id;
   const [name, setName] = useState('');
-  const [user_email, setEmail] = useState('');
-  const [userCredentialsAdministrator, setIsAdmin] = useState(false);
+  const [userEmail, setEmail] = useState('');
+  const [userAdminstrator, setIsAdmin] = useState(false);
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
@@ -33,15 +33,15 @@ export default function UserEditScreen(props) {
       dispatch(detailsUser(userId));
     } else {
       setName(user.name);
-      setEmail(user.user_email);
-      setIsAdmin(user.userCredentialsAdministrator);
+      setEmail(user.userEmail);
+      setIsAdmin(user.userAdminstrator);
     }
   }, [dispatch, props.history, successUpdate, user, userId]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     // dispatch update user
-    dispatch(updateUser({ _id: userId, name, user_email, userCredentialsAdministrator }));
+    dispatch(updateUser({ _id: userId, name, userEmail, userAdminstrator }));
   };
   return (
     <div className="pager">
@@ -70,21 +70,21 @@ export default function UserEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="user_email">Email</label>
+              <label htmlFor="userEmail">Email</label>
               <input
-                id="user_email"
-                type="user_email"
-                placeholder="Enter user_email"
-                value={user_email}
+                id="userEmail"
+                type="userEmail"
+                placeholder="Enter userEmail"
+                value={userEmail}
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="userCredentialsAdministrator">Is Admin</label>
+              <label htmlFor="userAdminstrator">Is Admin</label>
               <input
-                id="userCredentialsAdministrator"
+                id="userAdminstrator"
                 type="checkbox"
-                checked={userCredentialsAdministrator}
+                checked={userAdminstrator}
                 onChange={(e) => setIsAdmin(e.target.checked)}
               ></input>
             </div>

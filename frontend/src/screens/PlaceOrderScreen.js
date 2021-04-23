@@ -13,7 +13,7 @@ export default function PlaceOrderScreen(props) {
     props.history.push('/payment');
   }
   const orderCreate = useSelector((state) => state.orderCreate);
-  const { loading, success, error, customer_order } = orderCreate;
+  const { loading, success, error, order } = orderCreate;
   const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
   cart.itemsPrice = toPrice(
     cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
@@ -27,10 +27,10 @@ export default function PlaceOrderScreen(props) {
   };
   useEffect(() => {
     if (success) {
-      props.history.push(`/customer_order/${customer_order._id}`);
+      props.history.push(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
     }
-  }, [dispatch, customer_order, props.history, success]);
+  }, [dispatch, order, props.history, success]);
   return (
     <div className="pager">
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
@@ -70,7 +70,7 @@ export default function PlaceOrderScreen(props) {
                             className="small"
                           ></img>
                         </div>
-                        <div className="minimum-30">
+                        <div className="min-30">
                           <Link to={`/item/${item.item}`}>
                             {item.name}
                           </Link>

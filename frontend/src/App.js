@@ -82,8 +82,8 @@ function App() {
               className="open-sidebar"
               onClick={() => setSidebarIsOpen(true)}
             >
-              {/* <i className={ navbar ? 'fa fa-bars' : 'deactive'}></i> */}
-              <img className={ navbar ? 'menuIconLarge responsive' : ' menuIconLarge responsive'} src={img} alt="PPTmenuIcon"></img>
+              <i className={ navbar ? 'fa fa-bars' : 'deactive'}></i>
+              <img className={ navbar ? 'deactive' : ' menuIconLarge responsive'} src={img} alt="PPTmenuIcon"></img>
             </button>
             <Link className="Brand" to="/">
               PEAK PERFORMANCE TAEKWONDO
@@ -112,7 +112,7 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/credentials">User Profile  <i className="fa fa-address-card iconSmall"></i></Link>
+                    <Link to="/profile">User Profile  <i className="fa fa-address-card iconSmall"></i></Link>
                   </li>
                   <li>
                     <Link to="/orderhistory">Order History  <i className="fa fa-history iconSmall"></i></Link>
@@ -125,10 +125,10 @@ function App() {
                 </ul>
               </div>
             ) : (
-              <Link to="/login"><i className="far fa-user iconLarge"></i></Link>
+              <Link to="/signin"><i className="far fa-user iconLarge"></i></Link>
             )}
 
-            {userInfo && userInfo.userCredentialsAdministrator && (
+            {userInfo && userInfo.userAdminstrator && (
               <div className="dropdown">
                 <Link to="#admin">
                 <i className="fas fa-user-shield iconLarge"></i> {/*admin*/}
@@ -171,7 +171,7 @@ function App() {
               categories.map((c) => (
                 <li key={c}>
                   <Link
-                    to={`/search/product_catergory/${c}`}
+                    to={`/search/productCategory/${c}`}
                     onClick={() => setSidebarIsOpen(false)}
                   >
                     {c}
@@ -196,10 +196,10 @@ function App() {
           ></Route>
           </div>
           <div className="pages">
-          <Route path="/login" component={SigninScreen}></Route>
+          <Route path="/signin" component={SigninScreen}></Route>
           </div>
           <div className="pages">
-          <Route path="/signup" component={RegisterScreen}></Route>
+          <Route path="/register" component={RegisterScreen}></Route>
           </div>
           <div className="pages">
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
@@ -211,7 +211,7 @@ function App() {
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           </div>
           <div className="pages">
-          <Route path="/customer_order/:id" component={OrderScreen}></Route>
+          <Route path="/order/:id" component={OrderScreen}></Route>
           </div>
           <div className="pages">
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
@@ -225,28 +225,28 @@ function App() {
           </div>
           <div className="pages">
           <Route
-            path="/search/product_catergory/:product_catergory"
+            path="/search/productCategory/:productCategory"
             component={SearchScreen}
             exact
           ></Route>
           </div>
           <div className="pages">
           <Route
-            path="/search/product_catergory/:product_catergory/name/:name"
+            path="/search/productCategory/:productCategory/name/:name"
             component={SearchScreen}
             exact
           ></Route>
           </div>
           <div className="pages">
           <Route
-            path="/search/product_catergory/:product_catergory/name/:name/minimum/:minimum/maximum/:maximum/user_rating/:user_rating/customer_order/:customer_order/pageNumber/:pageNumber"
+            path="/search/productCategory/:productCategory/name/:name/min/:min/max/:max/userRating/:userRating/order/:order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
           ></Route>
           </div>
           <div className="pages">
           <PrivateRoute
-            path="/credentials"
+            path="/profile"
             component={ProfileScreen}
           ></PrivateRoute>
           </div>

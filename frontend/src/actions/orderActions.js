@@ -24,18 +24,18 @@ import {
   ORDER_DELIVER_FAIL,
 } from '../constants/orderConstants';
 
-export const createOrder = (customer_order) => async (dispatch, getState) => {
-  dispatch({ type: ORDER_CREATE_REQUEST, payload: customer_order });
+export const createOrder = (order) => async (dispatch, getState) => {
+  dispatch({ type: ORDER_CREATE_REQUEST, payload: order });
   try {
     const {
       userSignin: { userInfo },
     } = getState();
-    const { data } = await Axios.post('/api/orders', customer_order, {
+    const { data } = await Axios.post('/api/orders', order, {
       headers: {
-        Authorization: `Bearer ${userInfo.user_token}`,
+        Authorization: `Bearer ${userInfo.token}`,
       },
     });
-    dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.customer_order });
+    dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
     dispatch({ type: CART_EMPTY });
     localStorage.removeItem('cartItems');
   } catch (error) {
@@ -56,7 +56,7 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.get(`/api/orders/${orderId}`, {
-      headers: { Authorization: `Bearer ${userInfo.user_token}` },
+      headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
@@ -68,17 +68,17 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
   }
 };
 
-export const payOrder = (customer_order, paymentComplete) => async (
+export const payOrder = (order, paymentComplete) => async (
   dispatch,
   getState
 ) => {
-  dispatch({ type: ORDER_PAY_REQUEST, payload: { customer_order, paymentComplete } });
+  dispatch({ type: ORDER_PAY_REQUEST, payload: { order, paymentComplete } });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = Axios.put(`/api/orders/${customer_order._id}/pay`, paymentComplete, {
-      headers: { Authorization: `Bearer ${userInfo.user_token}` },
+    const { data } = Axios.put(`/api/orders/${order._id}/pay`, paymentComplete, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
   } catch (error) {
@@ -97,7 +97,7 @@ export const listOrderMine = () => async (dispatch, getState) => {
   try {
     const { data } = await Axios.get('/api/orders/mine', {
       headers: {
-        Authorization: `Bearer ${userInfo.user_token}`,
+        Authorization: `Bearer ${userInfo.token}`,
       },
     });
     dispatch({ type: ORDER_MINE_LIST_SUCCESS, payload: data });
@@ -116,7 +116,7 @@ export const listOrders = () => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.get('/api/orders', {
-      headers: { Authorization: `Bearer ${userInfo.user_token}` },
+      headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     console.log(data);
     dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
@@ -135,7 +135,7 @@ export const deleteOrder = (orderId) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = Axios.delete(`/api/orders/${orderId}`, {
-      headers: { Authorization: `Bearer ${userInfo.user_token}` },
+      headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: ORDER_DELETE_SUCCESS, payload: data });
   } catch (error) {
@@ -157,7 +157,7 @@ export const deliverOrder = (orderId) => async (dispatch, getState) => {
       `/api/orders/${orderId}/deliver`,
       {},
       {
-        headers: { Authorization: `Bearer ${userInfo.user_token}` },
+        headers: { Authorization: `Bearer ${userInfo.token}` },
       }
     );
     dispatch({ type: ORDER_DELIVER_SUCCESS, payload: data });

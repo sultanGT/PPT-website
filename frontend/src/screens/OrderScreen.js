@@ -16,7 +16,7 @@ export default function OrderScreen(props) {
   const orderId = props.match.params.id;
   const [sdkReady, setSdkReady] = useState(false);
   const orderDetails = useSelector((state) => state.orderDetails);
-  const { customer_order, loading, error } = orderDetails;
+  const { order, loading, error } = orderDetails;
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
@@ -46,16 +46,16 @@ export default function OrderScreen(props) {
       document.body.appendChild(script);
     };
     if (
-      !customer_order ||
+      !order ||
       successPay ||
       successDeliver ||
-      (customer_order && customer_order._id !== orderId)
+      (order && order._id !== orderId)
     ) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(detailsOrder(orderId));
     } else {
-      if (!customer_order.paymentConfirmed) {
+      if (!order.paymentConfirmed) {
         if (!window.paypal) {
           addPayPalScript();
         } else {
@@ -63,13 +63,13 @@ export default function OrderScreen(props) {
         }
       }
     }
-  }, [dispatch, orderId, sdkReady, successPay, successDeliver, customer_order]);
+  }, [dispatch, orderId, sdkReady, successPay, successDeliver, order]);
 
   const successPaymentHandler = (paymentComplete) => {
-    dispatch(payOrder(customer_order, paymentComplete));
+    dispatch(payOrder(order, paymentComplete));
   };
   const deliverHandler = () => {
-    dispatch(deliverOrder(customer_order._id));
+    dispatch(deliverOrder(order._id));
   };
 
   return loading ? (
@@ -79,7 +79,7 @@ export default function OrderScreen(props) {
   ) : (
     <div className="pager">
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
-      <h1>Order {customer_order._id}</h1>
+      <h1>Order {order._id}</h1>
       <div className="row top">
         <div className="col-2">
           <ul>
@@ -87,15 +87,15 @@ export default function OrderScreen(props) {
               <div className="card card-body">
                 <h2>Shippring</h2>
                 <p>
-                  <strong>Name:</strong> {customer_order.deliveryAddress.fullName} <br />
-                  <strong>Address: </strong> {customer_order.deliveryAddress.address},
-                  {customer_order.deliveryAddress.city},{' '}
-                  {customer_order.deliveryAddress.postalCode},
-                  {customer_order.deliveryAddress.county}
+                  <strong>Name:</strong> {order.deliveryAddress.fullName} <br />
+                  <strong>Address: </strong> {order.deliveryAddress.address},
+                  {order.deliveryAddress.city},{' '}
+                  {order.deliveryAddress.postalCode},
+                  {order.deliveryAddress.county}
                 </p>
-                {customer_order.deliveryConfirmed ? (
+                {order.deliveryConfirmed ? (
                   <MessageBox variant="success">
-                    Delivered at {customer_order.deliveryDate}
+                    Delivered at {order.deliveryDate}
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Delivered</MessageBox>
@@ -106,11 +106,11 @@ export default function OrderScreen(props) {
               <div className="card card-body">
                 <h2>Payment</h2>
                 <p>
-                  <strong>Method:</strong> {customer_order.paymentPPorS}
+                  <strong>Method:</strong> {order.paymentPPorS}
                 </p>
-                {customer_order.paymentConfirmed ? (
+                {order.paymentConfirmed ? (
                   <MessageBox variant="success">
-                    Paid at {customer_order.paymentDate}
+                    Paid at {order.paymentDate}
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Paid</MessageBox>
@@ -121,7 +121,7 @@ export default function OrderScreen(props) {
               <div className="card card-body">
                 <h2>Order Items</h2>
                 <ul>
-                  {customer_order.orderProducts.map((item) => (
+                  {order.orderProducts.map((item) => (
                     <li key={item.item}>
                       <div className="row">
                         <div>
@@ -131,7 +131,7 @@ export default function OrderScreen(props) {
                             className="small"
                           ></img>
                         </div>
-                        <div className="minimum-30">
+                        <div className="min-30">
                           <Link to={`/item/${item.item}`}>
                             {item.name}
                           </Link>
@@ -157,19 +157,19 @@ export default function OrderScreen(props) {
               <li>
                 <div className="row">
                   <div>Items</div>
-                  <div>${customer_order.itemsPrice.toFixed(2)}</div>
+                  <div>${order.itemsPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Shipping</div>
-                  <div>${customer_order.deliveryPrice.toFixed(2)}</div>
+                  <div>${order.deliveryPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Tax</div>
-                  <div>${customer_order.taxPrice.toFixed(2)}</div>
+                  <div>${order.taxPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
@@ -178,11 +178,11 @@ export default function OrderScreen(props) {
                     <strong> Order Total</strong>
                   </div>
                   <div>
-                    <strong>${customer_order.totalPrice.toFixed(2)}</strong>
+                    <strong>${order.totalPrice.toFixed(2)}</strong>
                   </div>
                 </div>
               </li>
-              {!customer_order.paymentConfirmed && (
+              {!order.paymentConfirmed && (
                 <li>
                   {!sdkReady ? (
                     <LoadingBox></LoadingBox>
@@ -194,14 +194,14 @@ export default function OrderScreen(props) {
                       {loadingPay && <LoadingBox></LoadingBox>}
 
                       <PayPalButton
-                        amount={customer_order.totalPrice}
+                        amount={order.totalPrice}
                         onSuccess={successPaymentHandler}
                       ></PayPalButton>
                     </>
                   )}
                 </li>
               )}
-              {userInfo.userCredentialsAdministrator && customer_order.paymentConfirmed && !customer_order.deliveryConfirmed && (
+              {userInfo.userAdminstrator && order.paymentConfirmed && !order.deliveryConfirmed && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
                   {errorDeliver && (

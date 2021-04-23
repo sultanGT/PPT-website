@@ -6,8 +6,8 @@ export const generateToken = (user) => {
     {
       _id: user._id,
       name: user.name,
-      user_email: user.user_email,
-      userCredentialsAdministrator: user.userCredentialsAdministrator,
+      userEmail: user.userEmail,
+      userAdminstrator: user.userAdminstrator,
     },
     process.env.JWT_SECRET || 'somethingsecret',
     {
@@ -19,9 +19,9 @@ export const generateToken = (user) => {
 export const userCredentialsAuthenticated = (req, res, next) => {
   const authorization = req.headers.authorization;
   if (authorization) {
-    const user_token = authorization.slice(7, authorization.length); // Bearer XXXXXX
+    const token = authorization.slice(7, authorization.length); // Bearer XXXXXX
     jwt.verify(
-      user_token,
+      token,
       process.env.JWT_SECRET || 'somethingsecret',
       (err, decode) => {
         if (err) {
@@ -36,8 +36,8 @@ export const userCredentialsAuthenticated = (req, res, next) => {
     res.status(401).send({ message: 'No Token' });
   }
 };
-export const userCredentialsAdministrator = (req, res, next) => {
-  if (req.user && req.user.userCredentialsAdministrator) {
+export const userAdminstrator = (req, res, next) => {
+  if (req.user && req.user.userAdminstrator) {
     next();
   } else {
     res.status(401).send({ message: 'Invalid Admin Token' });
@@ -50,12 +50,12 @@ export const mailgun = () =>
     domain: process.env.MAILGUN_DOMAIN,
   });
 
-export const orderCompletionEmail = (customer_order) => {
+export const orderCompletionEmail = (order) => {
   return `<h1>Thanks for shopping with us</h1>
   <p>
-  Hi ${customer_order.user.name},</p>
-  <p>We have finished processing your customer_order.</p>
-  <h2>[Order ${customer_order._id}] (${customer_order.createdAt.toString().substring(0, 10)})</h2>
+  Hi ${order.user.name},</p>
+  <p>We have finished processing your order.</p>
+  <h2>[Order ${order._id}] (${order.createdAt.toString().substring(0, 10)})</h2>
   <table>
   <thead>
   <tr>
@@ -64,7 +64,7 @@ export const orderCompletionEmail = (customer_order) => {
   <td><strong align="right">Price</strong></td>
   </thead>
   <tbody>
-  ${customer_order.orderProducts
+  ${order.orderProducts
     .map(
       (item) => `
     <tr>
@@ -79,28 +79,28 @@ export const orderCompletionEmail = (customer_order) => {
   <tfoot>
   <tr>
   <td colspan="2">Items Price:</td>
-  <td align="right"> $${customer_order.itemsPrice.toFixed(2)}</td>
+  <td align="right"> $${order.itemsPrice.toFixed(2)}</td>
   </tr>
   <tr>
   <td colspan="2">Tax Price:</td>
-  <td align="right"> $${customer_order.taxPrice.toFixed(2)}</td>
+  <td align="right"> $${order.taxPrice.toFixed(2)}</td>
   </tr>
   <tr>
   <td colspan="2">Shipping Price:</td>
-  <td align="right"> $${customer_order.deliveryPrice.toFixed(2)}</td>
+  <td align="right"> $${order.deliveryPrice.toFixed(2)}</td>
   </tr>
   <tr>
   <td colspan="2"><strong>Total Price:</strong></td>
-  <td align="right"><strong> $${customer_order.totalPrice.toFixed(2)}</strong></td>
+  <td align="right"><strong> $${order.totalPrice.toFixed(2)}</strong></td>
   </tr>
   </table>
   <h2>Shipping address</h2>
   <p>
-  ${customer_order.deliveryAddress.fullName},<br/>
-  ${customer_order.deliveryAddress.address},<br/>
-  ${customer_order.deliveryAddress.city},<br/>
-  ${customer_order.deliveryAddress.county},<br/>
-  ${customer_order.deliveryAddress.postCode}<br/>
+  ${order.deliveryAddress.fullName},<br/>
+  ${order.deliveryAddress.address},<br/>
+  ${order.deliveryAddress.city},<br/>
+  ${order.deliveryAddress.county},<br/>
+  ${order.deliveryAddress.postCode}<br/>
   </p>
   <hr/>
   <p>

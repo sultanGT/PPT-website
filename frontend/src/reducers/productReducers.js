@@ -38,7 +38,7 @@ export const productListReducer = (
         loading: false,
         products: action.payload.products,
         pages: action.payload.pages,
-        pptpage: action.payload.pptpage,
+        page: action.payload.page,
       };
     case PRODUCT_LIST_FAIL:
       return { loading: false, error: action.payload };

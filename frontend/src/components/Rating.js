@@ -1,15 +1,15 @@
 import React from 'react';
 
 export default function Rating(props) {
-  const { user_rating, numReviews, caption } = props;
+  const { userRating, numReviews, caption } = props;
   return (
     <div className="rating">
       <span>
         <i
           className={
-            user_rating >= 1
+            userRating >= 1
               ? 'fa fa-star'
-              : user_rating >= 0.5
+              : userRating >= 0.5
               ? 'fas fa-star-half-alt'
               : 'far fa-star'
           }
@@ -18,9 +18,9 @@ export default function Rating(props) {
       <span>
         <i
           className={
-            user_rating >= 2
+            userRating >= 2
               ? 'fa fa-star'
-              : user_rating >= 1.5
+              : userRating >= 1.5
               ? 'fa fa-star-half-o'
               : 'far fa-star'
           }
@@ -29,9 +29,9 @@ export default function Rating(props) {
       <span>
         <i
           className={
-            user_rating >= 3
+            userRating >= 3
               ? 'fa fa-star'
-              : user_rating >= 2.5
+              : userRating >= 2.5
               ? 'fas fa-star-half-alt'
               : 'far fa-star'
           }
@@ -40,9 +40,9 @@ export default function Rating(props) {
       <span>
         <i
           className={
-            user_rating >= 4
+            userRating >= 4
               ? 'fa fa-star'
-              : user_rating >= 3.5
+              : userRating >= 3.5
               ? 'fas fa-star-half-alt'
               : 'far fa-star'
           }
@@ -51,9 +51,9 @@ export default function Rating(props) {
       <span>
         <i
           className={
-            user_rating >= 5
+            userRating >= 5
               ? 'fa fa-star'
-              : user_rating >= 4.5
+              : userRating >= 4.5
               ? 'fas fa-star-half-alt'
               : 'far fa-star'
           }

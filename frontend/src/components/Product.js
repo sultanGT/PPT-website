@@ -11,9 +11,9 @@ export default function Product(props) {
 
   return (
   <div>
-    {/* <Link to={`/search/product_catergory/${item.product_catergory}`} >
+    {/* <Link to={`/search/productCategory/${item.productCategory}`} >
     <div className="row center">
-        <h1>{item.product_catergory}</h1>
+        <h1>{item.productCategory}</h1>
         </div>
     </Link> */}
 
@@ -34,7 +34,7 @@ export default function Product(props) {
           <h2 className={isShown ? 'h2-title center' : ''}>{item.name}</h2>
         </Link>
         {/* <Rating
-          user_rating={item.user_rating}
+          userRating={item.userRating}
           numReviews={item.numReviews}
         ></Rating> */}
         <div className={isShown ? 'deactive' : 'price center'}>£{item.price}</div>

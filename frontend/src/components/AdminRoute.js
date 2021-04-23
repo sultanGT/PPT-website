@@ -9,10 +9,10 @@ export default function AdminRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={(props) =>
-        userInfo && userInfo.userCredentialsAdministrator ? (
+        userInfo && userInfo.userAdminstrator ? (
           <Component {...props}></Component>
         ) : (
-          <Redirect to="/login" />
+          <Redirect to="/signin" />
         )
       }
     ></Route>
