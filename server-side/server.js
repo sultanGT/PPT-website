@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
-import route_item from './route/route_item.js/index.js';
+import route_item from './route/route_item.js';
 import route_user from './route/route_user.js';
 import route_paid from './route/route_paid.js';
 import route_load from './route/route_load.js';
