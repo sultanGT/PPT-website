@@ -211,7 +211,7 @@ function App() {
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           </div>
           <div className="pages">
-          <Route path="/order/:id" component={OrderScreen}></Route>
+          <Route path="/customer_order/:id" component={OrderScreen}></Route>
           </div>
           <div className="pages">
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
@@ -239,7 +239,7 @@ function App() {
           </div>
           <div className="pages">
           <Route
-            path="/search/product_catergory/:product_catergory/name/:name/min/:min/max/:max/userRating/:userRating/order/:order/pageNumber/:pageNumber"
+            path="/search/product_catergory/:product_catergory/name/:name/minimum/:minimum/maximum/:maximum/user_rating/:user_rating/customer_order/:customer_order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
           ></Route>

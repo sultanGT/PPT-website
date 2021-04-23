@@ -31,15 +31,15 @@ export default function OrderHistoryScreen(props) {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{order.totalPrice.toFixed(2)}</td>
-                <td>{order.paymentConfirmed ? order.paymentDate.substring(0, 10) : 'No'}</td>
+            {orders.map((customer_order) => (
+              <tr key={customer_order._id}>
+                <td>{customer_order._id}</td>
+                <td>{customer_order.createdAt.substring(0, 10)}</td>
+                <td>{customer_order.totalPrice.toFixed(2)}</td>
+                <td>{customer_order.paymentConfirmed ? customer_order.paymentDate.substring(0, 10) : 'No'}</td>
                 <td>
-                  {order.deliveryConfirmed
-                    ? order.deliveryDate.substring(0, 10)
+                  {customer_order.deliveryConfirmed
+                    ? customer_order.deliveryDate.substring(0, 10)
                     : 'No'}
                 </td>
                 <td>
@@ -47,7 +47,7 @@ export default function OrderHistoryScreen(props) {
                     type="button"
                     className="small"
                     onClick={() => {
-                      props.history.push(`/order/${order._id}`);
+                      props.history.push(`/customer_order/${customer_order._id}`);
                     }}
                   >
                     Details
