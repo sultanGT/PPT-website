@@ -2,7 +2,7 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
-import User from '../templates/userTemplate.js';
+import PPTUser from '../templates/userTemplate.js';
 import { generateToken, userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
 
 
@@ -13,9 +13,9 @@ const route_user = express.Router();
 
 //Function to insert commisioned pptusers into PPT web application - selfcoded
 route_user.get(
-  '/PPTusers',
+  '/PPTuserlist',
   expressAsyncHandler(async (req, res) => {
-    const ppt_users = await User.insertMany(data.pptusers);
+    const ppt_users = await PPTUser.insertMany(data.pptusers);
     res.send({ ppt_users });
   })
 );
@@ -24,7 +24,7 @@ route_user.get(
 route_user.post(
   '/login',
   expressAsyncHandler(async (req, res) => {
-    const user = await User.findOne({ user_email: req.body.user_email });
+    const user = await PPTUser.findOne({ user_email: req.body.user_email });
     if (user) {
       // Decrypt bcrypted user_password to match with pptuser entered user_password
       if (bcrypt.compareSync(req.body.password, user.password)) {
@@ -46,7 +46,7 @@ route_user.post(
 route_user.post(
   '/signup',
   expressAsyncHandler(async (req, res) => {
-    const user = new User({
+    const user = new PPTUser({
       name: req.body.name,
       user_email: req.body.user_email,
       password: bcrypt.hashSync(req.body.password, 8),
@@ -66,7 +66,7 @@ route_user.post(
 route_user.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id);
+    const user = await PPTUser.findById(req.params.id);
     if (user) {
       res.send(user);
     } else {
@@ -80,7 +80,7 @@ route_user.put(
   '/credentials',
   userCredentialsAuthenticated,
   expressAsyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id);
+    const user = await PPTUser.findById(req.user._id);
     if (user) {
       user.name = req.body.name || user.name;
       user.user_email = req.body.user_email || user.user_email;
@@ -105,7 +105,7 @@ route_user.get(
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
-    const pptusers = await User.find({});
+    const pptusers = await PPTUser.find({});
     res.send(pptusers);
   })
 );
@@ -116,7 +116,7 @@ route_user.delete(
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id);
+    const user = await PPTUser.findById(req.params.id);
     if (user) {
       if (user.user_email === 'sultan.malik@city.ac.uk') {
         res.status(400).send({ message: 'Cannot delete PPT Adminisrators account' });
@@ -136,7 +136,7 @@ route_user.put(
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id);
+    const user = await PPTUser.findById(req.params.id);
     if (user) {
       user.name = req.body.name || user.name;
       user.user_email = req.body.user_email || user.user_email;
