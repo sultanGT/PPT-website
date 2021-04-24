@@ -15,7 +15,7 @@ const route_user = express.Router();
 route_user.get(
   '/PPTusers',
   expressAsyncHandler(async (req, res) => {
-    const ppt_users = await User.insertMany(data.users);
+    const ppt_users = await User.insertMany(data.pptusers);
     res.send({ ppt_users });
   })
 );
@@ -42,6 +42,7 @@ route_user.post(
   })
 );
 
+//Function to signup a new pptuser on the PPT database - selfcoded
 route_user.post(
   '/signup',
   expressAsyncHandler(async (req, res) => {
@@ -104,8 +105,8 @@ route_user.get(
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
-    const users = await User.find({});
-    res.send(users);
+    const pptusers = await User.find({});
+    res.send(pptusers);
   })
 );
 

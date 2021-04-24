@@ -1,11 +1,11 @@
 import bcrypt from 'bcryptjs';
 
 const data = {
-    users: [
+    pptusers: [
         {
-            name:'admin',
-            user_email:'admin@ppt',
-            password: bcrypt.hashSync('admin', 8),
+            name:'sultan',
+            user_email:'sultan.malik@city.ac.uk',
+            password: bcrypt.hashSync('sultan', 8),
             userCredentialsAdministrator: true,
         },
         {

@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/PPT-website', {
   useCreateIndex: true,
 });
 app.use('/api/uploads', uploadRouter);
-app.use('/api/users', route_user);
+app.use('/api/pptusers', route_user);
 app.use('/api/products', productRouter);
 app.use('/api/orders', paymentRouter);
 app.get('/api/config/paypal', (req, res) => {

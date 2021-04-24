@@ -7,7 +7,7 @@ import { USER_DETAILS_RESET } from '../constants/userConstants';
 
 export default function UserListScreen(props) {
   const userList = useSelector((state) => state.userList);
-  const { loading, error, users } = userList;
+  const { loading, error, pptusers } = userList;
 
   const userDelete = useSelector((state) => state.userDelete);
   const {
@@ -52,7 +52,7 @@ export default function UserListScreen(props) {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {pptusers.map((user) => (
               <tr key={user._id}>
                 <td>{user._id}</td>
                 <td>{user.name}</td>
