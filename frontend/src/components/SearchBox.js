@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
 
 export default function SearchBox(props) {
   const [name, setName] = useState('');
@@ -17,7 +18,7 @@ export default function SearchBox(props) {
           onChange={(e) => setName(e.target.value)}
         ></input>
         <button className="primary" type="submit">
-          <i className="fa fa-search"></i>
+           <FaSearch />
         </button>
       </div>
     </form>
