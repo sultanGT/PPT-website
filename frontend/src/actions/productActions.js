@@ -82,7 +82,7 @@ export const createProduct = () => async (dispatch, getState) => {
       '/api/products',
       {},
       {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
+        headers: { Authorization: `Bearer ${userInfo.user_token}` },
       }
     );
     dispatch({
@@ -104,7 +104,7 @@ export const updateProduct = (item) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.put(`/api/products/${item._id}`, item, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+      headers: { Authorization: `Bearer ${userInfo.user_token}` },
     });
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
   } catch (error) {
@@ -123,7 +123,7 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
   try {
     // eslint-disable-next-line
     const { data } = Axios.delete(`/api/products/${productId}`, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+      headers: { Authorization: `Bearer ${userInfo.user_token}` },
     });
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
   } catch (error) {
@@ -147,7 +147,7 @@ export const createReview = (productId, review) => async (
       `/api/products/${productId}/reviews`,
       review,
       {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
+        headers: { Authorization: `Bearer ${userInfo.user_token}` },
       }
     );
     dispatch({

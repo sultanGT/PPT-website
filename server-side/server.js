@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 import productRouter from './routers/productRouter.js';
-import userRouter from './routers/userRouter.js';
+import route_user from './routers/route_user.js';
 import paymentRouter from './routers/paymentRouter.js';
 import uploadRouter from './routers/uploadRouter.js';
 
@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/PPT-website', {
   useCreateIndex: true,
 });
 app.use('/api/uploads', uploadRouter);
-app.use('/api/users', userRouter);
+app.use('/api/users', route_user);
 app.use('/api/products', productRouter);
 app.use('/api/orders', paymentRouter);
 app.get('/api/config/paypal', (req, res) => {

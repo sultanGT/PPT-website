@@ -201,7 +201,7 @@ export default function OrderScreen(props) {
                   )}
                 </li>
               )}
-              {userInfo.userAdminstrator && order.paymentConfirmed && !order.deliveryConfirmed && (
+              {userInfo.userCredentialsAdministrator && order.paymentConfirmed && !order.deliveryConfirmed && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
                   {errorDeliver && (

@@ -112,7 +112,7 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/profile">User Profile  <i className="fa fa-address-card iconSmall"></i></Link>
+                    <Link to="/credentials">User Profile  <i className="fa fa-address-card iconSmall"></i></Link>
                   </li>
                   <li>
                     <Link to="/orderhistory">Order History  <i className="fa fa-history iconSmall"></i></Link>
@@ -125,10 +125,10 @@ function App() {
                 </ul>
               </div>
             ) : (
-              <Link to="/signin"><i className="far fa-user iconLarge"></i></Link>
+              <Link to="/login"><i className="far fa-user iconLarge"></i></Link>
             )}
 
-            {userInfo && userInfo.userAdminstrator && (
+            {userInfo && userInfo.userCredentialsAdministrator && (
               <div className="dropdown">
                 <Link to="#admin">
                 <i className="fas fa-user-shield iconLarge"></i> {/*admin*/}
@@ -196,10 +196,10 @@ function App() {
           ></Route>
           </div>
           <div className="pages">
-          <Route path="/signin" component={SigninScreen}></Route>
+          <Route path="/login" component={SigninScreen}></Route>
           </div>
           <div className="pages">
-          <Route path="/register" component={RegisterScreen}></Route>
+          <Route path="/signup" component={RegisterScreen}></Route>
           </div>
           <div className="pages">
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
@@ -246,7 +246,7 @@ function App() {
           </div>
           <div className="pages">
           <PrivateRoute
-            path="/profile"
+            path="/credentials"
             component={ProfileScreen}
           ></PrivateRoute>
           </div>

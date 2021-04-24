@@ -2,7 +2,7 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 import Product from '../templates/productTemplate.js';
-import { userAdminstrator, userCredentialsAuthenticated } from '../utils.js';
+import { userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
 
 const productRouter = express.Router();
 
@@ -91,7 +91,7 @@ productRouter.get(
 productRouter.post(
   '/',
   userCredentialsAuthenticated,
-  userAdminstrator,
+  userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
     const item = new Product({
       name: 'sample name ' + Date.now(),
@@ -111,7 +111,7 @@ productRouter.post(
 productRouter.put(
   '/:id',
   userCredentialsAuthenticated,
-  userAdminstrator,
+  userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const item = await Product.findById(productId);
@@ -134,7 +134,7 @@ productRouter.put(
 productRouter.delete(
   '/:id',
   userCredentialsAuthenticated,
-  userAdminstrator,
+  userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
     const item = await Product.findById(req.params.id);
     if (item) {

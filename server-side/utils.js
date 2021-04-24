@@ -6,8 +6,8 @@ export const generateToken = (user) => {
     {
       _id: user._id,
       name: user.name,
-      userEmail: user.userEmail,
-      userAdminstrator: user.userAdminstrator,
+      user_email: user.user_email,
+      userCredentialsAdministrator: user.userCredentialsAdministrator,
     },
     process.env.JWT_SECRET || 'somethingsecret',
     {
@@ -19,9 +19,9 @@ export const generateToken = (user) => {
 export const userCredentialsAuthenticated = (req, res, next) => {
   const authorization = req.headers.authorization;
   if (authorization) {
-    const token = authorization.slice(7, authorization.length); // Bearer XXXXXX
+    const user_token = authorization.slice(7, authorization.length); // Bearer XXXXXX
     jwt.verify(
-      token,
+      user_token,
       process.env.JWT_SECRET || 'somethingsecret',
       (err, decode) => {
         if (err) {
@@ -36,8 +36,8 @@ export const userCredentialsAuthenticated = (req, res, next) => {
     res.status(401).send({ message: 'No Token' });
   }
 };
-export const userAdminstrator = (req, res, next) => {
-  if (req.user && req.user.userAdminstrator) {
+export const userCredentialsAdministrator = (req, res, next) => {
+  if (req.user && req.user.userCredentialsAdministrator) {
     next();
   } else {
     res.status(401).send({ message: 'Invalid Admin Token' });

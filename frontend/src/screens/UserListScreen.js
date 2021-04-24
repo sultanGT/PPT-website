@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteUser, listUsers } from '../actions/userActions';
+import { remove_pptuser, listUsers } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { USER_DETAILS_RESET } from '../constants/userConstants';
@@ -25,7 +25,7 @@ export default function UserListScreen(props) {
   }, [dispatch, successDelete]);
   const deleteHandler = (user) => {
     if (window.confirm('Are you sure?')) {
-      dispatch(deleteUser(user._id));
+      dispatch(remove_pptuser(user._id));
     }
   };
   return (
@@ -56,8 +56,8 @@ export default function UserListScreen(props) {
               <tr key={user._id}>
                 <td>{user._id}</td>
                 <td>{user.name}</td>
-                <td>{user.userEmail}</td>
-                <td>{user.userAdminstrator ? 'YES' : 'NO'}</td>
+                <td>{user.user_email}</td>
+                <td>{user.userCredentialsAdministrator ? 'YES' : 'NO'}</td>
                 <td>
                   <button
                     type="button"

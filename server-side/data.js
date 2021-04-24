@@ -4,15 +4,15 @@ const data = {
     users: [
         {
             name:'admin',
-            userEmail:'admin@ppt',
+            user_email:'admin@ppt',
             password: bcrypt.hashSync('admin', 8),
-            userAdminstrator: true,
+            userCredentialsAdministrator: true,
         },
         {
             name:'Mike',
-            userEmail:'user@ppt',
+            user_email:'user@ppt',
             password: bcrypt.hashSync('mike', 8),
-            userAdminstrator: false,
+            userCredentialsAdministrator: false,
         },
     ],
     products: [
