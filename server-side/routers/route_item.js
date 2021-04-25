@@ -20,22 +20,22 @@ route_item.get(
       req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
     const max =
       req.query.max && Number(req.query.max) !== 0 ? Number(req.query.max) : 0;
-    const userRating =
-      req.query.userRating && Number(req.query.userRating) !== 0
-        ? Number(req.query.userRating)
+    const rating =
+      req.query.rating && Number(req.query.rating) !== 0
+        ? Number(req.query.rating)
         : 0;
 
     const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
     const categoryFilter = productCategory ? { productCategory } : {};
     const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
-    const ratingFilter = userRating ? { userRating: { $gte: userRating } } : {};
+    const ratingFilter = rating ? { rating: { $gte: rating } } : {};
     const sortOrder =
       order === 'lowest'
         ? { price: 1 }
         : order === 'highest'
         ? { price: -1 }
         : order === 'toprated'
-        ? { userRating: -1 }
+        ? { rating: -1 }
         : { _id: -1 };
     const count = await Product.count({
       ...nameFilter,
@@ -102,7 +102,7 @@ route_item.post(
       productCategory: 'sample productCategory',
       productBrand: 'sample productBrand',
       countInStock: 0,
-      userRating: 0,
+      rating: 0,
       numReviews: 0,
       productDescription: 'sample productDescription',
     });
@@ -162,13 +162,13 @@ route_item.post(
       }
       const review = {
         name: req.pptuser.name,
-        userRating: Number(req.body.userRating),
-        userComment: req.body.userComment,
+        rating: Number(req.body.rating),
+        comment: req.body.comment,
       };
       item.reviews.push(review);
       item.numReviews = item.reviews.length;
-      item.userRating =
-        item.reviews.reduce((a, c) => c.userRating + a, 0) /
+      item.rating =
+        item.reviews.reduce((a, c) => c.rating + a, 0) /
         item.reviews.length;
       const updatedProduct = await item.save();
       res.status(201).send({

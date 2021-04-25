@@ -30,14 +30,14 @@ export const listProducts = ({
   order = '',
   min = 0,
   max = 0,
-  userRating = 0,
+  rating = 0,
 }) => async (dispatch) => {
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
     const { data } = await Axios.get(
-      `/api/products?pageNumber=${pageNumber}&name=${name}&productCategory=${productCategory}&min=${min}&max=${max}&userRating=${userRating}&order=${order}`
+      `/api/products?pageNumber=${pageNumber}&name=${name}&productCategory=${productCategory}&min=${min}&max=${max}&rating=${rating}&order=${order}`
     );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {

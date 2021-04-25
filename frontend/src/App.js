@@ -239,7 +239,7 @@ function App() {
           </div>
           <div className="pages">
           <Route
-            path="/search/productCategory/:productCategory/name/:name/min/:min/max/:max/userRating/:userRating/order/:order/pageNumber/:pageNumber"
+            path="/search/productCategory/:productCategory/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
           ></Route>

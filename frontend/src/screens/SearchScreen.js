@@ -14,7 +14,7 @@ export default function SearchScreen(props) {
     productCategory = 'all',
     min = 0,
     max = 0,
-    userRating = 0,
+    rating = 0,
     order = 'newest',
     pageNumber = 1,
   } = useParams();
@@ -36,21 +36,21 @@ export default function SearchScreen(props) {
         productCategory: productCategory !== 'all' ? productCategory : '',
         min,
         max,
-        userRating,
+        rating,
         order,
       })
     );
-  }, [productCategory, dispatch, max, min, name, order, userRating, pageNumber]);
+  }, [productCategory, dispatch, max, min, name, order, rating, pageNumber]);
 
   const getFilterUrl = (filter) => {
     const filterPage = filter.page || pageNumber;
     const filterCategory = filter.productCategory || productCategory;
     const filterName = filter.name || name;
-    const filterRating = filter.userRating || userRating;
+    const filterRating = filter.rating || rating;
     const sortOrder = filter.order || order;
     const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
     const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
-    return `/search/productCategory/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/userRating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
+    return `/search/productCategory/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
     <div className="">
@@ -131,10 +131,10 @@ export default function SearchScreen(props) {
               {ratings.map((r) => (
                 <li key={r.name}>
                   <Link
-                    to={getFilterUrl({ userRating: r.userRating })}
-                    className={`${r.userRating}` === `${userRating}` ? 'active' : ''}
+                    to={getFilterUrl({ rating: r.rating })}
+                    className={`${r.rating}` === `${rating}` ? 'active' : ''}
                   >
-                    <Rating caption={' & up'} userRating={r.userRating}></Rating>
+                    <Rating caption={' & up'} rating={r.rating}></Rating>
                   </Link>
                 </li>
               ))}
