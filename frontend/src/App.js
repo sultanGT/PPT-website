@@ -82,8 +82,8 @@ function App() {
               className="open-sidebar"
               onClick={() => setSidebarIsOpen(true)}
             >
-              <i className={ navbar ? 'fa fa-bars' : 'deactive'}></i>
-              <img className={ navbar ? 'deactive' : ' menuIconLarge responsive'} src={img} alt="PPTmenuIcon"></img>
+              {/* <i className={ navbar ? 'fa fa-bars' : 'deactive'}></i> */}
+              <img className={ navbar ? 'menuIconSmall responsive' : ' menuIconLarge responsive'} src={img} alt="PPTmenuIcon"></img>
             </button>
             <Link className="Brand" to="/">
               PEAK PERFORMANCE TAEKWONDO
@@ -283,17 +283,37 @@ function App() {
                 
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
-        <footer className="row center">
-        {/* <div className="row">1</div>
-        <div className="col-1">2</div>
-        <div className="col-1">3</div>
-        <div className="col-2">6</div>
-        <div className="col-3">7</div>
-        <div className="row">4</div>
-        <div className="row">5</div>
-        <div className="row">6</div> */}
-          
-          All right reserved</footer>
+        <footer className="row">
+          <div className='fbox1'>
+          <Link className="footerbrand" to="/">
+              PEAK PERFORMANCE TAEKWONDO
+            </Link>
+          <h2>Address: Wimbeldon Park Hall,<br/> 170 Arthur Rd, Wimbledon Park,<br/> London SW19 8AQ</h2>
+          </div>
+          <div className='fbox2'>
+          <ul className="categories">
+            <li>
+              <h1>Product Categories</h1>
+            </li>
+            {loadingCategories ? (
+              <LoadingBox></LoadingBox>
+            ) : errorCategories ? (
+              <MessageBox variant="danger">{errorCategories}</MessageBox>
+            ) : (
+              categories.map((c) => (
+                <li key={c} className="">
+                  <Link className="cat"
+                    to={`/search/productCategory/${c}`}
+                  >
+                    {c}
+                  </Link>
+                </li>
+              ))
+            )}
+          </ul>
+          </div>
+      © 2021 Peak Performance
+        </footer>
       </div>
     </BrowserRouter>
   );

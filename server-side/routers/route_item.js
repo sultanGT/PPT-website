@@ -8,6 +8,8 @@ import { userCredentialsAdministrator, userCredentialsAuthenticated } from '../u
 //Variable Declarations - selfcoded
 const route_item = express.Router();
 
+
+//Function for displaying item details - selfcoded
 route_item.get(
   '/',
   expressAsyncHandler(async (req, res) => {
