@@ -23,9 +23,9 @@ export default function UserListScreen(props) {
       type: USER_DETAILS_RESET,
     });
   }, [dispatch, successDelete]);
-  const deleteHandler = (user) => {
+  const deleteHandler = (pptuser) => {
     if (window.confirm('Are you sure?')) {
-      dispatch(remove_pptuser(user._id));
+      dispatch(remove_pptuser(pptuser._id));
     }
   };
   return (
@@ -52,24 +52,24 @@ export default function UserListScreen(props) {
             </tr>
           </thead>
           <tbody>
-            {pptusers.map((user) => (
-              <tr key={user._id}>
-                <td>{user._id}</td>
-                <td>{user.name}</td>
-                <td>{user.user_email}</td>
-                <td>{user.userCredentialsAdministrator ? 'YES' : 'NO'}</td>
+            {pptusers.map((pptuser) => (
+              <tr key={pptuser._id}>
+                <td>{pptuser._id}</td>
+                <td>{pptuser.name}</td>
+                <td>{pptuser.user_email}</td>
+                <td>{pptuser.userCredentialsAdministrator ? 'YES' : 'NO'}</td>
                 <td>
                   <button
                     type="button"
                     className="small"
-                    onClick={() => props.history.push(`/user/${user._id}/edit`)}
+                    onClick={() => props.history.push(`/pptuser/${pptuser._id}/edit`)}
                   >
                     Edit
                   </button>
                   <button
                     type="button"
                     className="small"
-                    onClick={() => deleteHandler(user)}
+                    onClick={() => deleteHandler(pptuser)}
                   >
                     Delete
                   </button>

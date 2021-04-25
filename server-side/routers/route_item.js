@@ -4,9 +4,11 @@ import data from '../data.js';
 import Product from '../templates/productTemplate.js';
 import { userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
 
-const productRouter = express.Router();
 
-productRouter.get(
+//Variable Declarations - selfcoded
+const route_item = express.Router();
+
+route_item.get(
   '/',
   expressAsyncHandler(async (req, res) => {
     const pageSize = 8;
@@ -54,7 +56,7 @@ productRouter.get(
   })
 );
 
-productRouter.get(
+route_item.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {
     const categories = await Product.find().distinct('productCategory');
@@ -62,7 +64,7 @@ productRouter.get(
   })
 );
 
-productRouter.get(
+route_item.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
     // await Product.remove({});
@@ -76,7 +78,7 @@ productRouter.get(
   })
 );
 
-productRouter.get(
+route_item.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
     const item = await Product.findById(req.params.id);
@@ -88,7 +90,7 @@ productRouter.get(
   })
 );
 
-productRouter.post(
+route_item.post(
   '/',
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
@@ -108,7 +110,7 @@ productRouter.post(
     res.send({ message: 'Product Created', item: createdProduct });
   })
 );
-productRouter.put(
+route_item.put(
   '/:id',
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
@@ -131,7 +133,7 @@ productRouter.put(
   })
 );
 
-productRouter.delete(
+route_item.delete(
   '/:id',
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
@@ -146,20 +148,20 @@ productRouter.delete(
   })
 );
 
-productRouter.post(
+route_item.post(
   '/:id/reviews',
   userCredentialsAuthenticated,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const item = await Product.findById(productId);
     if (item) {
-      if (item.reviews.find((x) => x.name === req.user.name)) {
+      if (item.reviews.find((x) => x.name === req.pptuser.name)) {
         return res
           .status(400)
           .send({ message: 'You already submitted a review' });
       }
       const review = {
-        name: req.user.name,
+        name: req.pptuser.name,
         userRating: Number(req.body.userRating),
         userComment: req.body.userComment,
       };
@@ -179,4 +181,4 @@ productRouter.post(
   })
 );
 
-export default productRouter;
+export default route_item;

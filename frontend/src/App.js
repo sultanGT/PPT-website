@@ -276,7 +276,7 @@ function App() {
           </div>
           <div className="pages">
           <AdminRoute
-            path="/user/:id/edit"
+            path="/pptuser/:id/edit"
             component={UserEditScreen}
           ></AdminRoute>
           </div>

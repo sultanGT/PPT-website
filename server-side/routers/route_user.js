@@ -24,16 +24,16 @@ route_user.get(
 route_user.post(
   '/login',
   expressAsyncHandler(async (req, res) => {
-    const user = await PPTUser.findOne({ user_email: req.body.user_email });
-    if (user) {
+    const pptuser = await PPTUser.findOne({ user_email: req.body.user_email });
+    if (pptuser) {
       // Decrypt bcrypted user_password to match with pptuser entered user_password
-      if (bcrypt.compareSync(req.body.password, user.password)) {
+      if (bcrypt.compareSync(req.body.password, pptuser.password)) {
         res.send({
-          _id: user._id,
-          name: user.name,
-          user_email: user.user_email,
-          userCredentialsAdministrator: user.userCredentialsAdministrator,
-          user_token: generateToken(user),
+          _id: pptuser._id,
+          name: pptuser.name,
+          user_email: pptuser.user_email,
+          userCredentialsAdministrator: pptuser.userCredentialsAdministrator,
+          user_token: generateToken(pptuser),
         });
         return;
       }
@@ -46,12 +46,12 @@ route_user.post(
 route_user.post(
   '/signup',
   expressAsyncHandler(async (req, res) => {
-    const user = new PPTUser({
+    const pptuser = new PPTUser({
       name: req.body.name,
       user_email: req.body.user_email,
       password: bcrypt.hashSync(req.body.password, 8),
     });
-    const pptUser = await user.save();
+    const pptUser = await pptuser.save();
     res.send({
       _id: pptUser._id,
       name: pptUser.name,
@@ -66,9 +66,9 @@ route_user.post(
 route_user.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
-    const user = await PPTUser.findById(req.params.id);
-    if (user) {
-      res.send(user);
+    const pptuser = await PPTUser.findById(req.params.id);
+    if (pptuser) {
+      res.send(pptuser);
     } else {
       res.status(404).send({ message: 'User Not Found' });
     }
@@ -80,14 +80,14 @@ route_user.put(
   '/credentials',
   userCredentialsAuthenticated,
   expressAsyncHandler(async (req, res) => {
-    const user = await PPTUser.findById(req.user._id);
-    if (user) {
-      user.name = req.body.name || user.name;
-      user.user_email = req.body.user_email || user.user_email;
+    const pptuser = await PPTUser.findById(req.pptuser._id);
+    if (pptuser) {
+      pptuser.name = req.body.name || pptuser.name;
+      pptuser.user_email = req.body.user_email || pptuser.user_email;
       if (req.body.password) {
-        user.password = bcrypt.hashSync(req.body.password, 8);
+        pptuser.password = bcrypt.hashSync(req.body.password, 8);
       }
-      const ammend_pptuser = await user.save();
+      const ammend_pptuser = await pptuser.save();
       res.send({
         _id: ammend_pptuser._id,
         name: ammend_pptuser.name,
@@ -116,14 +116,14 @@ route_user.delete(
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
-    const user = await PPTUser.findById(req.params.id);
-    if (user) {
-      if (user.user_email === 'sultan.malik@city.ac.uk') {
+    const pptuser = await PPTUser.findById(req.params.id);
+    if (pptuser) {
+      if (pptuser.user_email === 'sultan.malik@city.ac.uk') {
         res.status(400).send({ message: 'Cannot delete PPT Adminisrators account' });
         return;
       }
-      const remove_pptuser = await user.remove();
-      res.send({ message: 'User has now been removed from PPT web application', user: remove_pptuser });
+      const remove_pptuser = await pptuser.remove();
+      res.send({ message: 'User has now been removed from PPT web application', pptuser: remove_pptuser });
     } else {
       res.status(404).send({ message: 'User cannot be found on the PPT web application' });
     }
@@ -136,14 +136,14 @@ route_user.put(
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
-    const user = await PPTUser.findById(req.params.id);
-    if (user) {
-      user.name = req.body.name || user.name;
-      user.user_email = req.body.user_email || user.user_email;
-      user.userCredentialsAdministrator = Boolean(req.body.userCredentialsAdministrator);
-      // user.userCredentialsAdministrator = req.body.userCredentialsAdministrator || user.userCredentialsAdministrator;
-      const ammend_pptuser = await user.save();
-      res.send({ message: 'User Updated', user: ammend_pptuser });
+    const pptuser = await PPTUser.findById(req.params.id);
+    if (pptuser) {
+      pptuser.name = req.body.name || pptuser.name;
+      pptuser.user_email = req.body.user_email || pptuser.user_email;
+      pptuser.userCredentialsAdministrator = Boolean(req.body.userCredentialsAdministrator);
+      // pptuser.userCredentialsAdministrator = req.body.userCredentialsAdministrator || pptuser.userCredentialsAdministrator;
+      const ammend_pptuser = await pptuser.save();
+      res.send({ message: 'User Updated', pptuser: ammend_pptuser });
     } else {
       res.status(404).send({ message: 'User cannot be found on the PPT web application' });
     }

@@ -87,13 +87,13 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
     dispatch({ type: USER_DETAILS_FAIL, payload: message });
   }
 };
-export const updateUserProfile = (user) => async (dispatch, getState) => {
-  dispatch({ type: USER_UPDATE_PROFILE_REQUEST, payload: user });
+export const updateUserProfile = (pptuser) => async (dispatch, getState) => {
+  dispatch({ type: USER_UPDATE_PROFILE_REQUEST, payload: pptuser });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.put(`/api/pptusers/credentials`, user, {
+    const { data } = await Axios.put(`/api/pptusers/credentials`, pptuser, {
       headers: { Authorization: `Bearer ${userInfo.user_token}` },
     });
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
@@ -107,13 +107,13 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     dispatch({ type: USER_UPDATE_PROFILE_FAIL, payload: message });
   }
 };
-export const updateUser = (user) => async (dispatch, getState) => {
-  dispatch({ type: USER_UPDATE_PROFILE_REQUEST, payload: user });
+export const updateUser = (pptuser) => async (dispatch, getState) => {
+  dispatch({ type: USER_UPDATE_PROFILE_REQUEST, payload: pptuser });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.put(`/api/pptusers/${user._id}`, user, {
+    const { data } = await Axios.put(`/api/pptusers/${pptuser._id}`, pptuser, {
       headers: { Authorization: `Bearer ${userInfo.user_token}` },
     });
     dispatch({ type: USER_UPDATE_SUCCESS, payload: data });

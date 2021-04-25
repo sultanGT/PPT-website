@@ -14,7 +14,7 @@ export default function UserEditScreen(props) {
   const [userCredentialsAdministrator, setIsAdmin] = useState(false);
 
   const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, user } = userDetails;
+  const { loading, error, pptuser } = userDetails;
 
   const userUpdate = useSelector((state) => state.userUpdate);
   const {
@@ -29,14 +29,14 @@ export default function UserEditScreen(props) {
       dispatch({ type: USER_UPDATE_RESET });
       props.history.push('/userlist');
     }
-    if (!user) {
+    if (!pptuser) {
       dispatch(detailsUser(userId));
     } else {
-      setName(user.name);
-      setEmail(user.user_email);
-      setIsAdmin(user.userCredentialsAdministrator);
+      setName(pptuser.name);
+      setEmail(pptuser.user_email);
+      setIsAdmin(pptuser.userCredentialsAdministrator);
     }
-  }, [dispatch, props.history, successUpdate, user, userId]);
+  }, [dispatch, props.history, successUpdate, pptuser, userId]);
 
   const submitHandler = (e) => {
     e.preventDefault();

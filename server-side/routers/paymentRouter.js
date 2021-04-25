@@ -15,7 +15,7 @@ userCredentialsAdministrator,
 expressAsyncHandler(async (req, res) => { 
   const orders = await Order.find({})
   .populate(
-    'user', 
+    'pptuser', 
     'name');
 res.send(orders);}));
 
@@ -24,7 +24,7 @@ paymentRouter.get(
   '/mine', 
 userCredentialsAuthenticated, 
 expressAsyncHandler(async (req, res) => { 
-  const orders = await Order.find({ user: req.user._id });
+  const orders = await Order.find({ pptuser: req.pptuser._id });
 res.send(orders);}));
 
 //Function for completion of payment
@@ -35,7 +35,7 @@ expressAsyncHandler(async (req, res) => {
     res.status(400).send({ message: 'Cart is Currently Empty' });} 
     else {
 //New order details
-const order = new Order({orderProducts: req.body.orderProducts, deliveryAddress: req.body.deliveryAddress, paymentPPorS: req.body.paymentPPorS, itemsPrice: req.body.itemsPrice, deliveryPrice: req.body.deliveryPrice, taxPrice: req.body.taxPrice, totalPrice: req.body.totalPrice, user: req.user._id,});
+const order = new Order({orderProducts: req.body.orderProducts, deliveryAddress: req.body.deliveryAddress, paymentPPorS: req.body.paymentPPorS, itemsPrice: req.body.itemsPrice, deliveryPrice: req.body.deliveryPrice, taxPrice: req.body.taxPrice, totalPrice: req.body.totalPrice, pptuser: req.pptuser._id,});
 //Save order details in datbase
 const createdOrder = await order.save();
 // Send message on new order created
@@ -50,7 +50,7 @@ paymentRouter.put(
   userCredentialsAuthenticated,
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id).populate(
-      'user',
+      'pptuser',
       'user_email name'
     );
     if (order) {
@@ -68,7 +68,7 @@ paymentRouter.put(
         .send(
           {
             from: 'ppt-website <mailing.pptwebsite.co.uk>',
-            to: `${order.user.name} <${order.user.user_email}>`,
+            to: `${order.pptuser.name} <${order.pptuser.user_email}>`,
             subject: `New order ${order._id}`,
             html: orderCompletionEmail(order),
           },

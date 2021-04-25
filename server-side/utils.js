@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
 import mg from 'mailgun-js';
 
-export const generateToken = (user) => {
+export const generateToken = (pptuser) => {
   return jwt.sign(
     {
-      _id: user._id,
-      name: user.name,
-      user_email: user.user_email,
-      userCredentialsAdministrator: user.userCredentialsAdministrator,
+      _id: pptuser._id,
+      name: pptuser.name,
+      user_email: pptuser.user_email,
+      userCredentialsAdministrator: pptuser.userCredentialsAdministrator,
     },
     process.env.JWT_SECRET || 'somethingsecret',
     {
@@ -27,7 +27,7 @@ export const userCredentialsAuthenticated = (req, res, next) => {
         if (err) {
           res.status(401).send({ message: 'Invalid Token' });
         } else {
-          req.user = decode;
+          req.pptuser = decode;
           next();
         }
       }
@@ -37,7 +37,7 @@ export const userCredentialsAuthenticated = (req, res, next) => {
   }
 };
 export const userCredentialsAdministrator = (req, res, next) => {
-  if (req.user && req.user.userCredentialsAdministrator) {
+  if (req.pptuser && req.pptuser.userCredentialsAdministrator) {
     next();
   } else {
     res.status(401).send({ message: 'Invalid Admin Token' });
@@ -53,7 +53,7 @@ export const mailgun = () =>
 export const orderCompletionEmail = (order) => {
   return `<h1>Thanks for shopping with us</h1>
   <p>
-  Hi ${order.user.name},</p>
+  Hi ${order.pptuser.name},</p>
   <p>We have finished processing your order.</p>
   <h2>[Order ${order._id}] (${order.createdAt.toString().substring(0, 10)})</h2>
   <table>
