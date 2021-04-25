@@ -11,16 +11,16 @@ import { prices, ratings } from '../utils';
 export default function SearchScreen(props) {
   const {
     name = 'all',
-    productCategory = 'all',
+    item_category = 'all',
     min = 0,
     max = 0,
     rating = 0,
-    order = 'newest',
+    customer_order = 'newest',
     pageNumber = 1,
   } = useParams();
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products, page, pages } = productList;
+  const { loading, error, products, pptpage, pages } = productList;
 
   const productCategoryList = useSelector((state) => state.productCategoryList);
   const {
@@ -33,24 +33,24 @@ export default function SearchScreen(props) {
       listProducts({
         pageNumber,
         name: name !== 'all' ? name : '',
-        productCategory: productCategory !== 'all' ? productCategory : '',
+        item_category: item_category !== 'all' ? item_category : '',
         min,
         max,
         rating,
-        order,
+        customer_order,
       })
     );
-  }, [productCategory, dispatch, max, min, name, order, rating, pageNumber]);
+  }, [item_category, dispatch, max, min, name, customer_order, rating, pageNumber]);
 
   const getFilterUrl = (filter) => {
-    const filterPage = filter.page || pageNumber;
-    const filterCategory = filter.productCategory || productCategory;
+    const filterPage = filter.pptpage || pageNumber;
+    const filterCategory = filter.item_category || item_category;
     const filterName = filter.name || name;
     const filterRating = filter.rating || rating;
-    const sortOrder = filter.order || order;
+    const sortOrder = filter.customer_order || customer_order;
     const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
     const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
-    return `/search/productCategory/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
+    return `/search/item_category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/customer_order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
     <div className="">
@@ -65,9 +65,9 @@ export default function SearchScreen(props) {
         <div>
           Sort by{' '}
           <select
-            value={order}
+            value={customer_order}
             onChange={(e) => {
-              props.history.push(getFilterUrl({ order: e.target.value }));
+              props.history.push(getFilterUrl({ customer_order: e.target.value }));
             }}
           >
             <option value="newest">Newest Arrivals</option>
@@ -89,8 +89,8 @@ export default function SearchScreen(props) {
               <ul>
                 <li>
                   <Link
-                    className={'all' === productCategory ? 'active' : ''}
-                    to={getFilterUrl({ productCategory: 'all' })}
+                    className={'all' === item_category ? 'active' : ''}
+                    to={getFilterUrl({ item_category: 'all' })}
                   >
                     Any
                   </Link>
@@ -98,8 +98,8 @@ export default function SearchScreen(props) {
                 {categories.map((c) => (
                   <li key={c}>
                     <Link
-                      className={c === productCategory ? 'active' : ''}
-                      to={getFilterUrl({ productCategory: c })}
+                      className={c === item_category ? 'active' : ''}
+                      to={getFilterUrl({ item_category: c })}
                     >
                       {c}
                     </Link>
@@ -159,9 +159,9 @@ export default function SearchScreen(props) {
               <div className="row center pagination pageS">
                 {[...Array(pages).keys()].map((x) => (
                   <Link
-                    className={x + 1 === page ? 'active' : ''}
+                    className={x + 1 === pptpage ? 'active' : ''}
                     key={x + 1}
-                    to={getFilterUrl({ page: x + 1 })}
+                    to={getFilterUrl({ pptpage: x + 1 })}
                   >
                     {x + 1}
                   </Link>

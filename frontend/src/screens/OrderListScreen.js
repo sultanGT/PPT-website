@@ -22,9 +22,9 @@ export default function OrderListScreen(props) {
     dispatch({ type: ORDER_DELETE_RESET });
     dispatch(listOrders( userInfo._id ));
   }, [dispatch, successDelete, userInfo._id]);
-  const deleteHandler = (order) => {
+  const deleteHandler = (customer_order) => {
     if (window.confirm('Are you sure to delete?')) {
-      dispatch(deleteOrder(order._id));
+      dispatch(deleteOrder(customer_order._id));
     }
   };
   return (
@@ -50,16 +50,16 @@ export default function OrderListScreen(props) {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.pptuser.username}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{order.totalPrice.toFixed(2)}</td>
-                <td>{order.paymentConfirmed ? order.paymentDate.substring(0, 10) : 'No'}</td>
+            {orders.map((customer_order) => (
+              <tr key={customer_order._id}>
+                <td>{customer_order._id}</td>
+                <td>{customer_order.pptuser.username}</td>
+                <td>{customer_order.createdAt.substring(0, 10)}</td>
+                <td>{customer_order.totalPrice.toFixed(2)}</td>
+                <td>{customer_order.paymentConfirmed ? customer_order.paymentDate.substring(0, 10) : 'No'}</td>
                 <td>
-                  {order.deliveryConfirmed
-                    ? order.deliveryDate.substring(0, 10)
+                  {customer_order.deliveryConfirmed
+                    ? customer_order.deliveryDate.substring(0, 10)
                     : 'No'}
                 </td>
                 <td>
@@ -67,7 +67,7 @@ export default function OrderListScreen(props) {
                     type="button"
                     className="small"
                     onClick={() => {
-                      props.history.push(`/order/${order._id}`);
+                      props.history.push(`/customer_order/${customer_order._id}`);
                     }}
                   >
                     Details
@@ -75,7 +75,7 @@ export default function OrderListScreen(props) {
                   <button
                     type="button"
                     className="small"
-                    onClick={() => deleteHandler(order)}
+                    onClick={() => deleteHandler(customer_order)}
                   >
                     Delete
                   </button>

@@ -11,9 +11,9 @@ export default function Product(props) {
 
   return (
   <div>
-    {/* <Link to={`/search/productCategory/${item.productCategory}`} >
+    {/* <Link to={`/search/item_category/${item.item_category}`} >
     <div className="row center">
-        <h1>{item.productCategory}</h1>
+        <h1>{item.item_category}</h1>
         </div>
     </Link> */}
 

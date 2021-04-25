@@ -171,7 +171,7 @@ function App() {
               categories.map((c) => (
                 <li key={c}>
                   <Link
-                    to={`/search/productCategory/${c}`}
+                    to={`/search/item_category/${c}`}
                     onClick={() => setSidebarIsOpen(false)}
                   >
                     {c}
@@ -211,7 +211,7 @@ function App() {
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           </div>
           <div className="pages">
-          <Route path="/order/:id" component={OrderScreen}></Route>
+          <Route path="/customer_order/:id" component={OrderScreen}></Route>
           </div>
           <div className="pages">
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
@@ -225,21 +225,21 @@ function App() {
           </div>
           <div className="pages">
           <Route
-            path="/search/productCategory/:productCategory"
+            path="/search/item_category/:item_category"
             component={SearchScreen}
             exact
           ></Route>
           </div>
           <div className="pages">
           <Route
-            path="/search/productCategory/:productCategory/name/:name"
+            path="/search/item_category/:item_category/name/:name"
             component={SearchScreen}
             exact
           ></Route>
           </div>
           <div className="pages">
           <Route
-            path="/search/productCategory/:productCategory/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
+            path="/search/item_category/:item_category/name/:name/min/:min/max/:max/rating/:rating/customer_order/:customer_order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
           ></Route>
@@ -303,7 +303,7 @@ function App() {
               categories.map((c) => (
                 <li key={c} className="">
                   <Link className="cat"
-                    to={`/search/productCategory/${c}`}
+                    to={`/search/item_category/${c}`}
                   >
                     {c}
                   </Link>

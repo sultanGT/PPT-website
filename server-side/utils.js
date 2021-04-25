@@ -50,12 +50,12 @@ export const mailgun = () =>
     domain: process.env.MAILGUN_DOMAIN,
   });
 
-export const orderCompletionEmail = (order) => {
+export const orderCompletionEmail = (customer_order) => {
   return `<h1>Thanks for shopping with us</h1>
   <p>
-  Hi ${order.pptuser.name},</p>
-  <p>We have finished processing your order.</p>
-  <h2>[Order ${order._id}] (${order.createdAt.toString().substring(0, 10)})</h2>
+  Hi ${customer_order.pptuser.name},</p>
+  <p>We have finished processing your customer_order.</p>
+  <h2>[Order ${customer_order._id}] (${customer_order.createdAt.toString().substring(0, 10)})</h2>
   <table>
   <thead>
   <tr>
@@ -64,7 +64,7 @@ export const orderCompletionEmail = (order) => {
   <td><strong align="right">Price</strong></td>
   </thead>
   <tbody>
-  ${order.orderProducts
+  ${customer_order.orderProducts
     .map(
       (item) => `
     <tr>
@@ -79,28 +79,28 @@ export const orderCompletionEmail = (order) => {
   <tfoot>
   <tr>
   <td colspan="2">Items Price:</td>
-  <td align="right"> $${order.itemsPrice.toFixed(2)}</td>
+  <td align="right"> $${customer_order.itemsPrice.toFixed(2)}</td>
   </tr>
   <tr>
   <td colspan="2">Tax Price:</td>
-  <td align="right"> $${order.taxPrice.toFixed(2)}</td>
+  <td align="right"> $${customer_order.taxPrice.toFixed(2)}</td>
   </tr>
   <tr>
   <td colspan="2">Shipping Price:</td>
-  <td align="right"> $${order.deliveryPrice.toFixed(2)}</td>
+  <td align="right"> $${customer_order.deliveryPrice.toFixed(2)}</td>
   </tr>
   <tr>
   <td colspan="2"><strong>Total Price:</strong></td>
-  <td align="right"><strong> $${order.totalPrice.toFixed(2)}</strong></td>
+  <td align="right"><strong> $${customer_order.totalPrice.toFixed(2)}</strong></td>
   </tr>
   </table>
   <h2>Shipping address</h2>
   <p>
-  ${order.deliveryAddress.fullName},<br/>
-  ${order.deliveryAddress.address},<br/>
-  ${order.deliveryAddress.city},<br/>
-  ${order.deliveryAddress.county},<br/>
-  ${order.deliveryAddress.postCode}<br/>
+  ${customer_order.deliveryAddress.fullName},<br/>
+  ${customer_order.deliveryAddress.address},<br/>
+  ${customer_order.deliveryAddress.city},<br/>
+  ${customer_order.deliveryAddress.county},<br/>
+  ${customer_order.deliveryAddress.postCode}<br/>
   </p>
   <hr/>
   <p>

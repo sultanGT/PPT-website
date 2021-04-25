@@ -16,7 +16,7 @@ import {
 export default function ProductListScreen(props) {
   const { pageNumber = 1 } = useParams();
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products, page, pages } = productList;
+  const { loading, error, products, pptpage, pages } = productList;
 
   const productCreate = useSelector((state) => state.productCreate);
   const {
@@ -102,7 +102,7 @@ export default function ProductListScreen(props) {
                   <td>{item._id}</td>
                   <td>{item.name}</td>
                   <td>{item.price}</td>
-                  <td>{item.productCategory}</td>
+                  <td>{item.item_category}</td>
                   <td>{item.productBrand}</td>
                   <td>
                     <button
@@ -129,7 +129,7 @@ export default function ProductListScreen(props) {
           <div className="row center pagination">
             {[...Array(pages).keys()].map((x) => (
               <Link
-                className={x + 1 === page ? 'active' : ''}
+                className={x + 1 === pptpage ? 'active' : ''}
                 key={x + 1}
                 to={`/productlist/pageNumber/${x + 1}`}
               >

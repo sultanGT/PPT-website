@@ -13,11 +13,11 @@ const route_item = express.Router();
 route_item.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const pageSize = 8;
-    const page = Number(req.query.pageNumber) || 1;
+    const pageLength = 8;
+    const pptpage = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
-    const productCategory = req.query.productCategory || '';
-    const order = req.query.order || '';
+    const item_category = req.query.item_category || '';
+    const customer_order = req.query.customer_order || '';
     const min =
       req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
     const max =
@@ -28,15 +28,15 @@ route_item.get(
         : 0;
 
     const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
-    const categoryFilter = productCategory ? { productCategory } : {};
+    const categoryFilter = item_category ? { item_category } : {};
     const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
     const ratingFilter = rating ? { rating: { $gte: rating } } : {};
     const sortOrder =
-      order === 'lowest'
+      customer_order === 'lowest'
         ? { price: 1 }
-        : order === 'highest'
+        : customer_order === 'highest'
         ? { price: -1 }
-        : order === 'toprated'
+        : customer_order === 'toprated'
         ? { rating: -1 }
         : { _id: -1 };
     const count = await Product.count({
@@ -52,16 +52,16 @@ route_item.get(
       ...ratingFilter,
     })
       .sort(sortOrder)
-      .skip(pageSize * (page - 1))
-      .limit(pageSize);
-    res.send({ products, page, pages: Math.ceil(count / pageSize) });
+      .skip(pageLength * (pptpage - 1))
+      .limit(pageLength);
+    res.send({ products, pptpage, pages: Math.ceil(count / pageLength) });
   })
 );
 
 route_item.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {
-    const categories = await Product.find().distinct('productCategory');
+    const categories = await Product.find().distinct('item_category');
     res.send(categories);
   })
 );
@@ -101,7 +101,7 @@ route_item.post(
       name: 'sample name ' + Date.now(),
       picture: '/images/p1.jpg',
       price: 0,
-      productCategory: 'sample productCategory',
+      item_category: 'sample item_category',
       productBrand: 'sample productBrand',
       countInStock: 0,
       rating: 0,
@@ -123,7 +123,7 @@ route_item.put(
       item.name = req.body.name;
       item.price = req.body.price;
       item.picture = req.body.picture;
-      item.productCategory = req.body.productCategory;
+      item.item_category = req.body.item_category;
       item.productBrand = req.body.productBrand;
       item.countInStock = req.body.countInStock;
       item.productDescription = req.body.productDescription;
