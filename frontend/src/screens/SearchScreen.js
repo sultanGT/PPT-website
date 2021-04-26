@@ -12,9 +12,9 @@ export default function SearchScreen(props) {
   const {
     name = 'all',
     item_category = 'all',
-    min = 0,
-    max = 0,
-    rating = 0,
+    minimum = 0,
+    maximum = 0,
+    user_rating = 0,
     customer_order = 'newest',
     pageNumber = 1,
   } = useParams();
@@ -34,23 +34,23 @@ export default function SearchScreen(props) {
         pageNumber,
         name: name !== 'all' ? name : '',
         item_category: item_category !== 'all' ? item_category : '',
-        min,
-        max,
-        rating,
+        minimum,
+        maximum,
+        user_rating,
         customer_order,
       })
     );
-  }, [item_category, dispatch, max, min, name, customer_order, rating, pageNumber]);
+  }, [item_category, dispatch, maximum, minimum, name, customer_order, user_rating, pageNumber]);
 
   const getFilterUrl = (filter) => {
     const filterPage = filter.pptpage || pageNumber;
     const filterCategory = filter.item_category || item_category;
     const filterName = filter.name || name;
-    const filterRating = filter.rating || rating;
+    const filterRating = filter.user_rating || user_rating;
     const sortOrder = filter.customer_order || customer_order;
-    const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
-    const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
-    return `/search/item_category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/customer_order/${sortOrder}/pageNumber/${filterPage}`;
+    const filterMin = filter.minimum ? filter.minimum : filter.minimum === 0 ? 0 : minimum;
+    const filterMax = filter.maximum ? filter.maximum : filter.maximum === 0 ? 0 : maximum;
+    return `/search/item_category/${filterCategory}/name/${filterName}/minimum/${filterMin}/maximum/${filterMax}/user_rating/${filterRating}/customer_order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
     <div className="">
@@ -114,9 +114,9 @@ export default function SearchScreen(props) {
               {prices.map((p) => (
                 <li key={p.name}>
                   <Link
-                    to={getFilterUrl({ min: p.min, max: p.max })}
+                    to={getFilterUrl({ minimum: p.minimum, maximum: p.maximum })}
                     className={
-                      `${p.min}-${p.max}` === `${min}-${max}` ? 'active' : ''
+                      `${p.minimum}-${p.maximum}` === `${minimum}-${maximum}` ? 'active' : ''
                     }
                   >
                     {p.name}
@@ -131,10 +131,10 @@ export default function SearchScreen(props) {
               {ratings.map((r) => (
                 <li key={r.name}>
                   <Link
-                    to={getFilterUrl({ rating: r.rating })}
-                    className={`${r.rating}` === `${rating}` ? 'active' : ''}
+                    to={getFilterUrl({ user_rating: r.user_rating })}
+                    className={`${r.user_rating}` === `${user_rating}` ? 'active' : ''}
                   >
-                    <Rating caption={' & up'} rating={r.rating}></Rating>
+                    <Rating caption={' & up'} user_rating={r.user_rating}></Rating>
                   </Link>
                 </li>
               ))}

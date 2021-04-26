@@ -18,26 +18,26 @@ route_item.get(
     const name = req.query.name || '';
     const item_category = req.query.item_category || '';
     const customer_order = req.query.customer_order || '';
-    const min =
-      req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
-    const max =
-      req.query.max && Number(req.query.max) !== 0 ? Number(req.query.max) : 0;
-    const rating =
-      req.query.rating && Number(req.query.rating) !== 0
-        ? Number(req.query.rating)
+    const minimum =
+      req.query.minimum && Number(req.query.minimum) !== 0 ? Number(req.query.minimum) : 0;
+    const maximum =
+      req.query.maximum && Number(req.query.maximum) !== 0 ? Number(req.query.maximum) : 0;
+    const user_rating =
+      req.query.user_rating && Number(req.query.user_rating) !== 0
+        ? Number(req.query.user_rating)
         : 0;
 
     const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
     const categoryFilter = item_category ? { item_category } : {};
-    const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
-    const ratingFilter = rating ? { rating: { $gte: rating } } : {};
+    const priceFilter = minimum && maximum ? { price: { $gte: minimum, $lte: maximum } } : {};
+    const ratingFilter = user_rating ? { user_rating: { $gte: user_rating } } : {};
     const sortOrder =
       customer_order === 'lowest'
         ? { price: 1 }
         : customer_order === 'highest'
         ? { price: -1 }
         : customer_order === 'toprated'
-        ? { rating: -1 }
+        ? { user_rating: -1 }
         : { _id: -1 };
     const count = await Product.count({
       ...nameFilter,
@@ -104,7 +104,7 @@ route_item.post(
       item_category: 'sample item_category',
       productBrand: 'sample productBrand',
       countInStock: 0,
-      rating: 0,
+      user_rating: 0,
       numReviews: 0,
       productDescription: 'sample productDescription',
     });
@@ -164,13 +164,13 @@ route_item.post(
       }
       const review = {
         name: req.pptuser.name,
-        rating: Number(req.body.rating),
+        user_rating: Number(req.body.user_rating),
         comment: req.body.comment,
       };
       item.reviews.push(review);
       item.numReviews = item.reviews.length;
-      item.rating =
-        item.reviews.reduce((a, c) => c.rating + a, 0) /
+      item.user_rating =
+        item.reviews.reduce((a, c) => c.user_rating + a, 0) /
         item.reviews.length;
       const updatedProduct = await item.save();
       res.status(201).send({

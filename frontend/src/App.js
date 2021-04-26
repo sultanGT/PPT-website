@@ -239,7 +239,7 @@ function App() {
           </div>
           <div className="pages">
           <Route
-            path="/search/item_category/:item_category/name/:name/min/:min/max/:max/rating/:rating/customer_order/:customer_order/pageNumber/:pageNumber"
+            path="/search/item_category/:item_category/name/:name/minimum/:minimum/maximum/:maximum/user_rating/:user_rating/customer_order/:customer_order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
           ></Route>

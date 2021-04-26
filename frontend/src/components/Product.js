@@ -34,7 +34,7 @@ export default function Product(props) {
           <h2 className={isShown ? 'h2-title center' : ''}>{item.name}</h2>
         </Link>
         {/* <Rating
-          rating={item.rating}
+          user_rating={item.user_rating}
           numReviews={item.numReviews}
         ></Rating> */}
         <div className={isShown ? 'deactive' : 'price center'}>£{item.price}</div>

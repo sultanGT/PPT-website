@@ -1,16 +1,16 @@
 import React from 'react';
 
 export default function Rating(props) {
-  const { rating, numReviews, caption } = props;
+  const { user_rating, numReviews, caption } = props;
   return (
     <div className="rating">
       <span>
         <i
           className={
-            rating >= 1
-              ? 'fa fa-star'
-              : rating >= 0.5
-              ? 'fas fa-star-half-alt'
+            user_rating >= 1
+              ? 'fas fa-star'
+              : user_rating >= 0.5
+              ? 'fas fa-star-half-o'
               : 'far fa-star'
           }
         ></i>
@@ -18,10 +18,10 @@ export default function Rating(props) {
       <span>
         <i
           className={
-            rating >= 2
-              ? 'fa fa-star'
-              : rating >= 1.5
-              ? 'fa fa-star-half-o'
+            user_rating >= 2
+              ? 'fas fa-star'
+              : user_rating >= 1.5
+              ? 'fas fa-star-half-o'
               : 'far fa-star'
           }
         ></i>
@@ -29,10 +29,10 @@ export default function Rating(props) {
       <span>
         <i
           className={
-            rating >= 3
-              ? 'fa fa-star'
-              : rating >= 2.5
-              ? 'fas fa-star-half-alt'
+            user_rating >= 3
+              ? 'fas fa-star'
+              : user_rating >= 2.5
+              ? 'fas fa-star-half-o'
               : 'far fa-star'
           }
         ></i>
@@ -40,10 +40,10 @@ export default function Rating(props) {
       <span>
         <i
           className={
-            rating >= 4
-              ? 'fa fa-star'
-              : rating >= 3.5
-              ? 'fas fa-star-half-alt'
+            user_rating >= 4
+              ? 'fas fa-star'
+              : user_rating >= 3.5
+              ? 'fas fa-star-half-o'
               : 'far fa-star'
           }
         ></i>
@@ -51,10 +51,10 @@ export default function Rating(props) {
       <span>
         <i
           className={
-            rating >= 5
-              ? 'fa fa-star'
-              : rating >= 4.5
-              ? 'fas fa-star-half-alt'
+            user_rating >= 5
+              ? 'fas fa-star'
+              : user_rating >= 4.5
+              ? 'fas fa-star-half'
               : 'far fa-star'
           }
         ></i>

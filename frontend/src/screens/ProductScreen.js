@@ -24,7 +24,7 @@ export default function ProductScreen(props) {
     success: successReviewCreate,
   } = productReviewCreate;
 
-  const [rating, setRating] = useState(0);
+  const [user_rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
   useEffect(() => {
@@ -41,9 +41,9 @@ export default function ProductScreen(props) {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    if (comment && rating) {
+    if (comment && user_rating) {
       dispatch(
-        createReview(productId, { rating, comment, name: userInfo.name })
+        createReview(productId, { user_rating, comment, name: userInfo.name })
       );
     } else {
       alert('Please enter comment and rating');
@@ -75,7 +75,7 @@ export default function ProductScreen(props) {
                 </li>
                 <li>
                   <Rating
-                    rating={item.rating}
+                    user_rating={item.user_rating}
                     numReviews={item.numReviews}
                   ></Rating>
                 </li>
@@ -92,7 +92,7 @@ export default function ProductScreen(props) {
               {item.reviews.map((review) => (
                 <li key={review._id}>
                   <strong>{review.name}</strong>
-                  <Rating rating={review.rating} caption=" "></Rating>
+                  <Rating user_rating={review.user_rating} caption=" "></Rating>
                   <p>{review.createdAt.substring(0, 10)}</p>
                   <p>{review.comment}</p>
                 </li>
@@ -104,10 +104,10 @@ export default function ProductScreen(props) {
                       <h2>Write a customer review</h2>
                     </div>
                     <div>
-                      <label htmlFor="rating">Rating</label>
+                      <label htmlFor="user_rating">Rating</label>
                       <select
-                        id="rating"
-                        value={rating}
+                        id="user_rating"
+                        value={user_rating}
                         onChange={(e) => setRating(e.target.value)}
                       >
                         <option value="">Select...</option>

@@ -23,7 +23,7 @@ const data = {
             price:120,
             countInStock: 10,
             productBrand: 'WTF',
-            rating: 4.5,
+            user_rating: 4.5,
             numReviews: 10,
             productDescription: 'high quality item'
         },
@@ -34,7 +34,7 @@ const data = {
             price:100,
             countInStock: 20,
             productBrand: 'Adidas',
-            rating: 4.0,
+            user_rating: 4.0,
             numReviews: 10,
             productDescription: 'high quality item'
         },
@@ -45,7 +45,7 @@ const data = {
             price:220,
             countInStock: 30,
             productBrand: 'Nike',
-            rating: 4.5,
+            user_rating: 4.5,
             numReviews: 10,
             productDescription: 'high quality item'
         },
@@ -56,7 +56,7 @@ const data = {
             price:70,
             countInStock: 5,
             productBrand: 'Adidas',
-            rating: 4.5,
+            user_rating: 4.5,
             numReviews: 10,
             productDescription: 'high quality item'
         },
@@ -67,7 +67,7 @@ const data = {
             price:80,
             countInStock: 0,
             productBrand: 'Adidas',
-            rating: 4.5,
+            user_rating: 4.5,
             numReviews: 10,
             productDescription: 'high quality item'
         },
@@ -78,7 +78,7 @@ const data = {
             price:80,
             countInStock: 12,
             productBrand: 'Adidas',
-            rating: 4.5,
+            user_rating: 4.5,
             numReviews: 10,
             productDescription: 'high quality item'
         },
