@@ -59,7 +59,7 @@ export const orderCompletionEmail = (customer_order) => {
   <table>
   <thead>
   <tr>
-  <td><strong>Product</strong></td>
+  <td><strong>Item</strong></td>
   <td><strong>Quantity</strong></td>
   <td><strong align="right">Price</strong></td>
   </thead>

@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import Product from '../components/Product';
+import Item from '../components/Item';
 import Rating from '../components/Rating';
 import { prices, ratings } from '../utils';
 
@@ -149,11 +149,11 @@ export default function SearchScreen(props) {
           ) : (
             <>
               {PPTitems.length === 0 && (
-                <MessageBox>No Product Found</MessageBox>
+                <MessageBox>No Item Found</MessageBox>
               )}
               <div className="row center pageS">
                 {PPTitems.map((item) => (
-                  <Product key={item._id} item={item}></Product>
+                  <Item key={item._id} item={item}></Item>
                 ))}
               </div>
               <div className="row center pagination pageS">

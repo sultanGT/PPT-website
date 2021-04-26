@@ -1,7 +1,7 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
-import Product from '../templates/productTemplate.js';
+import Item from '../templates/productTemplate.js';
 import { userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
 
 
@@ -41,14 +41,14 @@ route_item.get(
         ? { user_rating: -1 }
         : { _id: -1 };
     //Filter for counting PPTitems for filter results - reused copied
-    const count = await Product.count({
+    const count = await Item.count({
       ...filter_item_names,
       ...filter_item_categories,
       ...filter_item_cost,
       ...filter_item_ratings,
     });
     //Function for finding PPTitems by filtered option - reused copied
-    const PPTitems = await Product.find({
+    const PPTitems = await Item.find({
       ...filter_item_names,
       ...filter_item_categories,
       ...filter_item_cost,
@@ -65,7 +65,7 @@ route_item.get(
 route_item.get(
   '/item_categories',
   expressAsyncHandler(async (req, res) => {
-    const categories = await Product.find().distinct('item_category');
+    const categories = await Item.find().distinct('item_category');
     res.send(categories);
   })
 );
@@ -78,30 +78,32 @@ route_item.get(
         ...item,
         
       }));
-      const ppt_products = await Product.insertMany(PPTitems);
+      const ppt_products = await Item.insertMany(PPTitems);
       res.send({ ppt_products });
 
   })
 );
 
+//Function for getting item by item id
 route_item.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
-    const item = await Product.findById(req.params.id);
+    const item = await Item.findById(req.params.id);
     if (item) {
       res.send(item);
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: 'Item cannot be found on the PPT web application' });
     }
   })
 );
+
 
 route_item.post(
   '/',
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
-    const item = new Product({
+    const item = new Item({
       name: 'sample name ' + Date.now(),
       picture: '/images/p1.jpg',
       cost: 0,
@@ -113,7 +115,7 @@ route_item.post(
       productDescription: 'sample productDescription',
     });
     const createdProduct = await item.save();
-    res.send({ message: 'Product Created', item: createdProduct });
+    res.send({ message: 'Item Created', item: createdProduct });
   })
 );
 route_item.put(
@@ -122,7 +124,7 @@ route_item.put(
   userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
-    const item = await Product.findById(productId);
+    const item = await Item.findById(productId);
     if (item) {
       item.name = req.body.name;
       item.cost = req.body.cost;
@@ -132,9 +134,9 @@ route_item.put(
       item.countInStock = req.body.countInStock;
       item.productDescription = req.body.productDescription;
       const updatedProduct = await item.save();
-      res.send({ message: 'Product Updated', item: updatedProduct });
+      res.send({ message: 'Item Updated', item: updatedProduct });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: 'Item Not Found' });
     }
   })
 );
@@ -144,12 +146,12 @@ route_item.delete(
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
-    const item = await Product.findById(req.params.id);
+    const item = await Item.findById(req.params.id);
     if (item) {
       const deleteProduct = await item.remove();
-      res.send({ message: 'Product Deleted', item: deleteProduct });
+      res.send({ message: 'Item Deleted', item: deleteProduct });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: 'Item Not Found' });
     }
   })
 );
@@ -159,7 +161,7 @@ route_item.post(
   userCredentialsAuthenticated,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
-    const item = await Product.findById(productId);
+    const item = await Item.findById(productId);
     if (item) {
       if (item.reviews.find((x) => x.name === req.pptuser.name)) {
         return res
@@ -182,7 +184,7 @@ route_item.post(
         review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
       });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: 'Item Not Found' });
     }
   })
 );

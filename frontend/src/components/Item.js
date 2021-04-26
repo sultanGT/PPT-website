@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 
-export default function Product(props) {
+export default function Item(props) {
   
   const { item } = props;
   const [isShown, setIsShown] = useState(false);

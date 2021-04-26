@@ -293,7 +293,7 @@ function App() {
           <div className='fbox2'>
           <ul className="categories">
             <li>
-              <h1>Product Categories</h1>
+              <h1>Item Categories</h1>
             </li>
             {loadingCategories ? (
               <LoadingBox></LoadingBox>

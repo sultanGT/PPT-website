@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
-// Product details to be stored in MongoDB using mongooose
+// Item details to be stored in MongoDB using mongooose
 const orderSchema = new mongoose.Schema(
-// Product description for orders
+// Item description for orders
 { orderProducts: [{ name: { type: String, required: true }, 
     quantity: { type: Number, required: true }, 
     picture: { type: String, required: true }, 
     cost: { type: Number, required: true }, 
     item: {type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Product', required: true, }, }, ], 
+        ref: 'Item', required: true, }, }, ], 
         deliveryAddress: { fullName: { type: String, required: true }, 
         address: { type: String, required: true }, 
         city: { type: String, required: true }, 

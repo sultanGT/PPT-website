@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Product from '../components/Product';
+import Item from '../components/Item';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,10 +30,10 @@ export default function HomeScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          {PPTitems.length === 0 && <MessageBox>No Product Found</MessageBox>}
+          {PPTitems.length === 0 && <MessageBox>No Item Found</MessageBox>}
           <div className="row center">
             {PPTitems.map((item) => (
-              <Product key={item._id} item={item}></Product>
+              <Item key={item._id} item={item}></Item>
             ))}
           </div>
         </>
