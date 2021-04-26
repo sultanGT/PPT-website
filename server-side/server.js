@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/PPT-website', {
 });
 app.use('/api/uploads', uploadRouter);
 app.use('/api/pptusers', route_user);
-app.use('/api/products', route_item);
+app.use('/api/PPTitems', route_item);
 app.use('/api/orders', paymentRouter);
 app.get('/api/config/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');

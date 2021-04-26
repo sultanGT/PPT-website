@@ -9,7 +9,7 @@ import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
 export default function ProductEditScreen(props) {
   const productId = props.match.params.id;
   const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
+  const [cost, setPrice] = useState('');
   const [picture, setImage] = useState('');
   const [item_category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
@@ -36,7 +36,7 @@ export default function ProductEditScreen(props) {
       dispatch(detailsProduct(productId));
     } else {
       setName(item.name);
-      setPrice(item.price);
+      setPrice(item.cost);
       setImage(item.picture);
       setCategory(item.item_category);
       setCountInStock(item.countInStock);
@@ -51,7 +51,7 @@ export default function ProductEditScreen(props) {
       updateProduct({
         _id: productId,
         name,
-        price,
+        cost,
         picture,
         item_category,
         productBrand,
@@ -110,12 +110,12 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="price">Price</label>
+              <label htmlFor="cost">Price</label>
               <input
-                id="price"
+                id="cost"
                 type="text"
-                placeholder="Enter price"
-                value={price}
+                placeholder="Enter cost"
+                value={cost}
                 onChange={(e) => setPrice(e.target.value)}
               ></input>
             </div>

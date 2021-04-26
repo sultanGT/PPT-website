@@ -16,7 +16,7 @@ import {
 export default function ProductListScreen(props) {
   const { pageNumber = 1 } = useParams();
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products, pptpage, pages } = productList;
+  const { loading, error, PPTitems, pptpage, pages } = productList;
 
   const productCreate = useSelector((state) => state.productCreate);
   const {
@@ -97,11 +97,11 @@ export default function ProductListScreen(props) {
               </tr>
             </thead>
             <tbody>
-              {products.map((item) => (
+              {PPTitems.map((item) => (
                 <tr key={item._id}>
                   <td>{item._id}</td>
                   <td>{item.name}</td>
-                  <td>{item.price}</td>
+                  <td>{item.cost}</td>
                   <td>{item.item_category}</td>
                   <td>{item.productBrand}</td>
                   <td>

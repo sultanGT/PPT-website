@@ -70,7 +70,7 @@ export const orderCompletionEmail = (customer_order) => {
     <tr>
     <td>${item.name}</td>
     <td align="center">${item.quantity}</td>
-    <td align="right"> $${item.price.toFixed(2)}</td>
+    <td align="right"> $${item.cost.toFixed(2)}</td>
     </tr>
   `
     )

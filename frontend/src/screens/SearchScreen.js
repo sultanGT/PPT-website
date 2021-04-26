@@ -20,7 +20,7 @@ export default function SearchScreen(props) {
   } = useParams();
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products, pptpage, pages } = productList;
+  const { loading, error, PPTitems, pptpage, pages } = productList;
 
   const productCategoryList = useSelector((state) => state.productCategoryList);
   const {
@@ -60,7 +60,7 @@ export default function SearchScreen(props) {
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
-          <div>{products.length} Results</div>
+          <div>{PPTitems.length} Results</div>
         )}
         <div>
           Sort by{' '}
@@ -148,11 +148,11 @@ export default function SearchScreen(props) {
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
             <>
-              {products.length === 0 && (
+              {PPTitems.length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
               )}
               <div className="row center pageS">
-                {products.map((item) => (
+                {PPTitems.map((item) => (
                   <Product key={item._id} item={item}></Product>
                 ))}
               </div>

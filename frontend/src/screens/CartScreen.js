@@ -66,7 +66,7 @@ export default function CartScreen(props) {
                       ))}
                     </select>
                   </div>
-                  <div>${item.price}</div>
+                  <div>${item.cost}</div>
                   <div>
                     <button
                       type="button"
@@ -86,8 +86,8 @@ export default function CartScreen(props) {
           <ul>
             <li>
               <h2>
-                Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)} items) : $
-                {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)} PPTitems) : $
+                {cartItems.reduce((a, c) => a + c.cost * c.quantity, 0)}
               </h2>
             </li>
             <li>

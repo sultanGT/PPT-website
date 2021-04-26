@@ -27,55 +27,59 @@ route_item.get(
         ? Number(req.query.user_rating)
         : 0;
 
-    const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
-    const categoryFilter = item_category ? { item_category } : {};
-    const priceFilter = minimum && maximum ? { price: { $gte: minimum, $lte: maximum } } : {};
-    const ratingFilter = user_rating ? { user_rating: { $gte: user_rating } } : {};
+//Search bar filters - reused copied
+    const filter_item_names = name ? { name: { $regex: name, $options: 'i' } } : {};
+    const filter_item_categories = item_category ? { item_category } : {};
+    const filter_item_cost = minimum && maximum ? { cost: { $gte: minimum, $lte: maximum } } : {};
+    const filter_item_ratings = user_rating ? { user_rating: { $gte: user_rating } } : {};
     const sortOrder =
       customer_order === 'lowest'
-        ? { price: 1 }
+        ? { cost: 1 }
         : customer_order === 'highest'
-        ? { price: -1 }
+        ? { cost: -1 }
         : customer_order === 'toprated'
         ? { user_rating: -1 }
         : { _id: -1 };
+    //Filter for counting PPTitems for filter results - reused copied
     const count = await Product.count({
-      ...nameFilter,
-      ...categoryFilter,
-      ...priceFilter,
-      ...ratingFilter,
+      ...filter_item_names,
+      ...filter_item_categories,
+      ...filter_item_cost,
+      ...filter_item_ratings,
     });
-    const products = await Product.find({
-      ...nameFilter,
-      ...categoryFilter,
-      ...priceFilter,
-      ...ratingFilter,
+    //Function for finding PPTitems by filtered option - reused copied
+    const PPTitems = await Product.find({
+      ...filter_item_names,
+      ...filter_item_categories,
+      ...filter_item_cost,
+      ...filter_item_ratings,
     })
       .sort(sortOrder)
       .skip(pageLength * (pptpage - 1))
       .limit(pageLength);
-    res.send({ products, pptpage, pages: Math.ceil(count / pageLength) });
+    res.send({ PPTitems, pptpage, pages: Math.ceil(count / pageLength) });
   })
 );
 
+//Filter for counting PPTitems for filter results - reused copied
 route_item.get(
-  '/categories',
+  '/item_categories',
   expressAsyncHandler(async (req, res) => {
     const categories = await Product.find().distinct('item_category');
     res.send(categories);
   })
 );
 
+//Function for initialising PPT PPTitems into the web application
 route_item.get(
-  '/seed',
+  '/PPTitemlist',
   expressAsyncHandler(async (req, res) => {
-    // await Product.remove({});
-    const products = data.products.map((item) => ({
+    const PPTitems = data.PPTitems.map((item) => ({
         ...item,
         
       }));
-      const createdProducts = await Product.insertMany(products);
-      res.send({ createdProducts });
+      const ppt_products = await Product.insertMany(PPTitems);
+      res.send({ ppt_products });
 
   })
 );
@@ -100,7 +104,7 @@ route_item.post(
     const item = new Product({
       name: 'sample name ' + Date.now(),
       picture: '/images/p1.jpg',
-      price: 0,
+      cost: 0,
       item_category: 'sample item_category',
       productBrand: 'sample productBrand',
       countInStock: 0,
@@ -121,7 +125,7 @@ route_item.put(
     const item = await Product.findById(productId);
     if (item) {
       item.name = req.body.name;
-      item.price = req.body.price;
+      item.cost = req.body.cost;
       item.picture = req.body.picture;
       item.item_category = req.body.item_category;
       item.productBrand = req.body.productBrand;

@@ -138,7 +138,7 @@ export default function OrderScreen(props) {
                         </div>
 
                         <div>
-                          {item.quantity} x ${item.price} = ${item.quantity * item.price}
+                          {item.quantity} x ${item.cost} = ${item.quantity * item.cost}
                         </div>
                       </div>
                     </li>

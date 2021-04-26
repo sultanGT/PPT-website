@@ -11,7 +11,7 @@ import { SliderData } from '../components/SliderData';
 export default function HomeScreen() {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, PPTitems } = productList;
 
 
 
@@ -30,9 +30,9 @@ export default function HomeScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
+          {PPTitems.length === 0 && <MessageBox>No Product Found</MessageBox>}
           <div className="row center">
-            {products.map((item) => (
+            {PPTitems.map((item) => (
               <Product key={item._id} item={item}></Product>
             ))}
           </div>

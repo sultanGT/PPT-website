@@ -79,7 +79,7 @@ export default function ProductScreen(props) {
                     numReviews={item.numReviews}
                   ></Rating>
                 </li>
-                <li>Price : £{item.price}</li>
+                <li>Price : £{item.cost}</li>
                 <li>
                   Description:
                   <p>{item.description}</p>
@@ -155,7 +155,7 @@ export default function ProductScreen(props) {
                   <li>
                     <div className="row">
                       <div>Price</div>
-                      <div className="price">£{item.price}</div>
+                      <div className="cost">£{item.cost}</div>
                     </div>
                   </li>
                   <li>

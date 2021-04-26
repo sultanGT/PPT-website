@@ -47,6 +47,7 @@ main {
 footer {
   grid-area: footer;
   background-color: #9a0800;
+  border-top: red 3px solid;
   padding: 20rem;
   color: #ffffff;
 }
@@ -343,7 +344,7 @@ img.large {
   background: #000;
   color: #fff;
 }
-.price {
+.cost {
   font-size: 2rem;
 
 }

@@ -27,7 +27,7 @@ const {
 } = require('../constants/productConstants');
 
 export const productListReducer = (
-  state = { loading: true, products: [] },
+  state = { loading: true, PPTitems: [] },
   action
 ) => {
   switch (action.type) {
@@ -36,7 +36,7 @@ export const productListReducer = (
     case PRODUCT_LIST_SUCCESS:
       return {
         loading: false,
-        products: action.payload.products,
+        PPTitems: action.payload.PPTitems,
         pages: action.payload.pages,
         pptpage: action.payload.pptpage,
       };
@@ -48,7 +48,7 @@ export const productListReducer = (
 };
 
 export const productCategoryListReducer = (
-  state = { loading: true, products: [] },
+  state = { loading: true, PPTitems: [] },
   action
 ) => {
   switch (action.type) {

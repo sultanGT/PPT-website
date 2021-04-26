@@ -37,7 +37,7 @@ export default function Product(props) {
           user_rating={item.user_rating}
           numReviews={item.numReviews}
         ></Rating> */}
-        <div className={isShown ? 'deactive' : 'price center'}>£{item.price}</div>
+        <div className={isShown ? 'deactive' : 'cost center'}>£{item.cost}</div>
       </div>
     </div>
     </div>

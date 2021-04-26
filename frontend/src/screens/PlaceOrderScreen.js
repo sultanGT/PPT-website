@@ -16,7 +16,7 @@ export default function PlaceOrderScreen(props) {
   const { loading, success, error, customer_order } = orderCreate;
   const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
   cart.itemsPrice = toPrice(
-    cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
+    cart.cartItems.reduce((a, c) => a + c.quantity * c.cost, 0)
   );
   cart.deliveryPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
@@ -77,7 +77,7 @@ export default function PlaceOrderScreen(props) {
                         </div>
 
                         <div>
-                          {item.quantity} x ${item.price} = ${item.quantity * item.price}
+                          {item.quantity} x ${item.cost} = ${item.quantity * item.cost}
                         </div>
                       </div>
                     </li>
