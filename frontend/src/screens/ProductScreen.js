@@ -10,7 +10,7 @@ import { GrReturn } from 'react-icons/gr';
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
-  const productId = props.match.params.id;
+  const item_id = props.match.params.id;
   const [quantity, setQty] = useState(1);
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, item } = productDetails;
@@ -25,7 +25,7 @@ export default function ProductScreen(props) {
   } = productReviewCreate;
 
   const [user_rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [user_comment, setComment] = useState('');
 
   useEffect(() => {
     if (successReviewCreate) {
@@ -34,19 +34,19 @@ export default function ProductScreen(props) {
       setComment('');
       dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
     }
-    dispatch(detailsProduct(productId));
-  }, [dispatch, productId, successReviewCreate]);
+    dispatch(detailsProduct(item_id));
+  }, [dispatch, item_id, successReviewCreate]);
   const addToCartHandler = () => {
-    props.history.push(`/cart/${productId}?quantity=${quantity}`);
+    props.history.push(`/cart/${item_id}?quantity=${quantity}`);
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    if (comment && user_rating) {
+    if (user_comment && user_rating) {
       dispatch(
-        createReview(productId, { user_rating, comment, name: userInfo.name })
+        createReview(item_id, { user_rating, user_comment, name: userInfo.name })
       );
     } else {
-      alert('Please enter comment and rating');
+      alert('Please enter user_comment and rating');
     }
   };
   return (
@@ -76,7 +76,7 @@ export default function ProductScreen(props) {
                 <li>
                   <Rating
                     user_rating={item.user_rating}
-                    numReviews={item.numReviews}
+                    review_count={item.review_count}
                   ></Rating>
                 </li>
                 <li>Price : £{item.cost}</li>
@@ -94,7 +94,7 @@ export default function ProductScreen(props) {
                   <strong>{review.name}</strong>
                   <Rating user_rating={review.user_rating} caption=" "></Rating>
                   <p>{review.createdAt.substring(0, 10)}</p>
-                  <p>{review.comment}</p>
+                  <p>{review.user_comment}</p>
                 </li>
               ))}
               <li>
@@ -119,10 +119,10 @@ export default function ProductScreen(props) {
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="comment">Comment</label>
+                      <label htmlFor="user_comment">Comment</label>
                       <textarea
-                        id="comment"
-                        value={comment}
+                        id="user_comment"
+                        value={user_comment}
                         onChange={(e) => setComment(e.target.value)}
                       ></textarea>
                     </div>
@@ -162,7 +162,7 @@ export default function ProductScreen(props) {
                     <div className="row">
                       <div>Status</div>
                       <div>
-                        {item.countInStock > 0 ? (
+                        {item.stock_number > 0 ? (
                           <span className="success">In Stock</span>
                         ) : (
                           <span className="danger">Unavailable</span>
@@ -170,7 +170,7 @@ export default function ProductScreen(props) {
                       </div>
                     </div>
                   </li>
-                  {item.countInStock > 0 && (
+                  {item.stock_number > 0 && (
                     <>
                       <li>
                         <div className="row">
@@ -180,7 +180,7 @@ export default function ProductScreen(props) {
                               value={quantity}
                               onChange={(e) => setQty(e.target.value)}
                             >
-                              {[...Array(item.countInStock).keys()].map(
+                              {[...Array(item.stock_number).keys()].map(
                                 (x) => (
                                   <option key={x + 1} value={x + 1}>
                                     {x + 1}

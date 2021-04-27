@@ -15,8 +15,8 @@ const route_user = express.Router();
 route_user.get(
   '/PPTuserlist',
   expressAsyncHandler(async (req, res) => {
-    const ppt_users = await PPTUser.insertMany(data.pptusers);
-    res.send({ ppt_users });
+    const insert_pptusers = await PPTUser.insertMany(data.pptusers);
+    res.send({ insert_pptusers });
   })
 );
 
@@ -51,13 +51,13 @@ route_user.post(
       user_email: req.body.user_email,
       password: bcrypt.hashSync(req.body.password, 8),
     });
-    const pptUser = await pptuser.save();
+    const new_pptuser = await pptuser.save();
     res.send({
-      _id: pptUser._id,
-      name: pptUser.name,
-      user_email: pptUser.user_email,
-      userCredentialsAdministrator: pptUser.userCredentialsAdministrator,
-      user_token: generateToken(pptUser),
+      _id: new_pptuser._id,
+      name: new_pptuser.name,
+      user_email: new_pptuser.user_email,
+      userCredentialsAdministrator: new_pptuser.userCredentialsAdministrator,
+      user_token: generateToken(new_pptuser),
     });
   })
 );

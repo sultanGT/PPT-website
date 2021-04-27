@@ -35,7 +35,7 @@ export default function Item(props) {
         </Link>
         {/* <Rating
           user_rating={item.user_rating}
-          numReviews={item.numReviews}
+          review_count={item.review_count}
         ></Rating> */}
         <div className={isShown ? 'deactive' : 'cost center'}>£{item.cost}</div>
       </div>

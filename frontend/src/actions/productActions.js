@@ -57,10 +57,10 @@ export const listProductCategories = () => async (dispatch) => {
   }
 };
 
-export const detailsProduct = (productId) => async (dispatch) => {
-  dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
+export const detailsProduct = (item_id) => async (dispatch) => {
+  dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: item_id });
   try {
-    const { data } = await Axios.get(`/api/PPTitems/${productId}`);
+    const { data } = await Axios.get(`/api/PPTitems/${item_id}`);
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -115,14 +115,14 @@ export const updateProduct = (item) => async (dispatch, getState) => {
     dispatch({ type: PRODUCT_UPDATE_FAIL, error: message });
   }
 };
-export const deleteProduct = (productId) => async (dispatch, getState) => {
-  dispatch({ type: PRODUCT_DELETE_REQUEST, payload: productId });
+export const item_deleted = (item_id) => async (dispatch, getState) => {
+  dispatch({ type: PRODUCT_DELETE_REQUEST, payload: item_id });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
     // eslint-disable-next-line
-    const { data } = Axios.delete(`/api/PPTitems/${productId}`, {
+    const { data } = Axios.delete(`/api/PPTitems/${item_id}`, {
       headers: { Authorization: `Bearer ${userInfo.user_token}` },
     });
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
@@ -134,7 +134,7 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
     dispatch({ type: PRODUCT_DELETE_FAIL, payload: message });
   }
 };
-export const createReview = (productId, review) => async (
+export const createReview = (item_id, review) => async (
   dispatch,
   getState
 ) => {
@@ -144,7 +144,7 @@ export const createReview = (productId, review) => async (
   } = getState();
   try {
     const { data } = await Axios.post(
-      `/api/PPTitems/${productId}/reviews`,
+      `/api/PPTitems/${item_id}/reviews`,
       review,
       {
         headers: { Authorization: `Bearer ${userInfo.user_token}` },

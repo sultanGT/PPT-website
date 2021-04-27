@@ -569,7 +569,9 @@ img.large {
   cursor: pointer;
   user-select: none;
 }
-
+.arrowbox {
+  opacity: 0.8;
+}
 .arrowbox:hover {
   background: rgba(42, 48, 58, 0.5);
   transition: 0.2s;

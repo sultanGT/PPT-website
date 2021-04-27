@@ -7,14 +7,14 @@ import MessageBox from '../components/MessageBox';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
 
 export default function ProductEditScreen(props) {
-  const productId = props.match.params.id;
+  const item_id = props.match.params.id;
   const [name, setName] = useState('');
   const [cost, setPrice] = useState('');
   const [picture, setImage] = useState('');
   const [item_category, setCategory] = useState('');
-  const [countInStock, setCountInStock] = useState('');
-  const [productBrand, setProductBrand] = useState('');
-  const [productDescription, setDescription] = useState('');
+  const [stock_number, setstock_count] = useState('');
+  const [product_brand, setproduct_brand] = useState('');
+  const [item_info, setDescription] = useState('');
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, item } = productDetails;
@@ -31,32 +31,32 @@ export default function ProductEditScreen(props) {
     if (successUpdate) {
       props.history.push('/productlist');
     }
-    if (!item || item._id !== productId || successUpdate) {
+    if (!item || item._id !== item_id || successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
-      dispatch(detailsProduct(productId));
+      dispatch(detailsProduct(item_id));
     } else {
       setName(item.name);
       setPrice(item.cost);
       setImage(item.picture);
       setCategory(item.item_category);
-      setCountInStock(item.countInStock);
-      setProductBrand(item.productBrand);
-      setDescription(item.productDescription);
+      setstock_count(item.stock_number);
+      setproduct_brand(item.product_brand);
+      setDescription(item.item_info);
     }
-  }, [item, dispatch, productId, successUpdate, props.history]);
+  }, [item, dispatch, item_id, successUpdate, props.history]);
   const submitHandler = (e) => {
     e.preventDefault();
     // TODO: dispatch update item
     dispatch(
       updateProduct({
-        _id: productId,
+        _id: item_id,
         name,
         cost,
         picture,
         item_category,
-        productBrand,
-        countInStock,
-        productDescription,
+        product_brand,
+        stock_number,
+        item_info,
       })
     );
   };
@@ -89,7 +89,7 @@ export default function ProductEditScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Edit Item {productId}</h1>
+          <h1>Edit Item {item_id}</h1>
         </div>
         {loadingUpdate && <LoadingBox></LoadingBox>}
         {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
@@ -153,33 +153,33 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="productBrand">Brand</label>
+              <label htmlFor="product_brand">Brand</label>
               <input
-                id="productBrand"
+                id="product_brand"
                 type="text"
                 placeholder="Enter brand"
-                value={productBrand}
-                onChange={(e) => setProductBrand(e.target.value)}
+                value={product_brand}
+                onChange={(e) => setproduct_brand(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="countInStock">Count In Stock</label>
+              <label htmlFor="stock_number">Count In Stock</label>
               <input
-                id="countInStock"
+                id="stock_number"
                 type="text"
-                placeholder="Enter countInStock"
-                value={countInStock}
-                onChange={(e) => setCountInStock(e.target.value)}
+                placeholder="Enter stock_number"
+                value={stock_number}
+                onChange={(e) => setstock_count(e.target.value)}
               ></input>
             </div>
             <div>
-            <label htmlFor="productDescription">Description</label>
+            <label htmlFor="item_info">Description</label>
               <textarea
-                id="productDescription"
+                id="item_info"
                 rows="3"
                 type="text"
-                placeholder="Enter productDescription"
-                value={productDescription}
+                placeholder="Enter item_info"
+                value={item_info}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>

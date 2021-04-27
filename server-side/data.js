@@ -21,66 +21,66 @@ const data = {
             item_category: 'Suits',
             picture: '/images/p1.jpg',
             cost:120,
-            countInStock: 10,
-            productBrand: 'WTF',
+            stock_number: 10,
+            product_brand: 'WTF',
             user_rating: 4.5,
-            numReviews: 10,
-            productDescription: 'high quality item'
+            review_count: 10,
+            item_info: 'high quality item'
         },
         {
             name: 'Adidas Taekwondo Suit',
             item_category: 'Suits',
             picture: '/images/p2.jpg',
             cost:100,
-            countInStock: 20,
-            productBrand: 'Adidas',
+            stock_number: 20,
+            product_brand: 'Adidas',
             user_rating: 4.0,
-            numReviews: 10,
-            productDescription: 'high quality item'
+            review_count: 10,
+            item_info: 'high quality item'
         },
         {
             name: 'Nike Taekwondo Suit',
             item_category: 'Suits',
             picture: '/images/p3.jpg',
             cost:220,
-            countInStock: 30,
-            productBrand: 'Nike',
+            stock_number: 30,
+            product_brand: 'Nike',
             user_rating: 4.5,
-            numReviews: 10,
-            productDescription: 'high quality item'
+            review_count: 10,
+            item_info: 'high quality item'
         },
         {
             name: 'Adidas Taekwondo Belts',
             item_category: 'Belts',
             picture: '/images/p4.jpg',
             cost:70,
-            countInStock: 5,
-            productBrand: 'Adidas',
+            stock_number: 5,
+            product_brand: 'Adidas',
             user_rating: 4.5,
-            numReviews: 10,
-            productDescription: 'high quality item'
+            review_count: 10,
+            item_info: 'high quality item'
         },
         {
             name: 'Adidas Red Body Armour',
             item_category: 'Body Armour',
             picture: '/images/p5.jpg',
             cost:80,
-            countInStock: 0,
-            productBrand: 'Adidas',
+            stock_number: 0,
+            product_brand: 'Adidas',
             user_rating: 4.5,
-            numReviews: 10,
-            productDescription: 'high quality item'
+            review_count: 10,
+            item_info: 'high quality item'
         },
         {
             name: 'Adidas Blue Body Armour',
             item_category: 'Body Armour',
             picture: '/images/p6.jpg',
             cost:80,
-            countInStock: 12,
-            productBrand: 'Adidas',
+            stock_number: 12,
+            product_brand: 'Adidas',
             user_rating: 4.5,
-            numReviews: 10,
-            productDescription: 'high quality item'
+            review_count: 10,
+            item_info: 'high quality item'
         },
     ]
 }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import {
   createProduct,
-  deleteProduct,
+  item_deleted,
   listProducts,
 } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
@@ -23,7 +23,7 @@ export default function ProductListScreen(props) {
     loading: loadingCreate,
     error: errorCreate,
     success: successCreate,
-    item: createdProduct,
+    item: new_item,
   } = productCreate;
 
   const productDelete = useSelector((state) => state.productDelete);
@@ -38,7 +38,7 @@ export default function ProductListScreen(props) {
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });
-      props.history.push(`/item/${createdProduct._id}/edit`);
+      props.history.push(`/item/${new_item._id}/edit`);
     }
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
@@ -47,7 +47,7 @@ export default function ProductListScreen(props) {
       listProducts(userInfo._id, pageNumber)
     );
   }, [
-    createdProduct,
+    new_item,
     dispatch,
     props.history,
 
@@ -59,7 +59,7 @@ export default function ProductListScreen(props) {
 
   const deleteHandler = (item) => {
     if (window.confirm('Are you sure you want to delete?')) {
-      dispatch(deleteProduct(item._id));
+      dispatch(item_deleted(item._id));
     }
   };
   const createHandler = () => {
@@ -103,7 +103,7 @@ export default function ProductListScreen(props) {
                   <td>{item.name}</td>
                   <td>{item.cost}</td>
                   <td>{item.item_category}</td>
-                  <td>{item.productBrand}</td>
+                  <td>{item.product_brand}</td>
                   <td>
                     <button
                       type="button"

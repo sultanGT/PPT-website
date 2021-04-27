@@ -5,7 +5,7 @@ import { addToCart, removeFromCart } from '../actions/cartActions';
 import MessageBox from '../components/MessageBox';
 
 export default function CartScreen(props) {
-  const productId = props.match.params.id;
+  const item_id = props.match.params.id;
   const quantity = props.location.search
     ? Number(props.location.search.split('=')[1])
     : 1;
@@ -13,10 +13,10 @@ export default function CartScreen(props) {
   const { cartItems, error } = cart;
   const dispatch = useDispatch();
   useEffect(() => {
-    if (productId) {
-      dispatch(addToCart(productId, quantity));
+    if (item_id) {
+      dispatch(addToCart(item_id, quantity));
     }
-  }, [dispatch, productId, quantity]);
+  }, [dispatch, item_id, quantity]);
 
   const removeFromCartHandler = (id) => {
     // delete action
@@ -59,7 +59,7 @@ export default function CartScreen(props) {
                         )
                       }
                     >
-                      {[...Array(item.countInStock).keys()].map((x) => (
+                      {[...Array(item.stock_number).keys()].map((x) => (
                         <option key={x + 1} value={x + 1}>
                           {x + 1}
                         </option>
