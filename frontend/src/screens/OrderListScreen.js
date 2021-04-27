@@ -7,7 +7,7 @@ import { ORDER_DELETE_RESET } from '../constants/orderConstants';
 
 export default function OrderListScreen(props) {
   const orderList = useSelector((state) => state.orderList);
-  const { loading, error, orders } = orderList;
+  const { loading, error, ppt_orders } = orderList;
   const orderDelete = useSelector((state) => state.orderDelete);
   const {
     loading: loadingDelete,
@@ -50,7 +50,7 @@ export default function OrderListScreen(props) {
             </tr>
           </thead>
           <tbody>
-            {orders.map((customer_order) => (
+            {ppt_orders.map((customer_order) => (
               <tr key={customer_order._id}>
                 <td>{customer_order._id}</td>
                 <td>{customer_order.pptuser.username}</td>

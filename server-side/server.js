@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import route_item from './routers/route_item.js';
 import route_user from './routers/route_user.js';
-import paymentRouter from './routers/paymentRouter.js';
+import route_pay from './routers/route_pay.js';
 import uploadRouter from './routers/uploadRouter.js';
 
 dotenv.config();
@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/PPT-website', {
 app.use('/api/uploads', uploadRouter);
 app.use('/api/pptusers', route_user);
 app.use('/api/PPTitems', route_item);
-app.use('/api/orders', paymentRouter);
+app.use('/api/ppt_orders', route_pay);
 app.get('/api/config/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });

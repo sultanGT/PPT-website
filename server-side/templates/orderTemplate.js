@@ -24,5 +24,5 @@ const orderSchema = new mongoose.Schema(
         paymentDate: { type: Date }, 
         deliveryConfirmed: { type: Boolean, default: false }, 
         deliveryDate: { type: Date }, }, { timestamps: true, });
-const Order = mongoose.model('Order', orderSchema);
-export default Order;
+const PPTOrder = mongoose.model('PPTOrder', orderSchema);
+export default PPTOrder;

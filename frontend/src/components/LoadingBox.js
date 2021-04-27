@@ -2,8 +2,10 @@ import React from 'react';
 
 export default function LoadingBox() {
   return (
-    <div className="loading">
-      <i className="fa fa-spinner fa-spin"></i> Loading...
+    <div class="loading">
+      <div class='uil-ring-css'>
+        <div></div>
+      </div>
     </div>
   );
 }

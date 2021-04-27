@@ -6,7 +6,7 @@ import MessageBox from '../components/MessageBox';
 
 export default function OrderHistoryScreen(props) {
   const orderMineList = useSelector((state) => state.orderMineList);
-  const { loading, error, orders } = orderMineList;
+  const { loading, error, ppt_orders } = orderMineList;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listOrderMine());
@@ -31,7 +31,7 @@ export default function OrderHistoryScreen(props) {
             </tr>
           </thead>
           <tbody>
-            {orders.map((customer_order) => (
+            {ppt_orders.map((customer_order) => (
               <tr key={customer_order._id}>
                 <td>{customer_order._id}</td>
                 <td>{customer_order.createdAt.substring(0, 10)}</td>
