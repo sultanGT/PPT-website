@@ -1,6 +1,6 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
-import PPTOrder from '../templates/orderTemplate.js';
+import PPTOrder from '../ppt-templates/orderTemplate.js';
 import { userCredentialsAdministrator, userCredentialsAuthenticated, mailgun, orderCompletionEmail, } from '../utils.js';
 
 

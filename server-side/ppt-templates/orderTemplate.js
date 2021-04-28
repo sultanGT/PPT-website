@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
-// Item details to be stored in MongoDB using mongooose
+
+// Item details to be stored in MongoDB using the mongoose library
 const orderSchema = new mongoose.Schema(
+
 // Item description for orders
 { items_order: [{ name: { type: String, required: true }, 
     quantity: { type: Number, required: true }, 
