@@ -62,15 +62,19 @@ function App() {
   // 
 
   window.addEventListener('scroll', changeBackground);
+
   const productCategoryList = useSelector((state) => state.productCategoryList);
   const {
     loading: loadingCategories,
     error: errorCategories,
     categories,
   } = productCategoryList;
+
+
   useEffect(() => {
     dispatch(listProductCategories());
   }, [dispatch]);
+
   
   return (
     <BrowserRouter>
@@ -184,104 +188,62 @@ function App() {
         <main>
         <div className="pages">
           <Route path="/cart/:id?" component={CartScreen}></Route>
-          </div>
-          <div className="pages">
           <Route path="/item/:id" component={ProductScreen} exact></Route>
-          </div>
-          <div className="pages">
-          <Route
-            path="/item/:id/edit"
-            component={ProductEditScreen}
-            exact
-          ></Route>
-          </div>
-          <div className="pages">
+          <Route path="/item/:id/edit" component={ProductEditScreen} exact></Route>
           <Route path="/login" component={SigninScreen}></Route>
-          </div>
-          <div className="pages">
           <Route path="/signup" component={RegisterScreen}></Route>
-          </div>
-          <div className="pages">
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
-          </div>
-          <div className="pages">
           <Route path="/payment" component={PaymentMethodScreen}></Route>
-          </div>
-          <div className="pages">
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
-          </div>
-          <div className="pages">
           <Route path="/customer_order/:id" component={OrderScreen}></Route>
-          </div>
-          <div className="pages">
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
-          </div>
-          <div className="pages">
           <Route
             path="/search/name/:name?"
             component={SearchScreen}
             exact
           ></Route>
-          </div>
-          <div className="pages">
           <Route
             path="/search/item_category/:item_category"
             component={SearchScreen}
             exact
           ></Route>
-          </div>
-          <div className="pages">
           <Route
             path="/search/item_category/:item_category/name/:name"
             component={SearchScreen}
             exact
           ></Route>
-          </div>
-          <div className="pages">
           <Route
             path="/search/item_category/:item_category/name/:name/minimum/:minimum/maximum/:maximum/user_rating/:user_rating/customer_order/:customer_order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
           ></Route>
-          </div>
-          <div className="pages">
           <PrivateRoute
             path="/credentials"
             component={ProfileScreen}
           ></PrivateRoute>
-          </div>
-          <div className="pages">
           <AdminRoute
             path="/productlist"
             component={ProductListScreen}
             exact
           ></AdminRoute>
-          </div>
-          <div className="pages">
           <AdminRoute
             path="/productlist/pageNumber/:pageNumber"
             component={ProductListScreen}
             exact
           ></AdminRoute>
-          </div>
-          <div className="pages">
           <AdminRoute
             path="/orderlist"
             component={OrderListScreen}
             exact
           ></AdminRoute>
-          </div>
-          <div className="pages">
           <AdminRoute path="/userlist" component={UserListScreen}></AdminRoute>
-          </div>
-          <div className="pages">
           <AdminRoute
             path="/pptuser/:id/edit"
             component={UserEditScreen}
           ></AdminRoute>
           </div>
-                
           <Route path="/" component={HomeScreen} exact></Route>
+      
         </main>
         <footer className="row">
           <div className='fbox1'>
