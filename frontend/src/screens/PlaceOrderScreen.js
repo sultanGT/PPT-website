@@ -9,21 +9,21 @@ import MessageBox from '../components/MessageBox';
 
 export default function PlaceOrderScreen(props) {
   const cart = useSelector((state) => state.cart);
-  if (!cart.paymentPPorS) {
+  if (!cart.purchase_method) {
     props.history.push('/payment');
   }
   const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, success, error, customer_order } = orderCreate;
   const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
-  cart.itemsPrice = toPrice(
+  cart.items_cost = toPrice(
     cart.cartItems.reduce((a, c) => a + c.quantity * c.cost, 0)
   );
-  cart.deliveryPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
-  cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
-  cart.totalPrice = cart.itemsPrice + cart.deliveryPrice + cart.taxPrice;
+  cart.delivery_cost = cart.items_cost > 100 ? toPrice(0) : toPrice(10);
+  cart.tax_cost = toPrice(0.15 * cart.items_cost);
+  cart.total_cost = cart.items_cost + cart.delivery_cost + cart.tax_cost;
   const dispatch = useDispatch();
   const placeOrderHandler = () => {
-    dispatch(createOrder({ ...cart, orderProducts: cart.cartItems }));
+    dispatch(createOrder({ ...cart, items_order: cart.cartItems }));
   };
   useEffect(() => {
     if (success) {
@@ -41,10 +41,10 @@ export default function PlaceOrderScreen(props) {
               <div className="card card-body">
                 <h2>Shipping</h2>
                 <p>
-                  <strong>Name:</strong> {cart.deliveryAddress.fullName} <br />
-                  <strong>Address: </strong> {cart.deliveryAddress.address},
-                  {cart.deliveryAddress.city}, {cart.deliveryAddress.postCode}
-                  ,{cart.deliveryAddress.county}
+                  <strong>Name:</strong> {cart.delivery_address.fullName} <br />
+                  <strong>Address: </strong> {cart.delivery_address.address},
+                  {cart.delivery_address.city}, {cart.delivery_address.postCode}
+                  ,{cart.delivery_address.county}
                 </p>
               </div>
             </li>
@@ -52,7 +52,7 @@ export default function PlaceOrderScreen(props) {
               <div className="card card-body">
                 <h2>Payment</h2>
                 <p>
-                  <strong>Method:</strong> {cart.paymentPPorS}
+                  <strong>Method:</strong> {cart.purchase_method}
                 </p>
               </div>
             </li>
@@ -96,19 +96,19 @@ export default function PlaceOrderScreen(props) {
               <li>
                 <div className="row">
                   <div>Items</div>
-                  <div>${cart.itemsPrice.toFixed(2)}</div>
+                  <div>${cart.items_cost.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Shipping</div>
-                  <div>${cart.deliveryPrice.toFixed(2)}</div>
+                  <div>${cart.delivery_cost.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Tax</div>
-                  <div>${cart.taxPrice.toFixed(2)}</div>
+                  <div>${cart.tax_cost.toFixed(2)}</div>
                 </div>
               </li>
               <li>
@@ -117,7 +117,7 @@ export default function PlaceOrderScreen(props) {
                     <strong> Order Total</strong>
                   </div>
                   <div>
-                    <strong>${cart.totalPrice.toFixed(2)}</strong>
+                    <strong>${cart.total_cost.toFixed(2)}</strong>
                   </div>
                 </div>
               </li>

@@ -7,15 +7,15 @@ export default function ShippingAddressScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const cart = useSelector((state) => state.cart);
-  const { deliveryAddress } = cart;
+  const { delivery_address } = cart;
   if (!userInfo) {
     props.history.push('/login');
   }
-  const [fullName, setFullName] = useState(deliveryAddress.fullName);
-  const [address, setAddress] = useState(deliveryAddress.address);
-  const [city, setCity] = useState(deliveryAddress.city);
-  const [postCode, setPostCode] = useState(deliveryAddress.postCode);
-  const [county, setCountry] = useState(deliveryAddress.county);
+  const [fullName, setFullName] = useState(delivery_address.fullName);
+  const [address, setAddress] = useState(delivery_address.address);
+  const [city, setCity] = useState(delivery_address.city);
+  const [postCode, setPostCode] = useState(delivery_address.postCode);
+  const [county, setCountry] = useState(delivery_address.county);
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();

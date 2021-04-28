@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteOrder, listOrders } from '../actions/orderActions';
+import { remove_order, listOrders } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { ORDER_DELETE_RESET } from '../constants/orderConstants';
@@ -24,7 +24,7 @@ export default function OrderListScreen(props) {
   }, [dispatch, successDelete, userInfo._id]);
   const deleteHandler = (customer_order) => {
     if (window.confirm('Are you sure to delete?')) {
-      dispatch(deleteOrder(customer_order._id));
+      dispatch(remove_order(customer_order._id));
     }
   };
   return (
@@ -55,10 +55,10 @@ export default function OrderListScreen(props) {
                 <td>{customer_order._id}</td>
                 <td>{customer_order.pptuser.username}</td>
                 <td>{customer_order.createdAt.substring(0, 10)}</td>
-                <td>{customer_order.totalPrice.toFixed(2)}</td>
-                <td>{customer_order.paymentConfirmed ? customer_order.paymentDate.substring(0, 10) : 'No'}</td>
+                <td>{customer_order.total_cost.toFixed(2)}</td>
+                <td>{customer_order.purchase_confirmed ? customer_order.purchase_date.substring(0, 10) : 'No'}</td>
                 <td>
-                  {customer_order.deliveryConfirmed
+                  {customer_order.delivery_confirmed
                     ? customer_order.deliveryDate.substring(0, 10)
                     : 'No'}
                 </td>

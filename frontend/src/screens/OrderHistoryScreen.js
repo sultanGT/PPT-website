@@ -35,10 +35,10 @@ export default function OrderHistoryScreen(props) {
               <tr key={customer_order._id}>
                 <td>{customer_order._id}</td>
                 <td>{customer_order.createdAt.substring(0, 10)}</td>
-                <td>{customer_order.totalPrice.toFixed(2)}</td>
-                <td>{customer_order.paymentConfirmed ? customer_order.paymentDate.substring(0, 10) : 'No'}</td>
+                <td>{customer_order.total_cost.toFixed(2)}</td>
+                <td>{customer_order.purchase_confirmed ? customer_order.purchase_date.substring(0, 10) : 'No'}</td>
                 <td>
-                  {customer_order.deliveryConfirmed
+                  {customer_order.delivery_confirmed
                     ? customer_order.deliveryDate.substring(0, 10)
                     : 'No'}
                 </td>

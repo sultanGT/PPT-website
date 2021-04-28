@@ -64,7 +64,7 @@ export const orderCompletionEmail = (customer_order) => {
   <td><strong align="right">Price</strong></td>
   </thead>
   <tbody>
-  ${customer_order.orderProducts
+  ${customer_order.items_order
     .map(
       (item) => `
     <tr>
@@ -79,28 +79,28 @@ export const orderCompletionEmail = (customer_order) => {
   <tfoot>
   <tr>
   <td colspan="2">Items Price:</td>
-  <td align="right"> $${customer_order.itemsPrice.toFixed(2)}</td>
+  <td align="right"> $${customer_order.items_cost.toFixed(2)}</td>
   </tr>
   <tr>
   <td colspan="2">Tax Price:</td>
-  <td align="right"> $${customer_order.taxPrice.toFixed(2)}</td>
+  <td align="right"> $${customer_order.tax_cost.toFixed(2)}</td>
   </tr>
   <tr>
   <td colspan="2">Shipping Price:</td>
-  <td align="right"> $${customer_order.deliveryPrice.toFixed(2)}</td>
+  <td align="right"> $${customer_order.delivery_cost.toFixed(2)}</td>
   </tr>
   <tr>
   <td colspan="2"><strong>Total Price:</strong></td>
-  <td align="right"><strong> $${customer_order.totalPrice.toFixed(2)}</strong></td>
+  <td align="right"><strong> $${customer_order.total_cost.toFixed(2)}</strong></td>
   </tr>
   </table>
   <h2>Shipping address</h2>
   <p>
-  ${customer_order.deliveryAddress.fullName},<br/>
-  ${customer_order.deliveryAddress.address},<br/>
-  ${customer_order.deliveryAddress.city},<br/>
-  ${customer_order.deliveryAddress.county},<br/>
-  ${customer_order.deliveryAddress.postCode}<br/>
+  ${customer_order.delivery_address.fullName},<br/>
+  ${customer_order.delivery_address.address},<br/>
+  ${customer_order.delivery_address.city},<br/>
+  ${customer_order.delivery_address.county},<br/>
+  ${customer_order.delivery_address.postCode}<br/>
   </p>
   <hr/>
   <p>

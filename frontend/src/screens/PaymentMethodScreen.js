@@ -5,15 +5,15 @@ import CheckoutSteps from '../components/CheckoutSteps';
 
 export default function PaymentMethodScreen(props) {
   const cart = useSelector((state) => state.cart);
-  const { deliveryAddress } = cart;
-  if (!deliveryAddress.address) {
+  const { delivery_address } = cart;
+  if (!delivery_address.address) {
     props.history.push('/shipping');
   }
-  const [paymentPPorS, setPaymentMethod] = useState('PayPal');
+  const [purchase_method, setPaymentMethod] = useState('PayPal');
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(savePaymentMethod(paymentPPorS));
+    dispatch(savePaymentMethod(purchase_method));
     props.history.push('/placeorder');
   };
   return (
@@ -29,7 +29,7 @@ export default function PaymentMethodScreen(props) {
               type="radio"
               id="paypal"
               value="PayPal"
-              name="paymentPPorS"
+              name="purchase_method"
               required
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
@@ -43,7 +43,7 @@ export default function PaymentMethodScreen(props) {
               type="radio"
               id="stripe"
               value="Stripe"
-              name="paymentPPorS"
+              name="purchase_method"
               required
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>

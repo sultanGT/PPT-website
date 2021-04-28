@@ -29,9 +29,9 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         cartItems: state.cartItems.filter((x) => x.item !== action.payload),
       };
     case CART_SAVE_SHIPPING_ADDRESS:
-      return { ...state, deliveryAddress: action.payload };
+      return { ...state, delivery_address: action.payload };
     case CART_SAVE_PAYMENT_METHOD:
-      return { ...state, paymentPPorS: action.payload };
+      return { ...state, purchase_method: action.payload };
     case CART_EMPTY:
       return { ...state, error: '', cartItems: [] };
     default:

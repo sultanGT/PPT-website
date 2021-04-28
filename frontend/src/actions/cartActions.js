@@ -29,7 +29,7 @@ export const removeFromCart = (item_id) => (dispatch, getState) => {
 
 export const saveShippingAddress = (data) => (dispatch) => {
   dispatch({ type: CART_SAVE_SHIPPING_ADDRESS, payload: data });
-  localStorage.setItem('deliveryAddress', JSON.stringify(data));
+  localStorage.setItem('delivery_address', JSON.stringify(data));
 };
 export const savePaymentMethod = (data) => (dispatch) => {
   dispatch({ type: CART_SAVE_PAYMENT_METHOD, payload: data });
