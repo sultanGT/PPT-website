@@ -2,10 +2,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
-import route_item from './routers/route_item.js';
-import route_user from './routers/route_user.js';
-import route_purchase from './routers/route_purchase.js';
-import uploadRouter from './routers/uploadRouter.js';
+import route_item from './ppt-routes/route_item.js';
+import route_user from './ppt-routes/route_user.js';
+import route_purchase from './ppt-routes/route_purchase.js';
+import route_saver from './ppt-routes/route_saver.js';
 
 dotenv.config();
 
@@ -18,7 +18,7 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/PPT-website', {
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
-app.use('/api/uploads', uploadRouter);
+app.use('/api/uploads', route_saver);
 app.use('/api/pptusers', route_user);
 app.use('/api/PPTitems', route_item);
 app.use('/api/ppt_orders', route_purchase);
