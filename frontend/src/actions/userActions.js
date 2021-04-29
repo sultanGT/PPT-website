@@ -76,7 +76,7 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.get(`/api/pptusers/${userId}`, {
-      headers: { Authorization: `Bearer ${userInfo.user_token}` },
+      headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
@@ -94,7 +94,7 @@ export const updateUserProfile = (pptuser) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.put(`/api/pptusers/credentials`, pptuser, {
-      headers: { Authorization: `Bearer ${userInfo.user_token}` },
+      headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
@@ -114,7 +114,7 @@ export const updateUser = (pptuser) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.put(`/api/pptusers/${pptuser._id}`, pptuser, {
-      headers: { Authorization: `Bearer ${userInfo.user_token}` },
+      headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
   } catch (error) {
@@ -133,7 +133,7 @@ export const listUsers = () => async (dispatch, getState) => {
     } = getState();
     const { data } = await Axios.get('/api/pptusers', {
       headers: {
-        Authorization: `Bearer ${userInfo.user_token}`,
+        Authorization: `Bearer ${userInfo.token}`,
       },
     });
     dispatch({ type: USER_LIST_SUCCESS, payload: data });
@@ -152,7 +152,7 @@ export const remove_pptuser = (userId) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.delete(`/api/pptusers/${userId}`, {
-      headers: { Authorization: `Bearer ${userInfo.user_token}` },
+      headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: USER_DELETE_SUCCESS, payload: data });
   } catch (error) {

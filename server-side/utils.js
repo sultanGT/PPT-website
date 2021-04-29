@@ -20,9 +20,9 @@ export const generateToken = (pptuser) => {
 export const userCredentialsAuthenticated = (req, res, next) => {
   const authorization = req.headers.authorization;
   if (authorization) {
-    const user_token = authorization.slice(7, authorization.length); // Bearer XXXXXX
+    const token = authorization.slice(7, authorization.length); // Bearer XXXXXX
     jwt.verify(
-      user_token,
+      token,
       process.env.JWT_SECRET || 'passcodeencrypted',
       (err, decode) => {
         if (err) {

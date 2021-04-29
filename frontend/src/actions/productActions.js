@@ -82,7 +82,7 @@ export const createProduct = () => async (dispatch, getState) => {
       '/api/pptitems',
       {},
       {
-        headers: { Authorization: `Bearer ${userInfo.user_token}` },
+        headers: { Authorization: `Bearer ${userInfo.token}` },
       }
     );
     dispatch({
@@ -104,7 +104,7 @@ export const updateProduct = (item) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.put(`/api/pptitems/${item._id}`, item, {
-      headers: { Authorization: `Bearer ${userInfo.user_token}` },
+      headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
   } catch (error) {
@@ -123,7 +123,7 @@ export const item_deleted = (item_id) => async (dispatch, getState) => {
   try {
     // eslint-disable-next-line
     const { data } = Axios.delete(`/api/pptitems/${item_id}`, {
-      headers: { Authorization: `Bearer ${userInfo.user_token}` },
+      headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
   } catch (error) {
@@ -147,7 +147,7 @@ export const createReview = (item_id, review) => async (
       `/api/pptitems/${item_id}/reviews`,
       review,
       {
-        headers: { Authorization: `Bearer ${userInfo.user_token}` },
+        headers: { Authorization: `Bearer ${userInfo.token}` },
       }
     );
     dispatch({

@@ -33,7 +33,7 @@ route_user.post(
           name: pptuser.name,
           email: pptuser.email,
           userCredentialsAdministrator: pptuser.userCredentialsAdministrator,
-          user_token: generateToken(pptuser),
+          token: generateToken(pptuser),
         });
         return;
       }
@@ -57,7 +57,7 @@ route_user.post(
       name: new_pptuser.name,
       email: new_pptuser.email,
       userCredentialsAdministrator: new_pptuser.userCredentialsAdministrator,
-      user_token: generateToken(new_pptuser),
+      token: generateToken(new_pptuser),
     });
   })
 );
@@ -93,7 +93,7 @@ route_user.put(
         name: ammend_pptuser.name,
         email: ammend_pptuser.email,
         userCredentialsAdministrator: ammend_pptuser.userCredentialsAdministrator,
-        user_token: generateToken(ammend_pptuser),
+        token: generateToken(ammend_pptuser),
       });
     }
   })
