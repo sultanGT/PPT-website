@@ -24,7 +24,7 @@ export default function CartScreen(props) {
   };
 
   const checkoutHandler = () => {
-    props.history.push('/login?redirect=shipping');
+    props.history.push('/signup?redirect=shipping');
   };
   return (
     <div className="row top pager">
