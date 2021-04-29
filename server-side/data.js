@@ -30,7 +30,7 @@ const data = {
             picture: '/images/p1.jpg',
             cost: 65.99,
             stock_number: 10,
-            product_brand: 'WTF',
+            item_brand: 'WTF',
             user_rating: 4.5,
             review_count: 10,
             item_info: 'Lightweight design mixed with durability and style, Great for all skill levels, from beginner to expert, Simple yet stylish design at an affordable price, High Quality, smart looking uniform both flexible and durable'
@@ -41,7 +41,7 @@ const data = {
             picture: '/images/p2.jpg',
             cost: 84.99,
             stock_number: 10,
-            product_brand: 'Adidas',
+            item_brand: 'Adidas',
             user_rating: 4.0,
             review_count: 10,
             item_info: 'Lightweight design mixed with durability and style, Great for all skill levels, from beginner to expert, Simple yet stylish design at an affordable price, High Quality, smart looking uniform both flexible and durable'
@@ -52,7 +52,7 @@ const data = {
             picture: '/images/p3.jpg',
             cost: 95.99,
             stock_number: 10,
-            product_brand: 'Nike',
+            item_brand: 'Nike',
             user_rating: 4.5,
             review_count: 10,
             item_info: 'Lightweight design mixed with durability and style, Great for all skill levels, from beginner to expert, Simple yet stylish design at an affordable price, High Quality, smart looking uniform both flexible and durable'
@@ -63,7 +63,7 @@ const data = {
             picture: '/images/p4.jpg',
             cost:20,
             stock_number: 5,
-            product_brand: 'Adidas',
+            item_brand: 'Adidas',
             user_rating: 4.5,
             review_count: 10,
             item_info: '100% cotton belts. Good for Karate, Judo and Taekwondo'
@@ -74,7 +74,7 @@ const data = {
             picture: '/images/p5.jpg',
             cost: 59.99,
             stock_number: 6,
-            product_brand: 'Adidas',
+            item_brand: 'Adidas',
             user_rating: 4.5,
             review_count: 10,
             item_info: 'Body protector for training and competition, Reversible Red or Blue, Shoulder protection, CE Approved, WT Approved'
@@ -85,7 +85,7 @@ const data = {
             picture: '/images/p6.jpg',
             cost:59.99,
             stock_number: 12,
-            product_brand: 'Adidas',
+            item_brand: 'Adidas',
             user_rating: 5,
             review_count: 10,
             item_info: 'Body protector for training and competition, Reversible Red or Blue, Shoulder protection, CE Approved, WT Approved'
@@ -96,7 +96,7 @@ const data = {
             picture: '/images/p7.jpg',
             cost:29.99,
             stock_number: 12,
-            product_brand: 'Tusah',
+            item_brand: 'Tusah',
             user_rating: 4.5,
             review_count: 10,
             item_info: 'Light, WTF approved head guard, perfect for Tae Kwon Do training sessions.'
@@ -107,7 +107,7 @@ const data = {
             picture: '/images/p8.jpg',
             cost:49.99,
             stock_number: 12,
-            product_brand: 'Adidas',
+            item_brand: 'Adidas',
             user_rating: 4,
             review_count: 10,
             item_info: 'Light, WTF approved head guard, perfect for Tae Kwon Do training sessions.'
@@ -118,7 +118,7 @@ const data = {
             picture: '/images/p9.jpg',
             cost:19.99,
             stock_number: 12,
-            product_brand: 'Adidas',
+            item_brand: 'Adidas',
             user_rating: 5,
             review_count: 10,
             item_info: 'Double hand pad for speed kick training'

@@ -16,6 +16,7 @@ route_item.get(
     const pptpage = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
     const item_category = req.query.item_category || '';
+    const item_brand = req.query.item_brand || '';
     const customer_order = req.query.customer_order || '';
     const minimum =
       req.query.minimum && Number(req.query.minimum) !== 0 ? Number(req.query.minimum) : 0;
@@ -28,6 +29,7 @@ route_item.get(
 // Search bar filters - reused copied
     const filter_item_names = name ? { name: { $regex: name, $options: 'i' } } : {};
     const filter_item_categories = item_category ? { item_category } : {};
+    const filter_item_brands = item_brand ? { item_brand } : {};
     const filter_item_cost = minimum && maximum ? { cost: { $gte: minimum, $lte: maximum } } : {};
     const filter_item_ratings = user_rating ? { user_rating: { $gte: user_rating } } : {};
     const sortOrder =
@@ -42,13 +44,16 @@ route_item.get(
     const count = await Item.count({
       ...filter_item_names,
       ...filter_item_categories,
+      ...filter_item_brands,
       ...filter_item_cost,
       ...filter_item_ratings,
+      
     });
 // Function for finding PPTitems by filtered option - reused copied
     const PPTitems = await Item.find({
       ...filter_item_names,
       ...filter_item_categories,
+      ...filter_item_brands,
       ...filter_item_cost,
       ...filter_item_ratings,
     })
@@ -65,6 +70,15 @@ route_item.get(
   expressAsyncHandler(async (req, res) => {
     const categories = await Item.find().distinct('item_category');
     res.send(categories);
+  })
+);
+
+// Filter for counting PPTitems for filter results - reused copied
+route_item.get(
+  '/item_brands',
+  expressAsyncHandler(async (req, res) => {
+    const brands = await Item.find().distinct('item_brand');
+    res.send(brands);
   })
 );
 
@@ -106,7 +120,7 @@ route_item.post(
       picture: '/images/p1.jpg',
       cost: 0,
       item_category: 'Example: Suits...',
-      product_brand: 'Example: Adidas...',
+      item_brand: 'Example: Adidas...',
       stock_number: 0,
       user_rating: 0,
       review_count: 0,
@@ -130,7 +144,7 @@ route_item.put(
       item.cost = req.body.cost;
       item.picture = req.body.picture;
       item.item_category = req.body.item_category;
-      item.product_brand = req.body.product_brand;
+      item.item_brand = req.body.item_brand;
       item.stock_number = req.body.stock_number;
       item.item_info = req.body.item_info;
       const item_ammended = await item.save();

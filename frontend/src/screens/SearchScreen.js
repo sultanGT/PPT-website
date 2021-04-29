@@ -5,13 +5,13 @@ import { listProducts } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Item from '../components/Item';
-import Rating from '../components/Rating';
-import { prices, ratings } from '../utils';
+import { prices } from '../utils';
 
 export default function SearchScreen(props) {
   const {
     name = 'all',
     item_category = 'all',
+    item_brand = 'all',
     minimum = 0,
     maximum = 0,
     user_rating = 0,
@@ -28,40 +28,45 @@ export default function SearchScreen(props) {
     error: errorCategories,
     categories,
   } = productCategoryList;
+
+  const productBrandList = useSelector((state) => state.productBrandList);
+  const {
+    loading: loadingBrands,
+    error: errorBrands,
+    brands,
+  } = productBrandList;
+
+
+
   useEffect(() => {
     dispatch(
       listProducts({
         pageNumber,
         name: name !== 'all' ? name : '',
         item_category: item_category !== 'all' ? item_category : '',
+        item_brand: item_brand !== 'all' ? item_brand : '',
         minimum,
         maximum,
         user_rating,
         customer_order,
       })
     );
-  }, [item_category, dispatch, maximum, minimum, name, customer_order, user_rating, pageNumber]);
+  }, [item_category, item_brand, dispatch, maximum, minimum, name, customer_order, user_rating, pageNumber]);
 
   const getFilterUrl = (filter) => {
     const filterPage = filter.pptpage || pageNumber;
     const filterCategory = filter.item_category || item_category;
+    const filterBrand = filter.item_brand || item_brand;
     const filterName = filter.name || name;
     const filterRating = filter.user_rating || user_rating;
     const sortOrder = filter.customer_order || customer_order;
     const filterMin = filter.minimum ? filter.minimum : filter.minimum === 0 ? 0 : minimum;
     const filterMax = filter.maximum ? filter.maximum : filter.maximum === 0 ? 0 : maximum;
-    return `/search/item_category/${filterCategory}/name/${filterName}/minimum/${filterMin}/maximum/${filterMax}/user_rating/${filterRating}/customer_order/${sortOrder}/pageNumber/${filterPage}`;
+    return `/search/item_category/${filterCategory}/item_brand/${filterBrand}/name/${filterName}/minimum/${filterMin}/maximum/${filterMax}/user_rating/${filterRating}/customer_order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
     <div className="">
-      <div className="row pageS">
-        {loading ? (
-          <LoadingBox></LoadingBox>
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
-          <div>{PPTitems.length} Results</div>
-        )}
+      <div className="row center pageS">
         <div>
           Sort by{' '}
           <select
@@ -79,8 +84,19 @@ export default function SearchScreen(props) {
       </div>
       <div className="row top pageS">
         <div className="col-1 borders">
+        {loading ? (
+          <LoadingBox></LoadingBox>
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <div>{PPTitems.length} Result(s)</div>
+        )}
           <h3 className="">Department</h3>
           <div>
+          <ul className="categories">
+          <li>
+              <strong>Categories</strong>
+            </li>
             {loadingCategories ? (
               <LoadingBox></LoadingBox>
             ) : errorCategories ? (
@@ -107,6 +123,36 @@ export default function SearchScreen(props) {
                 ))}
               </ul>
             )}
+            <li>
+              <strong>Brands</strong>
+            </li>
+            {loadingBrands ? (
+              <LoadingBox></LoadingBox>
+            ) : errorBrands ? (
+              <MessageBox variant="danger">{errorBrands}</MessageBox>
+            ) : (
+              <ul>
+                <li>
+                  <Link
+                    className={'all' === item_brand ? 'active' : ''}
+                    to={getFilterUrl({ item_brand: 'all' })}
+                  >
+                    Any
+                  </Link>
+                </li>
+                {brands.map((c) => (
+                  <li key={c}>
+                    <Link
+                      className={c === item_brand ? 'active' : ''}
+                      to={getFilterUrl({ item_brand: c })}
+                    >
+                      {c}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+            </ul>
           </div>
           <div>
             <h3>Price</h3>
@@ -120,21 +166,6 @@ export default function SearchScreen(props) {
                     }
                   >
                     {p.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3>Avg. Customer Review</h3>
-            <ul>
-              {ratings.map((r) => (
-                <li key={r.name}>
-                  <Link
-                    to={getFilterUrl({ user_rating: r.user_rating })}
-                    className={`${r.user_rating}` === `${user_rating}` ? 'active' : ''}
-                  >
-                    <Rating caption={' & up'} user_rating={r.user_rating}></Rating>
                   </Link>
                 </li>
               ))}

@@ -12,7 +12,7 @@ export const generateToken = (pptuser) => {
     },
     process.env.JWT_SECRET || 'passcodeencrypted',
     {
-      expiresIn: '30d',
+      expiresIn: '45d',
     }
   );
 };

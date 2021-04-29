@@ -22,7 +22,7 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
-import { listProductCategories } from './actions/productActions';
+import { listProductBrands, listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import '@fortawesome/fontawesome-free/js/all.js';
@@ -70,11 +70,18 @@ function App() {
     categories,
   } = productCategoryList;
 
+  const productBrandList = useSelector((state) => state.productBrandList);
+  const {
+    loading: loadingBrands,
+    error: errorBrands,
+    brands,
+  } = productBrandList;
+
 
   useEffect(() => {
     dispatch(listProductCategories());
+    dispatch(listProductBrands());
   }, [dispatch]);
-
   
   return (
     <BrowserRouter>
@@ -183,6 +190,25 @@ function App() {
                 </li>
               ))
             )}
+            <li>
+              <strong>Brands</strong>
+            </li>
+            {loadingBrands ? (
+              <LoadingBox></LoadingBox>
+            ) : errorBrands ? (
+              <MessageBox variant="danger">{errorBrands}</MessageBox>
+            ) : (
+              brands.map((a) => (
+                <li key={a}>
+                  <Link
+                    to={`/search/item_brand/${a}`}
+                    onClick={() => setSidebarIsOpen(false)}
+                  >
+                    {a}
+                  </Link>
+                </li>
+              ))
+            )}
           </ul>
         </aside>
         <main>
@@ -213,7 +239,17 @@ function App() {
             exact
           ></Route>
           <Route
-            path="/search/item_category/:item_category/name/:name/minimum/:minimum/maximum/:maximum/user_rating/:user_rating/customer_order/:customer_order/pageNumber/:pageNumber"
+            path="/search/item_brand/:item_brand"
+            component={SearchScreen}
+            exact
+          ></Route>
+          <Route
+            path="/search/item_brand/:item_brand/name/:name"
+            component={SearchScreen}
+            exact
+          ></Route>
+          <Route
+            path="/search/item_category/:item_category/item_brand/:item_brand/name/:name/minimum/:minimum/maximum/:maximum/user_rating/:user_rating/customer_order/:customer_order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
           ></Route>

@@ -21,12 +21,16 @@ import {
   PRODUCT_REVIEW_CREATE_REQUEST,
   PRODUCT_REVIEW_CREATE_SUCCESS,
   PRODUCT_REVIEW_CREATE_FAIL,
+  PRODUCT_BRAND_LIST_REQUEST,
+  PRODUCT_BRAND_LIST_SUCCESS,
+  PRODUCT_BRAND_LIST_FAIL,
 } from '../constants/productConstants';
 
 export const listProducts = ({
   pageNumber = '',
   name = '',
   item_category = '',
+  item_brand = '',
   customer_order = '',
   minimum = 0,
   maximum = 0,
@@ -37,7 +41,7 @@ export const listProducts = ({
   });
   try {
     const { data } = await Axios.get(
-      `/api/pptitems?pageNumber=${pageNumber}&name=${name}&item_category=${item_category}&minimum=${minimum}&maximum=${maximum}&user_rating=${user_rating}&customer_order=${customer_order}`
+      `/api/pptitems?pageNumber=${pageNumber}&name=${name}&item_category=${item_category}&item_brand=${item_brand}&minimum=${minimum}&maximum=${maximum}&user_rating=${user_rating}&customer_order=${customer_order}`
     );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -54,6 +58,18 @@ export const listProductCategories = () => async (dispatch) => {
     dispatch({ type: PRODUCT_CATEGORY_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_CATEGORY_LIST_FAIL, payload: error.message });
+  }
+};
+
+export const listProductBrands = () => async (dispatch) => {
+  dispatch({
+    type: PRODUCT_BRAND_LIST_REQUEST,
+  });
+  try {
+    const { data } = await Axios.get(`/api/pptitems/item_brands`);
+    dispatch({ type: PRODUCT_BRAND_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: PRODUCT_BRAND_LIST_FAIL, payload: error.message });
   }
 };
 
