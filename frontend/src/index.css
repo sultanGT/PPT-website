@@ -679,6 +679,13 @@ a.footerbrand {
 .cat {
   color: white;
 }
+.itemTitle {
+  color: rgb(216, 216, 216);
+  font-size: 5rem;
+  border: red 3px solid;
+  background: #bd1616;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 /* loading */
 *.hidden {

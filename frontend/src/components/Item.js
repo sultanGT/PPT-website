@@ -16,7 +16,7 @@ export default function Item(props) {
         <h1>{item.item_category}</h1>
         </div>
     </Link> */}
-
+    
     <div key={item._id} className="card2" onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}>
       <Link to={`/item/${item._id}`}>

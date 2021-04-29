@@ -245,6 +245,7 @@ function App() {
           <Route path="/" component={HomeScreen} exact></Route>
       
         </main>
+        
         <footer className="row">
           <div className='fbox1'>
           <Link className="footerbrand" to="/">

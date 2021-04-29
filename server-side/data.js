@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 
+//Initial PPT user list data to be inserted into PPT web application
 const data = {
     pptusers: [
         {
@@ -9,79 +10,121 @@ const data = {
             userCredentialsAdministrator: true,
         },
         {
-            name:'Mike',
-            user_email:'user@ppt',
+            name:'user',
+            user_email:'user@pptwebsite.co.uk',
             password: bcrypt.hashSync('mike', 8),
             userCredentialsAdministrator: false,
         },
+        {
+            name:'Admin',
+            user_email:'admin@pptwebsite.co.uk',
+            password: bcrypt.hashSync('mike', 8),
+            userCredentialsAdministrator: true,
+        },
     ],
+    //Initial PPT item list data to be inserted into PPT web application
     PPTitems: [
         {
             name: 'WTF Taekwondo Suit',
             item_category: 'Suits',
             picture: '/images/p1.jpg',
-            cost:120,
+            cost: 65.99,
             stock_number: 10,
             product_brand: 'WTF',
             user_rating: 4.5,
             review_count: 10,
-            item_info: 'high quality item'
+            item_info: 'Lightweight design mixed with durability and style, Great for all skill levels, from beginner to expert, Simple yet stylish design at an affordable price, High Quality, smart looking uniform both flexible and durable'
         },
         {
-            name: 'Adidas Taekwondo Suit',
+            name: 'Adidas WT Adiflex 2 Dobok',
             item_category: 'Suits',
             picture: '/images/p2.jpg',
-            cost:100,
-            stock_number: 20,
+            cost: 84.99,
+            stock_number: 10,
             product_brand: 'Adidas',
             user_rating: 4.0,
             review_count: 10,
-            item_info: 'high quality item'
+            item_info: 'Lightweight design mixed with durability and style, Great for all skill levels, from beginner to expert, Simple yet stylish design at an affordable price, High Quality, smart looking uniform both flexible and durable'
         },
         {
             name: 'Nike Taekwondo Suit',
             item_category: 'Suits',
             picture: '/images/p3.jpg',
-            cost:220,
-            stock_number: 30,
+            cost: 95.99,
+            stock_number: 10,
             product_brand: 'Nike',
             user_rating: 4.5,
             review_count: 10,
-            item_info: 'high quality item'
+            item_info: 'Lightweight design mixed with durability and style, Great for all skill levels, from beginner to expert, Simple yet stylish design at an affordable price, High Quality, smart looking uniform both flexible and durable'
         },
         {
             name: 'Adidas Taekwondo Belts',
             item_category: 'Belts',
             picture: '/images/p4.jpg',
-            cost:70,
+            cost:20,
             stock_number: 5,
             product_brand: 'Adidas',
             user_rating: 4.5,
             review_count: 10,
-            item_info: 'high quality item'
+            item_info: '100% cotton belts. Good for Karate, Judo and Taekwondo'
         },
         {
             name: 'Adidas Red Body Armour',
             item_category: 'Body Armour',
             picture: '/images/p5.jpg',
-            cost:80,
-            stock_number: 0,
+            cost: 59.99,
+            stock_number: 6,
             product_brand: 'Adidas',
             user_rating: 4.5,
             review_count: 10,
-            item_info: 'high quality item'
+            item_info: 'Body protector for training and competition, Reversible Red or Blue, Shoulder protection, CE Approved, WT Approved'
         },
         {
             name: 'Adidas Blue Body Armour',
             item_category: 'Body Armour',
             picture: '/images/p6.jpg',
-            cost:80,
+            cost:59.99,
             stock_number: 12,
             product_brand: 'Adidas',
+            user_rating: 5,
+            review_count: 10,
+            item_info: 'Body protector for training and competition, Reversible Red or Blue, Shoulder protection, CE Approved, WT Approved'
+        },
+        {
+            name: 'Tusah Head Guards',
+            item_category: 'Head Guards',
+            picture: '/images/p7.jpg',
+            cost:29.99,
+            stock_number: 12,
+            product_brand: 'Tusah',
             user_rating: 4.5,
             review_count: 10,
-            item_info: 'high quality item'
+            item_info: 'Light, WTF approved head guard, perfect for Tae Kwon Do training sessions.'
         },
+        {
+            name: 'Adidas Head Guards',
+            item_category: 'Head Guards',
+            picture: '/images/p8.jpg',
+            cost:49.99,
+            stock_number: 12,
+            product_brand: 'Adidas',
+            user_rating: 4,
+            review_count: 10,
+            item_info: 'Light, WTF approved head guard, perfect for Tae Kwon Do training sessions.'
+        },
+        {
+            name: 'Adidas Kicking Pads',
+            item_category: 'Pads',
+            picture: '/images/p9.jpg',
+            cost:19.99,
+            stock_number: 12,
+            product_brand: 'Adidas',
+            user_rating: 5,
+            review_count: 10,
+            item_info: 'Double hand pad for speed kick training'
+        },
+
+
     ]
 }
 

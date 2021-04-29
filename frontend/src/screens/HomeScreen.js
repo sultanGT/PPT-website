@@ -23,7 +23,8 @@ export default function HomeScreen() {
 {/* Carousel Slider */}
 <div className="row center responsive"> 
 <ImageSlider slides={SliderData} />
-</div>    
+</div>
+<h1 className='row center itemTitle'>Our Newest Products!</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
