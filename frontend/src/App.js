@@ -311,6 +311,28 @@ function App() {
             )}
           </ul>
           </div>
+          <div className='fbox2'>
+          <ul className="categories">
+          <li>
+              <h1>Brands</h1>
+            </li>
+            {loadingBrands ? (
+              <LoadingBox></LoadingBox>
+            ) : errorBrands ? (
+              <MessageBox variant="danger">{errorBrands}</MessageBox>
+            ) : (
+              brands.map((a) => (
+                <li key={a}>
+                  <Link className='cat'
+                    to={`/search/item_brand/${a}`}
+                  >
+                    {a}
+                  </Link>
+                </li>
+              ))
+            )}
+            </ul>
+          </div>
       © 2021 Peak Performance
         </footer>
       </div>
