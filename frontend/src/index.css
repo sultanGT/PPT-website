@@ -689,6 +689,28 @@ a.footerbrand {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.pad {
+  padding: 3px 25px 5px 5px;
+}
+
+.carousel-pointers {
+  background: rgba(42, 48, 58, 0.5);
+  margin-left: 10px;
+  border-radius: 50%;
+  border: 2px solid rgb(87, 87, 87);
+  color: white;
+  cursor: pointer;
+  margin-top: -100px;
+  fill: #fff;
+}
+
+.carousel-pointers:hover {
+  
+  background: rgba(208, 208, 208, 0.8);
+  fill: white;
+  transition: 0.2s;
+}
+
 /* loading */
 *.hidden {
   display: none !important;

@@ -65,7 +65,7 @@ export default function RegisterScreen(props) {
         </div>
         {load2 && <LoadingBox></LoadingBox>}
         {error2 && <MessageBox variant="danger">{error2}</MessageBox>}
-        <div className='wd'>
+        <div className=''>
           <label htmlFor="email">Email address</label>
           <input
             type="email"

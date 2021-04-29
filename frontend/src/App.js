@@ -136,7 +136,7 @@ function App() {
                 </ul>
               </div>
             ) : (
-              <Link to="/login"><i className="far fa-user iconLarge"></i></Link>
+              <Link to="/signup"><i className="far fa-user iconLarge"></i></Link>
             )}
 
             {userInfo && userInfo.userCredentialsAdministrator && (
