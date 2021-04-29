@@ -37,7 +37,7 @@ export const listProducts = ({
   });
   try {
     const { data } = await Axios.get(
-      `/api/PPTitems?pageNumber=${pageNumber}&name=${name}&item_category=${item_category}&minimum=${minimum}&maximum=${maximum}&user_rating=${user_rating}&customer_order=${customer_order}`
+      `/api/pptitems?pageNumber=${pageNumber}&name=${name}&item_category=${item_category}&minimum=${minimum}&maximum=${maximum}&user_rating=${user_rating}&customer_order=${customer_order}`
     );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -50,7 +50,7 @@ export const listProductCategories = () => async (dispatch) => {
     type: PRODUCT_CATEGORY_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get(`/api/PPTitems/item_categories`);
+    const { data } = await Axios.get(`/api/pptitems/item_categories`);
     dispatch({ type: PRODUCT_CATEGORY_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_CATEGORY_LIST_FAIL, payload: error.message });
@@ -60,7 +60,7 @@ export const listProductCategories = () => async (dispatch) => {
 export const detailsProduct = (item_id) => async (dispatch) => {
   dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: item_id });
   try {
-    const { data } = await Axios.get(`/api/PPTitems/${item_id}`);
+    const { data } = await Axios.get(`/api/pptitems/${item_id}`);
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -79,7 +79,7 @@ export const createProduct = () => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.post(
-      '/api/PPTitems',
+      '/api/pptitems',
       {},
       {
         headers: { Authorization: `Bearer ${userInfo.user_token}` },
@@ -103,7 +103,7 @@ export const updateProduct = (item) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.put(`/api/PPTitems/${item._id}`, item, {
+    const { data } = await Axios.put(`/api/pptitems/${item._id}`, item, {
       headers: { Authorization: `Bearer ${userInfo.user_token}` },
     });
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
@@ -122,7 +122,7 @@ export const item_deleted = (item_id) => async (dispatch, getState) => {
   } = getState();
   try {
     // eslint-disable-next-line
-    const { data } = Axios.delete(`/api/PPTitems/${item_id}`, {
+    const { data } = Axios.delete(`/api/pptitems/${item_id}`, {
       headers: { Authorization: `Bearer ${userInfo.user_token}` },
     });
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
@@ -144,7 +144,7 @@ export const createReview = (item_id, review) => async (
   } = getState();
   try {
     const { data } = await Axios.post(
-      `/api/PPTitems/${item_id}/reviews`,
+      `/api/pptitems/${item_id}/reviews`,
       review,
       {
         headers: { Authorization: `Bearer ${userInfo.user_token}` },

@@ -24,14 +24,14 @@ route_user.get(
 route_user.post(
   '/login',
   expressAsyncHandler(async (req, res) => {
-    const pptuser = await PPTUser.findOne({ user_email: req.body.user_email });
+    const pptuser = await PPTUser.findOne({ email: req.body.email });
     if (pptuser) {
       // Decrypt bcrypted user_password to match with pptuser entered user_password
       if (bcrypt.compareSync(req.body.password, pptuser.password)) {
         res.send({
           _id: pptuser._id,
           name: pptuser.name,
-          user_email: pptuser.user_email,
+          email: pptuser.email,
           userCredentialsAdministrator: pptuser.userCredentialsAdministrator,
           user_token: generateToken(pptuser),
         });
@@ -48,14 +48,14 @@ route_user.post(
   expressAsyncHandler(async (req, res) => {
     const pptuser = new PPTUser({
       name: req.body.name,
-      user_email: req.body.user_email,
+      email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 8),
     });
     const new_pptuser = await pptuser.save();
     res.send({
       _id: new_pptuser._id,
       name: new_pptuser.name,
-      user_email: new_pptuser.user_email,
+      email: new_pptuser.email,
       userCredentialsAdministrator: new_pptuser.userCredentialsAdministrator,
       user_token: generateToken(new_pptuser),
     });
@@ -83,7 +83,7 @@ route_user.put(
     const pptuser = await PPTUser.findById(req.pptuser._id);
     if (pptuser) {
       pptuser.name = req.body.name || pptuser.name;
-      pptuser.user_email = req.body.user_email || pptuser.user_email;
+      pptuser.email = req.body.email || pptuser.email;
       if (req.body.password) {
         pptuser.password = bcrypt.hashSync(req.body.password, 8);
       }
@@ -91,7 +91,7 @@ route_user.put(
       res.send({
         _id: ammend_pptuser._id,
         name: ammend_pptuser.name,
-        user_email: ammend_pptuser.user_email,
+        email: ammend_pptuser.email,
         userCredentialsAdministrator: ammend_pptuser.userCredentialsAdministrator,
         user_token: generateToken(ammend_pptuser),
       });
@@ -118,7 +118,7 @@ route_user.delete(
   expressAsyncHandler(async (req, res) => {
     const pptuser = await PPTUser.findById(req.params.id);
     if (pptuser) {
-      if (pptuser.user_email === 'sultan.malik@city.ac.uk') {
+      if (pptuser.email === 'sultan.malik@city.ac.uk') {
         res.status(400).send({ message: 'Cannot delete PPT Adminisrators account' });
         return;
       }
@@ -139,7 +139,7 @@ route_user.put(
     const pptuser = await PPTUser.findById(req.params.id);
     if (pptuser) {
       pptuser.name = req.body.name || pptuser.name;
-      pptuser.user_email = req.body.user_email || pptuser.user_email;
+      pptuser.email = req.body.email || pptuser.email;
       pptuser.userCredentialsAdministrator = Boolean(req.body.userCredentialsAdministrator);
       // pptuser.userCredentialsAdministrator = req.body.userCredentialsAdministrator || pptuser.userCredentialsAdministrator;
       const ammend_pptuser = await pptuser.save();

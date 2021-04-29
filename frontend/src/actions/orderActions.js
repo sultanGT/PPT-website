@@ -30,7 +30,7 @@ export const createOrder = (customer_order) => async (dispatch, getState) => {
     const {
       userSignin: { userInfo },
     } = getState();
-    const { data } = await Axios.post('/api/ppt_orders', customer_order, {
+    const { data } = await Axios.post('/api/pptpuchase', customer_order, {
       headers: {
         Authorization: `Bearer ${userInfo.user_token}`,
       },
@@ -55,7 +55,7 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.get(`/api/ppt_orders/${orderId}`, {
+    const { data } = await Axios.get(`/api/pptpuchase/${orderId}`, {
       headers: { Authorization: `Bearer ${userInfo.user_token}` },
     });
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
@@ -77,7 +77,7 @@ export const payOrder = (customer_order, purchase_complete) => async (
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = Axios.put(`/api/ppt_orders/${customer_order._id}/payment`, purchase_complete, {
+    const { data } = Axios.put(`/api/pptpuchase/${customer_order._id}/payment`, purchase_complete, {
       headers: { Authorization: `Bearer ${userInfo.user_token}` },
     });
     dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
@@ -95,7 +95,7 @@ export const listOrderMine = () => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.get('/api/ppt_orders/myaccount', {
+    const { data } = await Axios.get('/api/pptpuchase/myaccount', {
       headers: {
         Authorization: `Bearer ${userInfo.user_token}`,
       },
@@ -115,7 +115,7 @@ export const listOrders = () => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.get('/api/ppt_orders', {
+    const { data } = await Axios.get('/api/pptpuchase', {
       headers: { Authorization: `Bearer ${userInfo.user_token}` },
     });
     console.log(data);
@@ -134,7 +134,7 @@ export const remove_order = (orderId) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = Axios.delete(`/api/ppt_orders/${orderId}`, {
+    const { data } = Axios.delete(`/api/pptpuchase/${orderId}`, {
       headers: { Authorization: `Bearer ${userInfo.user_token}` },
     });
     dispatch({ type: ORDER_DELETE_SUCCESS, payload: data });
@@ -154,7 +154,7 @@ export const deliverOrder = (orderId) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = Axios.put(
-      `/api/ppt_orders/${orderId}/deliver`,
+      `/api/pptpuchase/${orderId}/deliver`,
       {},
       {
         headers: { Authorization: `Bearer ${userInfo.user_token}` },

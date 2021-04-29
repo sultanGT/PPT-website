@@ -6,7 +6,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 export default function SigninScreen(props) {
-  const [user_email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const redirect = props.location.search
@@ -19,7 +19,7 @@ export default function SigninScreen(props) {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(signin(user_email, password));
+    dispatch(signin(email, password));
   };
   useEffect(() => {
     if (userInfo) {
@@ -35,11 +35,11 @@ export default function SigninScreen(props) {
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="user_email">Email address</label>
+          <label htmlFor="email">Email address</label>
           <input
-            type="user_email"
-            id="user_email"
-            placeholder="Enter user_email"
+            type="email"
+            id="email"
+            placeholder="Enter email"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>

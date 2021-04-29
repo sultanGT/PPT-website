@@ -56,7 +56,7 @@ export default function UserListScreen(props) {
               <tr key={pptuser._id}>
                 <td>{pptuser._id}</td>
                 <td>{pptuser.name}</td>
-                <td>{pptuser.user_email}</td>
+                <td>{pptuser.email}</td>
                 <td>{pptuser.userCredentialsAdministrator ? 'YES' : 'NO'}</td>
                 <td>
                   <button

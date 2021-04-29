@@ -10,7 +10,7 @@ import { USER_UPDATE_RESET } from '../constants/userConstants';
 export default function UserEditScreen(props) {
   const userId = props.match.params.id;
   const [name, setName] = useState('');
-  const [user_email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [userCredentialsAdministrator, setIsAdmin] = useState(false);
 
   const userDetails = useSelector((state) => state.userDetails);
@@ -33,7 +33,7 @@ export default function UserEditScreen(props) {
       dispatch(detailsUser(userId));
     } else {
       setName(pptuser.name);
-      setEmail(pptuser.user_email);
+      setEmail(pptuser.email);
       setIsAdmin(pptuser.userCredentialsAdministrator);
     }
   }, [dispatch, props.history, successUpdate, pptuser, userId]);
@@ -41,7 +41,7 @@ export default function UserEditScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     // dispatch update user
-    dispatch(updateUser({ _id: userId, name, user_email, userCredentialsAdministrator }));
+    dispatch(updateUser({ _id: userId, name, email, userCredentialsAdministrator }));
   };
   return (
     <div className="pager">
@@ -70,12 +70,12 @@ export default function UserEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="user_email">Email</label>
+              <label htmlFor="email">Email</label>
               <input
-                id="user_email"
-                type="user_email"
-                placeholder="Enter user_email"
-                value={user_email}
+                id="email"
+                type="email"
+                placeholder="Enter email"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>

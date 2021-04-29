@@ -5,19 +5,19 @@ const data = {
     pptusers: [
         {
             name:'sultan',
-            user_email:'sultan.malik@city.ac.uk',
+            email:'sultan.malik@city.ac.uk',
             password: bcrypt.hashSync('sultan', 8),
             userCredentialsAdministrator: true,
         },
         {
             name:'user',
-            user_email:'user@pptwebsite.co.uk',
+            email:'user@pptwebsite.co.uk',
             password: bcrypt.hashSync('mike', 8),
             userCredentialsAdministrator: false,
         },
         {
             name:'Admin',
-            user_email:'admin@pptwebsite.co.uk',
+            email:'admin@pptwebsite.co.uk',
             password: bcrypt.hashSync('mike', 8),
             userCredentialsAdministrator: true,
         },

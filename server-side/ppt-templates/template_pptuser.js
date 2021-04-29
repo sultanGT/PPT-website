@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const PPTuserModel = new mongoose.Schema(
 { 
 name: { type: String, required: true }, 
-user_email: { type: String, required: true, unique: true }, 
+email: { type: String, required: true, unique: true }, 
 password: { type: String, required: true }, 
 userCredentialsAdministrator: { type: Boolean, default: false, required: true }, },
 { timestamps: true, });

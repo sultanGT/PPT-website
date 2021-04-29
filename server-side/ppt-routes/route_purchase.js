@@ -64,7 +64,7 @@ route_purchase.put(
   expressAsyncHandler(async (req, res) => {
     const customer_order = await PPTOrder.findById(req.params.id).populate(
       'pptuser',
-      'user_email name'
+      'email name'
     );
     if (customer_order) {
       customer_order.purchase_confirmed = true;
@@ -81,7 +81,7 @@ route_purchase.put(
       //   .send(
       //     {
       //       from: 'ppt-website <mailing.pptwebsite.co.uk>',
-      //       to: `${customer_order.pptuser.name} <${customer_order.pptuser.user_email}>`,
+      //       to: `${customer_order.pptuser.name} <${customer_order.pptuser.email}>`,
       //       subject: `New customer_order ${customer_order._id}`,
       //       html: orderCompletionEmail(customer_order),
       //     },

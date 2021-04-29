@@ -7,7 +7,7 @@ import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 export default function ProfileScreen() {
   const [name, setName] = useState('');
-  const [user_email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -29,7 +29,7 @@ export default function ProfileScreen() {
       dispatch(detailsUser(userInfo._id));
     } else {
       setName(pptuser.name);
-      setEmail(pptuser.user_email);
+      setEmail(pptuser.email);
     }
   }, [dispatch, userInfo._id, pptuser]);
   const submitHandler = (e) => {
@@ -42,7 +42,7 @@ export default function ProfileScreen() {
         updateUserProfile({
           userId: pptuser._id,
           name,
-          user_email,
+          email,
           password,
      
         })
@@ -81,12 +81,12 @@ export default function ProfileScreen() {
               ></input>
             </div>
             <div>
-              <label htmlFor="user_email">Email</label>
+              <label htmlFor="email">Email</label>
               <input
-                id="user_email"
-                type="user_email"
-                placeholder="Enter user_email"
-                value={user_email}
+                id="email"
+                type="email"
+                placeholder="Enter email"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>

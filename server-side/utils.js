@@ -1,15 +1,16 @@
 import jwt from 'jsonwebtoken';
 import mg from 'mailgun-js';
 
+
 export const generateToken = (pptuser) => {
   return jwt.sign(
     {
       _id: pptuser._id,
       name: pptuser.name,
-      user_email: pptuser.user_email,
+      email: pptuser.email,
       userCredentialsAdministrator: pptuser.userCredentialsAdministrator,
     },
-    process.env.JWT_SECRET || 'somethingsecret',
+    process.env.JWT_SECRET || 'passcodeencrypted',
     {
       expiresIn: '30d',
     }
@@ -22,7 +23,7 @@ export const userCredentialsAuthenticated = (req, res, next) => {
     const user_token = authorization.slice(7, authorization.length); // Bearer XXXXXX
     jwt.verify(
       user_token,
-      process.env.JWT_SECRET || 'somethingsecret',
+      process.env.JWT_SECRET || 'passcodeencrypted',
       (err, decode) => {
         if (err) {
           res.status(401).send({ message: 'Invalid Token' });
