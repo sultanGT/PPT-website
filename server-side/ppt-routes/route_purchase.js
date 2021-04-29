@@ -1,6 +1,6 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
-import PPTOrder from '../ppt-templates/orderTemplate.js';
+import PPTOrder from '../ppt-templates/template_pptorder.js';
 import { userCredentialsAdministrator, userCredentialsAuthenticated, mailgun, orderCompletionEmail, } from '../utils.js';
 
 
@@ -116,7 +116,7 @@ res.send({
 route_purchase.put('/:id/deliver', userCredentialsAuthenticated, userCredentialsAdministrator, expressAsyncHandler(async (req, res) => {
 const customer_order = await PPTOrder.findById(req.params.id);
 if (customer_order) { customer_order.delivery_confirmed = true; 
-customer_order.deliveryDate = Date.now();
+customer_order.delivery_date = Date.now();
 const save_customer_order = await customer_order.save();
 res.send({ message: 'Order Has Now Been Delivered', customer_order: save_customer_order });
 } else { res.status(404).send({ message: 'Order Cannot Be Found On The PPT Web Application, Please Contact An Administrator For Help' });}}));

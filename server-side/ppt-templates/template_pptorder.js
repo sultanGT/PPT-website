@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
-// Item details to be stored in MongoDB using the mongoose library
-const orderSchema = new mongoose.Schema(
+// Order details to be stored in MongoDB using the mongoose library
+const PPTorderModel = new mongoose.Schema(
 
-// Item description for orders
+// Item and User details for PPT orders
 { items_order: [{ name: { type: String, required: true }, 
     quantity: { type: Number, required: true }, 
     picture: { type: String, required: true }, 
@@ -13,7 +13,7 @@ const orderSchema = new mongoose.Schema(
         delivery_address: { fullName: { type: String, required: true }, 
         address: { type: String, required: true }, 
         city: { type: String, required: true }, 
-        postCode: { type: String, required: true }, 
+        post_code: { type: String, required: true }, 
         county: { type: String, required: true }, }, 
         purchase_method: { type: String, required: true }, 
         purchase_complete: { id: String, status: String, update_record: String, pptuser_email: String, }, 
@@ -25,6 +25,6 @@ const orderSchema = new mongoose.Schema(
         purchase_confirmed: { type: Boolean, default: false }, 
         purchase_date: { type: Date }, 
         delivery_confirmed: { type: Boolean, default: false }, 
-        deliveryDate: { type: Date }, }, { timestamps: true, });
-const PPTOrder = mongoose.model('PPTOrder', orderSchema);
+        delivery_date: { type: Date }, }, { timestamps: true, });
+const PPTOrder = mongoose.model('PPTOrder', PPTorderModel);
 export default PPTOrder;

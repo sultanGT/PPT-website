@@ -39,7 +39,7 @@ export default function OrderHistoryScreen(props) {
                 <td>{customer_order.purchase_confirmed ? customer_order.purchase_date.substring(0, 10) : 'No'}</td>
                 <td>
                   {customer_order.delivery_confirmed
-                    ? customer_order.deliveryDate.substring(0, 10)
+                    ? customer_order.delivery_date.substring(0, 10)
                     : 'No'}
                 </td>
                 <td>

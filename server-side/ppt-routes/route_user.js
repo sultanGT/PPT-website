@@ -2,7 +2,7 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
-import PPTUser from '../ppt-templates/userTemplate.js';
+import PPTUser from '../ppt-templates/template_pptuser.js';
 import { generateToken, userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
 
 

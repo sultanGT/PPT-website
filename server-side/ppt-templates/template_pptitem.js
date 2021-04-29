@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-// User template details to be stored in MongoDB using mongooose
-const userSchemaReview = new mongoose.Schema(
+// Review template details to be stored in MongoDB using mongooose
+const PPTreviewModel = new mongoose.Schema(
   { 
   name: { type: String, required: true }, 
   user_comment: { type: String, required: true }, 
@@ -8,7 +8,7 @@ const userSchemaReview = new mongoose.Schema(
   { timestamps: true,});
 
 // Item template details to be stored in MongoDB using mongooose
-const productSchema = new mongoose.Schema(
+const PPTitemModel = new mongoose.Schema(
   { 
   name: { type: String, required: true, unique: true }, 
   picture: { type: String, required: true }, 
@@ -16,8 +16,8 @@ const productSchema = new mongoose.Schema(
   item_category: { type: String, required: true }, 
   item_info: { type: String, required: true }, cost: { type: Number, required: true }, 
   stock_number: { type: Number, required: true }, user_rating: { type: Number, required: true }, 
-  review_count: { type: Number, required: true }, reviews: [userSchemaReview], },
+  review_count: { type: Number, required: true }, reviews: [PPTreviewModel], },
   { timestamps: true,});
   
-const Item = mongoose.model('Item', productSchema);
+const Item = mongoose.model('Item', PPTitemModel);
 export default Item;

@@ -95,7 +95,7 @@ export default function OrderScreen(props) {
                 </p>
                 {customer_order.delivery_confirmed ? (
                   <MessageBox variant="success">
-                    Delivered at {customer_order.deliveryDate}
+                    Delivered at {customer_order.delivery_date}
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Delivered</MessageBox>

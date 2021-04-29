@@ -1,7 +1,7 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
-import Item from '../ppt-templates/productTemplate.js';
+import Item from '../ppt-templates/template_pptitem.js';
 import { userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
 
 

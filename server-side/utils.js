@@ -100,7 +100,7 @@ export const orderCompletionEmail = (customer_order) => {
   ${customer_order.delivery_address.address},<br/>
   ${customer_order.delivery_address.city},<br/>
   ${customer_order.delivery_address.county},<br/>
-  ${customer_order.delivery_address.postCode}<br/>
+  ${customer_order.delivery_address.post_code}<br/>
   </p>
   <hr/>
   <p>

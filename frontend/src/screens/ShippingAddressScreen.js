@@ -14,13 +14,13 @@ export default function ShippingAddressScreen(props) {
   const [fullName, setFullName] = useState(delivery_address.fullName);
   const [address, setAddress] = useState(delivery_address.address);
   const [city, setCity] = useState(delivery_address.city);
-  const [postCode, setPostCode] = useState(delivery_address.postCode);
+  const [post_code, setPostCode] = useState(delivery_address.post_code);
   const [county, setCountry] = useState(delivery_address.county);
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      saveShippingAddress({ fullName, address, city, postCode, county })
+      saveShippingAddress({ fullName, address, city, post_code, county })
     );
     props.history.push('/placeorder');
   };
@@ -65,12 +65,12 @@ export default function ShippingAddressScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="postCode">Post Code</label>
+          <label htmlFor="post_code">Post Code</label>
           <input
             type="text"
-            id="postCode"
+            id="post_code"
             placeholder="Enter post code"
-            value={postCode}
+            value={post_code}
             onChange={(e) => setPostCode(e.target.value)}
             required
           ></input>
