@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { signin } from '../actions/userActions';
 import { register } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -16,30 +16,88 @@ export default function RegisterScreen(props) {
     : '/';
 
   const userRegister = useSelector((state) => state.userRegister);
-  const { userInfo, loading, error } = userRegister;
+  const { 
+    userInfo:  user1, 
+    loading: load1, 
+    error:  error1,
+
+  } = userRegister;
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { 
+    userInfo:  user2, 
+    loading: load2, 
+    error: error2,
+   } = userSignin;
+
 
   const dispatch = useDispatch();
-  const submitHandler = (e) => {
+  
+  const submitHandler2 = (e) => {
     e.preventDefault();
+    dispatch(signin(email, password));
+  }
+
+  const submitHandler = (e) => {
     if (password !== confirmPassword) {
       alert('Password and confirm password are not matching');
     } else {
+      e.preventDefault();
       dispatch(register(name, email, password));
+      dispatch(signin(email, password));
+
     }
   };
+
   useEffect(() => {
-    if (userInfo) {
+    if (user2 || user1) {
       props.history.push(redirect);
     }
-  }, [props.history, redirect, userInfo]);
+  }, [props.history, redirect, user2, user1]);
+
+  
   return (
-    <div>
-      <form className="form" onSubmit={submitHandler}>
+    
+    <div className='row pager'>
+      <form className="form wd" onSubmit={submitHandler2}>
+        <div>
+          <h1>Sign In</h1> 
+        </div>
+        {load2 && <LoadingBox></LoadingBox>}
+        {error2 && <MessageBox variant="danger">{error2}</MessageBox>}
+        <div className='wd'>
+          <label htmlFor="email">Email address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter email"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter password"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label />
+          <button className="primary" type="submit">
+            Sign In
+          </button>
+        </div>
+      </form>
+      <form className="form wd" onSubmit={submitHandler}>
         <div>
           <h1>Create Account</h1>
         </div>
-        {loading && <LoadingBox></LoadingBox>}
-        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        {load1 && <LoadingBox></LoadingBox>}
+        {error1 && <MessageBox variant="danger">{error1}</MessageBox>}
         <div>
           <label htmlFor="name">Name</label>
           <input
@@ -88,10 +146,6 @@ export default function RegisterScreen(props) {
         </div>
         <div>
           <label />
-          <div>
-            Already have an account?{' '}
-            <Link to={`/login?redirect=${redirect}`}>Sign-In</Link>
-          </div>
         </div>
       </form>
     </div>

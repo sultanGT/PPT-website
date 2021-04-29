@@ -667,7 +667,9 @@ img.large {
 .footer-title {
   margin-top: -40rem;
 }
-
+.wd {
+width: 100%;
+}
 a.footerbrand {
   color: #ffffff;
   font-size: 2rem;
