@@ -146,10 +146,11 @@ button:hover {
   color: #000;
 }
 /* Header */
+
 header a {
   color: #ffffff;
   font-size: 1.1rem;
-  margin-right: 3rem;
+  margin-right: 2rem;
 }
 a.brand {
   color: #ffffff;
@@ -615,6 +616,25 @@ img.large {
   padding: 5rem;
 }
 
+.nonde{
+ text-decoration: none;
+}
+
+@media only screen and (max-width: 1000px) {
+  .responsiveCart {
+      display: none;
+  }
+}
+
+.cartDropdown {
+  background: white;
+  border: 0.5rem black solid;
+  padding: none;
+  width: 70rem;
+  transition: width 5s ease-in-out 0s;
+  margin-top: 1.5rem;
+}
+
 .title {
   color: white;
 }
@@ -634,8 +654,10 @@ img.large {
 }
 
 .borders {
-  background: #e3e3e3;
-  border: 0.2rem #fff solid;
+  background: #ffffff;
+    border: 0.2rem #fff solid;
+    border-radius: 5px;
+    margin-left: 50px;
 }
 
 .return {
@@ -701,14 +723,13 @@ a.footerbrand {
   color: white;
   cursor: pointer;
   margin-top: -100px;
-  fill: #fff;
+  fill: #4e4e4e;
 }
 
 .carousel-pointers:hover {
   
-  background: rgba(208, 208, 208, 0.8);
-  fill: white;
-  transition: 0.2s;
+  background: rgba(255, 255, 255, 0.5);
+  transition: 0.3s;
 }
 
 /* loading */

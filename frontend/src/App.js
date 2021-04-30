@@ -27,14 +27,14 @@ import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import '@fortawesome/fontawesome-free/js/all.js';
 import img from './constants/pptmenuicon.png';
+import { addToCart, removeFromCart } from './actions/cartActions';
 
 
 
-     
-function App() {
-  const cart = useSelector((state) => state.cart);
+
+function App(props) {
+
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const { cartItems } = cart;
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
@@ -50,16 +50,6 @@ function App() {
       setNavbar(false);
     }
   };
-
-  // const [searchBar, setSearchBar] = useState(false);
-  // const changeSearchBackground = () => {
-  //   if (window.scrollY >= 300) {
-  //     setSearchBar(true);
-  //   } else {
-  //     setSearchBar(false);
-  //   }
-  // };
-  // 
 
   window.addEventListener('scroll', changeBackground);
 
@@ -82,6 +72,13 @@ function App() {
     dispatch(listProductCategories());
     dispatch(listProductBrands());
   }, [dispatch]);
+
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems, error } = cart;
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
+  };
   
   return (
     <BrowserRouter>
@@ -107,7 +104,9 @@ function App() {
               )}
             ></Route>
           </div>
+
           <div>
+          <div className="dropdown">
             <Link to="/cart">
               {/* Cart*/}
               <i className="fas fa-shopping-cart iconLarge"></i>
@@ -115,9 +114,93 @@ function App() {
                 <span className="badge">{cartItems.length}</span>
               )}
             </Link>
+{/* DROPDOWN CART SCREEN */}
+            <div className="dropdown-content cartDropdown responsiveCart">
+                {
+                  <div className="row top pager">
+                  <div className="col-2">
+                    <h1>Shopping Cart</h1>
+                    {error && <MessageBox variant="danger">{error}</MessageBox>}
+                    {cartItems.length === 0 ? (
+                      <MessageBox>
+                        Cart is empty. <Link to="/">Go Shopping</Link>
+                      </MessageBox>
+                    ) : (
+                      <ul>
+                        {cartItems.map((item) => (
+                          <li key={item.item}>
+                            <div className="row">
+                              <div>
+                                <img
+                                  src={item.picture}
+                                  alt={item.name}
+                                  className="small"
+                                ></img>
+                              </div>
+                              <div className="min-30">
+                                <Link to={`/item/${item.item}`}>{item.name}</Link>
+                              </div>
+                              <div>
+                                <select
+                                  value={item.quantity}
+                                  onChange={(e) =>
+                                    dispatch(
+                                      addToCart(item.item, Number(e.target.value))
+                                    )
+                                  }
+                                >
+                                  {[...Array(item.stock_number).keys()].map((x) => (
+                                    <option key={x + 1} value={x + 1}>
+                                      {x + 1}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                              <div>£{item.cost}</div>
+                              <div>
+                                <button
+                                  type="button"
+                                  onClick={() => removeFromCartHandler(item.item)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                  <div className="col-1">
+                    <div className="card card-body">
+                      <ul>
+                        <li>
+                          <h2>
+                            Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)} items) : £
+                            {cartItems.reduce((a, c) => a + c.cost * c.quantity, 0)}
+                          </h2>
+                        </li>
+                        <li>
+                          <button
+                            type="button"
+                            className="primary block"
+                            disabled={cartItems.length === 0}
+                          ><Link className='' to='/signup?redirect=shipping'>
+                            Proceed to Checkout</Link>
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                }
+            
+
+                </div>
+            </div>
+
             {userInfo ? (
               <div className="dropdown">
-                
                 <Link to="#">
                 <i className="far fa-user iconLarge"></i>{'  '}<i className="username">{ userInfo.name }</i>
                 </Link>

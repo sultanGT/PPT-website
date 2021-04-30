@@ -24,6 +24,7 @@ export default function RegisterScreen(props) {
   } = userRegister;
 
   const userSignin = useSelector((state) => state.userSignin);
+  
   const { 
     userInfo:  user2, 
     loading: load2, 
