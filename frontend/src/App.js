@@ -27,7 +27,7 @@ import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import '@fortawesome/fontawesome-free/js/all.js';
 import img from './constants/pptmenuicon.png';
-import { addToCart, removeFromCart } from './actions/cartActions';
+import { addShoppingItem, deleteShoppingItem } from './actions/shopping_actions';
 
 
 
@@ -75,9 +75,9 @@ function App(props) {
 
 
   const cart = useSelector((state) => state.cart);
-  const { cartItems, error } = cart;
+  const { shopping_items, error } = cart;
   const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id));
+    dispatch(deleteShoppingItem(id));
   };
   
   return (
@@ -110,8 +110,8 @@ function App(props) {
             <Link to="/cart">
               {/* Cart*/}
               <i className="fas fa-shopping-cart iconLarge"></i>
-              {cartItems.length > 0 && (
-                <span className="badge">{cartItems.length}</span>
+              {shopping_items.length > 0 && (
+                <span className="badge">{shopping_items.length}</span>
               )}
             </Link>
 {/* DROPDOWN CART SCREEN */}
@@ -121,13 +121,13 @@ function App(props) {
                   <div className="col-2">
                     <h1>Shopping Cart</h1>
                     {error && <MessageBox variant="danger">{error}</MessageBox>}
-                    {cartItems.length === 0 ? (
+                    {shopping_items.length === 0 ? (
                       <MessageBox>
                         Cart is empty. <Link to="/">Go Shopping</Link>
                       </MessageBox>
                     ) : (
                       <ul>
-                        {cartItems.map((item) => (
+                        {shopping_items.map((item) => (
                           <li key={item.item}>
                             <div className="row">
                               <div>
@@ -145,7 +145,7 @@ function App(props) {
                                   value={item.quantity}
                                   onChange={(e) =>
                                     dispatch(
-                                      addToCart(item.item, Number(e.target.value))
+                                      addShoppingItem(item.item, Number(e.target.value))
                                     )
                                   }
                                 >
@@ -176,17 +176,18 @@ function App(props) {
                       <ul>
                         <li>
                           <h2>
-                            Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)} items) : £
-                            {cartItems.reduce((a, c) => a + c.cost * c.quantity, 0)}
+                            Subtotal ({shopping_items.reduce((a, c) => a + c.quantity, 0)} items) : £
+                            {shopping_items.reduce((a, c) => a + c.cost * c.quantity, 0)}
                           </h2>
                         </li>
                         <li>
                           <button
                             type="button"
                             className="primary block"
-                            disabled={cartItems.length === 0}
-                          ><Link className='' to='/signup?redirect=shipping'>
-                            Proceed to Checkout</Link>
+                            disabled={shopping_items.length === 0}
+                          >
+                            <Link className='primary block' to='/signup?redirect=shipping'>Proceed to Checkout</Link>
+                            
                           </button>
                         </li>
                       </ul>

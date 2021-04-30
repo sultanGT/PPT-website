@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { savePaymentMethod } from '../actions/cartActions';
+import { savePayPal } from '../actions/shopping_actions';
 import CheckoutSteps from '../components/CheckoutSteps';
 
 export default function PaymentMethodScreen(props) {
@@ -13,7 +13,7 @@ export default function PaymentMethodScreen(props) {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(savePaymentMethod(purchase_method));
+    dispatch(savePayPal(purchase_method));
     props.history.push('/placeorder');
   };
   return (

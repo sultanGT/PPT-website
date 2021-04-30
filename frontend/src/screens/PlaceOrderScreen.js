@@ -16,14 +16,14 @@ export default function PlaceOrderScreen(props) {
   const { loading, success, error, customer_order } = orderCreate;
   const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
   cart.items_cost = toPrice(
-    cart.cartItems.reduce((a, c) => a + c.quantity * c.cost, 0)
+    cart.shopping_items.reduce((a, c) => a + c.quantity * c.cost, 0)
   );
   cart.delivery_cost = cart.items_cost > 100 ? toPrice(0) : toPrice(10);
   cart.tax_cost = toPrice(0.15 * cart.items_cost);
   cart.total_cost = cart.items_cost + cart.delivery_cost + cart.tax_cost;
   const dispatch = useDispatch();
   const placeOrderHandler = () => {
-    dispatch(createOrder({ ...cart, items_order: cart.cartItems }));
+    dispatch(createOrder({ ...cart, items_order: cart.shopping_items }));
   };
   useEffect(() => {
     if (success) {
@@ -60,7 +60,7 @@ export default function PlaceOrderScreen(props) {
               <div className="card card-body">
                 <h2>Order Items</h2>
                 <ul>
-                  {cart.cartItems.map((item) => (
+                  {cart.shopping_items.map((item) => (
                     <li key={item.item}>
                       <div className="row">
                         <div>
@@ -126,7 +126,7 @@ export default function PlaceOrderScreen(props) {
                   type="button"
                   onClick={placeOrderHandler}
                   className="primary block"
-                  disabled={cart.cartItems.length === 0}
+                  disabled={cart.shopping_items.length === 0}
                 >
                   Place Order
                 </button>

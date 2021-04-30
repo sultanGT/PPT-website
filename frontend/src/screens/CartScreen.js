@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addToCart, removeFromCart } from '../actions/cartActions';
+import { addShoppingItem, deleteShoppingItem } from '../actions/shopping_actions';
 import MessageBox from '../components/MessageBox';
 
 export default function CartScreen(props) {
@@ -10,17 +10,17 @@ export default function CartScreen(props) {
     ? Number(props.location.search.split('=')[1])
     : 1;
   const cart = useSelector((state) => state.cart);
-  const { cartItems, error } = cart;
+  const { shopping_items, error } = cart;
   const dispatch = useDispatch();
   useEffect(() => {
     if (item_id) {
-      dispatch(addToCart(item_id, quantity));
+      dispatch(addShoppingItem(item_id, quantity));
     }
   }, [dispatch, item_id, quantity]);
 
   const removeFromCartHandler = (id) => {
     // delete action
-    dispatch(removeFromCart(id));
+    dispatch(deleteShoppingItem(id));
   };
 
   const checkoutHandler = () => {
@@ -31,13 +31,13 @@ export default function CartScreen(props) {
       <div className="col-2">
         <h1>Shopping Cart</h1>
         {error && <MessageBox variant="danger">{error}</MessageBox>}
-        {cartItems.length === 0 ? (
+        {shopping_items.length === 0 ? (
           <MessageBox>
             Cart is empty. <Link to="/">Go Shopping</Link>
           </MessageBox>
         ) : (
           <ul>
-            {cartItems.map((item) => (
+            {shopping_items.map((item) => (
               <li key={item.item}>
                 <div className="row">
                   <div>
@@ -55,7 +55,7 @@ export default function CartScreen(props) {
                       value={item.quantity}
                       onChange={(e) =>
                         dispatch(
-                          addToCart(item.item, Number(e.target.value))
+                          addShoppingItem(item.item, Number(e.target.value))
                         )
                       }
                     >
@@ -86,8 +86,8 @@ export default function CartScreen(props) {
           <ul>
             <li>
               <h2>
-                Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)} PPTitems) : $
-                {cartItems.reduce((a, c) => a + c.cost * c.quantity, 0)}
+                Subtotal ({shopping_items.reduce((a, c) => a + c.quantity, 0)} PPTitems) : $
+                {shopping_items.reduce((a, c) => a + c.cost * c.quantity, 0)}
               </h2>
             </li>
             <li>
@@ -95,7 +95,7 @@ export default function CartScreen(props) {
                 type="button"
                 onClick={checkoutHandler}
                 className="primary block"
-                disabled={cartItems.length === 0}
+                disabled={shopping_items.length === 0}
               >
                 Proceed to Checkout
               </button>

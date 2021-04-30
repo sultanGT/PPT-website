@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveShippingAddress } from '../actions/cartActions';
+import { saveDeliveryAddress } from '../actions/shopping_actions';
 import CheckoutSteps from '../components/CheckoutSteps';
 
 export default function ShippingAddressScreen(props) {
@@ -20,7 +20,7 @@ export default function ShippingAddressScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      saveShippingAddress({ fullName, address, city, post_code, county })
+      saveDeliveryAddress({ fullName, address, city, post_code, county })
     );
     props.history.push('/placeorder');
   };

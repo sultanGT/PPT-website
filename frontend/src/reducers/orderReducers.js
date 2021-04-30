@@ -1,38 +1,38 @@
 import {
-  ORDER_CREATE_FAIL,
-  ORDER_CREATE_REQUEST,
+  PURCHASE_NEW_ERROR,
+  PURCHASE_NEW_REQUEST,
   ORDER_CREATE_RESET,
-  ORDER_CREATE_SUCCESS,
-  ORDER_DETAILS_FAIL,
-  ORDER_DETAILS_REQUEST,
-  ORDER_DETAILS_SUCCESS,
-  ORDER_MINE_LIST_FAIL,
-  ORDER_MINE_LIST_REQUEST,
-  ORDER_MINE_LIST_SUCCESS,
-  ORDER_PAY_FAIL,
-  ORDER_PAY_REQUEST,
+  PURCHASE_NEW_COMPLETE,
+  PURCHASE_INFO_ERROR,
+  PURCHASE_INFO_REQUEST,
+  PURCHASE_INFO_COMPLETE,
+  PURCHASE_ACCOUNT_HISTORY_ERROR,
+  PURCHASE_ACCOUNT_HISTORY_REQUEST,
+  PURCHASE_ACCOUNT_HISTORY_COMPLETE,
+  PURCHASE_PAYPAL_ERROR,
+  PURCHASE_PAYPAL_REQUEST,
   ORDER_PAY_RESET,
-  ORDER_PAY_SUCCESS,
-  ORDER_LIST_REQUEST,
-  ORDER_LIST_SUCCESS,
-  ORDER_LIST_FAIL,
-  ORDER_DELETE_REQUEST,
-  ORDER_DELETE_SUCCESS,
-  ORDER_DELETE_FAIL,
+  PURCHASE_PAYPAL_COMPLETE,
+  PURCHASE_HISTORY_REQUEST,
+  PURCHASE_HISTORY_COMPLETE,
+  PURCHASE_HISTORY_ERROR,
+  PURCHASE_REMOVE_REQUEST,
+  PURCHASE_REMOVE_COMPLETE,
+  PURCHASE_REMOVE_ERROR,
   ORDER_DELETE_RESET,
-  ORDER_DELIVER_REQUEST,
-  ORDER_DELIVER_SUCCESS,
-  ORDER_DELIVER_FAIL,
+  PURCHASE_SHIPPING_REQUEST,
+  PURCHASE_SHIPPING_COMPLETE,
+  PURCHASE_SHIPPING_ERROR,
   ORDER_DELIVER_RESET,
 } from '../constants/orderConstants';
 
 export const orderCreateReducer = (state = {}, action) => {
   switch (action.type) {
-    case ORDER_CREATE_REQUEST:
+    case PURCHASE_NEW_REQUEST:
       return { loading: true };
-    case ORDER_CREATE_SUCCESS:
+    case PURCHASE_NEW_COMPLETE:
       return { loading: false, success: true, customer_order: action.payload };
-    case ORDER_CREATE_FAIL:
+    case PURCHASE_NEW_ERROR:
       return { loading: false, error: action.payload };
     case ORDER_CREATE_RESET:
       return {};
@@ -43,11 +43,11 @@ export const orderCreateReducer = (state = {}, action) => {
 
 export const orderDetailsReducer = (state = { loading: true }, action) => {
   switch (action.type) {
-    case ORDER_DETAILS_REQUEST:
+    case PURCHASE_INFO_REQUEST:
       return { loading: true };
-    case ORDER_DETAILS_SUCCESS:
+    case PURCHASE_INFO_COMPLETE:
       return { loading: false, customer_order: action.payload };
-    case ORDER_DETAILS_FAIL:
+    case PURCHASE_INFO_ERROR:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -56,11 +56,11 @@ export const orderDetailsReducer = (state = { loading: true }, action) => {
 
 export const orderPayReducer = (state = {}, action) => {
   switch (action.type) {
-    case ORDER_PAY_REQUEST:
+    case PURCHASE_PAYPAL_REQUEST:
       return { loading: true };
-    case ORDER_PAY_SUCCESS:
+    case PURCHASE_PAYPAL_COMPLETE:
       return { loading: false, success: true };
-    case ORDER_PAY_FAIL:
+    case PURCHASE_PAYPAL_ERROR:
       return { loading: false, error: action.payload };
     case ORDER_PAY_RESET:
       return {};
@@ -70,11 +70,11 @@ export const orderPayReducer = (state = {}, action) => {
 };
 export const orderMineListReducer = (state = { ppt_orders: [] }, action) => {
   switch (action.type) {
-    case ORDER_MINE_LIST_REQUEST:
+    case PURCHASE_ACCOUNT_HISTORY_REQUEST:
       return { loading: true };
-    case ORDER_MINE_LIST_SUCCESS:
+    case PURCHASE_ACCOUNT_HISTORY_COMPLETE:
       return { loading: false, ppt_orders: action.payload };
-    case ORDER_MINE_LIST_FAIL:
+    case PURCHASE_ACCOUNT_HISTORY_ERROR:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -82,11 +82,11 @@ export const orderMineListReducer = (state = { ppt_orders: [] }, action) => {
 };
 export const orderListReducer = (state = { ppt_orders: [] }, action) => {
   switch (action.type) {
-    case ORDER_LIST_REQUEST:
+    case PURCHASE_HISTORY_REQUEST:
       return { loading: true };
-    case ORDER_LIST_SUCCESS:
+    case PURCHASE_HISTORY_COMPLETE:
       return { loading: false, ppt_orders: action.payload };
-    case ORDER_LIST_FAIL:
+    case PURCHASE_HISTORY_ERROR:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -94,11 +94,11 @@ export const orderListReducer = (state = { ppt_orders: [] }, action) => {
 };
 export const orderDeleteReducer = (state = {}, action) => {
   switch (action.type) {
-    case ORDER_DELETE_REQUEST:
+    case PURCHASE_REMOVE_REQUEST:
       return { loading: true };
-    case ORDER_DELETE_SUCCESS:
+    case PURCHASE_REMOVE_COMPLETE:
       return { loading: false, success: true };
-    case ORDER_DELETE_FAIL:
+    case PURCHASE_REMOVE_ERROR:
       return { loading: false, error: action.payload };
     case ORDER_DELETE_RESET:
       return {};
@@ -109,11 +109,11 @@ export const orderDeleteReducer = (state = {}, action) => {
 
 export const orderDeliverReducer = (state = {}, action) => {
   switch (action.type) {
-    case ORDER_DELIVER_REQUEST:
+    case PURCHASE_SHIPPING_REQUEST:
       return { loading: true };
-    case ORDER_DELIVER_SUCCESS:
+    case PURCHASE_SHIPPING_COMPLETE:
       return { loading: false, success: true };
-    case ORDER_DELIVER_FAIL:
+    case PURCHASE_SHIPPING_ERROR:
       return { loading: false, error: action.payload };
     case ORDER_DELIVER_RESET:
       return {};

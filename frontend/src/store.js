@@ -37,8 +37,8 @@ const initialState = {
       : null,
   },
   cart: {
-    cartItems: localStorage.getItem('cartItems')
-      ? JSON.parse(localStorage.getItem('cartItems'))
+    shopping_items: localStorage.getItem('shopping_items')
+      ? JSON.parse(localStorage.getItem('shopping_items'))
       : [],
     delivery_address: localStorage.getItem('delivery_address')
       ? JSON.parse(localStorage.getItem('delivery_address'))

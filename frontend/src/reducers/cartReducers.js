@@ -1,39 +1,39 @@
 import {
-  CART_ADD_ITEM,
+  SHOPPING_ADD_PPT_PRODUCT,
   CART_EMPTY,
-  CART_REMOVE_ITEM,
-  CART_SAVE_PAYMENT_METHOD,
-  CART_SAVE_SHIPPING_ADDRESS,
+  SHOPPING_DELETE_PPT_PRODUCT,
+  SHOPPING_PAYPAL,
+  SHOPPING_DELIVERY_ADDRESS,
 } from '../constants/cartConstants';
 
-export const cartReducer = (state = { cartItems: [] }, action) => {
+export const cartReducer = (state = { shopping_items: [] }, action) => {
   switch (action.type) {
-    case CART_ADD_ITEM:
+    case SHOPPING_ADD_PPT_PRODUCT:
       const item = action.payload;
-      const existItem = state.cartItems.find((x) => x.item === item.item);
+      const existItem = state.shopping_items.find((x) => x.item === item.item);
       if (existItem) {
         return {
           ...state,
           error: '',
-          cartItems: state.cartItems.map((x) =>
+          shopping_items: state.shopping_items.map((x) =>
             x.item === existItem.item ? item : x
           ),
         };
       } else {
-        return { ...state, error: '', cartItems: [...state.cartItems, item] };
+        return { ...state, error: '', shopping_items: [...state.shopping_items, item] };
       }
-    case CART_REMOVE_ITEM:
+    case SHOPPING_DELETE_PPT_PRODUCT:
       return {
         ...state,
         error: '',
-        cartItems: state.cartItems.filter((x) => x.item !== action.payload),
+        shopping_items: state.shopping_items.filter((x) => x.item !== action.payload),
       };
-    case CART_SAVE_SHIPPING_ADDRESS:
+    case SHOPPING_DELIVERY_ADDRESS:
       return { ...state, delivery_address: action.payload };
-    case CART_SAVE_PAYMENT_METHOD:
+    case SHOPPING_PAYPAL:
       return { ...state, purchase_method: action.payload };
     case CART_EMPTY:
-      return { ...state, error: '', cartItems: [] };
+      return { ...state, error: '', shopping_items: [] };
     default:
       return state;
   }
