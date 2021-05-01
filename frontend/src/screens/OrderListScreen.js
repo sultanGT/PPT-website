@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { remove_order, listOrders } from '../actions/orderActions';
+import { removePurchase, puchasesHistory } from '../actions/purchaseActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { ORDER_DELETE_RESET } from '../constants/orderConstants';
@@ -15,16 +15,16 @@ export default function OrderListScreen(props) {
     success: successDelete,
   } = orderDelete;
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const customerLogin = useSelector((state) => state.customerLogin);
+  const { pptUserDetails } = customerLogin;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: ORDER_DELETE_RESET });
-    dispatch(listOrders( userInfo._id ));
-  }, [dispatch, successDelete, userInfo._id]);
+    dispatch(puchasesHistory( pptUserDetails._id ));
+  }, [dispatch, successDelete, pptUserDetails._id]);
   const deleteHandler = (customer_order) => {
     if (window.confirm('Are you sure to delete?')) {
-      dispatch(remove_order(customer_order._id));
+      dispatch(removePurchase(customer_order._id));
     }
   };
   return (

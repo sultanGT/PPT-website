@@ -31,9 +31,9 @@ import {
 } from './reducers/userReducers';
 
 const initialState = {
-  userSignin: {
-    userInfo: localStorage.getItem('userInfo')
-      ? JSON.parse(localStorage.getItem('userInfo'))
+  customerLogin: {
+    pptUserDetails: localStorage.getItem('pptUserDetails')
+      ? JSON.parse(localStorage.getItem('pptUserDetails'))
       : null,
   },
   cart: {
@@ -50,7 +50,7 @@ const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   cart: cartReducer,
-  userSignin: userSigninReducer,
+  customerLogin: userSigninReducer,
   userRegister: userRegisterReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,

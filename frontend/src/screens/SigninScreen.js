@@ -13,8 +13,8 @@
 //     ? props.location.search.split('=')[1]
 //     : '/';
 
-//   const userSignin = useSelector((state) => state.userSignin);
-//   const { userInfo, loading, error } = userSignin;
+//   const customerLogin = useSelector((state) => state.customerLogin);
+//   const { pptUserDetails, loading, error } = customerLogin;
 
 //   const dispatch = useDispatch();
 //   const submitHandler = (e) => {
@@ -22,10 +22,10 @@
 //     dispatch(signin(email, password));
 //   };
 //   useEffect(() => {
-//     if (userInfo) {
+//     if (pptUserDetails) {
 //       props.history.push(redirect);
 //     }
-//   }, [props.history, redirect, userInfo]);
+//   }, [props.history, redirect, pptUserDetails]);
 //   return (
 //     <div className="pager">
 //       <form className="form" onSubmit={submitHandler}>

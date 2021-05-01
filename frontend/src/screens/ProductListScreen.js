@@ -32,8 +32,8 @@ export default function ProductListScreen(props) {
     error: errorDelete,
     success: successDelete,
   } = productDelete;
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const customerLogin = useSelector((state) => state.customerLogin);
+  const { pptUserDetails } = customerLogin;
   const dispatch = useDispatch();
   useEffect(() => {
     if (successCreate) {
@@ -44,7 +44,7 @@ export default function ProductListScreen(props) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
     dispatch(
-      listProducts(userInfo._id, pageNumber)
+      listProducts(pptUserDetails._id, pageNumber)
     );
   }, [
     new_item,
@@ -53,7 +53,7 @@ export default function ProductListScreen(props) {
 
     successCreate,
     successDelete,
-    userInfo._id,
+    pptUserDetails._id,
     pageNumber,
   ]);
 

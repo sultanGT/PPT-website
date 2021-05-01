@@ -14,8 +14,8 @@ export default function ProductScreen(props) {
   const [quantity, setQty] = useState(1);
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, item } = productDetails;
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const customerLogin = useSelector((state) => state.customerLogin);
+  const { pptUserDetails } = customerLogin;
 
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
   const {
@@ -43,7 +43,7 @@ export default function ProductScreen(props) {
     e.preventDefault();
     if (user_comment && user_rating) {
       dispatch(
-        createReview(item_id, { user_rating, user_comment, name: userInfo.name })
+        createReview(item_id, { user_rating, user_comment, name: pptUserDetails.name })
       );
     } else {
       alert('Please enter user_comment and rating');
@@ -98,7 +98,7 @@ export default function ProductScreen(props) {
                 </li>
               ))}
               <li>
-                {userInfo ? (
+                {pptUserDetails ? (
                   <form className="form" onSubmit={submitHandler}>
                     <div>
                       <h2>Write a customer review</h2>

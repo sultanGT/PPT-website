@@ -3,7 +3,7 @@ import { PayPalButton } from 'react-paypal-button-v2';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deliverOrder, detailsOrder, payOrder } from '../actions/orderActions';
+import { shippingPurchase, purchaseInfo, purchasePayPal } from '../actions/purchaseActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {
@@ -13,12 +13,12 @@ import {
 import CheckoutSteps from '../components/CheckoutSteps';
 
 export default function OrderScreen(props) {
-  const orderId = props.match.params.id;
+  const purchaseId = props.match.params.id;
   const [sdkReady, setSdkReady] = useState(false);
   const orderDetails = useSelector((state) => state.orderDetails);
   const { customer_order, loading, error } = orderDetails;
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const customerLogin = useSelector((state) => state.customerLogin);
+  const { pptUserDetails } = customerLogin;
 
   const orderPay = useSelector((state) => state.orderPay);
   const {
@@ -49,11 +49,11 @@ export default function OrderScreen(props) {
       !customer_order ||
       successPay ||
       successDeliver ||
-      (customer_order && customer_order._id !== orderId)
+      (customer_order && customer_order._id !== purchaseId)
     ) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
-      dispatch(detailsOrder(orderId));
+      dispatch(purchaseInfo(purchaseId));
     } else {
       if (!customer_order.purchase_confirmed) {
         if (!window.paypal) {
@@ -63,13 +63,13 @@ export default function OrderScreen(props) {
         }
       }
     }
-  }, [dispatch, orderId, sdkReady, successPay, successDeliver, customer_order]);
+  }, [dispatch, purchaseId, sdkReady, successPay, successDeliver, customer_order]);
 
   const successPaymentHandler = (purchase_complete) => {
-    dispatch(payOrder(customer_order, purchase_complete));
+    dispatch(purchasePayPal(customer_order, purchase_complete));
   };
   const deliverHandler = () => {
-    dispatch(deliverOrder(customer_order._id));
+    dispatch(shippingPurchase(customer_order._id));
   };
 
   return loading ? (
@@ -201,7 +201,7 @@ export default function OrderScreen(props) {
                   )}
                 </li>
               )}
-              {userInfo.userCredentialsAdministrator && customer_order.purchase_confirmed && !customer_order.delivery_confirmed && (
+              {pptUserDetails.userCredentialsAdministrator && customer_order.purchase_confirmed && !customer_order.delivery_confirmed && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
                   {errorDeliver && (

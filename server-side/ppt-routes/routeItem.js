@@ -1,15 +1,15 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
-import Item from '../ppt-templates/template_pptitem.js';
+import Item from '../ppt-templates/itemTemplate.js';
 import { userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
 
 
 // Variable Declarations - selfcoded
-const route_item = express.Router();
+const routeItem = express.Router();
 
 // Function for displaying item details - selfcoded
-route_item.get(
+routeItem.get(
   '/',
   expressAsyncHandler(async (req, res) => {
     const pageLength = 8;
@@ -65,7 +65,7 @@ route_item.get(
 );
 
 // Filter for counting PPTitems for filter results - reused copied
-route_item.get(
+routeItem.get(
   '/item_categories',
   expressAsyncHandler(async (req, res) => {
     const categories = await Item.find().distinct('item_category');
@@ -74,7 +74,7 @@ route_item.get(
 );
 
 // Filter for counting PPTitems for filter results - reused copied
-route_item.get(
+routeItem.get(
   '/item_brands',
   expressAsyncHandler(async (req, res) => {
     const brands = await Item.find().distinct('item_brand');
@@ -83,7 +83,7 @@ route_item.get(
 );
 
 // Function for initialising PPT PPTitems into the web application
-route_item.get(
+routeItem.get(
   '/PPTitemlist',
   expressAsyncHandler(async (req, res) => {
     const PPTitems = data.PPTitems.map((item) => ({
@@ -97,7 +97,7 @@ route_item.get(
 );
 
 // Function for getting item by item id
-route_item.get(
+routeItem.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
     const item = await Item.findById(req.params.id);
@@ -110,7 +110,7 @@ route_item.get(
 );
 
 // API for creating a new item in the PPT web app
-route_item.post(
+routeItem.post(
   '/',
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
@@ -132,7 +132,7 @@ route_item.post(
 );
 
 // API for updating PPT Items
-route_item.put(
+routeItem.put(
   '/:id',
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
@@ -156,7 +156,7 @@ route_item.put(
 );
 
 // API for deleting PPT Items
-route_item.delete(
+routeItem.delete(
   '/:id',
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
@@ -172,7 +172,7 @@ route_item.delete(
 );
 
 //API for user review and rating PPT Items
-route_item.post(
+routeItem.post(
   '/:id/reviews',
   userCredentialsAuthenticated,
   expressAsyncHandler(async (req, res) => {
@@ -200,4 +200,4 @@ route_item.post(
   })
 );
 
-export default route_item;
+export default routeItem;

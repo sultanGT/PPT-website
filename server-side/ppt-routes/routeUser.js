@@ -2,17 +2,17 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
-import PPTUser from '../ppt-templates/template_pptuser.js';
+import PPTUser from '../ppt-templates/userTemplate.js';
 import { generateToken, userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
 
 
 
 //Variable Declartions - selfcoded
-const route_user = express.Router();
+const routeUser = express.Router();
 
 
 //Function to insert commisioned pptusers into PPT web application - selfcoded
-route_user.get(
+routeUser.get(
   '/PPTuserlist',
   expressAsyncHandler(async (req, res) => {
     const insert_pptusers = await PPTUser.insertMany(data.pptusers);
@@ -21,7 +21,7 @@ route_user.get(
 );
 
 //Function for to login in pptuser from PPT web application - selfcoded
-route_user.post(
+routeUser.post(
   '/login',
   expressAsyncHandler(async (req, res) => {
     const pptuser = await PPTUser.findOne({ email: req.body.email });
@@ -43,7 +43,7 @@ route_user.post(
 );
 
 //Function to signup a new pptuser on the PPT database - selfcoded
-route_user.post(
+routeUser.post(
   '/signup',
   expressAsyncHandler(async (req, res) => {
     const pptuser = new PPTUser({
@@ -63,7 +63,7 @@ route_user.post(
 );
 
 //Function for authenticating pptuser id - reused
-route_user.get(
+routeUser.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
     const pptuser = await PPTUser.findById(req.params.id);
@@ -76,7 +76,7 @@ route_user.get(
 );
 
 //Function for updating pptuser credentials - selfcoded
-route_user.put(
+routeUser.put(
   '/credentials',
   userCredentialsAuthenticated,
   expressAsyncHandler(async (req, res) => {
@@ -100,7 +100,7 @@ route_user.put(
 );
 
 //Function for finding pptuser - selfcoded
-route_user.get(
+routeUser.get(
   '/',
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
@@ -111,7 +111,7 @@ route_user.get(
 );
 
 //Function for deleting pptusers from PPT web application with the exception of the owners email - selfcoded
-route_user.delete(
+routeUser.delete(
   '/:id',
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
@@ -131,7 +131,7 @@ route_user.delete(
 );
 
 //Function for updating pptuser credential in the PPT web application - selfcoded
-route_user.put(
+routeUser.put(
   '/:id',
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
@@ -150,4 +150,4 @@ route_user.put(
   })
 );
 
-export default route_user;
+export default routeUser;

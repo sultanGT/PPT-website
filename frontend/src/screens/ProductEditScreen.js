@@ -63,8 +63,8 @@ export default function ProductEditScreen(props) {
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [errorUpload, setErrorUpload] = useState('');
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const customerLogin = useSelector((state) => state.customerLogin);
+  const { pptUserDetails } = customerLogin;
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -74,7 +74,7 @@ export default function ProductEditScreen(props) {
       const { data } = await Axios.post('/api/saver', bodyFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${pptUserDetails.token}`,
         },
       });
       setImage(data);

@@ -1,14 +1,14 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
-import PPTOrder from '../ppt-templates/template_pptorder.js';
+import PPTOrder from '../ppt-templates/purchaseTemplate.js';
 import { userCredentialsAdministrator, userCredentialsAuthenticated, mailgun, orderCompletionEmail, } from '../utils.js';
 
 
 //Payment Router for PPT
-const route_purchase = express.Router();
+const routePurchase = express.Router();
 
 //Function for finding customer_order details
-route_purchase.get(
+routePurchase.get(
   '/', 
 userCredentialsAuthenticated, 
 userCredentialsAdministrator, 
@@ -21,7 +21,7 @@ res.send(ppt_orders);}));
 
 
 //Function for authentication user
-route_purchase.get(
+routePurchase.get(
   '/myaccount', 
 userCredentialsAuthenticated, 
 expressAsyncHandler(async (req, res) => { 
@@ -29,7 +29,7 @@ expressAsyncHandler(async (req, res) => {
 res.send(ppt_orders);}));
 
 //Function for completion of payment
-route_purchase.post('/', 
+routePurchase.post('/', 
 userCredentialsAuthenticated, 
 expressAsyncHandler(async (req, res) => {
 
@@ -54,11 +54,11 @@ const new_customer_order = await customer_order.save();
 res.status(201).send({ message: 'A New Order Has Been Created', customer_order: new_customer_order });}}));
 
 //Function to find customer_order using user id
-route_purchase.get('/:id', userCredentialsAuthenticated, expressAsyncHandler(async (req, res) => { const customer_order = await PPTOrder.findById(req.params.id);
+routePurchase.get('/:id', userCredentialsAuthenticated, expressAsyncHandler(async (req, res) => { const customer_order = await PPTOrder.findById(req.params.id);
 if (customer_order) { res.send(customer_order); } else { res.status(404).send({ message: 'PPT Order Cannot Be Found In The PPT Database. For Enquiries Please Contact Admin' });}}));
 
 //Update customer_order details to payment is confirmed once payment has been confirmed
-route_purchase.put(
+routePurchase.put(
   '/:id/payment',
   userCredentialsAuthenticated,
   expressAsyncHandler(async (req, res) => {
@@ -101,19 +101,19 @@ route_purchase.put(
 );
 
 //Function for admins to delete an customer_order stored in the database
-route_purchase.delete('/:id', 
+routePurchase.delete('/:id', 
 userCredentialsAuthenticated, 
 userCredentialsAdministrator, 
 expressAsyncHandler(async (req, res) => {const customer_order = await PPTOrder.findById(req.params.id);
 if (customer_order) { 
-  const remove_order = await customer_order.remove();
+  const removePurchase = await customer_order.remove();
 res.send({ 
   message: 'The Order Has Now Been Deleted', 
-  customer_order: remove_order });
+  customer_order: removePurchase });
 } else { res.status(404).send({ message: 'Order Cannot Be Found On The PPT Web Application, Please Contact An Administrator For Help' });}}));
 
 //Function to mark and update customer_order as delivered
-route_purchase.put('/:id/deliver', userCredentialsAuthenticated, userCredentialsAdministrator, expressAsyncHandler(async (req, res) => {
+routePurchase.put('/:id/deliver', userCredentialsAuthenticated, userCredentialsAdministrator, expressAsyncHandler(async (req, res) => {
 const customer_order = await PPTOrder.findById(req.params.id);
 if (customer_order) { customer_order.delivery_confirmed = true; 
 customer_order.delivery_date = Date.now();
@@ -121,4 +121,4 @@ const save_customer_order = await customer_order.save();
 res.send({ message: 'Order Has Now Been Delivered', customer_order: save_customer_order });
 } else { res.status(404).send({ message: 'Order Cannot Be Found On The PPT Web Application, Please Contact An Administrator For Help' });}}));
 
-export default route_purchase;
+export default routePurchase;

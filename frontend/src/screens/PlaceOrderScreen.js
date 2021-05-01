@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createOrder } from '../actions/orderActions';
+import { newPurchase } from '../actions/purchaseActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 import LoadingBox from '../components/LoadingBox';
@@ -23,7 +23,7 @@ export default function PlaceOrderScreen(props) {
   cart.total_cost = cart.items_cost + cart.delivery_cost + cart.tax_cost;
   const dispatch = useDispatch();
   const placeOrderHandler = () => {
-    dispatch(createOrder({ ...cart, items_order: cart.shopping_items }));
+    dispatch(newPurchase({ ...cart, items_order: cart.shopping_items }));
   };
   useEffect(() => {
     if (success) {

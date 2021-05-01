@@ -26,6 +26,7 @@ import {
   PRODUCT_BRAND_LIST_FAIL,
 } from '../constants/productConstants';
 
+
 export const listProducts = ({
   pageNumber = '',
   name = '',
@@ -91,14 +92,14 @@ export const detailsProduct = (item_id) => async (dispatch) => {
 export const createProduct = () => async (dispatch, getState) => {
   dispatch({ type: PRODUCT_CREATE_REQUEST });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
     const { data } = await Axios.post(
       '/api/pptitems',
       {},
       {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
+        headers: { Authorization: `Bearer ${pptUserDetails.token}` },
       }
     );
     dispatch({
@@ -116,11 +117,11 @@ export const createProduct = () => async (dispatch, getState) => {
 export const updateProduct = (item) => async (dispatch, getState) => {
   dispatch({ type: PRODUCT_UPDATE_REQUEST, payload: item });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
     const { data } = await Axios.put(`/api/pptitems/${item._id}`, item, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
   } catch (error) {
@@ -134,12 +135,12 @@ export const updateProduct = (item) => async (dispatch, getState) => {
 export const item_deleted = (item_id) => async (dispatch, getState) => {
   dispatch({ type: PRODUCT_DELETE_REQUEST, payload: item_id });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
     // eslint-disable-next-line
     const { data } = Axios.delete(`/api/pptitems/${item_id}`, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
   } catch (error) {
@@ -150,20 +151,22 @@ export const item_deleted = (item_id) => async (dispatch, getState) => {
     dispatch({ type: PRODUCT_DELETE_FAIL, payload: message });
   }
 };
+
+
 export const createReview = (item_id, review) => async (
   dispatch,
   getState
 ) => {
   dispatch({ type: PRODUCT_REVIEW_CREATE_REQUEST });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
     const { data } = await Axios.post(
       `/api/pptitems/${item_id}/reviews`,
       review,
       {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
+        headers: { Authorization: `Bearer ${pptUserDetails.token}` },
       }
     );
     dispatch({

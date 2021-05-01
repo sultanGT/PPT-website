@@ -17,19 +17,19 @@ export default function RegisterScreen(props) {
 
   const userRegister = useSelector((state) => state.userRegister);
   const { 
-    userInfo:  user1, 
+    pptUserDetails:  user1, 
     loading: load1, 
     error:  error1,
 
   } = userRegister;
 
-  const userSignin = useSelector((state) => state.userSignin);
+  const customerLogin = useSelector((state) => state.customerLogin);
   
   const { 
-    userInfo:  user2, 
+    pptUserDetails:  user2, 
     loading: load2, 
     error: error2,
-   } = userSignin;
+   } = customerLogin;
 
 
   const dispatch = useDispatch();

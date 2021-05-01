@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveDeliveryAddress } from '../actions/shopping_actions';
+import { saveDeliveryAddress } from '../actions/shoppingActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 
 export default function ShippingAddressScreen(props) {
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const customerLogin = useSelector((state) => state.customerLogin);
+  const { pptUserDetails } = customerLogin;
   const cart = useSelector((state) => state.cart);
   const { delivery_address } = cart;
-  if (!userInfo) {
+  if (!pptUserDetails) {
     props.history.push('/login');
   }
   const [fullName, setFullName] = useState(delivery_address.fullName);

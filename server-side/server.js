@@ -2,10 +2,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
-import route_item from './ppt-routes/route_item.js';
-import route_user from './ppt-routes/route_user.js';
-import route_purchase from './ppt-routes/route_purchase.js';
-import route_saver from './ppt-routes/route_saver.js';
+import routeItem from './ppt-routes/routeItem.js';
+import routeUser from './ppt-routes/routeUser.js';
+import routePurchase from './ppt-routes/routePurchase.js';
+import routeSaver from './ppt-routes/routeSaver.js';
 
 //Proccess .env file
 dotenv.config();
@@ -23,10 +23,10 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/PPT-website', {
 });
 
 //PPT web application API's
-app.use('/api/saver', route_saver);
-app.use('/api/pptusers', route_user);
-app.use('/api/pptitems', route_item);
-app.use('/api/pptpuchase', route_purchase);
+app.use('/api/saver', routeSaver);
+app.use('/api/pptusers', routeUser);
+app.use('/api/pptitems', routeItem);
+app.use('/api/pptpuchase', routePurchase);
 app.get('/api/config/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });

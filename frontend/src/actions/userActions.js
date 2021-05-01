@@ -33,7 +33,7 @@ export const register = (name, email, password) => async (dispatch) => {
     });
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    localStorage.setItem('pptUserDetails', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -50,7 +50,7 @@ export const signin = (email, password) => async (dispatch) => {
   try {
     const { data } = await Axios.post('/api/pptusers/login', { email, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    localStorage.setItem('pptUserDetails', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_SIGNIN_FAIL,
@@ -63,7 +63,7 @@ export const signin = (email, password) => async (dispatch) => {
 };
 
 export const signout = () => (dispatch) => {
-  localStorage.removeItem('userInfo');
+  localStorage.removeItem('pptUserDetails');
   localStorage.removeItem('shopping_items');
   localStorage.removeItem('delivery_address');
   dispatch({ type: USER_SIGNOUT });
@@ -72,11 +72,11 @@ export const signout = () => (dispatch) => {
 export const detailsUser = (userId) => async (dispatch, getState) => {
   dispatch({ type: USER_DETAILS_REQUEST, payload: userId });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
     const { data } = await Axios.get(`/api/pptusers/${userId}`, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
@@ -90,15 +90,15 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
 export const updateUserProfile = (pptuser) => async (dispatch, getState) => {
   dispatch({ type: USER_UPDATE_PROFILE_REQUEST, payload: pptuser });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
     const { data } = await Axios.put(`/api/pptusers/credentials`, pptuser, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    localStorage.setItem('pptUserDetails', JSON.stringify(data));
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -110,11 +110,11 @@ export const updateUserProfile = (pptuser) => async (dispatch, getState) => {
 export const updateUser = (pptuser) => async (dispatch, getState) => {
   dispatch({ type: USER_UPDATE_PROFILE_REQUEST, payload: pptuser });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
     const { data } = await Axios.put(`/api/pptusers/${pptuser._id}`, pptuser, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
   } catch (error) {
@@ -129,11 +129,11 @@ export const listUsers = () => async (dispatch, getState) => {
   dispatch({ type: USER_LIST_REQUEST });
   try {
     const {
-      userSignin: { userInfo },
+      customerLogin: { pptUserDetails },
     } = getState();
     const { data } = await Axios.get('/api/pptusers', {
       headers: {
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${pptUserDetails.token}`,
       },
     });
     dispatch({ type: USER_LIST_SUCCESS, payload: data });
@@ -148,11 +148,11 @@ export const listUsers = () => async (dispatch, getState) => {
 export const remove_pptuser = (userId) => async (dispatch, getState) => {
   dispatch({ type: USER_DELETE_REQUEST, payload: userId });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
     const { data } = await Axios.delete(`/api/pptusers/${userId}`, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     dispatch({ type: USER_DELETE_SUCCESS, payload: data });
   } catch (error) {

@@ -12,8 +12,8 @@ export default function ProfileScreen() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const customerLogin = useSelector((state) => state.customerLogin);
+  const { pptUserDetails } = customerLogin;
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, pptuser } = userDetails;
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
@@ -26,12 +26,12 @@ export default function ProfileScreen() {
   useEffect(() => {
     if (!pptuser) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
-      dispatch(detailsUser(userInfo._id));
+      dispatch(detailsUser(pptUserDetails._id));
     } else {
       setName(pptuser.name);
       setEmail(pptuser.email);
     }
-  }, [dispatch, userInfo._id, pptuser]);
+  }, [dispatch, pptUserDetails._id, pptuser]);
   const submitHandler = (e) => {
     e.preventDefault();
     // dispatch update profile

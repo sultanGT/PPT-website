@@ -6,6 +6,7 @@ import {
   SHOPPING_PAYPAL,
 } from '../constants/cartConstants';
 
+//
 export const addShoppingItem = (item_id, quantity) => async (dispatch, getState) =>{
   const {data} = await Axios.get(`/api/pptitems/${item_id}`);
   dispatch({
@@ -21,16 +22,17 @@ export const addShoppingItem = (item_id, quantity) => async (dispatch, getState)
   });
   localStorage.setItem('shopping_items', JSON.stringify(getState().cart.shopping_items));
 };
-
+//
 export const deleteShoppingItem = (item_id) => (dispatch, getState) => {
   dispatch({ type: SHOPPING_DELETE_PPT_PRODUCT, payload: item_id });
   localStorage.setItem('shopping_items', JSON.stringify(getState().cart.shopping_items));
 };
-
+//
 export const saveDeliveryAddress = (data) => (dispatch) => {
   dispatch({ type: SHOPPING_DELIVERY_ADDRESS, payload: data });
   localStorage.setItem('delivery_address', JSON.stringify(data));
 };
+//
 export const savePayPal = (data) => (dispatch) => {
   dispatch({ type: SHOPPING_PAYPAL, payload: data });
 };

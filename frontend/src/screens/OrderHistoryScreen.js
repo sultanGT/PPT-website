@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listOrderMine } from '../actions/orderActions';
+import { accountHistory } from '../actions/purchaseActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
@@ -9,7 +9,7 @@ export default function OrderHistoryScreen(props) {
   const { loading, error, ppt_orders } = orderMineList;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listOrderMine());
+    dispatch(accountHistory());
   }, [dispatch]);
   return (
     <div>

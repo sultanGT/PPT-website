@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addShoppingItem, deleteShoppingItem } from '../actions/shopping_actions';
+import { addShoppingItem, deleteShoppingItem } from '../actions/shoppingActions';
 import MessageBox from '../components/MessageBox';
 
 export default function CartScreen(props) {

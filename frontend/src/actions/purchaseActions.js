@@ -24,15 +24,16 @@ import {
   PURCHASE_SHIPPING_ERROR,
 } from '../constants/orderConstants';
 
-export const createOrder = (customer_order) => async (dispatch, getState) => {
+//
+export const newPurchase = (customer_order) => async (dispatch, getState) => {
   dispatch({ type: PURCHASE_NEW_REQUEST, payload: customer_order });
   try {
     const {
-      userSignin: { userInfo },
+      customerLogin: { pptUserDetails },
     } = getState();
     const { data } = await Axios.post('/api/pptpuchase', customer_order, {
       headers: {
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${pptUserDetails.token}`,
       },
     });
     dispatch({ type: PURCHASE_NEW_COMPLETE, payload: data.customer_order });
@@ -49,14 +50,15 @@ export const createOrder = (customer_order) => async (dispatch, getState) => {
   }
 };
 
-export const detailsOrder = (orderId) => async (dispatch, getState) => {
-  dispatch({ type: PURCHASE_INFO_REQUEST, payload: orderId });
+//
+export const purchaseInfo = (purchaseId) => async (dispatch, getState) => {
+  dispatch({ type: PURCHASE_INFO_REQUEST, payload: purchaseId });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
-    const { data } = await Axios.get(`/api/pptpuchase/${orderId}`, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+    const { data } = await Axios.get(`/api/pptpuchase/${purchaseId}`, {
+      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     dispatch({ type: PURCHASE_INFO_COMPLETE, payload: data });
   } catch (error) {
@@ -68,17 +70,18 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
   }
 };
 
-export const payOrder = (customer_order, purchase_complete) => async (
+//
+export const purchasePayPal = (customer_order, purchase_complete) => async (
   dispatch,
   getState
 ) => {
   dispatch({ type: PURCHASE_PAYPAL_REQUEST, payload: { customer_order, purchase_complete } });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
     const { data } = Axios.put(`/api/pptpuchase/${customer_order._id}/payment`, purchase_complete, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     dispatch({ type: PURCHASE_PAYPAL_COMPLETE, payload: data });
   } catch (error) {
@@ -89,15 +92,17 @@ export const payOrder = (customer_order, purchase_complete) => async (
     dispatch({ type: PURCHASE_PAYPAL_ERROR, payload: message });
   }
 };
-export const listOrderMine = () => async (dispatch, getState) => {
+
+//
+export const accountHistory = () => async (dispatch, getState) => {
   dispatch({ type: PURCHASE_ACCOUNT_HISTORY_REQUEST });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
     const { data } = await Axios.get('/api/pptpuchase/myaccount', {
       headers: {
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${pptUserDetails.token}`,
       },
     });
     dispatch({ type: PURCHASE_ACCOUNT_HISTORY_COMPLETE, payload: data });
@@ -109,14 +114,16 @@ export const listOrderMine = () => async (dispatch, getState) => {
     dispatch({ type: PURCHASE_ACCOUNT_HISTORY_ERROR, payload: message });
   }
 };
-export const listOrders = () => async (dispatch, getState) => {
+
+//
+export const puchasesHistory = () => async (dispatch, getState) => {
   dispatch({ type: PURCHASE_HISTORY_REQUEST });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
     const { data } = await Axios.get('/api/pptpuchase', {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     console.log(data);
     dispatch({ type: PURCHASE_HISTORY_COMPLETE, payload: data });
@@ -128,14 +135,14 @@ export const listOrders = () => async (dispatch, getState) => {
     dispatch({ type: PURCHASE_HISTORY_ERROR, payload: message });
   }
 };
-export const remove_order = (orderId) => async (dispatch, getState) => {
-  dispatch({ type: PURCHASE_REMOVE_REQUEST, payload: orderId });
+export const removePurchase = (purchaseId) => async (dispatch, getState) => {
+  dispatch({ type: PURCHASE_REMOVE_REQUEST, payload: purchaseId });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
-    const { data } = Axios.delete(`/api/pptpuchase/${orderId}`, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+    const { data } = Axios.delete(`/api/pptpuchase/${purchaseId}`, {
+      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     dispatch({ type: PURCHASE_REMOVE_COMPLETE, payload: data });
   } catch (error) {
@@ -147,17 +154,18 @@ export const remove_order = (orderId) => async (dispatch, getState) => {
   }
 };
 
-export const deliverOrder = (orderId) => async (dispatch, getState) => {
-  dispatch({ type: PURCHASE_SHIPPING_REQUEST, payload: orderId });
+//
+export const shippingPurchase = (purchaseId) => async (dispatch, getState) => {
+  dispatch({ type: PURCHASE_SHIPPING_REQUEST, payload: purchaseId });
   const {
-    userSignin: { userInfo },
+    customerLogin: { pptUserDetails },
   } = getState();
   try {
     const { data } = Axios.put(
-      `/api/pptpuchase/${orderId}/deliver`,
+      `/api/pptpuchase/${purchaseId}/deliver`,
       {},
       {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
+        headers: { Authorization: `Bearer ${pptUserDetails.token}` },
       }
     );
     dispatch({ type: PURCHASE_SHIPPING_COMPLETE, payload: data });

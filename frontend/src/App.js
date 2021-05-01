@@ -27,7 +27,7 @@ import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import '@fortawesome/fontawesome-free/js/all.js';
 import img from './constants/pptmenuicon.png';
-import { addShoppingItem, deleteShoppingItem } from './actions/shopping_actions';
+import { addShoppingItem, deleteShoppingItem } from './actions/shoppingActions';
 
 
 
@@ -35,8 +35,8 @@ import { addShoppingItem, deleteShoppingItem } from './actions/shopping_actions'
 function App(props) {
 
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const customerLogin = useSelector((state) => state.customerLogin);
+  const { pptUserDetails } = customerLogin;
   const dispatch = useDispatch();
   const signoutHandler = () => {
     dispatch(signout());
@@ -200,10 +200,10 @@ function App(props) {
                 </div>
             </div>
 
-            {userInfo ? (
+            {pptUserDetails ? (
               <div className="dropdown">
                 <Link to="#">
-                <i className="far fa-user iconLarge"></i>{'  '}<i className="username">{ userInfo.name }</i>
+                <i className="far fa-user iconLarge"></i>{'  '}<i className="username">{ pptUserDetails.name }</i>
                 </Link>
                 <ul className="dropdown-content">
                   <li>
@@ -223,7 +223,7 @@ function App(props) {
               <Link to="/signup"><i className="far fa-user iconLarge"></i></Link>
             )}
 
-            {userInfo && userInfo.userCredentialsAdministrator && (
+            {pptUserDetails && pptUserDetails.userCredentialsAdministrator && (
               <div className="dropdown">
                 <Link to="#admin">
                 <i className="fas fa-user-shield iconLarge"></i> {/*admin*/}

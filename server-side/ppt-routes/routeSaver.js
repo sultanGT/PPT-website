@@ -3,7 +3,7 @@ import express from 'express';
 import { userCredentialsAuthenticated } from '../utils.js';
 
 //Variable Declarations
-const route_saver = express.Router();
+const routeSaver = express.Router();
 // API for uploading image to local save_localy in uploads folder
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -19,8 +19,8 @@ const storage = multer.diskStorage({
 const image_saver = multer({ storage });
 
 //Api for saving image with new file name
-route_saver.post('/', userCredentialsAuthenticated, image_saver.single('image'), (req, res) => {
+routeSaver.post('/', userCredentialsAuthenticated, image_saver.single('image'), (req, res) => {
   res.send(`/${req.file.path}`);
 });
 
-export default route_saver;
+export default routeSaver;

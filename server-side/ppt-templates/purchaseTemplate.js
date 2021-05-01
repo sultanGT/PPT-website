@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 // Order details to be stored in MongoDB using the mongoose library
-const PPTorderModel = new mongoose.Schema(
+const pptPurchaseModel = new mongoose.Schema(
 
 // Item and User details for PPT orders
 { items_order: [{ name: { type: String, required: true }, 
@@ -26,5 +26,5 @@ const PPTorderModel = new mongoose.Schema(
         purchase_date: { type: Date }, 
         delivery_confirmed: { type: Boolean, default: false }, 
         delivery_date: { type: Date }, }, { timestamps: true, });
-const PPTOrder = mongoose.model('PPTOrder', PPTorderModel);
+const PPTOrder = mongoose.model('PPTOrder', pptPurchaseModel);
 export default PPTOrder;
