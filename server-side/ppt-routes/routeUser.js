@@ -122,8 +122,8 @@ routeUser.delete(
         res.status(400).send({ message: 'Cannot delete PPT Adminisrators account' });
         return;
       }
-      const remove_pptuser = await pptuser.remove();
-      res.send({ message: 'User has now been removed from PPT web application', pptuser: remove_pptuser });
+      const removeCustomer = await pptuser.remove();
+      res.send({ message: 'User has now been removed from PPT web application', pptuser: removeCustomer });
     } else {
       res.status(404).send({ message: 'User cannot be found on the PPT web application' });
     }

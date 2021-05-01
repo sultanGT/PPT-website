@@ -2,13 +2,13 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { detailsUser, updateUser } from '../actions/userActions';
+import { customerInfo, ammendCustomer } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { USER_UPDATE_RESET } from '../constants/userConstants';
 
 export default function UserEditScreen(props) {
-  const userId = props.match.params.id;
+  const customerId = props.match.params.id;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [userCredentialsAdministrator, setIsAdmin] = useState(false);
@@ -30,18 +30,18 @@ export default function UserEditScreen(props) {
       props.history.push('/userlist');
     }
     if (!pptuser) {
-      dispatch(detailsUser(userId));
+      dispatch(customerInfo(customerId));
     } else {
       setName(pptuser.name);
       setEmail(pptuser.email);
       setIsAdmin(pptuser.userCredentialsAdministrator);
     }
-  }, [dispatch, props.history, successUpdate, pptuser, userId]);
+  }, [dispatch, props.history, successUpdate, pptuser, customerId]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     // dispatch update user
-    dispatch(updateUser({ _id: userId, name, email, userCredentialsAdministrator }));
+    dispatch(ammendCustomer({ _id: customerId, name, email, userCredentialsAdministrator }));
   };
   return (
     <div className="pager">

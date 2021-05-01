@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createReview, detailsProduct } from '../actions/productActions';
+import { newReview, itemInfo } from '../actions/itemActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Rating from '../components/Rating';
@@ -34,7 +34,7 @@ export default function ProductScreen(props) {
       setComment('');
       dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
     }
-    dispatch(detailsProduct(item_id));
+    dispatch(itemInfo(item_id));
   }, [dispatch, item_id, successReviewCreate]);
   const addToCartHandler = () => {
     props.history.push(`/cart/${item_id}?quantity=${quantity}`);
@@ -43,7 +43,7 @@ export default function ProductScreen(props) {
     e.preventDefault();
     if (user_comment && user_rating) {
       dispatch(
-        createReview(item_id, { user_rating, user_comment, name: pptUserDetails.name })
+        newReview(item_id, { user_rating, user_comment, name: pptUserDetails.name })
       );
     } else {
       alert('Please enter user_comment and rating');

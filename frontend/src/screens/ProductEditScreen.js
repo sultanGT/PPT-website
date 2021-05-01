@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Axios from 'axios';
-import { detailsProduct, updateProduct } from '../actions/productActions';
+import { itemInfo, ammendItem } from '../actions/itemActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
@@ -33,7 +33,7 @@ export default function ProductEditScreen(props) {
     }
     if (!item || item._id !== item_id || successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
-      dispatch(detailsProduct(item_id));
+      dispatch(itemInfo(item_id));
     } else {
       setName(item.name);
       setPrice(item.cost);
@@ -48,7 +48,7 @@ export default function ProductEditScreen(props) {
     e.preventDefault();
     // TODO: dispatch update item
     dispatch(
-      updateProduct({
+      ammendItem({
         _id: item_id,
         name,
         cost,

@@ -23,7 +23,8 @@ import {
   CUSTOMER_AMMEND_ERROR,
 } from '../constants/userConstants';
 
-export const register = (name, email, password) => async (dispatch) => {
+//
+export const signup = (name, email, password) => async (dispatch) => {
   dispatch({ type: CUSTOMER_SIGNUP_REQUEST, payload: { email, password } });
   try {
     const { data } = await Axios.post('/api/pptusers/signup', {
@@ -44,8 +45,8 @@ export const register = (name, email, password) => async (dispatch) => {
     });
   }
 };
-
-export const signin = (email, password) => async (dispatch) => {
+//
+export const login = (email, password) => async (dispatch) => {
   dispatch({ type: CUSTOMER_LOGIN_REQUEST, payload: { email, password } });
   try {
     const { data } = await Axios.post('/api/pptusers/login', { email, password });
@@ -61,21 +62,23 @@ export const signin = (email, password) => async (dispatch) => {
     });
   }
 };
-
-export const signout = () => (dispatch) => {
+//
+export const logout = () => (dispatch) => {
   localStorage.removeItem('pptUserDetails');
   localStorage.removeItem('shopping_items');
   localStorage.removeItem('delivery_address');
   dispatch({ type: CUSTOMER_LOGOUT });
   document.location.href = '/';
 };
-export const detailsUser = (userId) => async (dispatch, getState) => {
-  dispatch({ type: CUSTOMER_INFO_REQUEST, payload: userId });
+
+//
+export const customerInfo = (customerId) => async (dispatch, getState) => {
+  dispatch({ type: CUSTOMER_INFO_REQUEST, payload: customerId });
   const {
     customerLogin: { pptUserDetails },
   } = getState();
   try {
-    const { data } = await Axios.get(`/api/pptusers/${userId}`, {
+    const { data } = await Axios.get(`/api/pptusers/${customerId}`, {
       headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     dispatch({ type: CUSTOMER_INFO_COMPLETE, payload: data });
@@ -87,7 +90,9 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
     dispatch({ type: CUSTOMER_INFO_ERROR, payload: message });
   }
 };
-export const updateUserProfile = (pptuser) => async (dispatch, getState) => {
+
+//
+export const ammendCustomerAccount = (pptuser) => async (dispatch, getState) => {
   dispatch({ type: CUSTOMER_AMMEND_ACCOUNT_REQUEST, payload: pptuser });
   const {
     customerLogin: { pptUserDetails },
@@ -107,7 +112,9 @@ export const updateUserProfile = (pptuser) => async (dispatch, getState) => {
     dispatch({ type: CUSTOMER_AMMEND_ACCOUNT_ERROR, payload: message });
   }
 };
-export const updateUser = (pptuser) => async (dispatch, getState) => {
+
+//
+export const ammendCustomer = (pptuser) => async (dispatch, getState) => {
   dispatch({ type: CUSTOMER_AMMEND_ACCOUNT_REQUEST, payload: pptuser });
   const {
     customerLogin: { pptUserDetails },
@@ -125,7 +132,8 @@ export const updateUser = (pptuser) => async (dispatch, getState) => {
     dispatch({ type: CUSTOMER_AMMEND_ERROR, payload: message });
   }
 };
-export const listUsers = () => async (dispatch, getState) => {
+//
+export const customerHistory = () => async (dispatch, getState) => {
   dispatch({ type: CUSTOMER_HISTORY_REQUEST });
   try {
     const {
@@ -145,13 +153,15 @@ export const listUsers = () => async (dispatch, getState) => {
     dispatch({ type: CUSTOMER_HISTORY_ERROR, payload: message });
   }
 };
-export const remove_pptuser = (userId) => async (dispatch, getState) => {
-  dispatch({ type: CUSTOMER_REMOVE_REQUEST, payload: userId });
+
+//
+export const removeCustomer = (customerId) => async (dispatch, getState) => {
+  dispatch({ type: CUSTOMER_REMOVE_REQUEST, payload: customerId });
   const {
     customerLogin: { pptUserDetails },
   } = getState();
   try {
-    const { data } = await Axios.delete(`/api/pptusers/${userId}`, {
+    const { data } = await Axios.delete(`/api/pptusers/${customerId}`, {
       headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     dispatch({ type: CUSTOMER_REMOVE_COMPLETE, payload: data });

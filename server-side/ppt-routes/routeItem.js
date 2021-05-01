@@ -13,7 +13,7 @@ routeItem.get(
   '/',
   expressAsyncHandler(async (req, res) => {
     const pageLength = 8;
-    const pptpage = Number(req.query.pageNumber) || 1;
+    const pptpage = Number(req.query.page_number) || 1;
     const name = req.query.name || '';
     const item_category = req.query.item_category || '';
     const item_brand = req.query.item_brand || '';
@@ -163,8 +163,8 @@ routeItem.delete(
   expressAsyncHandler(async (req, res) => {
     const item = await Item.findById(req.params.id);
     if (item) {
-      const item_deleted = await item.remove();
-      res.send({ message: 'Item Has Now Been Deleted From The PPT Web App', item: item_deleted });
+      const removeItem = await item.remove();
+      res.send({ message: 'Item Has Now Been Deleted From The PPT Web App', item: removeItem });
     } else {
       res.status(404).send({ message: 'Item Cannot Be Found On The PPT Web App' });
     }

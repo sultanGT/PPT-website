@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
-import { signout } from './actions/userActions';
+import { logout } from './actions/customerActions';
 import AdminRoute from './components/AdminRoute';
 import PrivateRoute from './components/PrivateRoute';
 import CartScreen from './screens/CartScreen';
@@ -22,7 +22,7 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
-import { listProductBrands, listProductCategories } from './actions/productActions';
+import { displayItemBrands, displayItemCategories } from './actions/itemActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import '@fortawesome/fontawesome-free/js/all.js';
@@ -39,7 +39,7 @@ function App(props) {
   const { pptUserDetails } = customerLogin;
   const dispatch = useDispatch();
   const signoutHandler = () => {
-    dispatch(signout());
+    dispatch(logout());
   };
   const [navbar, setNavbar] = useState(false);
 
@@ -69,8 +69,8 @@ function App(props) {
 
 
   useEffect(() => {
-    dispatch(listProductCategories());
-    dispatch(listProductBrands());
+    dispatch(displayItemCategories());
+    dispatch(displayItemBrands());
   }, [dispatch]);
 
 
@@ -181,6 +181,7 @@ function App(props) {
                           </h2>
                         </li>
                         <li>
+                        {shopping_items.length > 0 && (
                           <button
                             type="button"
                             className="primary block"
@@ -189,6 +190,7 @@ function App(props) {
                             <Link className='primary block' to='/signup?redirect=shipping'>Proceed to Checkout</Link>
                             
                           </button>
+                        )}
                         </li>
                       </ul>
                     </div>
@@ -333,7 +335,7 @@ function App(props) {
             exact
           ></Route>
           <Route
-            path="/search/item_category/:item_category/item_brand/:item_brand/name/:name/minimum/:minimum/maximum/:maximum/user_rating/:user_rating/customer_order/:customer_order/pageNumber/:pageNumber"
+            path="/search/item_category/:item_category/item_brand/:item_brand/name/:name/minimum/:minimum/maximum/:maximum/user_rating/:user_rating/customer_order/:customer_order/page_number/:page_number"
             component={SearchScreen}
             exact
           ></Route>
@@ -347,7 +349,7 @@ function App(props) {
             exact
           ></AdminRoute>
           <AdminRoute
-            path="/productlist/pageNumber/:pageNumber"
+            path="/productlist/page_number/:page_number"
             component={ProductListScreen}
             exact
           ></AdminRoute>
@@ -373,7 +375,7 @@ function App(props) {
             </Link>
           <h2>Address: Wimbeldon Park Hall,<br/> 170 Arthur Rd, Wimbledon Park,<br/> London SW19 8AQ</h2>
           </div>
-          <div className='fbox2'>
+          <div className='fbox2 responsive'>
           <ul className="categories">
             <li>
               <h1>Item Categories</h1>
@@ -395,7 +397,7 @@ function App(props) {
             )}
           </ul>
           </div>
-          <div className='fbox2'>
+          <div className='fbox2 responsive'>
           <ul className="categories">
           <li>
               <h1>Brands</h1>

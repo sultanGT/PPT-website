@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { remove_pptuser, listUsers } from '../actions/userActions';
+import { removeCustomer, customerHistory } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { USER_DETAILS_RESET } from '../constants/userConstants';
@@ -18,14 +18,14 @@ export default function UserListScreen(props) {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listUsers());
+    dispatch(customerHistory());
     dispatch({
       type: USER_DETAILS_RESET,
     });
   }, [dispatch, successDelete]);
   const deleteHandler = (pptuser) => {
     if (window.confirm('Are you sure?')) {
-      dispatch(remove_pptuser(pptuser._id));
+      dispatch(removeCustomer(pptuser._id));
     }
   };
   return (

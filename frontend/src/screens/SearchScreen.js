@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { listProducts } from '../actions/productActions';
+import { displayItems } from '../actions/itemActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Item from '../components/Item';
@@ -16,7 +16,7 @@ export default function SearchScreen(props) {
     maximum = 0,
     user_rating = 0,
     customer_order = 'newest',
-    pageNumber = 1,
+    page_number = 1,
   } = useParams();
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
@@ -40,8 +40,8 @@ export default function SearchScreen(props) {
 
   useEffect(() => {
     dispatch(
-      listProducts({
-        pageNumber,
+      displayItems({
+        page_number,
         name: name !== 'all' ? name : '',
         item_category: item_category !== 'all' ? item_category : '',
         item_brand: item_brand !== 'all' ? item_brand : '',
@@ -51,10 +51,10 @@ export default function SearchScreen(props) {
         customer_order,
       })
     );
-  }, [item_category, item_brand, dispatch, maximum, minimum, name, customer_order, user_rating, pageNumber]);
+  }, [item_category, item_brand, dispatch, maximum, minimum, name, customer_order, user_rating, page_number]);
 
   const getFilterUrl = (filter) => {
-    const filterPage = filter.pptpage || pageNumber;
+    const filterPage = filter.pptpage || page_number;
     const filterCategory = filter.item_category || item_category;
     const filterBrand = filter.item_brand || item_brand;
     const filterName = filter.name || name;
@@ -62,7 +62,7 @@ export default function SearchScreen(props) {
     const sortOrder = filter.customer_order || customer_order;
     const filterMin = filter.minimum ? filter.minimum : filter.minimum === 0 ? 0 : minimum;
     const filterMax = filter.maximum ? filter.maximum : filter.maximum === 0 ? 0 : maximum;
-    return `/search/item_category/${filterCategory}/item_brand/${filterBrand}/name/${filterName}/minimum/${filterMin}/maximum/${filterMax}/user_rating/${filterRating}/customer_order/${sortOrder}/pageNumber/${filterPage}`;
+    return `/search/item_category/${filterCategory}/item_brand/${filterBrand}/name/${filterName}/minimum/${filterMin}/maximum/${filterMax}/user_rating/${filterRating}/customer_order/${sortOrder}/page_number/${filterPage}`;
   };
   return (
     <div className="">

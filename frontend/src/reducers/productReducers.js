@@ -1,31 +1,31 @@
 const {
-  PRODUCT_LIST_REQUEST,
-  PRODUCT_LIST_SUCCESS,
-  PRODUCT_LIST_FAIL,
-  PRODUCT_DETAILS_REQUEST,
-  PRODUCT_DETAILS_SUCCESS,
-  PRODUCT_DETAILS_FAIL,
-  PRODUCT_CREATE_REQUEST,
-  PRODUCT_CREATE_SUCCESS,
-  PRODUCT_CREATE_FAIL,
+  ITEM_HISTORY_REQUEST,
+  ITEM_HISTORY_COMPLETE,
+  ITEM_HISTORY_ERROR,
+  ITEM_INFO_REQUEST,
+  ITEM_INFO_COMPLETE,
+  ITEM_INFO_ERROR,
+  ITEM_NEW_REQUEST,
+  ITEM_NEW_COMPLETE,
+  ITEM_NEW_ERROR,
   PRODUCT_CREATE_RESET,
-  PRODUCT_UPDATE_REQUEST,
-  PRODUCT_UPDATE_SUCCESS,
-  PRODUCT_UPDATE_FAIL,
+  ITEM_AMMEND_REQUEST,
+  ITEM_AMMEND_COMPLETE,
+  ITEM_AMMEND_ERROR,
   PRODUCT_UPDATE_RESET,
-  PRODUCT_DELETE_REQUEST,
-  PRODUCT_DELETE_SUCCESS,
-  PRODUCT_DELETE_FAIL,
+  ITEM_REMOVE_REQUEST,
+  ITEM_REMOVE_COMPLETE,
+  ITEM_REMOVE_ERROR,
   PRODUCT_DELETE_RESET,
-  PRODUCT_CATEGORY_LIST_REQUEST,
-  PRODUCT_CATEGORY_LIST_SUCCESS,
-  PRODUCT_CATEGORY_LIST_FAIL,
-  PRODUCT_BRAND_LIST_REQUEST,
-  PRODUCT_BRAND_LIST_SUCCESS,
-  PRODUCT_BRAND_LIST_FAIL,
-  PRODUCT_REVIEW_CREATE_REQUEST,
-  PRODUCT_REVIEW_CREATE_SUCCESS,
-  PRODUCT_REVIEW_CREATE_FAIL,
+  ITEM_CATEGORY_FILTER_REQUEST,
+  ITEM_CATEGORY_FILTER_COMPLETE,
+  ITEM_CATEGORY_FILTER_ERROR,
+  ITEM_BRAND_FILTER_REQUEST,
+  ITEM_BRAND_FILTER_COMPLETE,
+  ITEM_BRAND_FILTER_ERROR,
+  ITEM_REVIEW_NEW_REQUEST,
+  ITEM_REVIEW_NEW_COMPLETE,
+  ITEM_REVIEW_NEW_ERROR,
   PRODUCT_REVIEW_CREATE_RESET,
 } = require('../constants/productConstants');
 
@@ -34,16 +34,16 @@ export const productListReducer = (
   action
 ) => {
   switch (action.type) {
-    case PRODUCT_LIST_REQUEST:
+    case ITEM_HISTORY_REQUEST:
       return { loading: true };
-    case PRODUCT_LIST_SUCCESS:
+    case ITEM_HISTORY_COMPLETE:
       return {
         loading: false,
         PPTitems: action.payload.PPTitems,
         pages: action.payload.pages,
         pptpage: action.payload.pptpage,
       };
-    case PRODUCT_LIST_FAIL:
+    case ITEM_HISTORY_ERROR:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -55,11 +55,11 @@ export const productCategoryListReducer = (
   action
 ) => {
   switch (action.type) {
-    case PRODUCT_CATEGORY_LIST_REQUEST:
+    case ITEM_CATEGORY_FILTER_REQUEST:
       return { loading: true };
-    case PRODUCT_CATEGORY_LIST_SUCCESS:
+    case ITEM_CATEGORY_FILTER_COMPLETE:
       return { loading: false, categories: action.payload };
-    case PRODUCT_CATEGORY_LIST_FAIL:
+    case ITEM_CATEGORY_FILTER_ERROR:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -71,11 +71,11 @@ export const productBrandListReducer = (
   action
 ) => {
   switch (action.type) {
-    case PRODUCT_BRAND_LIST_REQUEST:
+    case ITEM_BRAND_FILTER_REQUEST:
       return { loading: true };
-    case PRODUCT_BRAND_LIST_SUCCESS:
+    case ITEM_BRAND_FILTER_COMPLETE:
       return { loading: false, brands: action.payload };
-    case PRODUCT_BRAND_LIST_FAIL:
+    case ITEM_BRAND_FILTER_ERROR:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -84,11 +84,11 @@ export const productBrandListReducer = (
 
 export const productDetailsReducer = (state = { loading: true }, action) => {
   switch (action.type) {
-    case PRODUCT_DETAILS_REQUEST:
+    case ITEM_INFO_REQUEST:
       return { loading: true };
-    case PRODUCT_DETAILS_SUCCESS:
+    case ITEM_INFO_COMPLETE:
       return { loading: false, item: action.payload };
-    case PRODUCT_DETAILS_FAIL:
+    case ITEM_INFO_ERROR:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -96,11 +96,11 @@ export const productDetailsReducer = (state = { loading: true }, action) => {
 };
 export const productCreateReducer = (state = {}, action) => {
   switch (action.type) {
-    case PRODUCT_CREATE_REQUEST:
+    case ITEM_NEW_REQUEST:
       return { loading: true };
-    case PRODUCT_CREATE_SUCCESS:
+    case ITEM_NEW_COMPLETE:
       return { loading: false, success: true, item: action.payload };
-    case PRODUCT_CREATE_FAIL:
+    case ITEM_NEW_ERROR:
       return { loading: false, error: action.payload };
     case PRODUCT_CREATE_RESET:
       return {};
@@ -110,11 +110,11 @@ export const productCreateReducer = (state = {}, action) => {
 };
 export const productUpdateReducer = (state = {}, action) => {
   switch (action.type) {
-    case PRODUCT_UPDATE_REQUEST:
+    case ITEM_AMMEND_REQUEST:
       return { loading: true };
-    case PRODUCT_UPDATE_SUCCESS:
+    case ITEM_AMMEND_COMPLETE:
       return { loading: false, success: true };
-    case PRODUCT_UPDATE_FAIL:
+    case ITEM_AMMEND_ERROR:
       return { loading: false, error: action.payload };
     case PRODUCT_UPDATE_RESET:
       return {};
@@ -124,11 +124,11 @@ export const productUpdateReducer = (state = {}, action) => {
 };
 export const productDeleteReducer = (state = {}, action) => {
   switch (action.type) {
-    case PRODUCT_DELETE_REQUEST:
+    case ITEM_REMOVE_REQUEST:
       return { loading: true };
-    case PRODUCT_DELETE_SUCCESS:
+    case ITEM_REMOVE_COMPLETE:
       return { loading: false, success: true };
-    case PRODUCT_DELETE_FAIL:
+    case ITEM_REMOVE_ERROR:
       return { loading: false, error: action.payload };
     case PRODUCT_DELETE_RESET:
       return {};
@@ -138,11 +138,11 @@ export const productDeleteReducer = (state = {}, action) => {
 };
 export const productReviewCreateReducer = (state = {}, action) => {
   switch (action.type) {
-    case PRODUCT_REVIEW_CREATE_REQUEST:
+    case ITEM_REVIEW_NEW_REQUEST:
       return { loading: true };
-    case PRODUCT_REVIEW_CREATE_SUCCESS:
+    case ITEM_REVIEW_NEW_COMPLETE:
       return { loading: false, success: true, review: action.payload };
-    case PRODUCT_REVIEW_CREATE_FAIL:
+    case ITEM_REVIEW_NEW_ERROR:
       return { loading: false, error: action.payload };
     case PRODUCT_REVIEW_CREATE_RESET:
       return {};

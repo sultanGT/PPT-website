@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { signin } from '../actions/userActions';
-import { register } from '../actions/userActions';
+import { login } from '../actions/customerActions';
+import { signup } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
@@ -36,7 +36,7 @@ export default function RegisterScreen(props) {
   
   const submitHandler2 = (e) => {
     e.preventDefault();
-    dispatch(signin(email, password));
+    dispatch(login(email, password));
   }
 
   const submitHandler = (e) => {
@@ -44,8 +44,8 @@ export default function RegisterScreen(props) {
       alert('Password and confirm password are not matching');
     } else {
       e.preventDefault();
-      dispatch(register(name, email, password));
-      dispatch(signin(email, password));
+      dispatch(signup(name, email, password));
+      dispatch(login(email, password));
 
     }
   };

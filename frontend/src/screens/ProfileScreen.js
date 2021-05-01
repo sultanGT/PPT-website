@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { detailsUser, updateUserProfile } from '../actions/userActions';
+import { customerInfo, ammendCustomerAccount } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
@@ -26,7 +26,7 @@ export default function ProfileScreen() {
   useEffect(() => {
     if (!pptuser) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
-      dispatch(detailsUser(pptUserDetails._id));
+      dispatch(customerInfo(pptUserDetails._id));
     } else {
       setName(pptuser.name);
       setEmail(pptuser.email);
@@ -39,8 +39,8 @@ export default function ProfileScreen() {
       alert('Password and Confirm Password Are Not Matched');
     } else {
       dispatch(
-        updateUserProfile({
-          userId: pptuser._id,
+        ammendCustomerAccount({
+          customerId: pptuser._id,
           name,
           email,
           password,

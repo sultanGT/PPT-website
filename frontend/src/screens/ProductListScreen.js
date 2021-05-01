@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import {
-  createProduct,
-  item_deleted,
-  listProducts,
-} from '../actions/productActions';
+  newItem,
+  removeItem,
+  displayItems,
+} from '../actions/itemActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {
@@ -14,7 +14,7 @@ import {
 } from '../constants/productConstants';
 
 export default function ProductListScreen(props) {
-  const { pageNumber = 1 } = useParams();
+  const { page_number = 1 } = useParams();
   const productList = useSelector((state) => state.productList);
   const { loading, error, PPTitems, pptpage, pages } = productList;
 
@@ -44,7 +44,7 @@ export default function ProductListScreen(props) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
     dispatch(
-      listProducts(pptUserDetails._id, pageNumber)
+      displayItems(pptUserDetails._id, page_number)
     );
   }, [
     new_item,
@@ -54,16 +54,16 @@ export default function ProductListScreen(props) {
     successCreate,
     successDelete,
     pptUserDetails._id,
-    pageNumber,
+    page_number,
   ]);
 
   const deleteHandler = (item) => {
     if (window.confirm('Are you sure you want to delete?')) {
-      dispatch(item_deleted(item._id));
+      dispatch(removeItem(item._id));
     }
   };
   const createHandler = () => {
-    dispatch(createProduct());
+    dispatch(newItem());
   };
   return (
     <div>
@@ -131,7 +131,7 @@ export default function ProductListScreen(props) {
               <Link
                 className={x + 1 === pptpage ? 'active' : ''}
                 key={x + 1}
-                to={`/productlist/pageNumber/${x + 1}`}
+                to={`/productlist/page_number/${x + 1}`}
               >
                 {x + 1}
               </Link>

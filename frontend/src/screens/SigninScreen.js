@@ -1,7 +1,7 @@
 // import React, { useEffect, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { Link } from 'react-router-dom';
-// import { signin } from '../actions/userActions';
+// import { login } from '../actions/customerActions';
 // import LoadingBox from '../components/LoadingBox';
 // import MessageBox from '../components/MessageBox';
 
@@ -19,7 +19,7 @@
 //   const dispatch = useDispatch();
 //   const submitHandler = (e) => {
 //     e.preventDefault();
-//     dispatch(signin(email, password));
+//     dispatch(login(email, password));
 //   };
 //   useEffect(() => {
 //     if (pptUserDetails) {
