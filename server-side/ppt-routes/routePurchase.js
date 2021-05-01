@@ -1,7 +1,7 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import PPTOrder from '../ppt-templates/purchaseTemplate.js';
-import { userCredentialsAdministrator, userCredentialsAuthenticated, mailgun, orderCompletionEmail, } from '../utils.js';
+import { userCredentialsAdministrator, userCredentialsAuthenticated, orderCompletionEmail, } from '../utils.js';
 
 
 //Payment Router for PPT
