@@ -656,8 +656,6 @@ img.large {
 .borders {
   background: #ffffff;
     border: 0.2rem #fff solid;
-    border-radius: 5px;
-    margin-left: 50px;
 }
 
 .return {

@@ -15,7 +15,7 @@ import ProductScreen from './screens/ProductScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
-import SigninScreen from './screens/SigninScreen';
+// import SigninScreen from './screens/SigninScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
@@ -300,7 +300,7 @@ function App(props) {
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/item/:id" component={ProductScreen} exact></Route>
           <Route path="/item/:id/edit" component={ProductEditScreen} exact></Route>
-          <Route path="/login" component={SigninScreen}></Route>
+          {/* <Route path="/login" component={SigninScreen}></Route> */}
           <Route path="/signup" component={RegisterScreen}></Route>
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
           <Route path="/payment" component={PaymentMethodScreen}></Route>
