@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { customerInfo, ammendCustomer } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { USER_UPDATE_RESET } from '../constants/userConstants';
+import { CUSTOMER_AMMEND_REFRESH } from '../constants/userConstants';
 
 export default function UserEditScreen(props) {
   const customerId = props.match.params.id;
@@ -26,7 +26,7 @@ export default function UserEditScreen(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     if (successUpdate) {
-      dispatch({ type: USER_UPDATE_RESET });
+      dispatch({ type: CUSTOMER_AMMEND_REFRESH });
       props.history.push('/userlist');
     }
     if (!pptuser) {

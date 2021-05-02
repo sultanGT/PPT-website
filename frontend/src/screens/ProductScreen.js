@@ -5,7 +5,7 @@ import { newReview, itemInfo } from '../actions/itemActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Rating from '../components/Rating';
-import { PRODUCT_REVIEW_CREATE_RESET } from '../constants/productConstants';
+import { ITEM_REVIEW_CREATE_REFRESH } from '../constants/productConstants';
 import { GrReturn } from 'react-icons/gr';
 
 export default function ProductScreen(props) {
@@ -32,7 +32,7 @@ export default function ProductScreen(props) {
       window.alert('Review Submitted Successfully');
       setRating('');
       setComment('');
-      dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
+      dispatch({ type: ITEM_REVIEW_CREATE_REFRESH });
     }
     dispatch(itemInfo(item_id));
   }, [dispatch, item_id, successReviewCreate]);

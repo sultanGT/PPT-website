@@ -1,7 +1,7 @@
 import {
   PURCHASE_NEW_ERROR,
   PURCHASE_NEW_REQUEST,
-  ORDER_CREATE_RESET,
+  PURCHASE_NEW_REFRESH,
   PURCHASE_NEW_COMPLETE,
   PURCHASE_INFO_ERROR,
   PURCHASE_INFO_REQUEST,
@@ -11,7 +11,7 @@ import {
   PURCHASE_ACCOUNT_HISTORY_COMPLETE,
   PURCHASE_PAYPAL_ERROR,
   PURCHASE_PAYPAL_REQUEST,
-  ORDER_PAY_RESET,
+  PURCHASE_PAYPAL_REFRESH,
   PURCHASE_PAYPAL_COMPLETE,
   PURCHASE_HISTORY_REQUEST,
   PURCHASE_HISTORY_COMPLETE,
@@ -19,11 +19,11 @@ import {
   PURCHASE_REMOVE_REQUEST,
   PURCHASE_REMOVE_COMPLETE,
   PURCHASE_REMOVE_ERROR,
-  ORDER_DELETE_RESET,
+  PURCHASE_REMOVE_REFRESH,
   PURCHASE_SHIPPING_REQUEST,
   PURCHASE_SHIPPING_COMPLETE,
   PURCHASE_SHIPPING_ERROR,
-  ORDER_DELIVER_RESET,
+  PURCHASE_SHIPPING_REFRESH,
 } from '../constants/orderConstants';
 
 export const orderCreateReducer = (state = {}, action) => {
@@ -34,7 +34,7 @@ export const orderCreateReducer = (state = {}, action) => {
       return { loading: false, success: true, customer_order: action.payload };
     case PURCHASE_NEW_ERROR:
       return { loading: false, error: action.payload };
-    case ORDER_CREATE_RESET:
+    case PURCHASE_NEW_REFRESH:
       return {};
     default:
       return state;
@@ -62,7 +62,7 @@ export const orderPayReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case PURCHASE_PAYPAL_ERROR:
       return { loading: false, error: action.payload };
-    case ORDER_PAY_RESET:
+    case PURCHASE_PAYPAL_REFRESH:
       return {};
     default:
       return state;
@@ -100,7 +100,7 @@ export const orderDeleteReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case PURCHASE_REMOVE_ERROR:
       return { loading: false, error: action.payload };
-    case ORDER_DELETE_RESET:
+    case PURCHASE_REMOVE_REFRESH:
       return {};
     default:
       return state;
@@ -115,7 +115,7 @@ export const orderDeliverReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case PURCHASE_SHIPPING_ERROR:
       return { loading: false, error: action.payload };
-    case ORDER_DELIVER_RESET:
+    case PURCHASE_SHIPPING_REFRESH:
       return {};
     default:
       return state;

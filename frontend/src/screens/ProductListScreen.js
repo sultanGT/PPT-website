@@ -9,8 +9,8 @@ import {
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {
-  PRODUCT_CREATE_RESET,
-  PRODUCT_DELETE_RESET,
+  ITEM_CREATE_REFRESH,
+  ITEM_REMOVE_REFRESH,
 } from '../constants/productConstants';
 
 export default function ProductListScreen(props) {
@@ -37,11 +37,11 @@ export default function ProductListScreen(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     if (successCreate) {
-      dispatch({ type: PRODUCT_CREATE_RESET });
+      dispatch({ type: ITEM_CREATE_REFRESH });
       props.history.push(`/item/${new_item._id}/edit`);
     }
     if (successDelete) {
-      dispatch({ type: PRODUCT_DELETE_RESET });
+      dispatch({ type: ITEM_REMOVE_REFRESH });
     }
     dispatch(
       displayItems(pptUserDetails._id, page_number)

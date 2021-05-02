@@ -14,7 +14,6 @@ import ProductScreen from './screens/ProductScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
-// import SigninScreen from './screens/SigninScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
@@ -25,7 +24,7 @@ import { displayItemBrands, displayItemCategories } from './actions/itemActions'
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import '@fortawesome/fontawesome-free/js/all.js';
-import img from './constants/pptmenuicon.png';
+import img from './pptmenuicon.png';
 import { addShoppingItem, deleteShoppingItem } from './actions/shoppingActions';
 
 

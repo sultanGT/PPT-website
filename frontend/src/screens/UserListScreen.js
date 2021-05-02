@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeCustomer, customerHistory } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { USER_DETAILS_RESET } from '../constants/userConstants';
+import { CUSTOMER_INFO_REFRESH } from '../constants/userConstants';
 
 export default function UserListScreen(props) {
   const userList = useSelector((state) => state.userList);
@@ -20,7 +20,7 @@ export default function UserListScreen(props) {
   useEffect(() => {
     dispatch(customerHistory());
     dispatch({
-      type: USER_DETAILS_RESET,
+      type: CUSTOMER_INFO_REFRESH,
     });
   }, [dispatch, successDelete]);
   const deleteHandler = (pptuser) => {

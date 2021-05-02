@@ -7,8 +7,8 @@ import { shippingPurchase, purchaseInfo, purchasePayPal } from '../actions/purch
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {
-  ORDER_DELIVER_RESET,
-  ORDER_PAY_RESET,
+  PURCHASE_SHIPPING_REFRESH,
+  PURCHASE_PAYPAL_REFRESH,
 } from '../constants/orderConstants';
 import PurchaseProgress from '../components/PurchaseProgress';
 
@@ -51,8 +51,8 @@ export default function OrderScreen(props) {
       successDeliver ||
       (customer_order && customer_order._id !== purchaseId)
     ) {
-      dispatch({ type: ORDER_PAY_RESET });
-      dispatch({ type: ORDER_DELIVER_RESET });
+      dispatch({ type: PURCHASE_PAYPAL_REFRESH });
+      dispatch({ type: PURCHASE_SHIPPING_REFRESH });
       dispatch(purchaseInfo(purchaseId));
     } else {
       if (!customer_order.purchase_confirmed) {
@@ -78,7 +78,13 @@ export default function OrderScreen(props) {
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div className="pager">
-      <PurchaseProgress progress_signin progress_shipping progress_place_order progress_payment></PurchaseProgress>
+
+      {customer_order.delivery_confirmed ? (
+                 <PurchaseProgress progress_signin progress_shipping progress_place_order progress_payment progress_delivered></PurchaseProgress>
+                ) : (
+                 <PurchaseProgress progress_signin progress_shipping progress_place_order progress_payment></PurchaseProgress>
+                )}    
+
       <h1>Order {customer_order._id}</h1>
       <div className="row top">
         <div className="col-2">
@@ -97,7 +103,6 @@ export default function OrderScreen(props) {
                 {customer_order.delivery_confirmed ? (
                   <MessageBox variant="success">
                     Delivered at {customer_order.delivery_date}
-                    <PurchaseProgress progress_signin progress_shipping progress_place_order progress_payment progress_delivery></PurchaseProgress>
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Delivered</MessageBox>

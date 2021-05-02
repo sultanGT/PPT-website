@@ -4,7 +4,7 @@ import Axios from 'axios';
 import { itemInfo, ammendItem } from '../actions/itemActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
+import { ITEM_AMMEND_REFRESH } from '../constants/productConstants';
 
 export default function ProductEditScreen(props) {
   const item_id = props.match.params.id;
@@ -32,7 +32,7 @@ export default function ProductEditScreen(props) {
       props.history.push('/productlist');
     }
     if (!item || item._id !== item_id || successUpdate) {
-      dispatch({ type: PRODUCT_UPDATE_RESET });
+      dispatch({ type: ITEM_AMMEND_REFRESH });
       dispatch(itemInfo(item_id));
     } else {
       setName(item.name);

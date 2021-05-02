@@ -104,7 +104,7 @@ export default function ShippingAddressScreen(props) {
         <div>
           <label htmlFor="contactNumber">Contact Number</label>
           <input
-            type="number"
+            type="text"
             id="contactNumber"
             placeholder="Enter Contact Number"
             onChange={(e) => setContactNumber(e.target.value)}

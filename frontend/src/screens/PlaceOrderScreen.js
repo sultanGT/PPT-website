@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { newPurchase } from '../actions/purchaseActions';
 import PurchaseProgress from '../components/PurchaseProgress';
-import { ORDER_CREATE_RESET } from '../constants/orderConstants';
+import { PURCHASE_NEW_REFRESH } from '../constants/orderConstants';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
@@ -28,7 +28,7 @@ export default function PlaceOrderScreen(props) {
   useEffect(() => {
     if (success) {
       props.history.push(`/customer_order/${customer_order._id}`);
-      dispatch({ type: ORDER_CREATE_RESET });
+      dispatch({ type: PURCHASE_NEW_REFRESH });
     }
   }, [dispatch, customer_order, props.history, success]);
   return (

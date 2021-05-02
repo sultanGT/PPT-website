@@ -8,15 +8,15 @@ const {
   ITEM_NEW_REQUEST,
   ITEM_NEW_COMPLETE,
   ITEM_NEW_ERROR,
-  PRODUCT_CREATE_RESET,
+  ITEM_CREATE_REFRESH,
   ITEM_AMMEND_REQUEST,
   ITEM_AMMEND_COMPLETE,
   ITEM_AMMEND_ERROR,
-  PRODUCT_UPDATE_RESET,
+  ITEM_AMMEND_REFRESH,
   ITEM_REMOVE_REQUEST,
   ITEM_REMOVE_COMPLETE,
   ITEM_REMOVE_ERROR,
-  PRODUCT_DELETE_RESET,
+  ITEM_REMOVE_REFRESH,
   ITEM_CATEGORY_FILTER_REQUEST,
   ITEM_CATEGORY_FILTER_COMPLETE,
   ITEM_CATEGORY_FILTER_ERROR,
@@ -26,7 +26,7 @@ const {
   ITEM_REVIEW_NEW_REQUEST,
   ITEM_REVIEW_NEW_COMPLETE,
   ITEM_REVIEW_NEW_ERROR,
-  PRODUCT_REVIEW_CREATE_RESET,
+  ITEM_REVIEW_CREATE_REFRESH,
 } = require('../constants/productConstants');
 
 export const productListReducer = (
@@ -102,7 +102,7 @@ export const productCreateReducer = (state = {}, action) => {
       return { loading: false, success: true, item: action.payload };
     case ITEM_NEW_ERROR:
       return { loading: false, error: action.payload };
-    case PRODUCT_CREATE_RESET:
+    case ITEM_CREATE_REFRESH:
       return {};
     default:
       return state;
@@ -116,7 +116,7 @@ export const productUpdateReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case ITEM_AMMEND_ERROR:
       return { loading: false, error: action.payload };
-    case PRODUCT_UPDATE_RESET:
+    case ITEM_AMMEND_REFRESH:
       return {};
     default:
       return state;
@@ -130,7 +130,7 @@ export const productDeleteReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case ITEM_REMOVE_ERROR:
       return { loading: false, error: action.payload };
-    case PRODUCT_DELETE_RESET:
+    case ITEM_REMOVE_REFRESH:
       return {};
     default:
       return state;
@@ -144,7 +144,7 @@ export const productReviewCreateReducer = (state = {}, action) => {
       return { loading: false, success: true, review: action.payload };
     case ITEM_REVIEW_NEW_ERROR:
       return { loading: false, error: action.payload };
-    case PRODUCT_REVIEW_CREATE_RESET:
+    case ITEM_REVIEW_CREATE_REFRESH:
       return {};
     default:
       return state;

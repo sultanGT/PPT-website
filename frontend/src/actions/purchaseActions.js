@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { CART_EMPTY } from '../constants/cartConstants';
+import { SHOPPING_NO_ITEMS } from '../constants/cartConstants';
 import {
   PURCHASE_NEW_ERROR,
   PURCHASE_NEW_REQUEST,
@@ -37,7 +37,7 @@ export const newPurchase = (customer_order) => async (dispatch, getState) => {
       },
     });
     dispatch({ type: PURCHASE_NEW_COMPLETE, payload: data.customer_order });
-    dispatch({ type: CART_EMPTY });
+    dispatch({ type: SHOPPING_NO_ITEMS });
     localStorage.removeItem('shopping_items');
   } catch (error) {
     dispatch({

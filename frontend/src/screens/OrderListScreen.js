@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removePurchase, puchasesHistory } from '../actions/purchaseActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { ORDER_DELETE_RESET } from '../constants/orderConstants';
+import { PURCHASE_REMOVE_REFRESH } from '../constants/orderConstants';
 
 export default function OrderListScreen(props) {
   const orderList = useSelector((state) => state.orderList);
@@ -19,7 +19,7 @@ export default function OrderListScreen(props) {
   const { pptUserDetails } = customerLogin;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({ type: ORDER_DELETE_RESET });
+    dispatch({ type: PURCHASE_REMOVE_REFRESH });
     dispatch(puchasesHistory( pptUserDetails._id ));
   }, [dispatch, successDelete, pptUserDetails._id]);
   const deleteHandler = (customer_order) => {

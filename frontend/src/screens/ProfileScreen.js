@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { customerInfo, ammendCustomerAccount } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
+import { CUSTOMER_AMMEND_PROFILE_REFRESH } from '../constants/userConstants';
 
 export default function ProfileScreen() {
   const [name, setName] = useState('');
@@ -25,7 +25,7 @@ export default function ProfileScreen() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (!pptuser) {
-      dispatch({ type: USER_UPDATE_PROFILE_RESET });
+      dispatch({ type: CUSTOMER_AMMEND_PROFILE_REFRESH });
       dispatch(customerInfo(pptUserDetails._id));
     } else {
       setName(pptuser.name);

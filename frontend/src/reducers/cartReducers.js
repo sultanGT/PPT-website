@@ -1,6 +1,6 @@
 import {
   SHOPPING_ADD_PRODUCT,
-  CART_EMPTY,
+  SHOPPING_NO_ITEMS,
   SHOPPING_REMOVE_PRODUCT,
   SHOPPING_PAYPAL,
   SHOPPING_DELIVERY_ADDRESS,
@@ -32,7 +32,7 @@ export const cartReducer = (state = { shopping_items: [] }, action) => {
       return { ...state, delivery_address: action.payload };
     case SHOPPING_PAYPAL:
       return { ...state, purchase_method: action.payload };
-    case CART_EMPTY:
+    case SHOPPING_NO_ITEMS:
       return { ...state, error: '', shopping_items: [] };
     default:
       return state;
