@@ -16,14 +16,29 @@ export default function ShippingAddressScreen(props) {
   const [city, setCity] = useState(delivery_address.city);
   const [post_code, setPostCode] = useState(delivery_address.post_code);
   const [county, setCountry] = useState(delivery_address.county);
+  const [contactNumber, setContactNumber] = useState(delivery_address.contactNumber);
   const dispatch = useDispatch();
+
   const submitHandler = (e) => {
+    if (contactNumber.length < 11) {
+      alert('Contact Number Is Not Valid');
+      e.preventDefault();
+    } else if (post_code.length < 7) {
+      e.preventDefault();
+      alert('Post Code Is Not Valid');
+    }
+      else
+      
+      {
     e.preventDefault();
     dispatch(
-      saveDeliveryAddress({ fullName, address, city, post_code, county })
+      saveDeliveryAddress({ fullName, address, city, post_code, county, contactNumber })
     );
     props.history.push('/placeorder');
   };
+}
+
+
   return (
     <div className="pager">
       <PurchaseProgress progress_signin progress_shipping></PurchaseProgress>
@@ -85,10 +100,18 @@ export default function ShippingAddressScreen(props) {
             onChange={(e) => setCountry(e.target.value)}
             required
           ></input>
+          <label htmlFor="contactNumber">Contact Number</label>
+          <input
+            type="number"
+            id="contactNumber"
+            placeholder="Enter Contact Number"
+            onChange={(e) => setContactNumber(e.target.value)}
+            required
+          ></input>
         </div>
         <div>
           <label />
-          <button className="primary" type="submit">
+          <button className="primary" type="submit" >
             Continue
           </button>
         </div>

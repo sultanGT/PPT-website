@@ -92,6 +92,7 @@ export default function OrderScreen(props) {
                   {customer_order.delivery_address.city},{' '}
                   {customer_order.delivery_address.postalCode},
                   {customer_order.delivery_address.county}
+                  {customer_order.delivery_address.contactNumber}
                 </p>
                 {customer_order.delivery_confirmed ? (
                   <MessageBox variant="success">

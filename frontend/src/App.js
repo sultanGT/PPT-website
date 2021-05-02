@@ -419,6 +419,13 @@ function App(props) {
             )}
             </ul>
           </div>
+          <div>
+          <ul className="categories responsive">
+          <li>
+              <h1>PPT Items</h1>
+            </li>
+            </ul>
+          </div>
       © 2021 Peak Performance
         </footer>
       </div>

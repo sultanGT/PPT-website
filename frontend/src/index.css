@@ -744,6 +744,11 @@ div.loading{
   background-color: rgba(16, 16, 16, 0.5);
 }
 
+.signupForm {
+  width: 100%;
+}
+
+
 @-webkit-keyframes uil-ring-anim {
   0% {
     -ms-transform: rotate(0deg);
@@ -897,3 +902,4 @@ div.loading{
   -o-animation: uil-ring-anim 1s linear infinite;
   animation: uil-ring-anim 1s linear infinite;
 }
+

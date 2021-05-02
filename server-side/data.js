@@ -72,7 +72,7 @@ const data = {
             name: 'Adidas Red Body Armour',
             item_category: 'Body Armour',
             picture: '/images/p5.jpg',
-            cost: 59.99,
+            cost: 59,
             stock_number: 6,
             item_brand: 'Adidas',
             user_rating: 4.5,

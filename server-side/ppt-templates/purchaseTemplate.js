@@ -14,7 +14,10 @@ const pptPurchaseModel = new mongoose.Schema(
         address: { type: String, required: true }, 
         city: { type: String, required: true }, 
         post_code: { type: String, required: true }, 
-        county: { type: String, required: true }, }, 
+        county: { type: String, required: true },
+        contactNumber: { type: Number, required: true }, 
+    
+    },
         purchase_method: { type: String, required: true }, 
         purchase_complete: { id: String, status: String, update_record: String, pptuser_email: String, }, 
         items_cost: { type: Number, required: true }, 
