@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { newPurchase } from '../actions/purchaseActions';
-import CheckoutSteps from '../components/CheckoutSteps';
+import PurchaseProgress from '../components/PurchaseProgress';
 import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -33,7 +33,7 @@ export default function PlaceOrderScreen(props) {
   }, [dispatch, customer_order, props.history, success]);
   return (
     <div className="pager">
-      <CheckoutSteps step1 step2 step3></CheckoutSteps>
+      <PurchaseProgress progress_signin progress_shipping progress_place_order></PurchaseProgress>
       <div className="row top">
         <div className="col-2">
           <ul>

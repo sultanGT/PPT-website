@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveDeliveryAddress } from '../actions/shoppingActions';
-import CheckoutSteps from '../components/CheckoutSteps';
+import PurchaseProgress from '../components/PurchaseProgress';
 
 export default function ShippingAddressScreen(props) {
   const customerLogin = useSelector((state) => state.customerLogin);
@@ -26,7 +26,7 @@ export default function ShippingAddressScreen(props) {
   };
   return (
     <div className="pager">
-      <CheckoutSteps step1 step2></CheckoutSteps>
+      <PurchaseProgress progress_signin progress_shipping></PurchaseProgress>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Shipping Address</h1>

@@ -135,6 +135,7 @@ export const puchasesHistory = () => async (dispatch, getState) => {
     dispatch({ type: PURCHASE_HISTORY_ERROR, payload: message });
   }
 };
+//
 export const removePurchase = (purchaseId) => async (dispatch, getState) => {
   dispatch({ type: PURCHASE_REMOVE_REQUEST, payload: purchaseId });
   const {

@@ -10,7 +10,7 @@ import {
   ORDER_DELIVER_RESET,
   ORDER_PAY_RESET,
 } from '../constants/orderConstants';
-import CheckoutSteps from '../components/CheckoutSteps';
+import PurchaseProgress from '../components/PurchaseProgress';
 
 export default function OrderScreen(props) {
   const purchaseId = props.match.params.id;
@@ -78,7 +78,7 @@ export default function OrderScreen(props) {
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div className="pager">
-      <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
+      <PurchaseProgress progress_signin progress_shipping progress_place_order progress_payment></PurchaseProgress>
       <h1>Order {customer_order._id}</h1>
       <div className="row top">
         <div className="col-2">
@@ -87,7 +87,7 @@ export default function OrderScreen(props) {
               <div className="card card-body">
                 <h2>Shippring</h2>
                 <p>
-                  <strong>Name:</strong> {customer_order.delivery_address.fullName} <br />
+                  <strong>Name:</strong> {pptUserDetails.name} <br />
                   <strong>Address: </strong> {customer_order.delivery_address.address},
                   {customer_order.delivery_address.city},{' '}
                   {customer_order.delivery_address.postalCode},

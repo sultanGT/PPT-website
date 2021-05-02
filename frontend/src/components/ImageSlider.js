@@ -12,32 +12,24 @@ const ImageSlider = ({ slides }) => {
   const nextSlide = () => {
     setCurrent(current === -1 ? length - 1 : current - 1 || current === -2 ? 0 : current - 1 || current === 0 ? 0 : current - 1);
   };
-
   const prevSlide = () => {
     setCurrent(current === 0 ? length - 2 : current + 1 || current === 0 ? length - 2 : current + 1);
   };
-
   const midSlide = () => {
     setCurrent(current === -2 ? length - 1 : current - 1 || current === -2 ? length - 1 : current + 1 );
   };
   
-
   const nextSlideArrow = () => {
     setCurrent(current === 0 ? length - 2 : current - 1 || current === 0 ? length - 1 : current + 1 );
   };
-
   const prevSlideArrow = () => {
     setCurrent(current === -1 ? length - 1 : current - 1 || current === 0 ? length - 1 : current + 1 );
   };
 
 
-
-
-  // if (!Array.isArray(slides) || slides.length <= 0) {
-  //   return null;
-  // }
-
-  
+  if (!Array.isArray(slides) || slides.length <= 0) {
+    return null;
+  }
 
   return (
     <div>

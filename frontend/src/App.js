@@ -83,7 +83,7 @@ function App(props) {
   return (
     <BrowserRouter>
       <div className="grid-container">
-      <header className={navbar ? 'row navbar active' : 'row navbar'}>
+      <header className={navbar ? 'row navbar active' : 'row navbar responsive'}>
           <div className="row left">
             <button
               type="button"
@@ -115,7 +115,7 @@ function App(props) {
               )}
             </Link>
 {/* DROPDOWN CART SCREEN */}
-            <div className="dropdown-content cartDropdown responsiveCart">
+            <div className="dropdown-content cartDropdown responsive">
                 {
                   <div className="row top pager">
                   <div className="col-2">

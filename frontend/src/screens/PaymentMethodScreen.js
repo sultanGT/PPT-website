@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { savePayPal } from '../actions/shoppingActions';
-import CheckoutSteps from '../components/CheckoutSteps';
+import PurchaseProgress from '../components/PurchaseProgress';
 
 export default function PaymentMethodScreen(props) {
   const cart = useSelector((state) => state.cart);
@@ -18,7 +18,7 @@ export default function PaymentMethodScreen(props) {
   };
   return (
     <div>
-      <CheckoutSteps step1 step2 step3></CheckoutSteps>
+      <PurchaseProgress progress_signin progress_shipping progress_place_order></PurchaseProgress>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Payment Method</h1>
