@@ -41,10 +41,12 @@ export default function PlaceOrderScreen(props) {
               <div className="card card-body">
                 <h2>Shipping</h2>
                 <p>
-                  <strong>Name:</strong> {cart.delivery_address.fullName} <br />
-                  <strong>Address: </strong> {cart.delivery_address.address},
-                  {cart.delivery_address.city}, {cart.delivery_address.post_code}
-                  ,{cart.delivery_address.county},{cart.delivery_address.contactNumber}
+                  <strong>Name:   </strong>{cart.delivery_address.fullName} <br />
+                  <strong>Address:  </strong>{cart.delivery_address.address}<br />
+                  <strong>City:   </strong>{cart.delivery_address.city}<br />
+                  <strong>Post Code:   </strong>{cart.delivery_address.post_code}<br />
+                  <strong>County:   </strong>{cart.delivery_address.county}<br />
+                  <strong>Contact Number:   </strong>{cart.delivery_address.contactNumber}<br />
                 </p>
               </div>
             </li>
@@ -52,7 +54,7 @@ export default function PlaceOrderScreen(props) {
               <div className="card card-body">
                 <h2>Payment</h2>
                 <p>
-                  <strong>Method:</strong> {cart.purchase_method}
+                {cart.purchase_method}
                 </p>
               </div>
             </li>

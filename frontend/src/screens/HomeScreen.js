@@ -4,8 +4,9 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayItems } from '../actions/itemActions';
-import ImageSlider from '../components/ImageSlider';
-import { SliderData } from '../components/SliderData';
+import ImageCarousel from '../components/ImageCarousel';
+import { ImageSlides } from '../components/ImageSlides';
+
 
 
 export default function HomeScreen() {
@@ -22,7 +23,7 @@ export default function HomeScreen() {
     <div>
 {/* Carousel Slider */}
 <div className="row center responsive"> 
-<ImageSlider slides={SliderData} />
+<ImageCarousel slides={ImageSlides} />
 </div>
 <h1 className='row center itemTitle'>Our Newest Products!</h1>
       {loading ? (

@@ -4,8 +4,6 @@ import { login } from '../actions/customerActions';
 import { signup } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import './UpdatePasswordContainer.css';
-import MustContainItem from './MustContainItem';
 
 export default function RegisterScreen(props) {
   const [name, setName] = useState('');
@@ -13,9 +11,6 @@ export default function RegisterScreen(props) {
 
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
-
-
-
 
 
   const redirect = props.location.search
@@ -41,19 +36,39 @@ export default function RegisterScreen(props) {
 
   const dispatch = useDispatch();
   
-  const submitHandler2 = (e) => {
+  const signupSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
   }
 
   const submitHandler = (e) => {
     if (password !==  confirmPassword) {
-      alert('Password and confirm password are not matching');
+      e.preventDefault();
+        alert('Password and confirm password are not matching');
+    } 
+      else if (password.toLowerCase() !== password) {
+        e.preventDefault();
+        alert('Password must contain a lower case character');
+    }
+      else if (password.toUpperCase() !== password) {
+        e.preventDefault();
+        alert('Password must contain an upper case character');
+    }
+      else if (/[!@?]/g.test(password)) {
+        e.preventDefault();
+        alert('Password must contain a special character case character e.g., @!?/');
+    }
+      else if (/\d/.test(password)) {
+        e.preventDefault();
+        alert('Password must contain a number');
+    }
+      else if (password.length >= 8) {
+        e.preventDefault();
+        alert('Password must contain more than 8 characters');
     } else {
       e.preventDefault();
       dispatch(signup(name, email, password));
       dispatch(login(email, password));
-
     }
   };
 
@@ -63,62 +78,13 @@ export default function RegisterScreen(props) {
     }
   }, [props.history, redirect, user2, user1]);
 
-  //Validate Password code used from https://github.com/cooljasonmelton/password-checklist
-
-
-
-  // booleans for password validations
-  const [containsUL, setContainsUL] = useState(false) // uppercase letter
-  const [containsLL, setContainsLL] = useState(false) // lowercase letter
-  const [containsN, setContainsN] = useState(false) // number
-  const [containsSC, setContainsSC] = useState(false) // special character
-  const [contains8C, setContains8C] = useState(false) // min 8 characters
-
-  // checks all validations are true
-  const [allValid, setAllValid] = useState(false)
-
-  // labels and state boolean corresponding to each validation
-  const mustContainData = [
-    ["An lowercase letter (a-z)", containsUL],
-    ["A uppercase letter (A-Z)", containsLL],
-    ["A special character (!@#$)", containsSC],
-    ["A number (0-9)", containsN],
-    ["At least 8 characters", contains8C],
-  ]
-
-  const validatePassword = () => {
-    // has uppercase letter
-    if (password.toLowerCase() !== password) setContainsUL(true)
-    else setContainsUL(false)
-
-    // has lowercase letter
-    if (password.toUpperCase() !== password) setContainsLL(true)
-    else setContainsLL(false)
-
-    // has special character
-    if (/[~`!#$%^&*+=\-[@';,/{}|":<>?]/g.test(password)) setContainsSC(true)
-    else setContainsSC(false)
-
-    // has number
-    if (/\d/.test(password)) setContainsN(true)
-    else setContainsN(false)
-
-    // has 8 characters
-    if (password.length >= 8) setContains8C(true)
-    else setContains8C(false)
-
-    // all validations passed
-    if (containsUL && containsLL && containsN  && containsSC && contains8C) setAllValid(true)
-    else setAllValid(false)
-  }
-
   
 
   
   return (
     
     <div className='row pager'>
-      <form className="form signupForm" onSubmit={submitHandler2}>
+      <form className="form signupForm" onSubmit={signupSubmitHandler}>
         <div>
           <h1>Sign In</h1> 
         </div>
@@ -183,8 +149,6 @@ export default function RegisterScreen(props) {
           <input
             type="password"
             id="password"
-            value={password}
-            onKeyUp={validatePassword}
             placeholder="Enter password"
             required
             onChange={(e) => setPassword(e.target.value)}
@@ -195,22 +159,19 @@ export default function RegisterScreen(props) {
           <input
             type="password"
             id="confirmPassword"
-            value={confirmPassword}
             placeholder="Enter confirm password"
-            onKeyUp={validatePassword}
             required
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></input>
         </div>
         <div>
           <label />
-          <button className="primary" type="submit" disabled={!allValid}>
+          <button className="primary" type="submit" >
             Register
           </button>
         </div>
         <div className='row center'>
                 <div>
-              {mustContainData.map(data=> <MustContainItem data={data}/>)}
               </div>
               </div>
       </form>

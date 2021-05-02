@@ -100,6 +100,8 @@ export default function ShippingAddressScreen(props) {
             onChange={(e) => setCountry(e.target.value)}
             required
           ></input>
+        </div>
+        <div>
           <label htmlFor="contactNumber">Contact Number</label>
           <input
             type="number"

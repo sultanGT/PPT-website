@@ -1,4 +1,4 @@
-export const SliderData = [
+export const ImageSlides = [
     {
         image: 'https://images.unsplash.com/photo-1598518619776-eae3f8a34eac?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80'
     },

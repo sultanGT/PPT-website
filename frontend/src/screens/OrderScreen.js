@@ -87,16 +87,17 @@ export default function OrderScreen(props) {
               <div className="card card-body">
                 <h2>Shippring</h2>
                 <p>
-                  <strong>Name:</strong> {pptUserDetails.name} <br />
-                  <strong>Address: </strong> {customer_order.delivery_address.address},
-                  {customer_order.delivery_address.city},{' '}
-                  {customer_order.delivery_address.postalCode},
-                  {customer_order.delivery_address.county}
-                  {customer_order.delivery_address.contactNumber}
+                <strong>Name:   </strong>{customer_order.delivery_address.fullName} <br />
+                  <strong>Address:  </strong>{customer_order.delivery_address.address}<br />
+                  <strong>City:   </strong>{customer_order.delivery_address.city}<br />
+                  <strong>Post Code:   </strong>{customer_order.delivery_address.post_code}<br />
+                  <strong>County:   </strong>{customer_order.delivery_address.county}<br />
+                  <strong>Contact Number:   </strong>{customer_order.delivery_address.contactNumber}<br />
                 </p>
                 {customer_order.delivery_confirmed ? (
                   <MessageBox variant="success">
                     Delivered at {customer_order.delivery_date}
+                    <PurchaseProgress progress_signin progress_shipping progress_place_order progress_payment progress_delivery></PurchaseProgress>
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Delivered</MessageBox>

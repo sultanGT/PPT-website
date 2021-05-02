@@ -8,7 +8,6 @@ import CartScreen from './screens/CartScreen';
 import HomeScreen from './screens/HomeScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import OrderScreen from './screens/OrderScreen';
-import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductScreen from './screens/ProductScreen';
@@ -20,7 +19,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
-import SearchBox from './components/SearchBox';
+import SearchBar from './components/SearchBar';
 import SearchScreen from './screens/SearchScreen';
 import { displayItemBrands, displayItemCategories } from './actions/itemActions';
 import LoadingBox from './components/LoadingBox';
@@ -100,7 +99,7 @@ function App(props) {
           <div className="row responsive">
             <Route
               render={({ history }) => (
-                <SearchBox history={history}></SearchBox>
+                <SearchBar history={history}></SearchBar>
               )}
             ></Route>
           </div>
@@ -305,7 +304,6 @@ function App(props) {
           {/* <Route path="/login" component={SigninScreen}></Route> */}
           <Route path="/signup" component={RegisterScreen}></Route>
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
-          <Route path="/payment" component={PaymentMethodScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/customer_order/:id" component={OrderScreen}></Route>
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>

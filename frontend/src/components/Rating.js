@@ -1,5 +1,6 @@
 import React from 'react';
 
+//
 export default function Rating(props) {
   const { user_rating, review_count, caption } = props;
   return (
