@@ -11,19 +11,20 @@ import { ImageSlides } from '../components/ImageSlides';
 //
 export default function HomePage() {
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, PPTitems } = productList;
+  const displayProducts = useSelector((state) => state.displayProducts);
+  const { loading, error, PPTitems } = displayProducts;
   
   useEffect(() => {
     dispatch(displayItems({}));
   }, [dispatch]);
+//
   return (
     <div>
 {/* Carousel Slider */}
 <div className="row center responsive"> 
 <ImageCarousel slides={ImageSlides} />
 </div>
-<h1 className='row center itemTitle'>Our Newest Products!</h1>
+<h1 className='row center container-box-hc-title'>Our Newest Products!</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (

@@ -19,8 +19,8 @@ export default function SearchScreen(props) {
     page_number = 1,
   } = useParams();
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, PPTitems, pptpage, pages } = productList;
+  const displayProducts = useSelector((state) => state.displayProducts);
+  const { loading, error, PPTitems, pptpage, pages } = displayProducts;
 
   const productCategoryList = useSelector((state) => state.productCategoryList);
   const {
