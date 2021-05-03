@@ -5,33 +5,41 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { PURCHASE_REMOVE_REFRESH } from '../constants/orderConstants';
 
-export default function OrderListScreen(props) {
-  const orderList = useSelector((state) => state.orderList);
-  const { loading, error, ppt_orders } = orderList;
-  const orderDelete = useSelector((state) => state.orderDelete);
-  const {
-    loading: loadingDelete,
-    error: errorDelete,
-    success: successDelete,
-  } = orderDelete;
 
+//
+export default function PurchaseDisplayPage(props) {
+  //
+  const displayPurchase = useSelector((state) => state.displayPurchase);
+  const { loading, error, ppt_orders } = displayPurchase;
+  const purchaseRemove = useSelector((state) => state.purchaseRemove);
+  const {
+    loading: loadingRemove,
+    error: errorRemove,
+    success: successRemove,
+  } = purchaseRemove;
+
+  //
   const customerLogin = useSelector((state) => state.customerLogin);
   const { pptUserDetails } = customerLogin;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: PURCHASE_REMOVE_REFRESH });
     dispatch(puchasesHistory( pptUserDetails._id ));
-  }, [dispatch, successDelete, pptUserDetails._id]);
+  }, [dispatch, successRemove, pptUserDetails._id]);
+
+  //
   const deleteHandler = (customer_order) => {
-    if (window.confirm('Are you sure to delete?')) {
+    if (window.confirm('Confirm removal of purchase')) {
       dispatch(removePurchase(customer_order._id));
     }
   };
+
+  //
   return (
     <div>
       <h1>Orders</h1>
-      {loadingDelete && <LoadingBox></LoadingBox>}
-      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
+      {loadingRemove && <LoadingBox></LoadingBox>}
+      {errorRemove && <MessageBox variant="danger">{errorRemove}</MessageBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (

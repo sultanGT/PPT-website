@@ -6,7 +6,7 @@ import AdminRoute from './components/AdminRoute';
 import PrivateRoute from './components/PrivateRoute';
 import ShoppingPage from './screens/ShoppingPage';
 import HomePage from './screens/HomePage';
-import OrderHistoryScreen from './screens/OrderHistoryScreen';
+import PurchaseHistoryPage from './screens/PurchaseHistoryPage';
 import OrderScreen from './screens/OrderScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProductListScreen from './screens/ProductListScreen';
@@ -15,7 +15,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
-import OrderListScreen from './screens/OrderListScreen';
+import PurchaseDisplayPage from './screens/PurchaseDisplayPage';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import SearchBar from './components/SearchBar';
@@ -305,7 +305,7 @@ function App(props) {
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/customer_order/:id" component={OrderScreen}></Route>
-          <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
+          <Route path="/orderhistory" component={PurchaseHistoryPage}></Route>
           <Route
             path="/search/name/:name?"
             component={SearchScreen}
@@ -352,7 +352,7 @@ function App(props) {
           ></AdminRoute>
           <AdminRoute
             path="/orderlist"
-            component={OrderListScreen}
+            component={PurchaseDisplayPage}
             exact
           ></AdminRoute>
           <AdminRoute path="/userlist" component={UserListScreen}></AdminRoute>

@@ -96,6 +96,15 @@ routeItem.get(
   })
 );
 
+
+// routeItem.get(
+//   '/our_brands',
+//   expressAsyncHandler(async (req, res) => {
+//     const our_brands = await Item.find().distinct('item_brand', {"item_brand" : "Nike"});
+//     res.send(our_brands);
+//   })
+// );
+
 // Function for getting item by item id
 routeItem.get(
   '/:id',

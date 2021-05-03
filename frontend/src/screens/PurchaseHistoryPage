@@ -4,16 +4,19 @@ import { accountHistory } from '../actions/purchaseActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
-export default function OrderHistoryScreen(props) {
-  const orderMineList = useSelector((state) => state.orderMineList);
-  const { loading, error, ppt_orders } = orderMineList;
+
+//
+export default function PurchaseHistoryPage(props) {
+  
+  const displayPurchaseAccount = useSelector((state) => state.displayPurchaseAccount);
+  const { loading, error, ppt_orders } = displayPurchaseAccount;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(accountHistory());
   }, [dispatch]);
   return (
     <div>
-      <h1>Order History</h1>
+      <h1>Purchase History</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
