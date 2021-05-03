@@ -125,7 +125,7 @@ export default function OrderScreen(props) {
               </div>
             </li>
             <li>
-              <div className="container-box-hc container-box-hc-info">
+              <div className="container-box container-box-info">
                 <h2>Order Items</h2>
                 <ul>
                   {customer_order.items_order.map((item) => (
@@ -156,7 +156,7 @@ export default function OrderScreen(props) {
           </ul>
         </div>
         <div className="col-1">
-          <div className="container-box-hc container-box-hc-info">
+          <div className="container-box container-box-info">
             <ul>
               <li>
                 <h2>Order Summary</h2>

@@ -8,14 +8,12 @@ import ImageCarousel from '../components/ImageCarousel';
 import { ImageSlides } from '../components/ImageSlides';
 
 
-
-export default function HomeScreen() {
+//
+export default function HomePage() {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { loading, error, PPTitems } = productList;
-
-
-
+  
   useEffect(() => {
     dispatch(displayItems({}));
   }, [dispatch]);

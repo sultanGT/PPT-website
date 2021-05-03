@@ -38,7 +38,7 @@ export default function PlaceOrderScreen(props) {
         <div className="col-2">
           <ul>
             <li>
-              <div className="container-box-hc container-box-hc-info">
+              <div className="container-box container-box-info">
                 <h2>Shipping</h2>
                 <p>
                   <strong>Name:   </strong>{shopping.delivery_address.fullName} <br />
@@ -51,7 +51,7 @@ export default function PlaceOrderScreen(props) {
               </div>
             </li>
             <li>
-              <div className="container-box-hc container-box-hc-info">
+              <div className="container-box container-box-info">
                 <h2>Payment</h2>
                 <p>
                 {shopping.purchase_method}
@@ -59,7 +59,7 @@ export default function PlaceOrderScreen(props) {
               </div>
             </li>
             <li>
-              <div className="container-box-hc container-box-hc-info">
+              <div className="container-box container-box-info">
                 <h2>Order Items</h2>
                 <ul>
                   {shopping.shoppingItems.map((item) => (
@@ -90,7 +90,7 @@ export default function PlaceOrderScreen(props) {
           </ul>
         </div>
         <div className="col-1">
-          <div className="container-box-hc container-box-hc-info">
+          <div className="container-box container-box-info">
             <ul>
               <li>
                 <h2>Order Summary</h2>

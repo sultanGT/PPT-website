@@ -5,7 +5,7 @@ import { logout } from './actions/customerActions';
 import AdminRoute from './components/AdminRoute';
 import PrivateRoute from './components/PrivateRoute';
 import ShoppingPage from './screens/ShoppingPage';
-import HomeScreen from './screens/HomeScreen';
+import HomePage from './screens/HomePage';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import OrderScreen from './screens/OrderScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
@@ -170,7 +170,7 @@ function App(props) {
                     )}
                   </div>
                   <div className="col-1">
-                    <div className="container-box-hc container-box-hc-info">
+                    <div className="container-box container-box-info">
                       <ul>
                         <li>
                           <h2>
@@ -207,7 +207,7 @@ function App(props) {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/credentials">User Profile  <i className="fa fa-address-container-box-hc iconSmall"></i></Link>
+                    <Link to="/credentials">User Profile  <i className="fa fa-address iconSmall"></i></Link>
                   </li>
                   <li>
                     <Link to="/orderhistory">Order History  <i className="fa fa-history iconSmall"></i></Link>
@@ -361,7 +361,7 @@ function App(props) {
             component={UserEditScreen}
           ></AdminRoute>
           </div>
-          <Route path="/" component={HomeScreen} exact></Route>
+          <Route path="/" component={HomePage} exact></Route>
       
         </main>
         

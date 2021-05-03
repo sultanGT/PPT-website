@@ -75,7 +75,7 @@ export default function ShoppingPage(props) {
                       ))}
                     </select>
                   </div>
-                  <div>${item.cost}</div>
+                  <div>£{item.cost}</div>
                   <div>
                     <button
                       type="button"
