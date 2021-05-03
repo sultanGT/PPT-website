@@ -83,9 +83,6 @@ export const orderCompletionEmail = (customer_order) => {
   <td align="right"> $${customer_order.items_cost.toFixed(2)}</td>
   </tr>
   <tr>
-  <td colspan="2">Tax Price:</td>
-  <td align="right"> $${customer_order.tax_cost.toFixed(2)}</td>
-  </tr>
   <tr>
   <td colspan="2">Shipping Price:</td>
   <td align="right"> $${customer_order.delivery_cost.toFixed(2)}</td>

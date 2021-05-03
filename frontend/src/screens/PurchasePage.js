@@ -12,26 +12,35 @@ import {
 } from '../constants/orderConstants';
 import PurchaseProgress from '../components/PurchaseProgress';
 
-export default function OrderScreen(props) {
+
+export default function PurchasePage(props) {
   const purchaseId = props.match.params.id;
   const [sdkReady, setSdkReady] = useState(false);
-  const orderDetails = useSelector((state) => state.orderDetails);
-  const { customer_order, loading, error } = orderDetails;
+
+  //
+  const purchaseDetails = useSelector((state) => state.purchaseDetails);
+  const { customer_order, loading, error } = purchaseDetails;
+  //
   const customerLogin = useSelector((state) => state.customerLogin);
   const { pptUserDetails } = customerLogin;
 
-  const orderPay = useSelector((state) => state.orderPay);
+  //
+  const purchasePayment = useSelector((state) => state.purchasePayment);
   const {
-    loading: loadingPay,
-    error: errorPay,
-    success: successPay,
-  } = orderPay;
-  const orderDeliver = useSelector((state) => state.orderDeliver);
+    loading: loadingPayment,
+    error: errorPayment,
+    success: successPayment,
+  } = purchasePayment;
+
+  //
+  const purchaseShipping = useSelector((state) => state.purchaseShipping);
   const {
-    loading: loadingDeliver,
-    error: errorDeliver,
-    success: successDeliver,
-  } = orderDeliver;
+    loading: loadingShipping,
+    error: errorShipping,
+    success: successShipping,
+  } = purchaseShipping;
+
+  //
   const dispatch = useDispatch();
   useEffect(() => {
     const addPayPalScript = async () => {
@@ -47,8 +56,8 @@ export default function OrderScreen(props) {
     };
     if (
       !customer_order ||
-      successPay ||
-      successDeliver ||
+      successPayment ||
+      successShipping ||
       (customer_order && customer_order._id !== purchaseId)
     ) {
       dispatch({ type: PURCHASE_PAYPAL_REFRESH });
@@ -63,14 +72,17 @@ export default function OrderScreen(props) {
         }
       }
     }
-  }, [dispatch, purchaseId, sdkReady, successPay, successDeliver, customer_order]);
+  }, [dispatch, purchaseId, sdkReady, successPayment, successShipping, customer_order]);
 
-  const successPaymentHandler = (purchase_complete) => {
+  //
+  const PayPalHandler = (purchase_complete) => {
     dispatch(purchasePayPal(customer_order, purchase_complete));
   };
-  const deliverHandler = () => {
+  const shippingHandler = () => {
     dispatch(shippingPurchase(customer_order._id));
   };
+
+  //
 
   return loading ? (
     <LoadingBox></LoadingBox>
@@ -78,7 +90,6 @@ export default function OrderScreen(props) {
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div className="pager">
-
       {customer_order.delivery_confirmed ? (
                  <PurchaseProgress progress_signin progress_shipping progress_place_order progress_payment progress_delivered></PurchaseProgress>
                 ) : (
@@ -164,19 +175,13 @@ export default function OrderScreen(props) {
               <li>
                 <div className="row">
                   <div>Items</div>
-                  <div>${customer_order.items_cost.toFixed(2)}</div>
+                  <div>£{customer_order.items_cost.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Shipping</div>
-                  <div>${customer_order.delivery_cost.toFixed(2)}</div>
-                </div>
-              </li>
-              <li>
-                <div className="row">
-                  <div>Tax</div>
-                  <div>${customer_order.tax_cost.toFixed(2)}</div>
+                  <div>£{customer_order.delivery_cost.toFixed(2)}</div>
                 </div>
               </li>
               <li>
@@ -185,7 +190,7 @@ export default function OrderScreen(props) {
                     <strong> Order Total</strong>
                   </div>
                   <div>
-                    <strong>${customer_order.total_cost.toFixed(2)}</strong>
+                    <strong>£{customer_order.total_cost.toFixed(2)}</strong>
                   </div>
                 </div>
               </li>
@@ -195,14 +200,14 @@ export default function OrderScreen(props) {
                     <LoadingBox></LoadingBox>
                   ) : (
                     <>
-                      {errorPay && (
-                        <MessageBox variant="danger">{errorPay}</MessageBox>
+                      {errorPayment && (
+                        <MessageBox variant="danger">{errorPayment}</MessageBox>
                       )}
-                      {loadingPay && <LoadingBox></LoadingBox>}
+                      {loadingPayment && <LoadingBox></LoadingBox>}
 
                       <PayPalButton
                         amount={customer_order.total_cost}
-                        onSuccess={successPaymentHandler}
+                        onSuccess={PayPalHandler}
                       ></PayPalButton>
                     </>
                   )}
@@ -210,14 +215,14 @@ export default function OrderScreen(props) {
               )}
               {pptUserDetails.userCredentialsAdministrator && customer_order.purchase_confirmed && !customer_order.delivery_confirmed && (
                 <li>
-                  {loadingDeliver && <LoadingBox></LoadingBox>}
-                  {errorDeliver && (
-                    <MessageBox variant="danger">{errorDeliver}</MessageBox>
+                  {loadingShipping && <LoadingBox></LoadingBox>}
+                  {errorShipping && (
+                    <MessageBox variant="danger">{errorShipping}</MessageBox>
                   )}
                   <button
                     type="button"
                     className="primary block"
-                    onClick={deliverHandler}
+                    onClick={shippingHandler}
                   >
                     Deliver Order
                   </button>

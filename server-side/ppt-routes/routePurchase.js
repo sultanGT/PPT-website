@@ -44,7 +44,6 @@ const customer_order = new PPTOrder({
   purchase_method: req.body.purchase_method, 
   items_cost: req.body.items_cost, 
   delivery_cost: req.body.delivery_cost, 
-  tax_cost: req.body.tax_cost, 
   total_cost: req.body.total_cost, 
   pptuser: req.pptuser._id,});
 

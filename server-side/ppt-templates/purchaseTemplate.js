@@ -22,7 +22,6 @@ const pptPurchaseModel = new mongoose.Schema(
         purchase_complete: { id: String, status: String, update_record: String, pptuser_email: String, }, 
         items_cost: { type: Number, required: true }, 
         delivery_cost: { type: Number, required: true }, 
-        tax_cost: { type: Number, required: true }, 
         total_cost: { type: Number, required: true }, 
         pptuser: { type: mongoose.Schema.Types.ObjectId, ref: 'PPTUser', required: true }, 
         purchase_confirmed: { type: Boolean, default: false }, 

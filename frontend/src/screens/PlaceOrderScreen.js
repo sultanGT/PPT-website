@@ -19,8 +19,7 @@ export default function PlaceOrderScreen(props) {
     shopping.shoppingItems.reduce((a, c) => a + c.quantity * c.cost, 0)
   );
   shopping.delivery_cost = shopping.items_cost > 100 ? toPrice(0) : toPrice(10);
-  shopping.tax_cost = toPrice(0.15 * shopping.items_cost);
-  shopping.total_cost = shopping.items_cost + shopping.delivery_cost + shopping.tax_cost;
+  shopping.total_cost = shopping.items_cost + shopping.delivery_cost;
   const dispatch = useDispatch();
   const placeOrderHandler = () => {
     dispatch(newPurchase({ ...shopping, items_order: shopping.shoppingItems }));
@@ -105,12 +104,6 @@ export default function PlaceOrderScreen(props) {
                 <div className="row">
                   <div>Shipping</div>
                   <div>${shopping.delivery_cost.toFixed(2)}</div>
-                </div>
-              </li>
-              <li>
-                <div className="row">
-                  <div>Tax</div>
-                  <div>${shopping.tax_cost.toFixed(2)}</div>
                 </div>
               </li>
               <li>
