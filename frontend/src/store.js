@@ -52,7 +52,7 @@ const reducer = combineReducers({
   shopping: cartReducer,
   customerLogin: userSigninReducer,
   userRegister: userRegisterReducer,
-  orderCreate: orderCreateReducer,
+  newCustomerPurchase: orderCreateReducer,
   purchaseDetails: orderDetailsReducer,
   purchasePayment: orderPayReducer,
   displayPurchaseAccount: orderMineListReducer,

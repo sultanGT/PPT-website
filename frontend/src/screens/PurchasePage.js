@@ -102,7 +102,7 @@ export default function PurchasePage(props) {
           <ul>
             <li>
               <div className="container-box container-box-info">
-                <h2>Shippring</h2>
+                <h2>Shipping</h2>
                 <p>
                 <strong>Name:   </strong>{customer_order.delivery_address.fullName} <br />
                   <strong>Address:  </strong>{customer_order.delivery_address.address}<br />

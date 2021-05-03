@@ -7,29 +7,46 @@ import { PURCHASE_NEW_REFRESH } from '../constants/orderConstants';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
-export default function PlaceOrderScreen(props) {
+
+//
+export default function OrderPurchasePage(props) {
+
   const shopping = useSelector((state) => state.shopping);
   if (!shopping.purchase_method) {
     props.history.push('/payment');
   }
-  const orderCreate = useSelector((state) => state.orderCreate);
-  const { loading, success, error, customer_order } = orderCreate;
-  const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
-  shopping.items_cost = toPrice(
+
+  //
+  const newCustomerPurchase = useSelector((state) => state.newCustomerPurchase);
+  const { loading, success, error, customer_order } = newCustomerPurchase;
+
+  //
+  const decimalCost = (num) => Number(num.toFixed(2));
+
+  //
+  shopping.items_cost = decimalCost(
     shopping.shoppingItems.reduce((a, c) => a + c.quantity * c.cost, 0)
   );
-  shopping.delivery_cost = shopping.items_cost > 100 ? toPrice(0) : toPrice(10);
+
+  //
+  shopping.delivery_cost = shopping.items_cost > 100 ? decimalCost(0) : decimalCost(10);
   shopping.total_cost = shopping.items_cost + shopping.delivery_cost;
   const dispatch = useDispatch();
-  const placeOrderHandler = () => {
+
+  //
+  const placePurchaseHandler = () => {
     dispatch(newPurchase({ ...shopping, items_order: shopping.shoppingItems }));
   };
+
+  //
   useEffect(() => {
     if (success) {
       props.history.push(`/customer_order/${customer_order._id}`);
       dispatch({ type: PURCHASE_NEW_REFRESH });
     }
   }, [dispatch, customer_order, props.history, success]);
+
+  //
   return (
     <div className="pager">
       <PurchaseProgress progress_signin progress_shipping progress_place_order></PurchaseProgress>
@@ -78,7 +95,7 @@ export default function PlaceOrderScreen(props) {
                         </div>
 
                         <div>
-                          {item.quantity} x ${item.cost} = ${item.quantity * item.cost}
+                          {item.quantity} x £{item.cost} = £{item.quantity * item.cost}
                         </div>
                       </div>
                     </li>
@@ -97,13 +114,13 @@ export default function PlaceOrderScreen(props) {
               <li>
                 <div className="row">
                   <div>Items</div>
-                  <div>${shopping.items_cost.toFixed(2)}</div>
+                  <div>£{shopping.items_cost.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Shipping</div>
-                  <div>${shopping.delivery_cost.toFixed(2)}</div>
+                  <div>£{shopping.delivery_cost.toFixed(2)}</div>
                 </div>
               </li>
               <li>
@@ -112,14 +129,14 @@ export default function PlaceOrderScreen(props) {
                     <strong> Order Total</strong>
                   </div>
                   <div>
-                    <strong>${shopping.total_cost.toFixed(2)}</strong>
+                    <strong>£{shopping.total_cost.toFixed(2)}</strong>
                   </div>
                 </div>
               </li>
               <li>
                 <button
                   type="button"
-                  onClick={placeOrderHandler}
+                  onClick={placePurchaseHandler}
                   className="primary block"
                   disabled={shopping.shoppingItems.length === 0}
                 >

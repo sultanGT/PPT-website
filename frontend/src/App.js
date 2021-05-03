@@ -8,7 +8,7 @@ import ShoppingPage from './screens/ShoppingPage';
 import HomePage from './screens/HomePage';
 import PurchaseHistoryPage from './screens/PurchaseHistoryPage';
 import PurchasePage from './screens/PurchasePage';
-import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderPurchasePage from './screens/OrderPurchasePage';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductScreen from './screens/ProductScreen';
 import ProfileScreen from './screens/ProfileScreen';
@@ -303,7 +303,7 @@ function App(props) {
           {/* <Route path="/login" component={SigninScreen}></Route> */}
           <Route path="/signup" component={RegisterScreen}></Route>
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
-          <Route path="/placeorder" component={PlaceOrderScreen}></Route>
+          <Route path="/placeorder" component={OrderPurchasePage}></Route>
           <Route path="/customer_order/:id" component={PurchasePage}></Route>
           <Route path="/orderhistory" component={PurchaseHistoryPage}></Route>
           <Route
