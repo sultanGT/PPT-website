@@ -78,10 +78,10 @@ export const displayItemBrands = () => async (dispatch) => {
 };
 
 //
-export const itemInfo = (item_id) => async (dispatch) => {
-  dispatch({ type: ITEM_INFO_REQUEST, payload: item_id });
+export const itemInfo = (itemId) => async (dispatch) => {
+  dispatch({ type: ITEM_INFO_REQUEST, payload: itemId });
   try {
-    const { data } = await Axios.get(`/api/pptitems/${item_id}`);
+    const { data } = await Axios.get(`/api/pptitems/${itemId}`);
     dispatch({ type: ITEM_INFO_COMPLETE, payload: data });
   } catch (error) {
     dispatch({
@@ -142,14 +142,14 @@ export const ammendItem = (item) => async (dispatch, getState) => {
 };
 
 //
-export const removeItem = (item_id) => async (dispatch, getState) => {
-  dispatch({ type: ITEM_REMOVE_REQUEST, payload: item_id });
+export const removeItem = (itemId) => async (dispatch, getState) => {
+  dispatch({ type: ITEM_REMOVE_REQUEST, payload: itemId });
   const {
     customerLogin: { pptUserDetails },
   } = getState();
   try {
     // eslint-disable-next-line
-    const { data } = Axios.delete(`/api/pptitems/${item_id}`, {
+    const { data } = Axios.delete(`/api/pptitems/${itemId}`, {
       headers: { Authorization: `Bearer ${pptUserDetails.token}` },
     });
     dispatch({ type: ITEM_REMOVE_COMPLETE });
@@ -163,7 +163,7 @@ export const removeItem = (item_id) => async (dispatch, getState) => {
 };
 
 //
-export const newReview = (item_id, review) => async (
+export const newReview = (itemId, review) => async (
   dispatch,
   getState
 ) => {
@@ -173,7 +173,7 @@ export const newReview = (item_id, review) => async (
   } = getState();
   try {
     const { data } = await Axios.post(
-      `/api/pptitems/${item_id}/reviews`,
+      `/api/pptitems/${itemId}/reviews`,
       review,
       {
         headers: { Authorization: `Bearer ${pptUserDetails.token}` },

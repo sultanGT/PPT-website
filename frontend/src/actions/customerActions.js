@@ -65,7 +65,7 @@ export const login = (email, password) => async (dispatch) => {
 //
 export const logout = () => (dispatch) => {
   localStorage.removeItem('pptUserDetails');
-  localStorage.removeItem('shopping_items');
+  localStorage.removeItem('shoppingItems');
   localStorage.removeItem('delivery_address');
   dispatch({ type: CUSTOMER_LOGOUT });
   document.location.href = '/';

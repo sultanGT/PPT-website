@@ -10,7 +10,7 @@ import { GrReturn } from 'react-icons/gr';
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
-  const item_id = props.match.params.id;
+  const itemId = props.match.params.id;
   const [quantity, setQty] = useState(1);
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, item } = productDetails;
@@ -34,17 +34,17 @@ export default function ProductScreen(props) {
       setComment('');
       dispatch({ type: ITEM_REVIEW_CREATE_REFRESH });
     }
-    dispatch(itemInfo(item_id));
-  }, [dispatch, item_id, successReviewCreate]);
+    dispatch(itemInfo(itemId));
+  }, [dispatch, itemId, successReviewCreate]);
   
   const addToCartHandler = () => {
-    props.history.push(`/cart/${item_id}?quantity=${quantity}`);
+    props.history.push(`/shopping/${itemId}?quantity=${quantity}`);
   };
   const submitHandler = (e) => {
     e.preventDefault();
     if (user_comment && user_rating) {
       dispatch(
-        newReview(item_id, { user_rating, user_comment, name: pptUserDetails.name })
+        newReview(itemId, { user_rating, user_comment, name: pptUserDetails.name })
       );
     } else {
       alert('Please enter user_comment and rating');
@@ -151,7 +151,7 @@ export default function ProductScreen(props) {
             </ul>
           </div>
             <div className="col-1">
-              <div className="card card-body">
+              <div className="container-box container-box-info">
                 <ul>
                   <li>
                     <div className="row">

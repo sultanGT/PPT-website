@@ -36,9 +36,9 @@ const initialState = {
       ? JSON.parse(localStorage.getItem('pptUserDetails'))
       : null,
   },
-  cart: {
-    shopping_items: localStorage.getItem('shopping_items')
-      ? JSON.parse(localStorage.getItem('shopping_items'))
+  shopping: {
+    shoppingItems: localStorage.getItem('shoppingItems')
+      ? JSON.parse(localStorage.getItem('shoppingItems'))
       : [],
     delivery_address: localStorage.getItem('delivery_address')
       ? JSON.parse(localStorage.getItem('delivery_address'))
@@ -49,7 +49,7 @@ const initialState = {
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
-  cart: cartReducer,
+  shopping: cartReducer,
   customerLogin: userSigninReducer,
   userRegister: userRegisterReducer,
   orderCreate: orderCreateReducer,

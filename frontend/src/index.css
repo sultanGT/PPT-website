@@ -306,35 +306,34 @@ img.large {
   max-height: 80rem;
 }
 
-/* Card */
-.card {
+.container-box {
   border: 0.3rem solid transparent;
   background-color: #fff;
   border-radius: 0.5rem;
   margin: 1rem;
   transition: 0.3s;
 }
-.card-body {
+
+.container-box-info {
   padding: 1rem;
 }
 
-.item-box-info {
+.container-box-info-hc {
   padding: 1rem;
     background: #fff;
     margin-top: 0.5rem;
-
 }
-.item-box {
+.container-box-hc {
   border: 0.2rem solid transparent;
   background-color: #fff;
   margin: 1rem;
   transition: 0.2s;
 }
-.item-box:hover {
+.container-box-hc:hover {
   border: 0.2rem solid black;
   opacity: 0.9;
 }
-.item-box-body {
+.container-box-hc-body {
   padding: 1rem;
 }
 .blackout {
@@ -598,6 +597,7 @@ img.large {
   transform: scale(1.08);
   background: #000;
 }
+
  .pages {
    background: #fff;
  }

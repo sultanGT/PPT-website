@@ -90,7 +90,7 @@ export default function OrderScreen(props) {
         <div className="col-2">
           <ul>
             <li>
-              <div className="card card-body">
+              <div className="container-box container-box-info">
                 <h2>Shippring</h2>
                 <p>
                 <strong>Name:   </strong>{customer_order.delivery_address.fullName} <br />
@@ -110,7 +110,7 @@ export default function OrderScreen(props) {
               </div>
             </li>
             <li>
-              <div className="card card-body">
+              <div className="container-box container-box-info">
                 <h2>Payment</h2>
                 <p>
                   <strong>Method:</strong> {customer_order.purchase_method}
@@ -125,7 +125,7 @@ export default function OrderScreen(props) {
               </div>
             </li>
             <li>
-              <div className="card card-body">
+              <div className="container-box-hc container-box-hc-info">
                 <h2>Order Items</h2>
                 <ul>
                   {customer_order.items_order.map((item) => (
@@ -156,7 +156,7 @@ export default function OrderScreen(props) {
           </ul>
         </div>
         <div className="col-1">
-          <div className="card card-body">
+          <div className="container-box-hc container-box-hc-info">
             <ul>
               <li>
                 <h2>Order Summary</h2>

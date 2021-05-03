@@ -7,8 +7,8 @@ import {
 } from '../constants/cartConstants';
 
 //
-export const addShoppingItem = (item_id, quantity) => async (dispatch, getState) =>{
-  const {data} = await Axios.get(`/api/pptitems/${item_id}`);
+export const addShoppingItem = (itemId, quantity) => async (dispatch, getState) =>{
+  const {data} = await Axios.get(`/api/pptitems/${itemId}`);
   dispatch({
       type: SHOPPING_ADD_PRODUCT,
       payload: {
@@ -20,12 +20,12 @@ export const addShoppingItem = (item_id, quantity) => async (dispatch, getState)
           quantity,
       },
   });
-  localStorage.setItem('shopping_items', JSON.stringify(getState().cart.shopping_items));
+  localStorage.setItem('shoppingItems', JSON.stringify(getState().shopping.shoppingItems));
 };
 //
-export const deleteShoppingItem = (item_id) => (dispatch, getState) => {
-  dispatch({ type: SHOPPING_REMOVE_PRODUCT, payload: item_id });
-  localStorage.setItem('shopping_items', JSON.stringify(getState().cart.shopping_items));
+export const deleteShoppingItem = (itemId) => (dispatch, getState) => {
+  dispatch({ type: SHOPPING_REMOVE_PRODUCT, payload: itemId });
+  localStorage.setItem('shoppingItems', JSON.stringify(getState().shopping.shoppingItems));
 };
 //
 export const saveDeliveryAddress = (data) => (dispatch) => {

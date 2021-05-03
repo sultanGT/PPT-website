@@ -38,7 +38,7 @@ export const newPurchase = (customer_order) => async (dispatch, getState) => {
     });
     dispatch({ type: PURCHASE_NEW_COMPLETE, payload: data.customer_order });
     dispatch({ type: SHOPPING_NO_ITEMS });
-    localStorage.removeItem('shopping_items');
+    localStorage.removeItem('shoppingItems');
   } catch (error) {
     dispatch({
       type: PURCHASE_NEW_ERROR,

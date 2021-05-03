@@ -4,40 +4,49 @@ import { Link } from 'react-router-dom';
 import { addShoppingItem, deleteShoppingItem } from '../actions/shoppingActions';
 import MessageBox from '../components/MessageBox';
 
-export default function CartScreen(props) {
-  const item_id = props.match.params.id;
+//
+export default function ShoppingPage(props) {
+  const itemId = props.match.params.id;
   const quantity = props.location.search
     ? Number(props.location.search.split('=')[1])
     : 1;
-  const cart = useSelector((state) => state.cart);
-  const { shopping_items, error } = cart;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (item_id) {
-      dispatch(addShoppingItem(item_id, quantity));
-    }
-  }, [dispatch, item_id, quantity]);
 
-  const removeFromCartHandler = (id) => {
-    // delete action
+    //
+  const shopping = useSelector((state) => state.shopping);
+  const { shoppingItems, error } = shopping;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (itemId) {
+      dispatch(addShoppingItem(itemId, quantity));
+    }
+  }, [dispatch, itemId, quantity]);
+
+  //
+  const deleteItemHandler = (id) => {
     dispatch(deleteShoppingItem(id));
   };
 
-  const checkoutHandler = () => {
+  //
+  const shoppingHandler = () => {
     props.history.push('/signup?redirect=shipping');
   };
+
+
   return (
     <div className="row top pager">
       <div className="col-2">
         <h1>Shopping Cart</h1>
         {error && <MessageBox variant="danger">{error}</MessageBox>}
-        {shopping_items.length === 0 ? (
+        {shoppingItems.length === 0 ? (
           <MessageBox>
-            Cart is empty. <Link to="/">Go Shopping</Link>
+            There are currently no items in the cart <Link className='title' to="/">Back to shopping</Link>
           </MessageBox>
         ) : (
+
+          //
           <ul>
-            {shopping_items.map((item) => (
+            {shoppingItems.map((item) => (
               <li key={item.item}>
                 <div className="row">
                   <div>
@@ -70,7 +79,7 @@ export default function CartScreen(props) {
                   <div>
                     <button
                       type="button"
-                      onClick={() => removeFromCartHandler(item.item)}
+                      onClick={() => deleteItemHandler(item.item)}
                     >
                       Delete
                     </button>
@@ -81,21 +90,22 @@ export default function CartScreen(props) {
           </ul>
         )}
       </div>
+      {/* //wdadadasd */}
       <div className="col-1">
-        <div className="card card-body">
+        <div className="container-box container-box-info">
           <ul>
             <li>
               <h2>
-                Subtotal ({shopping_items.reduce((a, c) => a + c.quantity, 0)} PPTitems) : $
-                {shopping_items.reduce((a, c) => a + c.cost * c.quantity, 0)}
+                Subtotal ({shoppingItems.reduce((a, b) => a + b.quantity, 0)} PPTitems) : £
+                {shoppingItems.reduce((a, b) => a + b.cost * b.quantity, 0)}
               </h2>
             </li>
             <li>
               <button
                 type="button"
-                onClick={checkoutHandler}
+                onClick={shoppingHandler}
                 className="primary block"
-                disabled={shopping_items.length === 0}
+                disabled={shoppingItems.length === 0}
               >
                 Proceed to Checkout
               </button>

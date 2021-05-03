@@ -20,12 +20,12 @@ export default function Item(props) {
     </Link> */}
     
 
-    <div key={item._id} className="item-box" onMouseEnter={() => setViewItem(true)}
+    <div key={item._id} className="container-box-hc" onMouseEnter={() => setViewItem(true)}
         onMouseLeave={() => setViewItem(false)}>
       <Link to={`/item/${item._id}`}>
         <img className="medium" src={item.picture} alt={item.name} />
       </Link>
-      <div className="item-box-info">
+      <div className="container-box-info-hc">
       {viewItem && (
       <div className="row center">
         <Link className="wide" to={`/item/${item._id}`}>

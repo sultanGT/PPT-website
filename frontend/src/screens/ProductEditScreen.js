@@ -7,7 +7,7 @@ import MessageBox from '../components/MessageBox';
 import { ITEM_AMMEND_REFRESH } from '../constants/productConstants';
 
 export default function ProductEditScreen(props) {
-  const item_id = props.match.params.id;
+  const itemId = props.match.params.id;
   const [name, setName] = useState('');
   const [cost, setPrice] = useState('');
   const [picture, setImage] = useState('');
@@ -31,9 +31,9 @@ export default function ProductEditScreen(props) {
     if (successUpdate) {
       props.history.push('/productlist');
     }
-    if (!item || item._id !== item_id || successUpdate) {
+    if (!item || item._id !== itemId || successUpdate) {
       dispatch({ type: ITEM_AMMEND_REFRESH });
-      dispatch(itemInfo(item_id));
+      dispatch(itemInfo(itemId));
     } else {
       setName(item.name);
       setPrice(item.cost);
@@ -43,13 +43,13 @@ export default function ProductEditScreen(props) {
       setproduct_brand(item.item_brand);
       setDescription(item.item_info);
     }
-  }, [item, dispatch, item_id, successUpdate, props.history]);
+  }, [item, dispatch, itemId, successUpdate, props.history]);
   const submitHandler = (e) => {
     e.preventDefault();
     // TODO: dispatch update item
     dispatch(
       ammendItem({
-        _id: item_id,
+        _id: itemId,
         name,
         cost,
         picture,
@@ -89,7 +89,7 @@ export default function ProductEditScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Edit Item {item_id}</h1>
+          <h1>Edit Item {itemId}</h1>
         </div>
         {loadingUpdate && <LoadingBox></LoadingBox>}
         {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}

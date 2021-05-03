@@ -6,8 +6,8 @@ import PurchaseProgress from '../components/PurchaseProgress';
 export default function ShippingAddressScreen(props) {
   const customerLogin = useSelector((state) => state.customerLogin);
   const { pptUserDetails } = customerLogin;
-  const cart = useSelector((state) => state.cart);
-  const { delivery_address } = cart;
+  const shopping = useSelector((state) => state.shopping);
+  const { delivery_address } = shopping;
   if (!pptUserDetails) {
     props.history.push('/login');
   }

@@ -4,7 +4,7 @@ import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { logout } from './actions/customerActions';
 import AdminRoute from './components/AdminRoute';
 import PrivateRoute from './components/PrivateRoute';
-import CartScreen from './screens/CartScreen';
+import ShoppingPage from './screens/ShoppingPage';
 import HomeScreen from './screens/HomeScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import OrderScreen from './screens/OrderScreen';
@@ -72,16 +72,16 @@ function App(props) {
   }, [dispatch]);
 
 
-  const cart = useSelector((state) => state.cart);
-  const { shopping_items, error } = cart;
-  const removeFromCartHandler = (id) => {
+  const shopping = useSelector((state) => state.shopping);
+  const { shoppingItems, error } = shopping;
+  const deleteItemHandler = (id) => {
     dispatch(deleteShoppingItem(id));
   };
   
   return (
     <BrowserRouter>
       <div className="grid-container">
-      <header className={navbar ? 'row navbar active' : 'row navbar responsive'}>
+      <header className={navbar ? 'row navbar active' : 'row navbar'}>
           <div className="row left">
             <button
               type="button"
@@ -108,8 +108,8 @@ function App(props) {
             <Link to="/cart">
               {/* Cart*/}
               <i className="fas fa-shopping-cart iconLarge"></i>
-              {shopping_items.length > 0 && (
-                <span className="badge">{shopping_items.length}</span>
+              {shoppingItems.length > 0 && (
+                <span className="badge">{shoppingItems.length}</span>
               )}
             </Link>
 {/* DROPDOWN CART SCREEN */}
@@ -119,13 +119,13 @@ function App(props) {
                   <div className="col-2">
                     <h1>Shopping Cart</h1>
                     {error && <MessageBox variant="danger">{error}</MessageBox>}
-                    {shopping_items.length === 0 ? (
+                    {shoppingItems.length === 0 ? (
                       <MessageBox>
                         Cart is empty. <Link to="/">Go Shopping</Link>
                       </MessageBox>
                     ) : (
                       <ul>
-                        {shopping_items.map((item) => (
+                        {shoppingItems.map((item) => (
                           <li key={item.item}>
                             <div className="row">
                               <div>
@@ -158,7 +158,7 @@ function App(props) {
                               <div>
                                 <button
                                   type="button"
-                                  onClick={() => removeFromCartHandler(item.item)}
+                                  onClick={() => deleteItemHandler(item.item)}
                                 >
                                   Delete
                                 </button>
@@ -170,20 +170,20 @@ function App(props) {
                     )}
                   </div>
                   <div className="col-1">
-                    <div className="card card-body">
+                    <div className="container-box-hc container-box-hc-info">
                       <ul>
                         <li>
                           <h2>
-                            Subtotal ({shopping_items.reduce((a, c) => a + c.quantity, 0)} items) : £
-                            {shopping_items.reduce((a, c) => a + c.cost * c.quantity, 0)}
+                            Subtotal ({shoppingItems.reduce((a, c) => a + c.quantity, 0)} items) : £
+                            {shoppingItems.reduce((a, c) => a + c.cost * c.quantity, 0)}
                           </h2>
                         </li>
                         <li>
-                        {shopping_items.length > 0 && (
+                        {shoppingItems.length > 0 && (
                           <button
                             type="button"
                             className="primary block"
-                            disabled={shopping_items.length === 0}
+                            disabled={shoppingItems.length === 0}
                           >
                             <Link className='primary block' to='/signup?redirect=shipping'>Proceed to Checkout</Link>
                             
@@ -207,7 +207,7 @@ function App(props) {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/credentials">User Profile  <i className="fa fa-address-card iconSmall"></i></Link>
+                    <Link to="/credentials">User Profile  <i className="fa fa-address-container-box-hc iconSmall"></i></Link>
                   </li>
                   <li>
                     <Link to="/orderhistory">Order History  <i className="fa fa-history iconSmall"></i></Link>
@@ -297,7 +297,7 @@ function App(props) {
         </aside>
         <main>
         <div className="pages">
-          <Route path="/cart/:id?" component={CartScreen}></Route>
+          <Route path="/shopping/:id?" component={ShoppingPage}></Route>
           <Route path="/item/:id" component={ProductScreen} exact></Route>
           <Route path="/item/:id/edit" component={ProductEditScreen} exact></Route>
           {/* <Route path="/login" component={SigninScreen}></Route> */}

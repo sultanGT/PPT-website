@@ -8,22 +8,22 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 export default function PlaceOrderScreen(props) {
-  const cart = useSelector((state) => state.cart);
-  if (!cart.purchase_method) {
+  const shopping = useSelector((state) => state.shopping);
+  if (!shopping.purchase_method) {
     props.history.push('/payment');
   }
   const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, success, error, customer_order } = orderCreate;
   const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
-  cart.items_cost = toPrice(
-    cart.shopping_items.reduce((a, c) => a + c.quantity * c.cost, 0)
+  shopping.items_cost = toPrice(
+    shopping.shoppingItems.reduce((a, c) => a + c.quantity * c.cost, 0)
   );
-  cart.delivery_cost = cart.items_cost > 100 ? toPrice(0) : toPrice(10);
-  cart.tax_cost = toPrice(0.15 * cart.items_cost);
-  cart.total_cost = cart.items_cost + cart.delivery_cost + cart.tax_cost;
+  shopping.delivery_cost = shopping.items_cost > 100 ? toPrice(0) : toPrice(10);
+  shopping.tax_cost = toPrice(0.15 * shopping.items_cost);
+  shopping.total_cost = shopping.items_cost + shopping.delivery_cost + shopping.tax_cost;
   const dispatch = useDispatch();
   const placeOrderHandler = () => {
-    dispatch(newPurchase({ ...cart, items_order: cart.shopping_items }));
+    dispatch(newPurchase({ ...shopping, items_order: shopping.shoppingItems }));
   };
   useEffect(() => {
     if (success) {
@@ -38,31 +38,31 @@ export default function PlaceOrderScreen(props) {
         <div className="col-2">
           <ul>
             <li>
-              <div className="card card-body">
+              <div className="container-box-hc container-box-hc-info">
                 <h2>Shipping</h2>
                 <p>
-                  <strong>Name:   </strong>{cart.delivery_address.fullName} <br />
-                  <strong>Address:  </strong>{cart.delivery_address.address}<br />
-                  <strong>City:   </strong>{cart.delivery_address.city}<br />
-                  <strong>Post Code:   </strong>{cart.delivery_address.post_code}<br />
-                  <strong>County:   </strong>{cart.delivery_address.county}<br />
-                  <strong>Contact Number:   </strong>{cart.delivery_address.contactNumber}<br />
+                  <strong>Name:   </strong>{shopping.delivery_address.fullName} <br />
+                  <strong>Address:  </strong>{shopping.delivery_address.address}<br />
+                  <strong>City:   </strong>{shopping.delivery_address.city}<br />
+                  <strong>Post Code:   </strong>{shopping.delivery_address.post_code}<br />
+                  <strong>County:   </strong>{shopping.delivery_address.county}<br />
+                  <strong>Contact Number:   </strong>{shopping.delivery_address.contactNumber}<br />
                 </p>
               </div>
             </li>
             <li>
-              <div className="card card-body">
+              <div className="container-box-hc container-box-hc-info">
                 <h2>Payment</h2>
                 <p>
-                {cart.purchase_method}
+                {shopping.purchase_method}
                 </p>
               </div>
             </li>
             <li>
-              <div className="card card-body">
+              <div className="container-box-hc container-box-hc-info">
                 <h2>Order Items</h2>
                 <ul>
-                  {cart.shopping_items.map((item) => (
+                  {shopping.shoppingItems.map((item) => (
                     <li key={item.item}>
                       <div className="row">
                         <div>
@@ -90,7 +90,7 @@ export default function PlaceOrderScreen(props) {
           </ul>
         </div>
         <div className="col-1">
-          <div className="card card-body">
+          <div className="container-box-hc container-box-hc-info">
             <ul>
               <li>
                 <h2>Order Summary</h2>
@@ -98,19 +98,19 @@ export default function PlaceOrderScreen(props) {
               <li>
                 <div className="row">
                   <div>Items</div>
-                  <div>${cart.items_cost.toFixed(2)}</div>
+                  <div>${shopping.items_cost.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Shipping</div>
-                  <div>${cart.delivery_cost.toFixed(2)}</div>
+                  <div>${shopping.delivery_cost.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Tax</div>
-                  <div>${cart.tax_cost.toFixed(2)}</div>
+                  <div>${shopping.tax_cost.toFixed(2)}</div>
                 </div>
               </li>
               <li>
@@ -119,7 +119,7 @@ export default function PlaceOrderScreen(props) {
                     <strong> Order Total</strong>
                   </div>
                   <div>
-                    <strong>${cart.total_cost.toFixed(2)}</strong>
+                    <strong>${shopping.total_cost.toFixed(2)}</strong>
                   </div>
                 </div>
               </li>
@@ -128,7 +128,7 @@ export default function PlaceOrderScreen(props) {
                   type="button"
                   onClick={placeOrderHandler}
                   className="primary block"
-                  disabled={cart.shopping_items.length === 0}
+                  disabled={shopping.shoppingItems.length === 0}
                 >
                   Place Order
                 </button>

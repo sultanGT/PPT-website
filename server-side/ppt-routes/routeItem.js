@@ -137,8 +137,8 @@ routeItem.put(
   userCredentialsAuthenticated,
   userCredentialsAdministrator,
   expressAsyncHandler(async (req, res) => {
-    const item_id = req.params.id;
-    const item = await Item.findById(item_id);
+    const itemId = req.params.id;
+    const item = await Item.findById(itemId);
     if (item) {
       item.name = req.body.name;
       item.cost = req.body.cost;
@@ -176,8 +176,8 @@ routeItem.post(
   '/:id/reviews',
   userCredentialsAuthenticated,
   expressAsyncHandler(async (req, res) => {
-    const item_id = req.params.id;
-    const item = await Item.findById(item_id);
+    const itemId = req.params.id;
+    const item = await Item.findById(itemId);
     if (item) {
       const review = {
         name: req.pptuser.name,
