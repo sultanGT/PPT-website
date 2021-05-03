@@ -9,12 +9,12 @@ import HomePage from './screens/HomePage';
 import PurchaseHistoryPage from './screens/PurchaseHistoryPage';
 import PurchasePage from './screens/PurchasePage';
 import OrderPurchasePage from './screens/OrderPurchasePage';
-import ProductListScreen from './screens/ProductListScreen';
+import DisplayItemPage from './screens/DisplayItemPage';
 import ProductScreen from './screens/ProductScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import MyAccountPage from './screens/MyAccountPage';
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
-import ProductEditScreen from './screens/ProductEditScreen';
+import ItemEditPage from './screens/ItemEditPage';
 import PurchaseDisplayPage from './screens/PurchaseDisplayPage';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
@@ -207,7 +207,7 @@ function App(props) {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/credentials">User Profile  <i className="fa fa-address iconSmall"></i></Link>
+                    <Link to="/credentials">User Profile  <i className="fa fa-address-card iconSmall"></i></Link>
                   </li>
                   <li>
                     <Link to="/orderhistory">Order History  <i className="fa fa-history iconSmall"></i></Link>
@@ -299,7 +299,7 @@ function App(props) {
         <div className="pages">
           <Route path="/shopping/:id?" component={ShoppingPage}></Route>
           <Route path="/item/:id" component={ProductScreen} exact></Route>
-          <Route path="/item/:id/edit" component={ProductEditScreen} exact></Route>
+          <Route path="/item/:id/edit" component={ItemEditPage} exact></Route>
           {/* <Route path="/login" component={SigninScreen}></Route> */}
           <Route path="/signup" component={RegisterScreen}></Route>
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
@@ -338,16 +338,16 @@ function App(props) {
           ></Route>
           <PrivateRoute
             path="/credentials"
-            component={ProfileScreen}
+            component={MyAccountPage}
           ></PrivateRoute>
           <AdminRoute
             path="/productlist"
-            component={ProductListScreen}
+            component={DisplayItemPage}
             exact
           ></AdminRoute>
           <AdminRoute
             path="/productlist/page_number/:page_number"
-            component={ProductListScreen}
+            component={DisplayItemPage}
             exact
           ></AdminRoute>
           <AdminRoute

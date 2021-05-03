@@ -12,8 +12,8 @@ export default function ProductScreen(props) {
   const dispatch = useDispatch();
   const itemId = props.match.params.id;
   const [quantity, setQty] = useState(1);
-  const productDetails = useSelector((state) => state.productDetails);
-  const { loading, error, item } = productDetails;
+  const itemDetails = useSelector((state) => state.itemDetails);
+  const { loading, error, item } = itemDetails;
   const customerLogin = useSelector((state) => state.customerLogin);
   const { pptUserDetails } = customerLogin;
 

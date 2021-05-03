@@ -6,26 +6,32 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { ITEM_AMMEND_REFRESH } from '../constants/productConstants';
 
-export default function ProductEditScreen(props) {
+
+//
+export default function ItemEditPage(props) {
+
+  //
   const itemId = props.match.params.id;
   const [name, setName] = useState('');
   const [cost, setPrice] = useState('');
-  const [picture, setImage] = useState('');
+  const [picture, setPicture] = useState('');
   const [item_category, setCategory] = useState('');
   const [stock_number, setstock_count] = useState('');
   const [item_brand, setproduct_brand] = useState('');
-  const [item_info, setDescription] = useState('');
+  const [item_info, setInfo] = useState('');
 
-  const productDetails = useSelector((state) => state.productDetails);
-  const { loading, error, item } = productDetails;
+  //
+  const itemDetails = useSelector((state) => state.itemDetails);
+  const { loading, error, item } = itemDetails;
 
-  const productUpdate = useSelector((state) => state.productUpdate);
+  const itemAmmend = useSelector((state) => state.itemAmmend);
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
-  } = productUpdate;
+  } = itemAmmend;
 
+  //
   const dispatch = useDispatch();
   useEffect(() => {
     if (successUpdate) {
@@ -37,11 +43,11 @@ export default function ProductEditScreen(props) {
     } else {
       setName(item.name);
       setPrice(item.cost);
-      setImage(item.picture);
+      setPicture(item.picture);
       setCategory(item.item_category);
       setstock_count(item.stock_number);
       setproduct_brand(item.item_brand);
-      setDescription(item.item_info);
+      setInfo(item.item_info);
     }
   }, [item, dispatch, itemId, successUpdate, props.history]);
   const submitHandler = (e) => {
@@ -65,7 +71,7 @@ export default function ProductEditScreen(props) {
 
   const customerLogin = useSelector((state) => state.customerLogin);
   const { pptUserDetails } = customerLogin;
-  const uploadFileHandler = async (e) => {
+  const pictureUploadHandler = async (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('image', file);
@@ -77,7 +83,7 @@ export default function ProductEditScreen(props) {
           Authorization: `Bearer ${pptUserDetails.token}`,
         },
       });
-      setImage(data);
+      setPicture(data);
       setLoadingUpload(false);
     } catch (error) {
       setErrorUpload(error.message);
@@ -126,7 +132,7 @@ export default function ProductEditScreen(props) {
                 type="text"
                 placeholder="Enter picture"
                 value={picture}
-                onChange={(e) => setImage(e.target.value)}
+                onChange={(e) => setPicture(e.target.value)}
               ></input>
             </div>
             <div>
@@ -134,8 +140,8 @@ export default function ProductEditScreen(props) {
               <input
                 type="file"
                 id="imageFile"
-                label="Choose Image"
-                onChange={uploadFileHandler}
+                label="Choose Picture"
+                onChange={pictureUploadHandler}
               ></input>
               {loadingUpload && <LoadingBox></LoadingBox>}
               {errorUpload && (
@@ -163,7 +169,7 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="stock_number">Count In Stock</label>
+              <label htmlFor="stock_number">Stock Count</label>
               <input
                 id="stock_number"
                 type="text"
@@ -180,7 +186,7 @@ export default function ProductEditScreen(props) {
                 type="text"
                 placeholder="Enter item_info"
                 value={item_info}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setInfo(e.target.value)}
               ></textarea>
             </div>
             <div>

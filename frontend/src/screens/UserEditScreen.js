@@ -13,8 +13,8 @@ export default function UserEditScreen(props) {
   const [email, setEmail] = useState('');
   const [userCredentialsAdministrator, setIsAdmin] = useState(false);
 
-  const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, pptuser } = userDetails;
+  const userInfo = useSelector((state) => state.userInfo);
+  const { loading, error, pptuser } = userInfo;
 
   const userUpdate = useSelector((state) => state.userUpdate);
   const {

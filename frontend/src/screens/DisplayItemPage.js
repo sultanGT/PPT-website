@@ -13,34 +13,38 @@ import {
   ITEM_REMOVE_REFRESH,
 } from '../constants/productConstants';
 
-export default function ProductListScreen(props) {
+
+//
+export default function DisplayItemPage(props) {
   const { page_number = 1 } = useParams();
   const displayProducts = useSelector((state) => state.displayProducts);
   const { loading, error, PPTitems, pptpage, pages } = displayProducts;
 
-  const productCreate = useSelector((state) => state.productCreate);
+  //
+  const itemNew = useSelector((state) => state.itemNew);
   const {
-    loading: loadingCreate,
-    error: errorCreate,
-    success: successCreate,
+    loading: loadingNew,
+    error: errorNew,
+    success: successNew,
     item: new_item,
-  } = productCreate;
+  } = itemNew;
 
-  const productDelete = useSelector((state) => state.productDelete);
+  const itemRemove = useSelector((state) => state.itemRemove);
   const {
-    loading: loadingDelete,
-    error: errorDelete,
-    success: successDelete,
-  } = productDelete;
+    loading: loadingRemove,
+    error: errorRemove,
+    success: successRemove,
+  } = itemRemove;
+
   const customerLogin = useSelector((state) => state.customerLogin);
   const { pptUserDetails } = customerLogin;
   const dispatch = useDispatch();
   useEffect(() => {
-    if (successCreate) {
+    if (successNew) {
       dispatch({ type: ITEM_CREATE_REFRESH });
       props.history.push(`/item/${new_item._id}/edit`);
     }
-    if (successDelete) {
+    if (successRemove) {
       dispatch({ type: ITEM_REMOVE_REFRESH });
     }
     dispatch(
@@ -51,14 +55,14 @@ export default function ProductListScreen(props) {
     dispatch,
     props.history,
 
-    successCreate,
-    successDelete,
+    successNew,
+    successRemove,
     pptUserDetails._id,
     page_number,
   ]);
 
   const deleteHandler = (item) => {
-    if (window.confirm('Are you sure you want to delete?')) {
+    if (window.confirm('Are you sure you want to remove item?')) {
       dispatch(removeItem(item._id));
     }
   };
@@ -74,11 +78,11 @@ export default function ProductListScreen(props) {
         </button>
       </div>
 
-      {loadingDelete && <LoadingBox></LoadingBox>}
-      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
+      {loadingRemove && <LoadingBox></LoadingBox>}
+      {errorRemove && <MessageBox variant="danger">{errorRemove}</MessageBox>}
 
-      {loadingCreate && <LoadingBox></LoadingBox>}
-      {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
+      {loadingNew && <LoadingBox></LoadingBox>}
+      {errorNew && <MessageBox variant="danger">{errorNew}</MessageBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
