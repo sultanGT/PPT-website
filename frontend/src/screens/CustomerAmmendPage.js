@@ -7,25 +7,28 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { CUSTOMER_AMMEND_REFRESH } from '../constants/userConstants';
 
-export default function UserEditScreen(props) {
+export default function CustomerAmmendPage(props) {
   const customerId = props.match.params.id;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [userCredentialsAdministrator, setIsAdmin] = useState(false);
+  const [userCredentialsAdministrator, setCredentialsAdministrator] = useState(false);
 
   const userInfo = useSelector((state) => state.userInfo);
   const { loading, error, pptuser } = userInfo;
 
-  const userUpdate = useSelector((state) => state.userUpdate);
+  //
+  const userAmmend = useSelector((state) => state.userAmmend);
   const {
-    loading: loadingUpdate,
-    error: errorUpdate,
-    success: successUpdate,
-  } = userUpdate;
+    loading: loadingAmmend,
+    error: errorAmmend,
+    success: successAmmend,
+  } = userAmmend;
 
+
+  //
   const dispatch = useDispatch();
   useEffect(() => {
-    if (successUpdate) {
+    if (successAmmend) {
       dispatch({ type: CUSTOMER_AMMEND_REFRESH });
       props.history.push('/userlist');
     }
@@ -34,23 +37,26 @@ export default function UserEditScreen(props) {
     } else {
       setName(pptuser.name);
       setEmail(pptuser.email);
-      setIsAdmin(pptuser.userCredentialsAdministrator);
+      setCredentialsAdministrator(pptuser.userCredentialsAdministrator);
     }
-  }, [dispatch, props.history, successUpdate, pptuser, customerId]);
+  }, [dispatch, props.history, successAmmend, pptuser, customerId]);
 
+
+  //
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch update user
     dispatch(ammendCustomer({ _id: customerId, name, email, userCredentialsAdministrator }));
   };
+
+  //
   return (
     <div className="pager">
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Edit User {name}</h1>
-          {loadingUpdate && <LoadingBox></LoadingBox>}
-          {errorUpdate && (
-            <MessageBox variant="danger">{errorUpdate}</MessageBox>
+          {loadingAmmend && <LoadingBox></LoadingBox>}
+          {errorAmmend && (
+            <MessageBox variant="danger">{errorAmmend}</MessageBox>
           )}
         </div>
         {loading ? (
@@ -85,7 +91,7 @@ export default function UserEditScreen(props) {
                 id="userCredentialsAdministrator"
                 type="checkbox"
                 checked={userCredentialsAdministrator}
-                onChange={(e) => setIsAdmin(e.target.checked)}
+                onChange={(e) => setCredentialsAdministrator(e.target.checked)}
               ></input>
             </div>
             <div>

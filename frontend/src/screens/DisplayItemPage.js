@@ -42,7 +42,7 @@ export default function DisplayItemPage(props) {
   useEffect(() => {
     if (successNew) {
       dispatch({ type: ITEM_CREATE_REFRESH });
-      props.history.push(`/item/${new_item._id}/edit`);
+      props.history.push(`/item/${new_item._id}/ammend`);
     }
     if (successRemove) {
       dispatch({ type: ITEM_REMOVE_REFRESH });
@@ -61,7 +61,7 @@ export default function DisplayItemPage(props) {
     page_number,
   ]);
 
-  const deleteHandler = (item) => {
+  const removeHandler = (item) => {
     if (window.confirm('Are you sure you want to remove item?')) {
       dispatch(removeItem(item._id));
     }
@@ -113,7 +113,7 @@ export default function DisplayItemPage(props) {
                       type="button"
                       className="small"
                       onClick={() =>
-                        props.history.push(`/item/${item._id}/edit`)
+                        props.history.push(`/item/${item._id}/ammend`)
                       }
                     >
                       Edit
@@ -121,7 +121,7 @@ export default function DisplayItemPage(props) {
                     <button
                       type="button"
                       className="small"
-                      onClick={() => deleteHandler(item)}
+                      onClick={() => removeHandler(item)}
                     >
                       Delete
                     </button>

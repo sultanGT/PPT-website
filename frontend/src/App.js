@@ -10,16 +10,16 @@ import PurchaseHistoryPage from './screens/PurchaseHistoryPage';
 import PurchasePage from './screens/PurchasePage';
 import OrderPurchasePage from './screens/OrderPurchasePage';
 import DisplayItemPage from './screens/DisplayItemPage';
-import ProductScreen from './screens/ProductScreen';
+import ItemPage from './screens/ItemPage';
 import MyAccountPage from './screens/MyAccountPage';
-import RegisterScreen from './screens/RegisterScreen';
-import ShippingAddressScreen from './screens/ShippingAddressScreen';
-import ItemEditPage from './screens/ItemEditPage';
+import SignupPage from './screens/SignupPage';
+import DeliveryAddressPage from './screens/DeliveryAddressPage';
+import ItemAmmendPage from './screens/ItemAmmendPage';
 import PurchaseDisplayPage from './screens/PurchaseDisplayPage';
-import UserListScreen from './screens/UserListScreen';
-import UserEditScreen from './screens/UserEditScreen';
+import DisplayCustomersPage from './screens/DisplayCustomersPage';
+import CustomerAmmendPage from './screens/CustomerAmmendPage';
 import SearchBar from './components/SearchBar';
-import SearchScreen from './screens/SearchScreen';
+import SearchPage from './screens/SearchPage';
 import { displayItemBrands, displayItemCategories } from './actions/itemActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
@@ -29,19 +29,22 @@ import { addShoppingItem, deleteShoppingItem } from './actions/shoppingActions';
 
 
 
-
+//
 function App(props) {
 
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  //
+  const [sidebarDisplay, setSidebarDisplay] = useState(false);
   const customerLogin = useSelector((state) => state.customerLogin);
   const { pptUserDetails } = customerLogin;
   const dispatch = useDispatch();
   const signoutHandler = () => {
     dispatch(logout());
   };
+
+  
   const [navbar, setNavbar] = useState(false);
 
-  const changeBackground = () => {
+  const changeNavbar = () => {
     if (window.scrollY > 100) {
       setNavbar(true);
     } else {
@@ -49,21 +52,21 @@ function App(props) {
     }
   };
 
-  window.addEventListener('scroll', changeBackground);
+  window.addEventListener('scroll', changeNavbar);
 
-  const productCategoryList = useSelector((state) => state.productCategoryList);
+  const displayCategories = useSelector((state) => state.displayCategories);
   const {
     loading: loadingCategories,
     error: errorCategories,
     categories,
-  } = productCategoryList;
+  } = displayCategories;
 
-  const productBrandList = useSelector((state) => state.productBrandList);
+  const displayBrands = useSelector((state) => state.displayBrands);
   const {
     loading: loadingBrands,
     error: errorBrands,
     brands,
-  } = productBrandList;
+  } = displayBrands;
 
 
   useEffect(() => {
@@ -74,7 +77,7 @@ function App(props) {
 
   const shopping = useSelector((state) => state.shopping);
   const { shoppingItems, error } = shopping;
-  const deleteItemHandler = (id) => {
+  const removeProductHandler = (id) => {
     dispatch(deleteShoppingItem(id));
   };
   
@@ -86,10 +89,10 @@ function App(props) {
             <button
               type="button"
               className="open-sidebar"
-              onClick={() => setSidebarIsOpen(true)}
+              onClick={() => setSidebarDisplay(true)}
             >
               {/* <i className={ navbar ? 'fa fa-bars' : 'deactive'}></i> */}
-              <img className={ navbar ? 'menuIconSmall responsive' : ' menuIconLarge responsive'} src={img} alt="PPTmenuIcon"></img>
+              <img className={ navbar ? 'menu-Icon-Small responsive' : ' menu-Icon-large responsive'} src={img} alt="PPTmenuIcon"></img>
             </button>
             <Link className="Brand" to="/">
               PEAK PERFORMANCE TAEKWONDO
@@ -107,13 +110,13 @@ function App(props) {
           <div className="dropdown">
             <Link to="/cart">
               {/* Cart*/}
-              <i className="fas fa-shopping-cart iconLarge"></i>
+              <i className="fas fa-shopping-cart icon-large"></i>
               {shoppingItems.length > 0 && (
                 <span className="badge">{shoppingItems.length}</span>
               )}
             </Link>
 {/* DROPDOWN CART SCREEN */}
-            <div className="dropdown-content cartDropdown responsive">
+            <div className="dropdown-content shopping-dropdown responsive">
                 {
                   <div className="row top pager">
                   <div className="col-2">
@@ -158,7 +161,7 @@ function App(props) {
                               <div>
                                 <button
                                   type="button"
-                                  onClick={() => deleteItemHandler(item.item)}
+                                  onClick={() => removeProductHandler(item.item)}
                                 >
                                   Delete
                                 </button>
@@ -185,7 +188,7 @@ function App(props) {
                             className="primary block"
                             disabled={shoppingItems.length === 0}
                           >
-                            <Link className='primary block' to='/signup?redirect=shipping'>Proceed to Checkout</Link>
+                            <Link className='primary block' to='/signup?redirect=delivery'>Proceed to Checkout</Link>
                             
                           </button>
                         )}
@@ -203,14 +206,14 @@ function App(props) {
             {pptUserDetails ? (
               <div className="dropdown">
                 <Link to="#">
-                <i className="far fa-user iconLarge"></i>{'  '}<i className="username">{ pptUserDetails.name }</i>
+                <i className="far fa-user icon-large"></i>{'  '}<i className="username">{ pptUserDetails.name }</i>
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/credentials">User Profile  <i className="fa fa-address-card iconSmall"></i></Link>
+                    <Link to="/credentials">User Profile  <i className="fa fa-address-card icon-small"></i></Link>
                   </li>
                   <li>
-                    <Link to="/orderhistory">Order History  <i className="fa fa-history iconSmall"></i></Link>
+                    <Link to="/orderhistory">Order History  <i className="fa fa-history icon-small"></i></Link>
                   </li>
                   <li>
                     <Link to="#signout" onClick={signoutHandler} >
@@ -220,13 +223,13 @@ function App(props) {
                 </ul>
               </div>
             ) : (
-              <Link to="/signup"><i className="far fa-user iconLarge"></i></Link>
+              <Link to="/signup"><i className="far fa-user icon-large"></i></Link>
             )}
 
             {pptUserDetails && pptUserDetails.userCredentialsAdministrator && (
               <div className="dropdown">
                 <Link to="#admin">
-                <i className="fas fa-user-shield iconLarge"></i> {/*admin*/}
+                <i className="fas fa-user-shield icon-large"></i> {/*admin*/}
                 </Link>
                 <ul className="dropdown-content">
                   <li>
@@ -246,12 +249,12 @@ function App(props) {
             )}
           </div>
         </header>
-        <aside className={sidebarIsOpen ? 'open' : ''}>
+        <aside className={sidebarDisplay ? 'open' : ''}>
           <ul className="categories">
             <li>
               <strong>Categories</strong>
               <button
-                onClick={() => setSidebarIsOpen(false)}
+                onClick={() => setSidebarDisplay(false)}
                 className="close-sidebar"
                 type="button"
               >
@@ -267,7 +270,7 @@ function App(props) {
                 <li key={c}>
                   <Link
                     to={`/search/item_category/${c}`}
-                    onClick={() => setSidebarIsOpen(false)}
+                    onClick={() => setSidebarDisplay(false)}
                   >
                     {c}
                   </Link>
@@ -286,7 +289,7 @@ function App(props) {
                 <li key={a}>
                   <Link
                     to={`/search/item_brand/${a}`}
-                    onClick={() => setSidebarIsOpen(false)}
+                    onClick={() => setSidebarDisplay(false)}
                   >
                     {a}
                   </Link>
@@ -298,42 +301,42 @@ function App(props) {
         <main>
         <div className="pages">
           <Route path="/shopping/:id?" component={ShoppingPage}></Route>
-          <Route path="/item/:id" component={ProductScreen} exact></Route>
-          <Route path="/item/:id/edit" component={ItemEditPage} exact></Route>
+          <Route path="/item/:id" component={ItemPage} exact></Route>
+          <Route path="/item/:id/ammend" component={ItemAmmendPage} exact></Route>
           {/* <Route path="/login" component={SigninScreen}></Route> */}
-          <Route path="/signup" component={RegisterScreen}></Route>
-          <Route path="/shipping" component={ShippingAddressScreen}></Route>
-          <Route path="/placeorder" component={OrderPurchasePage}></Route>
+          <Route path="/signup" component={SignupPage}></Route>
+          <Route path="/delivery" component={DeliveryAddressPage}></Route>
+          <Route path="/orderpurchase" component={OrderPurchasePage}></Route>
           <Route path="/customer_order/:id" component={PurchasePage}></Route>
           <Route path="/orderhistory" component={PurchaseHistoryPage}></Route>
           <Route
             path="/search/name/:name?"
-            component={SearchScreen}
+            component={SearchPage}
             exact
           ></Route>
           <Route
             path="/search/item_category/:item_category"
-            component={SearchScreen}
+            component={SearchPage}
             exact
           ></Route>
           <Route
             path="/search/item_category/:item_category/name/:name"
-            component={SearchScreen}
+            component={SearchPage}
             exact
           ></Route>
           <Route
             path="/search/item_brand/:item_brand"
-            component={SearchScreen}
+            component={SearchPage}
             exact
           ></Route>
           <Route
             path="/search/item_brand/:item_brand/name/:name"
-            component={SearchScreen}
+            component={SearchPage}
             exact
           ></Route>
           <Route
             path="/search/item_category/:item_category/item_brand/:item_brand/name/:name/minimum/:minimum/maximum/:maximum/user_rating/:user_rating/customer_order/:customer_order/page_number/:page_number"
-            component={SearchScreen}
+            component={SearchPage}
             exact
           ></Route>
           <PrivateRoute
@@ -355,10 +358,10 @@ function App(props) {
             component={PurchaseDisplayPage}
             exact
           ></AdminRoute>
-          <AdminRoute path="/userlist" component={UserListScreen}></AdminRoute>
+          <AdminRoute path="/userlist" component={DisplayCustomersPage}></AdminRoute>
           <AdminRoute
-            path="/pptuser/:id/edit"
-            component={UserEditScreen}
+            path="/pptuser/:id/ammend"
+            component={CustomerAmmendPage}
           ></AdminRoute>
           </div>
           <Route path="/" component={HomePage} exact></Route>
@@ -366,13 +369,13 @@ function App(props) {
         </main>
         
         <footer className="row">
-          <div className='fbox1'>
+          <div className='footerbox-1'>
           <Link className="footerbrand" to="/">
               PEAK PERFORMANCE TAEKWONDO
             </Link>
           <h2>Address: Wimbeldon Park Hall,<br/> 170 Arthur Rd, Wimbledon Park,<br/> London SW19 8AQ</h2>
           </div>
-          <div className='fbox2 responsive'>
+          <div className='footerbox-2 responsive'>
           <ul className="categories">
             <li>
               <h1>Item Categories</h1>
@@ -384,7 +387,7 @@ function App(props) {
             ) : (
               categories.map((c) => (
                 <li key={c} className="">
-                  <Link className="cat"
+                  <Link className="white-links"
                     to={`/search/item_category/${c}`}
                   >
                     {c}
@@ -394,7 +397,7 @@ function App(props) {
             )}
           </ul>
           </div>
-          <div className='fbox2 responsive'>
+          <div className='footerbox-2 responsive'>
           <ul className="categories">
           <li>
               <h1>Brands</h1>
@@ -406,7 +409,7 @@ function App(props) {
             ) : (
               brands.map((a) => (
                 <li key={a}>
-                  <Link className='cat'
+                  <Link className='white-links'
                     to={`/search/item_brand/${a}`}
                   >
                     {a}

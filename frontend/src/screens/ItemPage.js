@@ -8,7 +8,8 @@ import Rating from '../components/Rating';
 import { ITEM_REVIEW_CREATE_REFRESH } from '../constants/productConstants';
 import { GrReturn } from 'react-icons/gr';
 
-export default function ProductScreen(props) {
+//
+export default function ItemPage(props) {
   const dispatch = useDispatch();
   const itemId = props.match.params.id;
   const [quantity, setQty] = useState(1);
@@ -16,28 +17,28 @@ export default function ProductScreen(props) {
   const { loading, error, item } = itemDetails;
   const customerLogin = useSelector((state) => state.customerLogin);
   const { pptUserDetails } = customerLogin;
-
-  const productReviewCreate = useSelector((state) => state.productReviewCreate);
+//
+  const ItemNewReview = useSelector((state) => state.ItemNewReview);
   const {
-    loading: loadingReviewCreate,
-    error: errorReviewCreate,
-    success: successReviewCreate,
-  } = productReviewCreate;
+    loading: loadingNewReview,
+    error: errorNewReview,
+    success: successNewReview,
+  } = ItemNewReview;
 
-  const [user_rating, setRating] = useState(0);
-  const [user_comment, setComment] = useState('');
+  const [user_rating, setCustomerRating] = useState(0);
+  const [user_comment, setCustomerComment] = useState('');
 
   useEffect(() => {
-    if (successReviewCreate) {
-      window.alert('Review Submitted Successfully');
-      setRating('');
-      setComment('');
+    if (successNewReview) {
+      window.alert('Your Review has now been Published');
+      setCustomerRating('');
+      setCustomerComment('');
       dispatch({ type: ITEM_REVIEW_CREATE_REFRESH });
     }
     dispatch(itemInfo(itemId));
-  }, [dispatch, itemId, successReviewCreate]);
+  }, [dispatch, itemId, successNewReview]);
   
-  const addToCartHandler = () => {
+  const addShoppingItemHandler = () => {
     props.history.push(`/shopping/${itemId}?quantity=${quantity}`);
   };
   const submitHandler = (e) => {
@@ -47,7 +48,7 @@ export default function ProductScreen(props) {
         newReview(itemId, { user_rating, user_comment, name: pptUserDetails.name })
       );
     } else {
-      alert('Please enter user_comment and rating');
+      alert('Please enter a review of the item and rating');
     }
   };
   return (
@@ -109,7 +110,7 @@ export default function ProductScreen(props) {
                       <select
                         id="user_rating"
                         value={user_rating}
-                        onChange={(e) => setRating(e.target.value)}
+                        onChange={(e) => setCustomerRating(e.target.value)}
                       >
                         <option value="">Select...</option>
                         <option value="1">1- Poor</option>
@@ -124,7 +125,7 @@ export default function ProductScreen(props) {
                       <textarea
                         id="user_comment"
                         value={user_comment}
-                        onChange={(e) => setComment(e.target.value)}
+                        onChange={(e) => setCustomerComment(e.target.value)}
                       ></textarea>
                     </div>
                     <div>
@@ -134,10 +135,10 @@ export default function ProductScreen(props) {
                       </button>
                     </div>
                     <div>
-                      {loadingReviewCreate && <LoadingBox></LoadingBox>}
-                      {errorReviewCreate && (
+                      {loadingNewReview && <LoadingBox></LoadingBox>}
+                      {errorNewReview && (
                         <MessageBox variant="danger">
-                          {errorReviewCreate}
+                          {errorNewReview}
                         </MessageBox>
                       )}
                     </div>
@@ -194,7 +195,7 @@ export default function ProductScreen(props) {
                       </li>
                       <li>
                         <button
-                          onClick={addToCartHandler}
+                          onClick={addShoppingItemHandler}
                           className="primary block"
                         >
                           Add to Cart

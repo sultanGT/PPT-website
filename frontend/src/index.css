@@ -505,20 +505,20 @@ img.large {
   font-weight: bold;
 }
 
-.menuIconLarge {
+.menu-Icon-large {
   width: 8rem;
   height: 8rem;
 }
 
-.menuIconSmall {
+.menu-Icon-Small {
   width: 5rem;
   height: 5rem;
 }
 
-.iconSmall{
+.icon-small{
   margin-left: 1rem;
 }
-.iconLarge{
+.icon-large{
   margin-left: 1rem;
   font-size: 2.2rem;
 }
@@ -601,7 +601,7 @@ img.large {
  .pages {
    background: #fff;
  }
- .pageS {
+ .blackout {
   background: #000;
 }
  
@@ -626,7 +626,7 @@ img.large {
   }
 }
 
-.cartDropdown {
+.shopping-dropdown {
   background: white;
   border: 0.5rem black solid;
   padding: none;
@@ -673,19 +673,16 @@ img.large {
   background: black;
 }
 
-.fbox1 {
+.footerbox-1 {
   margin-top: -100px;
 }
 
-.fbox2 {
+.footerbox-2 {
   margin-top: -100px;
 }
 
 .footer-title {
   margin-top: -40rem;
-}
-.wd {
-width: 100%;
 }
 a.footerbrand {
   color: #ffffff;
@@ -695,7 +692,7 @@ a.footerbrand {
   transition: all 0.2s;
 }
 
-.cat {
+.white-links {
   color: white;
 }
 .container-box-hc-title {
@@ -741,6 +738,3 @@ div.loading{
   background-color: rgba(16, 16, 16, 0.5);
 }
 
-.signupForm {
-  width: 100%;
-}

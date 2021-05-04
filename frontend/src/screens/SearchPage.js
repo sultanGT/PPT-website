@@ -7,7 +7,8 @@ import MessageBox from '../components/MessageBox';
 import Item from '../components/Item';
 import { prices } from '../utils';
 
-export default function SearchScreen(props) {
+//
+export default function SearchPage(props) {
   const {
     name = 'all',
     item_category = 'all',
@@ -21,23 +22,23 @@ export default function SearchScreen(props) {
   const dispatch = useDispatch();
   const displayProducts = useSelector((state) => state.displayProducts);
   const { loading, error, PPTitems, pptpage, pages } = displayProducts;
-
-  const productCategoryList = useSelector((state) => state.productCategoryList);
+//
+  const displayCategories = useSelector((state) => state.displayCategories);
   const {
     loading: loadingCategories,
     error: errorCategories,
     categories,
-  } = productCategoryList;
-
-  const productBrandList = useSelector((state) => state.productBrandList);
+  } = displayCategories;
+//
+  const displayBrands = useSelector((state) => state.displayBrands);
   const {
     loading: loadingBrands,
     error: errorBrands,
     brands,
-  } = productBrandList;
+  } = displayBrands;
 
 
-
+//
   useEffect(() => {
     dispatch(
       displayItems({
@@ -53,6 +54,7 @@ export default function SearchScreen(props) {
     );
   }, [item_category, item_brand, dispatch, maximum, minimum, name, customer_order, user_rating, page_number]);
 
+  //
   const getFilterUrl = (filter) => {
     const filterPage = filter.pptpage || page_number;
     const filterCategory = filter.item_category || item_category;
@@ -66,7 +68,7 @@ export default function SearchScreen(props) {
   };
   return (
     <div className="">
-      <div className="row center pageS">
+      <div className="row center blackout">
         <div>
           Sort by{' '}
           <select
@@ -82,7 +84,7 @@ export default function SearchScreen(props) {
           </select>
         </div>
       </div>
-      <div className="row top pageS">
+      <div className="row top blackout">
         <div className="col-1 borders">
         {loading ? (
           <LoadingBox></LoadingBox>
@@ -182,12 +184,12 @@ export default function SearchScreen(props) {
               {PPTitems.length === 0 && (
                 <MessageBox>No Item Found</MessageBox>
               )}
-              <div className="row center pageS">
+              <div className="row center blackout">
                 {PPTitems.map((item) => (
                   <Item key={item._id} item={item}></Item>
                 ))}
               </div>
-              <div className="row center pagination pageS">
+              <div className="row center pagination blackout">
                 {[...Array(pages).keys()].map((x) => (
                   <Link
                     className={x + 1 === pptpage ? 'active' : ''}

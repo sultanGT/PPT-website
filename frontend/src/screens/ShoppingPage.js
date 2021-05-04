@@ -23,13 +23,13 @@ export default function ShoppingPage(props) {
   }, [dispatch, itemId, quantity]);
 
   //
-  const deleteItemHandler = (id) => {
+  const removeProductHandler = (id) => {
     dispatch(deleteShoppingItem(id));
   };
 
   //
   const shoppingHandler = () => {
-    props.history.push('/signup?redirect=shipping');
+    props.history.push('/signup?redirect=delivery');
   };
 
 
@@ -79,7 +79,7 @@ export default function ShoppingPage(props) {
                   <div>
                     <button
                       type="button"
-                      onClick={() => deleteItemHandler(item.item)}
+                      onClick={() => removeProductHandler(item.item)}
                     >
                       Delete
                     </button>

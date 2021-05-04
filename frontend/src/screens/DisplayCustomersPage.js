@@ -5,10 +5,12 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { CUSTOMER_INFO_REFRESH } from '../constants/userConstants';
 
-export default function UserListScreen(props) {
+//
+export default function DisplayCustomersPage(props) {
   const userList = useSelector((state) => state.userList);
   const { loading, error, pptusers } = userList;
 
+  //
   const userDelete = useSelector((state) => state.userDelete);
   const {
     loading: loadingDelete,
@@ -23,11 +25,13 @@ export default function UserListScreen(props) {
       type: CUSTOMER_INFO_REFRESH,
     });
   }, [dispatch, successDelete]);
-  const deleteHandler = (pptuser) => {
+  const removeHandler = (pptuser) => {
     if (window.confirm('Are you sure?')) {
       dispatch(removeCustomer(pptuser._id));
     }
   };
+
+//
   return (
     <div className="pager">
       <h1>Users</h1>
@@ -62,14 +66,14 @@ export default function UserListScreen(props) {
                   <button
                     type="button"
                     className="small"
-                    onClick={() => props.history.push(`/pptuser/${pptuser._id}/edit`)}
+                    onClick={() => props.history.push(`/pptuser/${pptuser._id}/ammend`)}
                   >
                     Edit
                   </button>
                   <button
                     type="button"
                     className="small"
-                    onClick={() => deleteHandler(pptuser)}
+                    onClick={() => removeHandler(pptuser)}
                   >
                     Delete
                   </button>

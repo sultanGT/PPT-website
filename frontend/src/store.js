@@ -58,7 +58,7 @@ const reducer = combineReducers({
   displayPurchaseAccount: orderMineListReducer,
   userInfo: userDetailsReducer,
   userAmmendAccount: userUpdateProfileReducer,
-  userUpdate: userUpdateReducer,
+  userAmmend: userUpdateReducer,
   itemNew: productCreateReducer,
   itemAmmend: productUpdateReducer,
   itemRemove: productDeleteReducer,
@@ -67,9 +67,9 @@ const reducer = combineReducers({
   purchaseShipping: orderDeliverReducer,
   userList: userListReducer,
   userDelete: userDeleteReducer,
-  productCategoryList: productCategoryListReducer,
-  productBrandList: productBrandListReducer,
-  productReviewCreate: productReviewCreateReducer,
+  displayCategories: productCategoryListReducer,
+  displayBrands: productBrandListReducer,
+  ItemNewReview: productReviewCreateReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

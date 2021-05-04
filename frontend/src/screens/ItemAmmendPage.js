@@ -8,7 +8,7 @@ import { ITEM_AMMEND_REFRESH } from '../constants/productConstants';
 
 
 //
-export default function ItemEditPage(props) {
+export default function ItemAmmendPage(props) {
 
   //
   const itemId = props.match.params.id;

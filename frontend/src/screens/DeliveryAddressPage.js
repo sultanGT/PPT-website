@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveDeliveryAddress } from '../actions/shoppingActions';
 import PurchaseProgress from '../components/PurchaseProgress';
 
-export default function ShippingAddressScreen(props) {
+
+export default function DeliveryAddressPage(props) {
   const customerLogin = useSelector((state) => state.customerLogin);
   const { pptUserDetails } = customerLogin;
   const shopping = useSelector((state) => state.shopping);
@@ -11,6 +12,8 @@ export default function ShippingAddressScreen(props) {
   if (!pptUserDetails) {
     props.history.push('/login');
   }
+
+  //
   const [fullName, setFullName] = useState(delivery_address.fullName);
   const [address, setAddress] = useState(delivery_address.address);
   const [city, setCity] = useState(delivery_address.city);
@@ -19,6 +22,8 @@ export default function ShippingAddressScreen(props) {
   const [contactNumber, setContactNumber] = useState(delivery_address.contactNumber);
   const dispatch = useDispatch();
 
+
+  //
   const submitHandler = (e) => {
     if (contactNumber.length < 11) {
       alert('Contact Number Is Not Valid');
@@ -26,19 +31,16 @@ export default function ShippingAddressScreen(props) {
     } else if (post_code.length < 7) {
       e.preventDefault();
       alert('Post Code Is Not Valid');
-    }
-      else
-      
-      {
+    } else {
     e.preventDefault();
     dispatch(
       saveDeliveryAddress({ fullName, address, city, post_code, county, contactNumber })
     );
-    props.history.push('/placeorder');
+    props.history.push('/orderpurchase');
   };
 }
 
-
+//
   return (
     <div className="pager">
       <PurchaseProgress progress_signin progress_shipping></PurchaseProgress>

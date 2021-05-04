@@ -28,7 +28,7 @@ export default function PurchaseDisplayPage(props) {
   }, [dispatch, successRemove, pptUserDetails._id]);
 
   //
-  const deleteHandler = (customer_order) => {
+  const removeHandler = (customer_order) => {
     if (window.confirm('Confirm removal of purchase')) {
       dispatch(removePurchase(customer_order._id));
     }
@@ -83,7 +83,7 @@ export default function PurchaseDisplayPage(props) {
                   <button
                     type="button"
                     className="small"
-                    onClick={() => deleteHandler(customer_order)}
+                    onClick={() => removeHandler(customer_order)}
                   >
                     Delete
                   </button>
