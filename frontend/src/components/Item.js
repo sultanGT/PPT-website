@@ -13,13 +13,6 @@ export default function Item(props) {
   return (
 
   <div>
-    {/* <Link to={`/search/item_category/${item.item_category}`} >
-    <div className="row center">
-        <h1>{item.item_category}</h1>
-        </div>
-    </Link> */}
-    
-
     <div key={item._id} className="container-box-hc" onMouseEnter={() => setViewItem(true)}
         onMouseLeave={() => setViewItem(false)}>
       <Link to={`/item/${item._id}`}>

@@ -66,20 +66,24 @@ export const displayItemCategories = () => async (dispatch) => {
 
 //
 export const displayItemBrands = () => async (dispatch) => {
-  dispatch({
-    type: ITEM_BRAND_FILTER_REQUEST,
+dispatch({ type: ITEM_BRAND_FILTER_REQUEST, });
+try {
+const { data } = await Axios.get(
+  `/api/pptitems/item_brands`
+  );
+    dispatch({ type: 
+      ITEM_BRAND_FILTER_COMPLETE, 
+      payload: data 
   });
-  try {
-    const { data } = await Axios.get(`/api/pptitems/item_brands`);
-    dispatch({ type: ITEM_BRAND_FILTER_COMPLETE, payload: data });
-  } catch (error) {
+  } catch (error) 
+  {
     dispatch({ type: ITEM_BRAND_FILTER_ERROR, payload: error.message });
   }
 };
 
 //
 export const itemInfo = (itemId) => async (dispatch) => {
-  dispatch({ type: ITEM_INFO_REQUEST, payload: itemId });
+dispatch({ type: ITEM_INFO_REQUEST, payload: itemId });
   try {
     const { data } = await Axios.get(`/api/pptitems/${itemId}`);
     dispatch({ type: ITEM_INFO_COMPLETE, payload: data });

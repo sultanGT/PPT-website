@@ -505,7 +505,7 @@ img.large {
 
 /* Carousel */
 
-.slider {
+.carousel {
   position: relative;
   height: 100vh;
   width: 100%;
@@ -515,7 +515,7 @@ img.large {
   margin-top: -9rem;
 }
 
-.sliderImage {
+.carousel-picture {
   width: 100%;
   max-width: 1334px;
   height: 600px;
@@ -562,12 +562,12 @@ img.large {
   transition: 0.2s;
 }
 
-.slide {
+.carousel_picture {
   opacity: 0;
   transition-duration: 1s ease;
 }
 
-.slide.active {
+.carousel_picture.active {
   opacity: 1;
   transition-duration: 1s;
   transform: scale(1.08);

@@ -23,75 +23,63 @@ import {
   CUSTOMER_AMMEND_ERROR,
 } from '../constants/userConstants';
 
-//
+
+//Function for customer to signip on the PPT web app - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
 export const signup = (name, email, password) => async (dispatch) => {
-  dispatch({ type: CUSTOMER_SIGNUP_REQUEST, payload: { email, password } });
-  try {
-    const { data } = await Axios.post('/api/pptusers/signup', {
-      name,
-      email,
-      password,
-    });
-    dispatch({ type: CUSTOMER_SIGNUP_COMPLETE, payload: data });
-    dispatch({ type: CUSTOMER_LOGIN_COMPLETE, payload: data });
-    localStorage.setItem('pptUserDetails', JSON.stringify(data));
-  } catch (error) {
-    dispatch({
-      type: CUSTOMER_SIGNUP_ERROR,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
-//
+
+dispatch({ type: CUSTOMER_SIGNUP_REQUEST, payload: { email, password } });
+try {const { data } = await Axios.post('/api/pptusers/signup', {name, email, password,});
+
+dispatch({ type: CUSTOMER_SIGNUP_COMPLETE, payload: data });
+dispatch({ type: CUSTOMER_LOGIN_COMPLETE, payload: data });
+    
+localStorage.setItem('pptUserDetails', JSON.stringify(data));
+
+} catch (error) {
+dispatch({type: CUSTOMER_SIGNUP_ERROR, payload: error.response && error.response.data.message ? error.response.data.message : error.message,});}};
+
+// Function for customer login to the web app once registered - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
 export const login = (email, password) => async (dispatch) => {
-  dispatch({ type: CUSTOMER_LOGIN_REQUEST, payload: { email, password } });
-  try {
-    const { data } = await Axios.post('/api/pptusers/login', { email, password });
-    dispatch({ type: CUSTOMER_LOGIN_COMPLETE, payload: data });
-    localStorage.setItem('pptUserDetails', JSON.stringify(data));
-  } catch (error) {
-    dispatch({
-      type: CUSTOMER_LOGIN_ERROR,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
-//
+
+dispatch({ type: CUSTOMER_LOGIN_REQUEST, payload: { email, password } });
+try { const { data } = await Axios.post('/api/pptusers/login', { email, password });
+
+dispatch({ type: CUSTOMER_LOGIN_COMPLETE, payload: data });
+localStorage.setItem('pptUserDetails', JSON.stringify(data));
+
+} catch (error) {
+dispatch({
+type: CUSTOMER_LOGIN_ERROR, payload: error.response && error.response.data.message ? error.response.data.message : error.message,});}};
+
+//Functions for removing account data from logged in session - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
 export const logout = () => (dispatch) => {
-  localStorage.removeItem('pptUserDetails');
-  localStorage.removeItem('shoppingItems');
-  localStorage.removeItem('delivery_address');
-  dispatch({ type: CUSTOMER_LOGOUT });
-  document.location.href = '/';
+localStorage.removeItem('pptUserDetails');
+localStorage.removeItem('shoppingItems');
+localStorage.removeItem('delivery_address');
+
+dispatch({ type: CUSTOMER_LOGOUT });
+
+document.location.href = '/';
 };
 
-//
+//Function for getting customer info - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
 export const customerInfo = (customerId) => async (dispatch, getState) => {
-  dispatch({ type: CUSTOMER_INFO_REQUEST, payload: customerId });
-  const {
-    customerLogin: { pptUserDetails },
-  } = getState();
-  try {
-    const { data } = await Axios.get(`/api/pptusers/${customerId}`, {
-      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
-    });
-    dispatch({ type: CUSTOMER_INFO_COMPLETE, payload: data });
-  } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    dispatch({ type: CUSTOMER_INFO_ERROR, payload: message });
-  }
-};
+dispatch({ type: CUSTOMER_INFO_REQUEST, payload: customerId });
+const { customerLogin: { pptUserDetails }, } = getState();
 
-//
+try { 
+
+const { data } = await Axios.get(`/api/pptusers/${customerId}`, {
+headers: { Authorization: `Bearer ${pptUserDetails.token}` },});
+
+dispatch({ type: CUSTOMER_INFO_COMPLETE, payload: data });
+} catch (error) {
+
+//Send Error message if cannot find customer info - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
+const message = error.response && error.response.data.message ? error.response.data.message : error.message;
+dispatch({ type: CUSTOMER_INFO_ERROR, payload: message });}};
+
+//Function for updating customers account details - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
 export const ammendCustomerAccount = (pptuser) => async (dispatch, getState) => {
   dispatch({ type: CUSTOMER_AMMEND_ACCOUNT_REQUEST, payload: pptuser });
   const {
