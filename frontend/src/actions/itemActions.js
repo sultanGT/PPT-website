@@ -1,4 +1,4 @@
-import Axios from '../pages/axios';
+import Axios from 'axios';
 import {
   ITEM_NEW_ERROR,
   ITEM_NEW_REQUEST,

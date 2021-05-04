@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from './react';
-import { useDispatch, useSelector } from './react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { customerInfo, ammendCustomerAccount } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';

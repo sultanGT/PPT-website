@@ -1,4 +1,4 @@
-import Axios from '../pages/axios';
+import Axios from 'axios';
 import {
   SHOPPING_ADD_PRODUCT,
   SHOPPING_REMOVE_PRODUCT,

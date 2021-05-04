@@ -1,4 +1,4 @@
-import Axios from '../pages/axios';
+import Axios from 'axios';
 import { SHOPPING_NO_ITEMS } from '../constants/cartConstants';
 import {
   PURCHASE_NEW_ERROR,

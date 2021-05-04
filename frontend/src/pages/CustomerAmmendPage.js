@@ -1,7 +1,7 @@
-import React from './react';
-import { useEffect } from './react';
-import { useState } from './react';
-import { useDispatch, useSelector } from './react-redux';
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { customerInfo, ammendCustomer } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';

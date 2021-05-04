@@ -1,6 +1,6 @@
-import React, { useEffect } from './react';
-import { useDispatch, useSelector } from './react-redux';
-import { Link } from './react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { newPurchase } from '../actions/purchaseActions';
 import PurchaseProgress from '../components/PurchaseProgress';
 import { PURCHASE_NEW_REFRESH } from '../constants/orderConstants';

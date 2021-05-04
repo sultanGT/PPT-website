@@ -1,8 +1,8 @@
-import React, { useEffect } from './react';
+import React, { useEffect } from 'react';
 import Item from '../components/Item';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { useDispatch, useSelector } from './react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { displayItems } from '../actions/itemActions';
 import ImageCarousel from '../components/ImageCarousel';
 import { ImageSlides } from '../components/ImageSlides';
