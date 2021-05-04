@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from './react';
+import { useDispatch, useSelector } from './react-redux';
+import { Link } from './react-router-dom';
 import { newReview, itemInfo } from '../actions/itemActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Rating from '../components/Rating';
 import { ITEM_REVIEW_CREATE_REFRESH } from '../constants/productConstants';
-import { GrReturn } from 'react-icons/gr';
+import { GrReturn } from './react-icons/gr';
 
 //
 export default function ItemPage(props) {

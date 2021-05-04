@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from './react';
+import { useDispatch, useSelector } from './react-redux';
 import { saveDeliveryAddress } from '../actions/shoppingActions';
 import PurchaseProgress from '../components/PurchaseProgress';
 
@@ -53,7 +53,7 @@ export default function DeliveryAddressPage(props) {
           <input
             type="text"
             id="fullName"
-            placeholder="Enter full username"
+            placeholder="Enter full name"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
@@ -108,7 +108,7 @@ export default function DeliveryAddressPage(props) {
           <input
             type="text"
             id="contactNumber"
-            placeholder="Enter Contact Number"
+            placeholder="Enter contact number"
             onChange={(e) => setContactNumber(e.target.value)}
             required
           ></input>

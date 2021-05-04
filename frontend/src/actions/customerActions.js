@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import Axios from '../pages/axios';
 import {
   CUSTOMER_INFO_ERROR,
   CUSTOMER_INFO_REQUEST,

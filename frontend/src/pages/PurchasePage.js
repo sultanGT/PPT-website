@@ -1,8 +1,8 @@
-import Axios from 'axios';
-import { PayPalButton } from 'react-paypal-button-v2';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import Axios from './axios';
+import { PayPalButton } from './react-paypal-button-v2';
+import React, { useEffect, useState } from './react';
+import { useDispatch, useSelector } from './react-redux';
+import { Link } from './react-router-dom';
 import { shippingPurchase, purchaseInfo, purchasePayPal } from '../actions/purchaseActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';

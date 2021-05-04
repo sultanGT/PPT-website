@@ -5,7 +5,7 @@ import Item from '../ppt-templates/itemTemplate.js';
 import { userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
 
 
-// Variable Declarations - selfcoded
+
 const routeItem = express.Router();
 
 // Function for displaying item details - selfcoded
@@ -74,13 +74,7 @@ routeItem.get(
 );
 
 // Filter for counting PPTitems for filter results - reused copied
-routeItem.get(
-  '/item_brands',
-  expressAsyncHandler(async (req, res) => {
-    const brands = await Item.find().distinct('item_brand');
-    res.send(brands);
-  })
-);
+routeItem.get( '/item_brands', expressAsyncHandler(async (req, res) => { const brands = await Item.find().distinct('item_brand'); res.send(brands);}));
 
 // Function for initialising PPT PPTitems into the web application
 routeItem.get(
