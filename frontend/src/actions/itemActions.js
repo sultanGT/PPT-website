@@ -24,6 +24,9 @@ import {
   ITEM_BRAND_FILTER_REQUEST,
   ITEM_BRAND_FILTER_COMPLETE,
   ITEM_BRAND_FILTER_ERROR,
+  ITEM_COST_FILTER_COMPLETE, 
+  ITEM_COST_FILTER_ERROR, 
+  ITEM_COST_FILTER_REQUEST,
 } from '../constants/itemConstants'; //Self Coded
 
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb
@@ -33,7 +36,7 @@ export const displayItems = ({
   name = '',
   item_category = '',
   item_brand = '', //Self coded
-  item_cost = '',
+  our_products = '',
   customer_order = '',
   minimum = 0,
   maximum = 0,
@@ -44,7 +47,7 @@ export const displayItems = ({
   });
 try {
     const { data } = await Axios.get( //Self coded - item_brand
-      `/api/pptitems?page_number=${page_number}&name=${name}&item_category=${item_category}&item_brand=${item_brand}&item_cost=${item_cost}&minimum=${minimum} &maximum=${maximum}&user_rating=${user_rating}&customer_order=${customer_order}`
+      `/api/pptitems?page_number=${page_number}&name=${name}&item_category=${item_category}&item_brand=${item_brand}&our_products=${our_products}&minimum=${minimum} &maximum=${maximum}&user_rating=${user_rating}&customer_order=${customer_order}`
     );
     dispatch({ 
       type: ITEM_HISTORY_COMPLETE, 
@@ -98,24 +101,24 @@ const { data } = await Axios.get(
 
 //Function for displaying item brands in sidemenu, searchbar and footer - // Self coded
 export const displayItemCosts = () => async (dispatch) => { 
-  dispatch({ type: ITEM_BRAND_FILTER_REQUEST, }); 
-  try {
-  const { data } = await Axios.get(
-    `/api/pptitems/item_brands` 
-    );
-      dispatch({ type: 
-        ITEM_BRAND_FILTER_COMPLETE, 
-        payload: data 
+dispatch({ type: ITEM_COST_FILTER_REQUEST, }); 
+try {
+const { data } = await Axios.get(
+  `/api/pptitems/our_products` 
+  );
+    dispatch({ type: 
+      ITEM_COST_FILTER_COMPLETE, 
+      payload: data 
+  });
+} catch (error) 
+  {
+    dispatch({ 
+      type: ITEM_COST_FILTER_ERROR, 
+      payload: 
+      error.message 
     });
-  } catch (error) 
-    {
-      dispatch({ 
-        type: ITEM_BRAND_FILTER_ERROR, 
-        payload: 
-        error.message 
-      });
-    }
-  };
+  }
+};
 
 //Funtion for getting info of items 
 export const itemInfo = (itemId) => async (dispatch) => {// Reused, edited

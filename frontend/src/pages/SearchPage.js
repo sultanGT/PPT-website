@@ -37,6 +37,13 @@ export default function SearchPage(props) {
     brands,
   } = displayBrands;
 
+  const displayOurProducts = useSelector((state) => state.displayOurProducts);
+  const {
+    loading: loadingOurProducts,
+    error: errorOurProducts,
+    our_products,
+  } = displayOurProducts;
+
 
 //
   useEffect(() => {
@@ -46,6 +53,7 @@ export default function SearchPage(props) {
         name: name !== 'all' ? name : '',
         item_category: item_category !== 'all' ? item_category : '',
         item_brand: item_brand !== 'all' ? item_brand : '',
+        our_product: item_brand !== 'all' ? item_brand : '',
         minimum,
         maximum,
         user_rating,
@@ -85,19 +93,24 @@ export default function SearchPage(props) {
         </div>
       </div>
       <div className="row top blackout">
-        <div className="col-1 borders">
+        <div className="col-1 borders search-filter">
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
-          <div>{PPTitems.length} Result(s)</div>
+          <div className='row center result'>{PPTitems.length} Result(s)</div>
         )}
-          <h3 className="">Department</h3>
+          <h3 className='row center'>Department</h3>
           <div>
           <ul className="categories">
-          <li>
-              <strong>Categories</strong>
+          <li className='row center'>
+                  <Link
+                    className={'all' === item_category ? 'search-filter-active row center' : 'row center'}
+                    to={getFilterUrl({ item_category: 'all' })}
+                  >
+                  <strong>Categories</strong>
+                  </Link>
             </li>
             {loadingCategories ? (
               <LoadingBox></LoadingBox>
@@ -105,18 +118,10 @@ export default function SearchPage(props) {
               <MessageBox variant="danger">{errorCategories}</MessageBox>
             ) : (
               <ul>
-                <li>
-                  <Link
-                    className={'all' === item_category ? 'active' : ''}
-                    to={getFilterUrl({ item_category: 'all' })}
-                  >
-                    Any
-                  </Link>
-                </li>
                 {categories.map((c) => (
-                  <li key={c}>
+                  <li className='row center' key={c}>
                     <Link
-                      className={c === item_category ? 'active' : ''}
+                      className={c === item_category ? 'search-filter-active' : ''}
                       to={getFilterUrl({ item_category: c })}
                     >
                       {c}
@@ -125,8 +130,13 @@ export default function SearchPage(props) {
                 ))}
               </ul>
             )}
-            <li>
-              <strong>Brands</strong>
+          <li className='row center'>
+                  <Link
+                    className={'all' === item_brand ? 'search-filter-active row center' : 'row center'}
+                    to={getFilterUrl({ item_brand: 'all' })}
+                  ><strong>Brands</strong>
+                    
+                  </Link>
             </li>
             {loadingBrands ? (
               <LoadingBox></LoadingBox>
@@ -134,18 +144,36 @@ export default function SearchPage(props) {
               <MessageBox variant="danger">{errorBrands}</MessageBox>
             ) : (
               <ul>
-                <li>
-                  <Link
-                    className={'all' === item_brand ? 'active' : ''}
-                    to={getFilterUrl({ item_brand: 'all' })}
-                  >
-                    Any
-                  </Link>
-                </li>
                 {brands.map((c) => (
-                  <li key={c}>
+                  <li className='row center' key={c}>
                     <Link
-                      className={c === item_brand ? 'active' : ''}
+                      className={c === item_brand ? 'search-filter-active' : ''}
+                      to={getFilterUrl({ item_brand: c })}
+                    >
+                      {c}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          <li className='row center'>
+                  <Link
+                    className={'all' === item_brand ? 'search-filter-active row center' : 'row center'}
+                    // to={getFilterUrl({ item_brand: 'all' })}
+                  ><strong>Our Products</strong>
+                    
+                  </Link>
+            </li>
+            {loadingOurProducts ? (
+              <LoadingBox></LoadingBox>
+            ) : errorOurProducts ? (
+              <MessageBox variant="danger">{errorOurProducts}</MessageBox>
+            ) : (
+              <ul>
+                {our_products.map((c) => (
+                  <li className='row center' key={c}>
+                    <Link
+                      className={c === item_brand ? 'search-filter-active' : ''}
                       to={getFilterUrl({ item_brand: c })}
                     >
                       {c}
@@ -157,14 +185,13 @@ export default function SearchPage(props) {
             </ul>
           </div>
           <div>
-            <h3>Price</h3>
             <ul>
               {prices.map((p) => (
-                <li key={p.name}>
+                <li className='row center' key={p.name}>
                   <Link
                     to={getFilterUrl({ minimum: p.minimum, maximum: p.maximum })}
                     className={
-                      `${p.minimum}-${p.maximum}` === `${minimum}-${maximum}` ? 'active' : ''
+                      `${p.minimum}-${p.maximum}` === `${minimum}-${maximum}` ? 'search-filter-active' : ''
                     }
                   >
                     {p.name}

@@ -27,6 +27,9 @@ const {
   ITEM_REVIEW_NEW_COMPLETE,
   ITEM_REVIEW_NEW_ERROR,
   ITEM_REVIEW_CREATE_REFRESH,
+  ITEM_COST_FILTER_REQUEST,
+  ITEM_COST_FILTER_COMPLETE,
+  ITEM_COST_FILTER_ERROR,
 } = require('../constants/itemConstants');
 
 export const productListReducer = (
@@ -76,6 +79,22 @@ export const productBrandListReducer = (
     case ITEM_BRAND_FILTER_COMPLETE:
       return { loading: false, brands: action.payload };
     case ITEM_BRAND_FILTER_ERROR:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productCostListReducer = (
+  state = { loading: true, PPTitems: [] },
+  action
+) => {
+  switch (action.type) {
+    case ITEM_COST_FILTER_REQUEST:
+      return { loading: true };
+    case ITEM_COST_FILTER_COMPLETE:
+      return { loading: false, our_products: action.payload };
+    case ITEM_COST_FILTER_ERROR:
       return { loading: false, error: action.payload };
     default:
       return state;

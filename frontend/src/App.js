@@ -20,7 +20,7 @@ import DisplayCustomersPage from './pages/DisplayCustomersPage';
 import CustomerAmmendPage from './pages/CustomerAmmendPage';
 import SearchBar from './components/SearchBar';
 import SearchPage from './pages/SearchPage';
-import { displayItemBrands, displayItemCategories } from './actions/itemActions';
+import { displayItemBrands, displayItemCategories, displayItemCosts } from './actions/itemActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import '@fortawesome/fontawesome-free/js/all.js';
@@ -67,12 +67,20 @@ function App(props) {
     error: errorBrands,
     brands,
   } = displayBrands;
-  
+
+  const displayOurProducts = useSelector((state) => state.displayOurProducts);
+  const {
+    loading: loadingOurProducts,
+    error: errorOurProducts,
+    our_products,
+  } = displayOurProducts;
+
 
 
   useEffect(() => {
     dispatch(displayItemCategories());
     dispatch(displayItemBrands());
+    dispatch(displayItemCosts());
   }, [dispatch]);
 
 
@@ -297,6 +305,25 @@ function App(props) {
                 </li>
               ))
             )}
+            <li>
+              <strong>Our Products</strong>
+            </li>
+            {loadingOurProducts ? (
+              <LoadingBox></LoadingBox>
+            ) : errorOurProducts ? (
+              <MessageBox variant="danger">{errorOurProducts}</MessageBox>
+            ) : (
+              our_products.map((q) => (
+                <li key={q}>
+                  <Link
+                    to={`/search/item_brand/${q}`}
+                    onClick={() => setSidebarDisplay(false)}
+                  >
+                    {q}
+                  </Link>
+                </li>
+              ))
+            )}
           </ul>
         </aside>
         <main>
@@ -423,8 +450,25 @@ function App(props) {
           <div>
           <ul className="categories responsive">
           <li>
-              <h1>PPT Items</h1>
+              <strong>Our Products</strong>
             </li>
+            {loadingOurProducts ? (
+              <LoadingBox></LoadingBox>
+            ) : errorOurProducts ? (
+              <MessageBox variant="danger">{errorOurProducts}</MessageBox>
+            ) : (
+              our_products.map((q) => (
+                <li key={q}>
+                  <Link
+                  className='white-links'
+                    to={`/search/item_brand/${q}`}
+                    onClick={() => setSidebarDisplay(false)}
+                  >
+                    {q}
+                  </Link>
+                </li>
+              ))
+            )}
             </ul>
           </div>
       © 2021 Peak Performance
