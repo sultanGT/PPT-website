@@ -9,7 +9,7 @@ import MessageBox from '../components/MessageBox';
 
 
 //
-export default function OrderPurchasePage(props) {
+export default function PurchaseOrderPage(props) {
 
   const shopping = useSelector((state) => state.shopping);
   if (!shopping.purchase_method) {

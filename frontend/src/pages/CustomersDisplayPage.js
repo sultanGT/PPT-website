@@ -6,7 +6,7 @@ import MessageBox from '../components/MessageBox';
 import { CUSTOMER_INFO_REFRESH } from '../constants/customerConstants';
 
 //
-export default function DisplayCustomersPage(props) {
+export default function CustomersDisplayPage(props) {
   const userList = useSelector((state) => state.userList);
   const { loading, error, pptusers } = userList;
 

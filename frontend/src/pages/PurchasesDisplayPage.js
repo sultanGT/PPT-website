@@ -7,7 +7,7 @@ import { PURCHASE_REMOVE_REFRESH } from '../constants/purchaseConstants';
 
 
 //
-export default function PurchaseDisplayPage(props) {
+export default function PurchasesDisplayPage(props) {
   //
   const displayPurchase = useSelector((state) => state.displayPurchase);
   const { loading, error, ppt_orders } = displayPurchase;

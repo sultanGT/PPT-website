@@ -8,15 +8,15 @@ import ShoppingPage from './pages/ShoppingPage';
 import HomePage from './pages/HomePage';
 import PurchaseHistoryPage from './pages/PurchaseHistoryPage';
 import PurchasePage from './pages/PurchasePage';
-import OrderPurchasePage from './pages/OrderPurchasePage';
-import DisplayItemPage from './pages/DisplayItemPage';
+import PurchaseOrderPage from './pages/CustomersDisplayPage';
+import ItemsDisplayPage from './pages/ItemsDisplayPage';
 import ItemPage from './pages/ItemPage';
 import MyAccountPage from './pages/MyAccountPage';
 import SignupPage from './pages/SignupPage';
 import DeliveryAddressPage from './pages/DeliveryAddressPage';
 import ItemAmmendPage from './pages/ItemAmmendPage';
-import PurchaseDisplayPage from './pages/PurchaseDisplayPage';
-import DisplayCustomersPage from './pages/DisplayCustomersPage';
+import PurchasesDisplayPage from './pages/PurchasesDisplayPage';
+import CustomersDisplayPage from './pages/CustomersDisplayPage';
 import CustomerAmmendPage from './pages/CustomerAmmendPage';
 import SearchBar from './components/SearchBar';
 import SearchPage from './pages/SearchPage';
@@ -334,7 +334,7 @@ function App(props) {
           {/* <Route path="/login" component={SigninScreen}></Route> */}
           <Route path="/signup" component={SignupPage}></Route>
           <Route path="/delivery" component={DeliveryAddressPage}></Route>
-          <Route path="/orderpurchase" component={OrderPurchasePage}></Route>
+          <Route path="/orderpurchase" component={PurchaseOrderPage}></Route>
           <Route path="/customer_order/:id" component={PurchasePage}></Route>
           <Route path="/orderhistory" component={PurchaseHistoryPage}></Route>
           <Route
@@ -373,20 +373,20 @@ function App(props) {
           ></PrivateRoute>
           <AdminRoute
             path="/productlist"
-            component={DisplayItemPage}
+            component={ItemsDisplayPage}
             exact
           ></AdminRoute>
           <AdminRoute
             path="/productlist/page_number/:page_number"
-            component={DisplayItemPage}
+            component={ItemsDisplayPage}
             exact
           ></AdminRoute>
           <AdminRoute
             path="/orderlist"
-            component={PurchaseDisplayPage}
+            component={PurchasesDisplayPage.js}
             exact
           ></AdminRoute>
-          <AdminRoute path="/userlist" component={DisplayCustomersPage}></AdminRoute>
+          <AdminRoute path="/userlist" component={CustomersDisplayPage}></AdminRoute>
           <AdminRoute
             path="/pptuser/:id/ammend"
             component={CustomerAmmendPage}

@@ -15,7 +15,7 @@ import {
 
 
 //
-export default function DisplayItemPage(props) {
+export default function ItemsDisplayPage(props) {
   const { page_number = 1 } = useParams();
   const displayProducts = useSelector((state) => state.displayProducts);
   const { loading, error, PPTitems, pptpage, pages } = displayProducts;

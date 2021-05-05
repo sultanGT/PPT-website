@@ -123,6 +123,50 @@ const data = {
             review_count: 10,
             item_info: 'Double hand pad for speed kick training'
         },
+        {
+            name: 'Peak PerformanceBlue Body Armour',
+            item_category: 'Body Armour',
+            picture: '/images/p6.jpg',
+            cost:59,
+            stock_number: 12,
+            item_brand: 'Peak Performance',
+            user_rating: 5,
+            review_count: 10,
+            item_info: 'Body protector for training and competition, Reversible Red or Blue, Shoulder protection, CE Approved, WT Approved'
+        },
+        {
+            name: 'Peak Performance Head Guards',
+            item_category: 'Head Guards',
+            picture: '/images/p7.jpg',
+            cost:29,
+            stock_number: 12,
+            item_brand: 'Peak Performance',
+            user_rating: 4.5,
+            review_count: 10,
+            item_info: 'Light, WTF approved head guard, perfect for Tae Kwon Do training sessions.'
+        },
+        {
+            name: 'Peak Performance Head Guards',
+            item_category: 'Head Guards',
+            picture: '/images/p8.jpg',
+            cost:49,
+            stock_number: 12,
+            item_brand: 'Peak Performance',
+            user_rating: 4,
+            review_count: 10,
+            item_info: 'Light, WTF approved head guard, perfect for Tae Kwon Do training sessions.'
+        },
+        {
+            name: 'Peak Performance Kicking Pads',
+            item_category: 'Pads',
+            picture: '/images/p9.jpg',
+            cost:19,
+            stock_number: 12,
+            item_brand: 'Peak Performance',
+            user_rating: 5,
+            review_count: 10,
+            item_info: 'Double hand pad for speed kick training'
+        },
 
 
     ]

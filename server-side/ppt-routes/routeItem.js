@@ -77,7 +77,7 @@ routeItem.get(
 routeItem.get(
   '/our_products',
   expressAsyncHandler(async (req, res) => {
-    const our_products = await Item.find().distinct('item_brand', {"item_brand" : "Nike"});
+    const our_products = await Item.find().distinct('item_brand', {"item_brand" : "Peak Performance"});
     res.send(our_products);
   })
 );

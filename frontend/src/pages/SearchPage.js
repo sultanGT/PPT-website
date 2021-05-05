@@ -93,7 +93,7 @@ export default function SearchPage(props) {
         </div>
       </div>
       <div className="row top blackout">
-        <div className="col-1 borders search-filter">
+        <div className="col-1 borders">
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
@@ -103,21 +103,24 @@ export default function SearchPage(props) {
         )}
           <h3 className='row center'>Department</h3>
           <div>
-          <ul className="categories">
-          <li className='row center'>
-                  <Link
-                    className={'all' === item_category ? 'search-filter-active row center' : 'row center'}
-                    to={getFilterUrl({ item_category: 'all' })}
-                  >
-                  <strong>Categories</strong>
-                  </Link>
+          <ul className="categories ">
+          <li className='row center filter-titles'>
+              <strong>Categories</strong>
             </li>
             {loadingCategories ? (
               <LoadingBox></LoadingBox>
             ) : errorCategories ? (
               <MessageBox variant="danger">{errorCategories}</MessageBox>
             ) : (
-              <ul>
+              <ul className='search-filter'>
+                <li className='row center'>
+                  <Link
+                    className={'all' === item_category ? 'search-filter-active' : ''}
+                    to={getFilterUrl({ item_category: 'all' })}
+                  >
+                    Any
+                  </Link>
+                </li>
                 {categories.map((c) => (
                   <li className='row center' key={c}>
                     <Link
@@ -130,20 +133,23 @@ export default function SearchPage(props) {
                 ))}
               </ul>
             )}
-          <li className='row center'>
-                  <Link
-                    className={'all' === item_brand ? 'search-filter-active row center' : 'row center'}
-                    to={getFilterUrl({ item_brand: 'all' })}
-                  ><strong>Brands</strong>
-                    
-                  </Link>
+            <li className='row center filter-titles '>
+              <strong>Brands</strong>
             </li>
             {loadingBrands ? (
               <LoadingBox></LoadingBox>
             ) : errorBrands ? (
               <MessageBox variant="danger">{errorBrands}</MessageBox>
             ) : (
-              <ul>
+              <ul className='search-filter'>
+                <li className='row center'>
+                  <Link
+                    className={'all' === item_brand ? 'search-filter-active' : ''}
+                    to={getFilterUrl({ item_brand: 'all' })}
+                  >
+                    Any
+                  </Link>
+                </li>
                 {brands.map((c) => (
                   <li className='row center' key={c}>
                     <Link
@@ -156,20 +162,15 @@ export default function SearchPage(props) {
                 ))}
               </ul>
             )}
-          <li className='row center'>
-                  <Link
-                    className={'all' === item_brand ? 'search-filter-active row center' : 'row center'}
-                    // to={getFilterUrl({ item_brand: 'all' })}
-                  ><strong>Our Products</strong>
-                    
-                  </Link>
+            <li className='row center filter-titles '>
+              <strong>Our Products</strong>
             </li>
             {loadingOurProducts ? (
               <LoadingBox></LoadingBox>
             ) : errorOurProducts ? (
               <MessageBox variant="danger">{errorOurProducts}</MessageBox>
             ) : (
-              <ul>
+              <ul className='search-filter'>
                 {our_products.map((c) => (
                   <li className='row center' key={c}>
                     <Link
@@ -185,6 +186,7 @@ export default function SearchPage(props) {
             </ul>
           </div>
           <div>
+            <h3 className='row center'>Price</h3>
             <ul>
               {prices.map((p) => (
                 <li className='row center' key={p.name}>

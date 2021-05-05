@@ -44,7 +44,7 @@ header {
 }
 .search-filter-active { 
   background-color: #5c5a5a;
-  color: #000;
+  color: #fff;
   width: 100%;
   text-align: center;
 }
@@ -52,12 +52,18 @@ header {
 .search-filter li:hover {
 background: rgb(201, 201, 201);
 color: #fff;
+transition: all 0.3s;
 }
 
 .search-filter li {
   margin: 0;
   padding: 0.8rem;
-  }
+}
+
+.filter-titles {
+padding: 1rem;
+background-color: #c7c6c6;
+}
 
 main {
   grid-area: main;
