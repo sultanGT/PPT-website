@@ -12,6 +12,7 @@ export default function SignupPage(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState("")
+  const [password2, setPassword2] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
 
 
@@ -39,18 +40,19 @@ export default function SignupPage(props) {
   const dispatch = useDispatch();
   
   const signupSubmitHandler = (e) => {
+    if (password2 !==  confirmPassword) {
+      alert('Password and confirm password are not matching');
+    } else {
     e.preventDefault();
-    dispatch(signup(name, email, password));
+    dispatch(signup(name, email, password2));
+    }
   }
 
   const submitHandler = (e) => {
-    if (password !==  confirmPassword) {
-      alert('Password and confirm password are not matching');
-    } else {
+
       e.preventDefault();
-      
       dispatch(login(email, password));
-    }
+
   };
 
   useEffect(() => {
@@ -172,15 +174,15 @@ export default function SignupPage(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password2">Password</label>
           <input
             type="password"
-            id="password"
-            value={password}
+            id="password2"
+            value={password2}
             onKeyUp={validatePassword}
             placeholder="Enter password"
             required
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword2(e.target.value)}
           ></input>
         </div>
         <div>

@@ -1,37 +1,38 @@
 import Axios from 'axios';
 import {
-  ITEM_NEW_ERROR,
-  ITEM_NEW_REQUEST,
-  ITEM_NEW_COMPLETE,
-  ITEM_INFO_ERROR,
-  ITEM_INFO_REQUEST,
-  ITEM_INFO_COMPLETE,
-  ITEM_HISTORY_ERROR,
-  ITEM_HISTORY_REQUEST,
-  ITEM_HISTORY_COMPLETE,
   ITEM_AMMEND_REQUEST,
   ITEM_AMMEND_COMPLETE,
   ITEM_AMMEND_ERROR,
+  ITEM_REVIEW_NEW_REQUEST,
+  ITEM_REVIEW_NEW_COMPLETE,
+  ITEM_REVIEW_NEW_ERROR,
+  ITEM_NEW_ERROR,
+  ITEM_NEW_REQUEST,
+  ITEM_NEW_COMPLETE,
   ITEM_REMOVE_REQUEST,
   ITEM_REMOVE_ERROR,
   ITEM_REMOVE_COMPLETE,
   ITEM_CATEGORY_FILTER_COMPLETE,
   ITEM_CATEGORY_FILTER_REQUEST,
   ITEM_CATEGORY_FILTER_ERROR,
-  ITEM_REVIEW_NEW_REQUEST,
-  ITEM_REVIEW_NEW_COMPLETE,
-  ITEM_REVIEW_NEW_ERROR,
+  ITEM_INFO_ERROR,
+  ITEM_INFO_REQUEST,
+  ITEM_INFO_COMPLETE,
+  ITEM_HISTORY_ERROR,
+  ITEM_HISTORY_REQUEST,
+  ITEM_HISTORY_COMPLETE,
   ITEM_BRAND_FILTER_REQUEST,
   ITEM_BRAND_FILTER_COMPLETE,
   ITEM_BRAND_FILTER_ERROR,
-} from '../constants/productConstants';
+} from '../constants/productConstants'; //Self Coded
 
-//
+//Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb
+//Function to display item details using the browser URL and item attributes  - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
 export const displayItems = ({
   page_number = '',
   name = '',
   item_category = '',
-  item_brand = '',
+  item_brand = '', //Self coded
   customer_order = '',
   minimum = 0,
   maximum = 0,
@@ -40,158 +41,191 @@ export const displayItems = ({
   dispatch({
     type: ITEM_HISTORY_REQUEST,
   });
-  try {
-    const { data } = await Axios.get(
-      `/api/pptitems?page_number=${page_number}&name=${name}&item_category=${item_category}&item_brand=${item_brand}&minimum=${minimum}&maximum=${maximum}&user_rating=${user_rating}&customer_order=${customer_order}`
+try {
+    const { data } = await Axios.get( //Self coded - item_brand
+      `/api/pptitems?page_number=${page_number}&name=${name}&item_category=${item_category}&item_brand=${item_brand}&minimum=${minimum} &maximum=${maximum}&user_rating=${user_rating}&customer_order=${customer_order}`
     );
-    dispatch({ type: ITEM_HISTORY_COMPLETE, payload: data });
+    dispatch({ 
+      type: ITEM_HISTORY_COMPLETE, 
+      payload: data }); // Reused, edited
   } catch (error) {
-    dispatch({ type: ITEM_HISTORY_ERROR, payload: error.message });
+
+    dispatch({ 
+      type: ITEM_HISTORY_ERROR, 
+      payload: error.message }); // Reused, edited
   }
 };
 
-
-//
-export const displayItemCategories = () => async (dispatch) => {
+//Function for displaying item categories in sidemenu, searchbar and footer 
+export const displayItemCategories = () => async (dispatch) => { // Reused, edited
   dispatch({
-    type: ITEM_CATEGORY_FILTER_REQUEST,
+    type: 
+    ITEM_CATEGORY_FILTER_REQUEST, // Reused, edited
   });
-  try {
-    const { data } = await Axios.get(`/api/pptitems/item_categories`);
-    dispatch({ type: ITEM_CATEGORY_FILTER_COMPLETE, payload: data });
-  } catch (error) {
-    dispatch({ type: ITEM_CATEGORY_FILTER_ERROR, payload: error.message });
+try {
+    const { data } = await Axios.get(`/api/pptitems/item_categories`); // Reused, edited
+    dispatch({ 
+      type: ITEM_CATEGORY_FILTER_COMPLETE, 
+      payload: data }); // Reused, edited
+} catch (error) {
+    dispatch({ 
+      type: ITEM_CATEGORY_FILTER_ERROR, 
+      payload: error.message }); // Reused, edited
   }
 };
 
-//
-export const displayItemBrands = () => async (dispatch) => {
-dispatch({ type: ITEM_BRAND_FILTER_REQUEST, });
+//Function for displaying item brands in sidemenu, searchbar and footer - // Self coded
+export const displayItemBrands = () => async (dispatch) => { 
+dispatch({ type: ITEM_BRAND_FILTER_REQUEST, }); 
 try {
 const { data } = await Axios.get(
-  `/api/pptitems/item_brands`
+  `/api/pptitems/item_brands` 
   );
     dispatch({ type: 
       ITEM_BRAND_FILTER_COMPLETE, 
       payload: data 
   });
-  } catch (error) 
+} catch (error) 
   {
-    dispatch({ type: ITEM_BRAND_FILTER_ERROR, payload: error.message });
-  }
-};
-
-//
-export const itemInfo = (itemId) => async (dispatch) => {
-dispatch({ type: ITEM_INFO_REQUEST, payload: itemId });
-  try {
-    const { data } = await Axios.get(`/api/pptitems/${itemId}`);
-    dispatch({ type: ITEM_INFO_COMPLETE, payload: data });
-  } catch (error) {
-    dispatch({
-      type: ITEM_INFO_ERROR,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+    dispatch({ 
+      type: ITEM_BRAND_FILTER_ERROR, 
+      payload: 
+      error.message 
     });
   }
 };
 
-//
-export const newItem = () => async (dispatch, getState) => {
-  dispatch({ type: ITEM_NEW_REQUEST });
-  const {
-    customerLogin: { pptUserDetails },
+//Funtion for getting info of items 
+export const itemInfo = (itemId) => async (dispatch) => {// Reused, edited
+dispatch({ 
+  type: ITEM_INFO_REQUEST, // Reused, edited
+  payload: 
+  itemId 
+});// Reused, edited
+try {
+    const { data } = await Axios.get(`/api/pptitems/${itemId}`);// Reused, edited
+    
+    dispatch({ type: ITEM_INFO_COMPLETE, payload: data });// Reused, edited
+} catch (error) {
+    
+  dispatch({
+      type: ITEM_INFO_ERROR,// Reused, edited
+      payload:
+      error.response 
+      && error.response.data.message
+      ? error.response.data.message
+      : error.message,
+    });
+  }
+};
+
+//function for admin to create new item 
+export const newItem = () => async (dispatch, getState) => { // Reused, edited
+dispatch({ type: ITEM_NEW_REQUEST });// Reused, edited
+  const { customerLogin: { pptUserDetails },// Reused, edited
   } = getState();
   try {
     const { data } = await Axios.post(
-      '/api/pptitems',
+      '/api/pptitems',                // Reused, edited
       {},
       {
-        headers: { Authorization: `Bearer ${pptUserDetails.token}` },
+        headers: { Authorization: `Bearer ${pptUserDetails.token}` }, // Reused, edited
       }
     );
     dispatch({
-      type: ITEM_NEW_COMPLETE,
-      payload: data.item,
+      type: ITEM_NEW_COMPLETE,  // Reused, edited
+      payload: data.item, 
     });
   } catch (error) {
     const message =
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    dispatch({ type: ITEM_NEW_ERROR, payload: message });
+    dispatch({ type: ITEM_NEW_ERROR, payload: message }); // Reused, edited
   }
 };
 
-//
-export const ammendItem = (item) => async (dispatch, getState) => {
-  dispatch({ type: ITEM_AMMEND_REQUEST, payload: item });
-  const {
-    customerLogin: { pptUserDetails },
-  } = getState();
-  try {
-    const { data } = await Axios.put(`/api/pptitems/${item._id}`, item, {
-      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
+//function for administrator to ammend item details
+export const ammendItem = (item) => async (dispatch, getState) => { // Reused, edited
+dispatch({ type: ITEM_AMMEND_REQUEST, payload: item }); // Reused, edited
+const { customerLogin: { pptUserDetails },  // Reused, edited
+} = getState();
+try {
+    const { data } = await Axios.put(`/api/pptitems/${item._id}`, item, { // Reused, edited
+      headers: { Authorization: `Bearer ${pptUserDetails.token}` }, // Reused, edited
     });
-    dispatch({ type: ITEM_AMMEND_COMPLETE, payload: data });
+    dispatch({ 
+      type: ITEM_AMMEND_COMPLETE, 
+      payload: data });  // Reused, edited
   } catch (error) {
     const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    dispatch({ type: ITEM_AMMEND_ERROR, error: message });
+      error.response && 
+      error.response.data.message
+      ? error.response.data.message
+      : error.message;
+    dispatch({ 
+      type: ITEM_AMMEND_ERROR, 
+      error: message });  // Reused, edited
   }
 };
 
-//
+//function for administrator to remove item from web app
 export const removeItem = (itemId) => async (dispatch, getState) => {
-  dispatch({ type: ITEM_REMOVE_REQUEST, payload: itemId });
+  dispatch({ 
+    type: ITEM_REMOVE_REQUEST, 
+    payload: itemId }); // Reused, edited
   const {
-    customerLogin: { pptUserDetails },
+    customerLogin: { pptUserDetails },  // Reused, edited
   } = getState();
   try {
     // eslint-disable-next-line
-    const { data } = Axios.delete(`/api/pptitems/${itemId}`, {
-      headers: { Authorization: `Bearer ${pptUserDetails.token}` },
-    });
-    dispatch({ type: ITEM_REMOVE_COMPLETE });
+    const { data } = Axios.delete(`/api/pptitems/${itemId}`, {  // Reused, edited
+      headers: { Authorization: `Bearer ${pptUserDetails.token}` }, // Reused, edited
+  }); 
+    dispatch({ 
+    type: ITEM_REMOVE_COMPLETE }); // Reused, edited
   } catch (error) {
     const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    dispatch({ type: ITEM_REMOVE_ERROR, payload: message });
+      error.response 
+      && error.response.data.message
+      ? error.response.data.message
+      : error.message;
+    dispatch({ 
+      type: ITEM_REMOVE_ERROR, 
+      payload: message });  // Reused, edited
   }
 };
 
-//
-export const newReview = (itemId, review) => async (
+//function for creating a new customer review
+export const newReview = (itemId, review) => async (  // Reused, edited
   dispatch,
   getState
-) => {
-  dispatch({ type: ITEM_REVIEW_NEW_REQUEST });
+) => {  
+  dispatch({ 
+    type: ITEM_REVIEW_NEW_REQUEST });  // Reused, edited
   const {
-    customerLogin: { pptUserDetails },
+    customerLogin: { pptUserDetails },  // Reused, edited
   } = getState();
   try {
-    const { data } = await Axios.post(
-      `/api/pptitems/${itemId}/reviews`,
+    const { data } = await Axios.post(  
+      `/api/pptitems/${itemId}/reviews`,  // Reused, edited
       review,
       {
-        headers: { Authorization: `Bearer ${pptUserDetails.token}` },
-      }
+        headers: { Authorization: `Bearer ${pptUserDetails.token}` }, // Reused, edited
+      } 
     );
     dispatch({
-      type: ITEM_REVIEW_NEW_COMPLETE,
+      type: ITEM_REVIEW_NEW_COMPLETE, // Reused, edited
       payload: data.review,
     });
   } catch (error) {
     const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    dispatch({ type: ITEM_REVIEW_NEW_ERROR, payload: message });
+      error.response 
+      && error.response.data.message
+      ? error.response.data.message
+      : error.message;
+    dispatch({ 
+      type: ITEM_REVIEW_NEW_ERROR, 
+      payload: message });  // Reused, edited
   }
 };
