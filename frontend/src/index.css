@@ -495,7 +495,7 @@ img.large {
 .pagination a {
   padding: 1rem;
   margin: 0.5rem;
-  color: #4e4e4e;
+  color: blue;
   background-color: #fff;
   border: 0.1rem #fff solid;
   font-size: 1.6rem;
@@ -505,7 +505,7 @@ img.large {
 }
 .pagination a.active {
   font-weight: bold;
-  color: blue;
+  color: red;
 }
 
 .menu-Icon-large {
