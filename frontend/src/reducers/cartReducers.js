@@ -4,7 +4,7 @@ import {
   SHOPPING_REMOVE_PRODUCT,
   SHOPPING_PAYPAL,
   SHOPPING_DELIVERY_ADDRESS,
-} from '../constants/cartConstants';
+} from '../constants/shoppingConstants';
 
 export const cartReducer = (state = { shoppingItems: [] }, action) => {
   switch (action.type) {

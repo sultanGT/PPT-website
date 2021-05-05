@@ -11,7 +11,7 @@ import MessageBox from '../components/MessageBox';
 import {
   ITEM_CREATE_REFRESH,
   ITEM_REMOVE_REFRESH,
-} from '../constants/productConstants';
+} from '../constants/itemConstants';
 
 
 //

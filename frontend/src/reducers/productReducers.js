@@ -27,7 +27,7 @@ const {
   ITEM_REVIEW_NEW_COMPLETE,
   ITEM_REVIEW_NEW_ERROR,
   ITEM_REVIEW_CREATE_REFRESH,
-} = require('../constants/productConstants');
+} = require('../constants/itemConstants');
 
 export const productListReducer = (
   state = { loading: true, PPTitems: [] },

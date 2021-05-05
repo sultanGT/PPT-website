@@ -21,7 +21,7 @@ import {
   CUSTOMER_AMMEND_ACCOUNT_ERROR,
   CUSTOMER_AMMEND_ACCOUNT_REQUEST,
   CUSTOMER_AMMEND_ACCOUNT_COMPLETE,
-} from '../constants/userConstants'; //Self coded
+} from '../constants/customerConstants'; //Self coded
 
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb
 //Function for customer to signup on the PPT web app - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website

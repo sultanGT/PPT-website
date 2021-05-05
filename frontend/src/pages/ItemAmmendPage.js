@@ -4,7 +4,7 @@ import Axios from 'axios';
 import { itemInfo, ammendItem } from '../actions/itemActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { ITEM_AMMEND_REFRESH } from '../constants/productConstants';
+import { ITEM_AMMEND_REFRESH } from '../constants/itemConstants';
 
 
 //

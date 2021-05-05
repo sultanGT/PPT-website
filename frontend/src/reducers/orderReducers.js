@@ -24,7 +24,7 @@ import {
   PURCHASE_SHIPPING_COMPLETE,
   PURCHASE_SHIPPING_ERROR,
   PURCHASE_SHIPPING_REFRESH,
-} from '../constants/orderConstants';
+} from '../constants/purchaseConstants';
 
 export const orderCreateReducer = (state = {}, action) => {
   switch (action.type) {

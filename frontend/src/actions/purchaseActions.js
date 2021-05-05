@@ -18,10 +18,10 @@ import {
   PURCHASE_INFO_ERROR,
   PURCHASE_INFO_REQUEST,
   PURCHASE_INFO_COMPLETE,
-} from '../constants/orderConstants'; //Self Coded
+} from '../constants/purchaseConstants'; //Self Coded
 import { 
   SHOPPING_NO_ITEMS //Self Coded
-} from '../constants/cartConstants';
+} from '../constants/shoppingConstants';
 
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb
 // function for a new customer purchase - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website

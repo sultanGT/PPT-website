@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removePurchase, puchasesHistory } from '../actions/purchaseActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { PURCHASE_REMOVE_REFRESH } from '../constants/orderConstants';
+import { PURCHASE_REMOVE_REFRESH } from '../constants/purchaseConstants';
 
 
 //

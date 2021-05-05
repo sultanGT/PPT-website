@@ -9,7 +9,7 @@ import MessageBox from '../components/MessageBox';
 import {
   PURCHASE_SHIPPING_REFRESH,
   PURCHASE_PAYPAL_REFRESH,
-} from '../constants/orderConstants';
+} from '../constants/purchaseConstants';
 import PurchaseProgress from '../components/PurchaseProgress';
 
 

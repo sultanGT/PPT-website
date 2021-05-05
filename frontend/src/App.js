@@ -67,6 +67,7 @@ function App(props) {
     error: errorBrands,
     brands,
   } = displayBrands;
+  
 
 
   useEffect(() => {

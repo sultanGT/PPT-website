@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { customerInfo, ammendCustomerAccount } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { CUSTOMER_AMMEND_PROFILE_REFRESH } from '../constants/userConstants';
+import { CUSTOMER_AMMEND_PROFILE_REFRESH } from '../constants/customerConstants';
 import MustContainItem from './MustContainItem';
 
 export default function MyAccountPage() {

@@ -4,7 +4,7 @@ import {
   SHOPPING_REMOVE_PRODUCT,
   SHOPPING_DELIVERY_ADDRESS,
   SHOPPING_PAYPAL,
-} from '../constants/cartConstants';
+} from '../constants/shoppingConstants';
 
 //
 export const addShoppingItem = (itemId, quantity) => async (dispatch, getState) =>{

@@ -25,7 +25,7 @@ import {
   USER_UPDATE_REQUEST,
   CUSTOMER_AMMEND_REFRESH,
   CUSTOMER_AMMEND_SUCCESS,
-} from '../constants/userConstants';
+} from '../constants/customerConstants';
 
 export const userRegisterReducer = (state = {}, action) => {
   switch (action.type) {

@@ -5,7 +5,7 @@ import { newReview, itemInfo } from '../actions/itemActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Rating from '../components/Rating';
-import { ITEM_REVIEW_CREATE_REFRESH } from '../constants/productConstants';
+import { ITEM_REVIEW_CREATE_REFRESH } from '../constants/itemConstants';
 import { GrReturn } from 'react-icons/gr';
 
 //

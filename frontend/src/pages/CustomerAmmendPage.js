@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { customerInfo, ammendCustomer } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { CUSTOMER_AMMEND_REFRESH } from '../constants/userConstants';
+import { CUSTOMER_AMMEND_REFRESH } from '../constants/customerConstants';
 
 export default function CustomerAmmendPage(props) {
   const customerId = props.match.params.id;
