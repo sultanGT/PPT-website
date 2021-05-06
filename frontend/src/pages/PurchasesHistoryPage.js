@@ -7,7 +7,7 @@ import { PURCHASE_REMOVE_REFRESH } from '../constants/purchaseConstants';
 
 
 //
-export default function PurchasesDisplayPage(props) {
+export default function PurchasesHistoryPage(props) {
   //
   const displayPurchase = useSelector((state) => state.displayPurchase);
   const { loading, error, ppt_orders } = displayPurchase;
@@ -73,7 +73,7 @@ export default function PurchasesDisplayPage(props) {
                 <td>
                   <button
                     type="button"
-                    className="small"
+                    className="small primary"
                     onClick={() => {
                       props.history.push(`/customer_order/${customer_order._id}`);
                     }}

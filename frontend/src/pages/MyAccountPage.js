@@ -4,7 +4,7 @@ import { customerInfo, ammendCustomerAccount } from '../actions/customerActions'
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { CUSTOMER_AMMEND_PROFILE_REFRESH } from '../constants/customerConstants';
-import MustContainItem from './MustContainItem';
+import PasswordSecurity from './PasswordSecurity';
 
 
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
@@ -70,8 +70,8 @@ export default function MyAccountPage() {
 
   // labels and state boolean corresponding to each validation
   const mustContainData = [
-    ["A lowercase letter (a-z)", containsLowercase],
-    ["An uppercase letter (A-Z)", containsUppercase],
+    ["An uppercase letter (A-Z)", containsLowercase],
+    ["A lowercase letter (a-z)", containsUppercase],
     ["A special character (!@#$)", containsCharacter],
     ["A number (0-9)", containsNumber],
     ["At least 8 characters", contains8Characters],
@@ -178,7 +178,7 @@ export default function MyAccountPage() {
         )}
                 <div className='row center'>
                 <div>
-                {mustContainData.map(data=> <MustContainItem data={data}/>)}
+                {mustContainData.map(data=> <PasswordSecurity data={data}/>)}
               </div>
               </div>
       </form>

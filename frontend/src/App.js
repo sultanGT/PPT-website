@@ -6,17 +6,17 @@ import AdminRoute from './components/AdminRoute';
 import PrivateRoute from './components/PrivateRoute';
 import ShoppingPage from './pages/ShoppingPage';
 import HomePage from './pages/HomePage';
-import PurchaseHistoryPage from './pages/PurchaseHistoryPage';
+import CustomerPurchaseHistoryPage from './pages/CustomerPurchaseHistoryPage';
 import PurchasePage from './pages/PurchasePage';
-import PurchaseOrderPage from './pages/PurchaseOrderPage';
-import ItemsDisplayPage from './pages/ItemsDisplayPage';
+import PlaceOrderPage from './pages/PlaceOrderPage';
+import ItemInventoryPage from './pages/ItemInventoryPage';
 import ItemPage from './pages/ItemPage';
 import MyAccountPage from './pages/MyAccountPage';
 import SignupPage from './pages/SignupPage';
 import DeliveryAddressPage from './pages/DeliveryAddressPage';
 import ItemAmmendPage from './pages/ItemAmmendPage';
-import PurchasesDisplayPage from './pages/PurchasesDisplayPage';
-import CustomersDisplayPage from './pages/CustomersDisplayPage';
+import PurchasesHistoryPage from './pages/PurchasesHistoryPage';
+import CustomersRegisterPage from './pages/CustomersRegisterPage';
 import CustomerAmmendPage from './pages/CustomerAmmendPage';
 import SearchBar from './components/SearchBar';
 import SearchPage from './pages/SearchPage';
@@ -220,10 +220,10 @@ function App(props) {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/credentials">User Profile  <i className="fa fa-address-card icon-small"></i></Link>
+                    <Link to="/credentials">My Account<i className="fa fa-address-card icon-small"></i></Link>
                   </li>
                   <li>
-                    <Link to="/orderhistory">Order History  <i className="fa fa-history icon-small"></i></Link>
+                    <Link to="/orderhistory">Order History<i className="fa fa-history icon-small"></i></Link>
                   </li>
                   <li>
                     <Link to="#signout" onClick={signoutHandler} >
@@ -243,16 +243,13 @@ function App(props) {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/dashboard">Dashboard</Link>
+                    <Link to="/displayItems">PPT Inventory</Link>
                   </li>
                   <li>
-                    <Link to="/displayItems">PPT Items List</Link>
+                    <Link to="/orderlist">PPT Orders</Link>
                   </li>
                   <li>
-                    <Link to="/orderlist">PPT Orders List</Link>
-                  </li>
-                  <li>
-                    <Link to="/customerdisplay">PPT Users List</Link>
+                    <Link to="/customerdisplay">PPT Users</Link>
                   </li>
                 </ul>
               </div>
@@ -335,9 +332,9 @@ function App(props) {
           {/* <Route path="/login" component={SigninScreen}></Route> */}
           <Route path="/signup" component={SignupPage}></Route>
           <Route path="/delivery" component={DeliveryAddressPage}></Route>
-          <Route path="/orderpurchase" component={PurchaseOrderPage}></Route>
+          <Route path="/orderpurchase" component={PlaceOrderPage}></Route>
           <Route path="/customer_order/:id" component={PurchasePage}></Route>
-          <Route path="/orderhistory" component={PurchaseHistoryPage}></Route>
+          <Route path="/orderhistory" component={CustomerPurchaseHistoryPage}></Route>
           <Route
             path="/search/name/:name?"
             component={SearchPage}
@@ -374,20 +371,20 @@ function App(props) {
           ></PrivateRoute>
           <AdminRoute
             path="/displayItems"
-            component={ItemsDisplayPage}
+            component={ItemInventoryPage}
             exact
           ></AdminRoute>
           <AdminRoute
             path="/displayItems/page_number/:page_number"
-            component={ItemsDisplayPage}
+            component={ItemInventoryPage}
             exact
           ></AdminRoute>
           <AdminRoute
             path="/orderlist"
-            component={PurchasesDisplayPage}
+            component={PurchasesHistoryPage}
             exact
           ></AdminRoute>
-          <AdminRoute path="/customerdisplay" component={CustomersDisplayPage}></AdminRoute>
+          <AdminRoute path="/customerdisplay" component={CustomersRegisterPage}></AdminRoute>
           <AdminRoute
             path="/pptuser/:id/ammend"
             component={CustomerAmmendPage}

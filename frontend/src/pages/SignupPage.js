@@ -4,7 +4,7 @@ import { login } from '../actions/customerActions';
 import { signup } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import MustContainItem from './MustContainItem';
+import PasswordSecurity from './PasswordSecurity';
 
 
 //
@@ -77,9 +77,9 @@ export default function SignupPage(props) {
 
   // labels and state boolean corresponding to each validation
   const mustContainData = [
-    ["A lowercase letter (a-z)", containsLowercase],
-    ["An uppercase letter (A-Z)", containsUppercase],
-    ["A special character (!@#$)", containsCharacter],
+    ["An uppercase letter (A-Z)", containsLowercase],
+    ["A lowercase letter (a-z)", containsUppercase],
+    ["A special character (!@#$...)", containsCharacter],
     ["A number (0-9)", containsNumber],
     ["At least 8 characters", contains8Characters],
   ]
@@ -205,7 +205,7 @@ export default function SignupPage(props) {
         </div>
         <div className='row center'>
                 <div>
-              {mustContainData.map(data=> <MustContainItem data={data}/>)}
+              {mustContainData.map(data=> <PasswordSecurity data={data}/>)}
               </div>
               </div>
       </form>

@@ -11,19 +11,15 @@ import MessageBox from '../components/MessageBox';
 import { ITEM_CREATE_REFRESH, ITEM_REMOVE_REFRESH,// Reused edited
 } from '../constants/itemConstants';
 
-
-
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
-export default function ItemsDisplayPage(props) {// Reused edited
+export default function ItemInventoryPage(props) {// Reused edited
   const { page_number = 2 } = useParams();
   const displayProducts = useSelector((state) => state.displayProducts);// Reused edited
   const { loading, error, PPTitems, page, pages } = displayProducts;
   const itemNew = useSelector((state) => state.itemNew);// Reused edited
   const {loading: loadingNew, error: errorNew, success: successNew, item: new_item, } = itemNew;// Reused edited
-
   const itemRemove = useSelector((state) => state.itemRemove);// Reused edited
   const { loading: loadingRemove, error: errorRemove, success: successRemove, } = itemRemove;// Reused edited
-
   const customerLogin = useSelector((state) => state.customerLogin);// Reused edited
   const { userDetails } = customerLogin;// Reused edited
   const dispatch = useDispatch();
