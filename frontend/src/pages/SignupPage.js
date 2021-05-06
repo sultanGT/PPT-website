@@ -5,6 +5,7 @@ import { signup } from '../actions/customerActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import PasswordSecurity from './PasswordSecurity';
+import GoogleLogin from 'react-google-login';
 
 
 //
@@ -14,7 +15,6 @@ export default function SignupPage(props) {
   const [password, setPassword] = useState("")
   const [password2, setPassword2] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
-
 
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
@@ -36,7 +36,6 @@ export default function SignupPage(props) {
     error: error2,
    } = customerLogin;
 
-
   const dispatch = useDispatch();
   
   const signupSubmitHandler = (e) => {
@@ -49,10 +48,8 @@ export default function SignupPage(props) {
   }
 
   const submitHandler = (e) => {
-
       e.preventDefault();
       dispatch(login(email, password));
-
   };
 
   useEffect(() => {
@@ -108,6 +105,12 @@ export default function SignupPage(props) {
     // all validations passed
     if (containsLowercase && containsUppercase && containsNumber  && containsCharacter && contains8Characters) setAllValid(true)
     else setAllValid(false)
+  }
+
+  //google id
+
+  const responseGoogle = (response) => {
+    console.log(response);
   }
   
   return (
@@ -202,6 +205,15 @@ export default function SignupPage(props) {
           <button className="primary" type="submit" disabled={!allValid}>
             Register
           </button>
+        </div>
+        <div>
+        <GoogleLogin
+          clientId="714794464338-on2k3o2ovt9qoku1ul5m5eis7ovt9bdb.apps.googleusercontent.com"
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={'single_host_origin'}
+        />
         </div>
         <div className='row center'>
                 <div>
