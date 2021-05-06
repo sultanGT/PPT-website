@@ -547,8 +547,20 @@ img.large {
   max-width: 1334px;
   height: 600px;
   z-index: 10;
-  
 }
+
+.carousel_picture {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.carousel_picture.active {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
+  background: #000;
+}
+
 .left-arrow {
   position: absolute;
   top: 50%;
@@ -572,6 +584,35 @@ img.large {
   cursor: pointer;
   user-select: none;
 }
+
+.carousel-indicators {
+  background: rgba(42, 48, 58, 0.5);
+  margin-left: 10px;
+  border-radius: 50%;
+  border: 2px solid rgb(87, 87, 87);
+  color: white;
+  cursor: pointer;
+  margin-top: -100px;
+  fill: #4e4e4e;
+}
+
+.carousel-indicators:hover {
+  
+  background: rgba(255, 255, 255, 0.5);
+  transition: 0.3s;
+}
+
+.carousel-indicators-active {
+  background: #fff;
+  margin-left: 10px;
+  border-radius: 50%;
+  border: 2px solid rgb(87, 87, 87);
+  color: white;
+  cursor: pointer;
+  margin-top: -100px;
+  fill: #4e4e4e;
+}
+
 .arrowbox {
   opacity: 0.8;
 }
@@ -587,18 +628,6 @@ img.large {
 .left-arrow:hover {
   color: #fff;
   transition: 0.2s;
-}
-
-.carousel_picture {
-  opacity: 0;
-  transition-duration: 1s ease;
-}
-
-.carousel_picture.active {
-  opacity: 1;
-  transition-duration: 1s;
-  transform: scale(1.08);
-  background: #000;
 }
 
  .pages {
@@ -707,23 +736,6 @@ a.footerbrand {
 
 .pad {
   padding: 3px 25px 5px 5px;
-}
-
-.carousel-pointers {
-  background: rgba(42, 48, 58, 0.5);
-  margin-left: 10px;
-  border-radius: 50%;
-  border: 2px solid rgb(87, 87, 87);
-  color: white;
-  cursor: pointer;
-  margin-top: -100px;
-  fill: #4e4e4e;
-}
-
-.carousel-pointers:hover {
-  
-  background: rgba(255, 255, 255, 0.5);
-  transition: 0.3s;
 }
 
 /* loading */

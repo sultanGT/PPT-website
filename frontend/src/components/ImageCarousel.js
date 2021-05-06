@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { ImageSlides } from './ImageSlides'; //edited
-import { FiChevronRight, FiChevronLeft } from 'react-icons/fi'; 
+import { FiChevronRight, FiChevronLeft } from 'react-icons/fi'; //self coded
 import { BsCircle } from 'react-icons/bs'; //self coded
 
 // Reused code from Youtube tutorials - https://www.youtube.com/watch?v=l1MYfu5YWHc&t=1175s , https://github.com/briancodex/react-image-slider-carousel/blob/main/src/components/ImageSlider.js
 // function and variable declarations
-const ImageCarousel = ({ slides }) => {
+const ImageCarousel = ({ slides }) => { // Reused edited
 const [slideImage, setSlideImage] = useState(0);
 const length = slides.length;
   
-//function to move to the next slide in the carousel 
+//function to move to the next slide in the carousel // Reused edited
   const nextSlide = () => {
     setSlideImage(
       slideImage === -1 
@@ -20,7 +20,7 @@ const length = slides.length;
       ? 0 : slideImage - 1);
   };
 
-//function to move to the next slide in the carousel 
+//function to move to the next slide in the carousel // Reused edited
   const previousSlide = () => {
     setSlideImage(
       slideImage === 0 
@@ -65,9 +65,9 @@ const length = slides.length;
   <div>
     <div className='row carousel'>
     {/* Reused edited */}
-    <FiChevronLeft className='left-arrow arrowbox' onClick={previousImage} />
+    <FiChevronLeft className='left-arrow arrowbox' onClick={nextImage} />
     {/* Reused edited */}
-    <FiChevronRight className='right-arrow arrowbox' onClick={nextImage} />
+    <FiChevronRight className='right-arrow arrowbox' onClick={previousImage} />
 
         {/* Reused edited */}
     {ImageSlides.map((carousel_picture, c) => {
@@ -80,13 +80,16 @@ const length = slides.length;
         <img src={carousel_picture.picture} alt='Peak Performance Taekwondo' className='carousel-picture' />
             <div className='row center'>
                 {c === slideImage && (
-                   <BsCircle className='row center carousel-pointers' onClick={midSlide}></BsCircle> //c === length -2 && knees
+                   <BsCircle className={c === length - 2 ? 'row center carousel-indicators-active' 
+                   : 'row center carousel-indicators'} onClick={previousSlide}></BsCircle> //c === length -2 && knees
                 )}
                 {c === slideImage &&  (
-                    <BsCircle className='row center carousel-pointers' onClick={nextSlide}>Middle</BsCircle> //c === length 0 palms
+                    <BsCircle className={c === 0 ? 'row center carousel-indicators-active' 
+                    : 'row center carousel-indicators'} onClick={nextSlide}>Middle</BsCircle> //c === length 0 palms
                 )}
                 {c === slideImage && (
-                    <BsCircle className='row center carousel-pointers' onClick={previousSlide}>Right</BsCircle> //c === length -1 && many
+                    <BsCircle className={c === length - 1 ? 'row center carousel-indicators-active' 
+                    : 'row center carousel-indicators'} onClick={midSlide}>Right</BsCircle> //c === length -1 && many
                 )}
             </div>
           </div>
