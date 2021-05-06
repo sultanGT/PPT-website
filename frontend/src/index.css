@@ -630,6 +630,28 @@ img.large {
   transition: 0.2s;
 }
 
+
+/* google form */
+.google-form {
+  flex-direction: column;
+}
+.half {
+  width: 50%;
+}
+
+.google-button {
+  width: 35%;
+}
+
+.google-button span {
+  margin: 0 auto;
+}
+
+
+.pad {
+  padding: 1rem;
+}
+
  .pages {
    background: #fff;
  }

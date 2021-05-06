@@ -82,8 +82,7 @@ localStorage.removeItem('shoppingItems');
 localStorage.removeItem('delivery_address');
 
 dispatch({ type: CUSTOMER_LOGOUT }); // Reused, edited
-
-document.location.href = '/';
+document.location.href = '/signup';
 };
 
 //Function for getting customer info - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website

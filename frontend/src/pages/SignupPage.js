@@ -10,11 +10,13 @@ import GoogleLogin from 'react-google-login';
 
 //
 export default function SignupPage(props) {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
   const [password2, setPassword2] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+
+  
 
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
@@ -38,7 +40,7 @@ export default function SignupPage(props) {
 
   const dispatch = useDispatch();
   
-  const signupSubmitHandler = (e) => {
+  const signuploginSubmitHandler = (e) => {
     if (password2 !==  confirmPassword) {
       alert('Password and confirm password are not matching');
     } else {
@@ -47,7 +49,7 @@ export default function SignupPage(props) {
     }
   }
 
-  const submitHandler = (e) => {
+  const loginSubmitHandler = (e) => {
       e.preventDefault();
       dispatch(login(email, password));
   };
@@ -81,6 +83,8 @@ export default function SignupPage(props) {
     ["At least 8 characters", contains8Characters],
   ]
 
+  
+
   const validatePassword = () => {
     // has uppercase letter
     if (password2.toLowerCase() !== password2) setContainsLowercase(true)
@@ -109,15 +113,34 @@ export default function SignupPage(props) {
 
   //google id
 
-  const responseGoogle = (response) => {
-    console.log(response);
+
+  const loginResponseGoogle = (response) => {
+    
+    setEmail(response.profileObj.email);
+    setPassword(response.profileObj.googleId);
+    dispatch(login(email, password));
+
   }
+
+
+  const signupResponseGoogle = (response) => {
+    setName(response.profileObj.givenName);
+    setEmail(response.profileObj.email);
+    setPassword2(response.profileObj.googleId);
+    setConfirmPassword(response.profileObj.googleId);
+    dispatch(signup(name, email, password2));
+  }
+
+
+
   
   return (
+
+    
     
     <div className='row pager'>
-      <form className="form wide" onSubmit={submitHandler}>
-        <div>
+      <form autoComplete="username" className="form wide" onSubmit={loginSubmitHandler}>
+      <div className='row center'>
           <h1>Sign In</h1> 
         </div>
         {load2 && <LoadingBox></LoadingBox>}
@@ -128,6 +151,7 @@ export default function SignupPage(props) {
             type="email"
             id="email"
             placeholder="Enter email"
+            autoComplete="username"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
@@ -138,20 +162,31 @@ export default function SignupPage(props) {
             type="password"
             id="password"
             placeholder="Enter password"
+            autoComplete="username"
             required
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
         <div>
           <label />
-          <button className="primary" type="submit">
+        <div className='row google-form'>
+        <GoogleLogin className='google-button'
+          clientId="714794464338-1d4era4sfqk47117qvk53deeiujvu68h.apps.googleusercontent.com"
+          buttonText="Login with Google"
+          onSuccess={loginResponseGoogle}
+          onFailure={loginResponseGoogle}
+          cookiePolicy={'single_host_origin'}
+        />
+         <p>OR</p>
+          <button className="primary half" type="submit">
             Sign In
           </button>
         </div>
+        </div>
       </form>
 
-      <form className="form wide" onSubmit={signupSubmitHandler}>
-        <div>
+      <form autoComplete="new-password" className="form wide" onSubmit={signuploginSubmitHandler}>
+        <div className='row center'>
           <h1>Create Account</h1>
         </div>
         {load1 && <LoadingBox></LoadingBox>}
@@ -161,6 +196,7 @@ export default function SignupPage(props) {
           <input
             type="text"
             id="name"
+            autoComplete="new-password"
             placeholder="Enter name"
             required
             onChange={(e) => setName(e.target.value)}
@@ -172,6 +208,7 @@ export default function SignupPage(props) {
             type="email"
             id="email"
             placeholder="Enter email"
+            autoComplete="new-password"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
@@ -182,6 +219,7 @@ export default function SignupPage(props) {
             type="password"
             id="password2"
             value={password2}
+            autoComplete="new-password"
             onKeyUp={validatePassword}
             placeholder="Enter password"
             required
@@ -194,6 +232,7 @@ export default function SignupPage(props) {
             type="password"
             id="confirmPassword"
             value={confirmPassword}
+            autoComplete="new-password"
             placeholder="Enter confirm password"
             onKeyUp={validatePassword}
             required
@@ -201,19 +240,21 @@ export default function SignupPage(props) {
           ></input>
         </div>
         <div>
+
           <label />
-          <button className="primary" type="submit" disabled={!allValid}>
-            Register
-          </button>
-        </div>
-        <div>
-        <GoogleLogin
-          clientId="714794464338-on2k3o2ovt9qoku1ul5m5eis7ovt9bdb.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
+        <div className='row google-form'>
+        <GoogleLogin className='google-button'
+          clientId="714794464338-1d4era4sfqk47117qvk53deeiujvu68h.apps.googleusercontent.com"
+          buttonText="Signup with Google"
+          onSuccess={signupResponseGoogle}
+          onFailure={signupResponseGoogle}
           cookiePolicy={'single_host_origin'}
         />
+        <p>OR</p>
+          <button className="primary half" type="submit" disabled={!allValid}>
+            Sign up
+          </button>
+        </div>
         </div>
         <div className='row center'>
                 <div>

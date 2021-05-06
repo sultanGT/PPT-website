@@ -9,8 +9,8 @@ import PasswordSecurity from './PasswordSecurity';
 
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
 export default function MyAccountPage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(false);
+  const [email, setEmail] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const customerLogin = useSelector((state) => state.customerLogin);
@@ -18,11 +18,19 @@ export default function MyAccountPage() {
   const userInfo = useSelector((state) => state.userInfo);
   const { loading, error, pptuser } = userInfo;
   const userAmmendAccount = useSelector((state) => state.userAmmendAccount);
+  const userAmmendAccount2 = useSelector((state) => state.userAmmendAccount);
+
   const {
     success: successUpdate,
     error: errorAmmend,
     loading: loadingAmmend,
   } = userAmmendAccount;
+
+  const {
+    success: successUpdate2,
+    error: errorAmmend2,
+    loading: loadingAmmend2,
+  } = userAmmendAccount2;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -34,9 +42,20 @@ export default function MyAccountPage() {
       setEmail(pptuser.email);
     }
   }, [dispatch, userDetails._id, pptuser]);
-  const submitHandler = (e) => {
-    e.preventDefault();
 
+  const profileSubmitHandler = (e) => {
+      e.preventDefault();
+      dispatch(
+        ammendCustomerAccount({
+          customerId: pptuser._id,
+          name,
+          email,    
+        })
+      );
+    };
+
+  const passwordSubmitHandler = (e) => {
+    e.preventDefault();
     if (password !==  confirmPassword) {
       e.preventDefault();
       alert('Password and confirm password are not matching');
@@ -53,6 +72,8 @@ export default function MyAccountPage() {
       );
     }
   };
+
+  
 
 //Validate Password code used from https://github.com/cooljasonmelton/password-checklist
 
@@ -104,10 +125,10 @@ export default function MyAccountPage() {
   }
 
   return (
-    <div className='pager'>
-      <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>User Profile</h1>
+    <div className='row pager'>
+      <form className="form wide" onSubmit={profileSubmitHandler}>
+        <div className='row center'>
+          <h1>My Account</h1>
         </div>
         {loading ? (
           <LoadingBox></LoadingBox>
@@ -124,7 +145,7 @@ export default function MyAccountPage() {
                 Profile Updated Successfully
               </MessageBox>
             )}
-            <div>
+      <div>
               <label htmlFor="name">Name</label>
               <input
                 id="name"
@@ -144,6 +165,36 @@ export default function MyAccountPage() {
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>
+            <div>
+              <label />
+              <div className='row center'>
+              <button className="primary half" type="submit">
+                Update Profile
+              </button>
+              </div>
+            </div>
+          </>
+        )}
+      </form>
+      <form className="form wide" onSubmit={passwordSubmitHandler}>
+      <div className='row center'>
+          <h1>My Account Password</h1>
+        </div>
+        {loading ? (
+          <LoadingBox></LoadingBox>
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <>
+            {loadingAmmend2 && <LoadingBox></LoadingBox>}
+            {errorAmmend2 && (
+              <MessageBox variant="danger">{errorAmmend2}</MessageBox>
+            )}
+            {successUpdate2 && (
+              <MessageBox variant="success">
+                Password Updated Successfully
+              </MessageBox>
+            )}
             <div>
               <label htmlFor="password">Password</label>
               <input
@@ -166,13 +217,13 @@ export default function MyAccountPage() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               ></input>
             </div>
-
                 <div>
-
               <label />
-              <button className="primary" type="submit" disabled={!allValid}>
-                Update
+              <div className='row center'>
+              <button className="primary half" type="submit" disabled={!allValid}>
+                Update Password
               </button>
+              </div>
             </div>
           </>
         )}
