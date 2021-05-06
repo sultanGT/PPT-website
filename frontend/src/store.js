@@ -11,16 +11,16 @@ import {
   orderPayReducer,
 } from './reducers/orderReducers';
 import {
-  productBrandListReducer,
-  productCategoryListReducer,
-  productCostListReducer,
-  productCreateReducer,
-  productDeleteReducer,
-  productDetailsReducer,
-  productListReducer,
-  productReviewCreateReducer,
-  productUpdateReducer,
-} from './reducers/productReducers';
+  itemBrandListReducer,
+  itemCategoryListReducer,
+  itemOurProductReducer,
+  itemCreateReducer,
+  itemRemoveReducer,
+  itemInfoReducer,
+  itemListReducer,
+  itemReviewNewReducer,
+  itemAmmendReducer,
+} from './reducers/itemReducers';
 import {
   userDeleteReducer,
   userDetailsReducer,
@@ -33,8 +33,8 @@ import {
 
 const initialState = {
   customerLogin: {
-    pptUserDetails: localStorage.getItem('pptUserDetails')
-      ? JSON.parse(localStorage.getItem('pptUserDetails'))
+    userDetails: localStorage.getItem('userDetails')
+      ? JSON.parse(localStorage.getItem('userDetails'))
       : null,
   },
   shopping: {
@@ -48,8 +48,8 @@ const initialState = {
   },
 };
 const reducer = combineReducers({
-  displayProducts: productListReducer,
-  itemDetails: productDetailsReducer,
+  displayProducts: itemListReducer,
+  itemDetails: itemInfoReducer,
   shopping: cartReducer,
   customerLogin: userSigninReducer,
   userRegister: userRegisterReducer,
@@ -60,18 +60,18 @@ const reducer = combineReducers({
   userInfo: userDetailsReducer,
   userAmmendAccount: userUpdateProfileReducer,
   userAmmend: userUpdateReducer,
-  itemNew: productCreateReducer,
-  itemAmmend: productUpdateReducer,
-  itemRemove: productDeleteReducer,
+  itemNew: itemCreateReducer,
+  itemAmmend: itemAmmendReducer,
+  itemRemove: itemRemoveReducer,
   displayPurchase: orderListReducer,
   purchaseRemove: orderDeleteReducer,
   purchaseShipping: orderDeliverReducer,
   userList: userListReducer,
   userDelete: userDeleteReducer,
-  displayCategories: productCategoryListReducer,
-  displayBrands: productBrandListReducer,
-  displayOurProducts: productCostListReducer,
-  ItemNewReview: productReviewCreateReducer,
+  displayCategories: itemCategoryListReducer,
+  displayBrands: itemBrandListReducer,
+  displayOurProducts: itemOurProductReducer,
+  ItemNewReview: itemReviewNewReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

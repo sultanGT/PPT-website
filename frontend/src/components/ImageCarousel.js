@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { ImageSlides } from './ImageSlides';
-import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
-import { BsCircle } from 'react-icons/bs';
+import { ImageSlides } from './ImageSlides'; //edited
+import { FiChevronRight, FiChevronLeft } from 'react-icons/fi'; 
+import { BsCircle } from 'react-icons/bs'; //self coded
 
+// Reused code from Youtube tutorials - https://www.youtube.com/watch?v=l1MYfu5YWHc&t=1175s , https://github.com/briancodex/react-image-slider-carousel/blob/main/src/components/ImageSlider.js
 // function and variable declarations
 const ImageCarousel = ({ slides }) => {
 const [slideImage, setSlideImage] = useState(0);
 const length = slides.length;
   
-// function for right carousel indicatior on click to the next carousel_picture - selfcoded
+//function to move to the next slide in the carousel 
   const nextSlide = () => {
     setSlideImage(
       slideImage === -1 
@@ -19,7 +20,7 @@ const length = slides.length;
       ? 0 : slideImage - 1);
   };
 
-// function for left carousel indicatior on click to the previous carousel_picture - selfcoded
+//function to move to the next slide in the carousel 
   const previousSlide = () => {
     setSlideImage(
       slideImage === 0 
@@ -54,7 +55,7 @@ const length = slides.length;
         - 1);
   };
 
-//
+// Reused edited
   if (!Array.isArray(slides) || slides.length <= 0) {
     return null;
   }
@@ -63,11 +64,16 @@ const length = slides.length;
   return (
   <div>
     <div className='row carousel'>
-      
+    {/* Reused edited */}
     <FiChevronLeft className='left-arrow arrowbox' onClick={previousImage} />
+    {/* Reused edited */}
     <FiChevronRight className='right-arrow arrowbox' onClick={nextImage} />
+
+        {/* Reused edited */}
     {ImageSlides.map((carousel_picture, c) => {
     return (
+
+    //self coded
     <div className={c === slideImage ? 'carousel_picture active' : 'carousel_picture'} key={c}>
     {c === slideImage && ( 
         <div>
@@ -86,7 +92,7 @@ const length = slides.length;
           </div>
                       )}
           </div>
-);})}
+);})} 
     </div>
   </div>
   );

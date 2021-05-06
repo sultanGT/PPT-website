@@ -6,15 +6,15 @@ import MessageBox from '../components/MessageBox';
 import { CUSTOMER_AMMEND_PROFILE_REFRESH } from '../constants/customerConstants';
 import MustContainItem from './MustContainItem';
 
+
+//Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
 export default function MyAccountPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-//
   const customerLogin = useSelector((state) => state.customerLogin);
-  const { pptUserDetails } = customerLogin;
+  const { userDetails } = customerLogin;
   const userInfo = useSelector((state) => state.userInfo);
   const { loading, error, pptuser } = userInfo;
   const userAmmendAccount = useSelector((state) => state.userAmmendAccount);
@@ -28,12 +28,12 @@ export default function MyAccountPage() {
   useEffect(() => {
     if (!pptuser) {
       dispatch({ type: CUSTOMER_AMMEND_PROFILE_REFRESH });
-      dispatch(customerInfo(pptUserDetails._id));
+      dispatch(customerInfo(userDetails._id));
     } else {
       setName(pptuser.name);
       setEmail(pptuser.email);
     }
-  }, [dispatch, pptUserDetails._id, pptuser]);
+  }, [dispatch, userDetails._id, pptuser]);
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -178,7 +178,7 @@ export default function MyAccountPage() {
         )}
                 <div className='row center'>
                 <div>
-              {mustContainData.map(data=> <MustContainItem data={data}/>)}
+                {mustContainData.map(data=> <MustContainItem data={data}/>)}
               </div>
               </div>
       </form>

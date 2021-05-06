@@ -1,4 +1,5 @@
-//
+// Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
+//Reused edited
 export const PURCHASE_NEW_REQUEST = 'PURCHASE_NEW_REQUEST';
 export const PURCHASE_NEW_COMPLETE = 'PURCHASE_NEW_COMPLETE';
 export const PURCHASE_NEW_ERROR = 'PURCHASE_NEW_ERROR';

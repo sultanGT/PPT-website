@@ -22,7 +22,7 @@ export default function SignupPage(props) {
 
   const userRegister = useSelector((state) => state.userRegister);
   const { 
-    pptUserDetails:  user1, 
+    userDetails:  user1, 
     loading: load1, 
     error:  error1,
 
@@ -31,7 +31,7 @@ export default function SignupPage(props) {
   const customerLogin = useSelector((state) => state.customerLogin);
   
   const { 
-    pptUserDetails:  user2, 
+    userDetails:  user2, 
     loading: load2, 
     error: error2,
    } = customerLogin;
@@ -86,23 +86,23 @@ export default function SignupPage(props) {
 
   const validatePassword = () => {
     // has uppercase letter
-    if (password.toLowerCase() !== password) setContainsLowercase(true)
+    if (password2.toLowerCase() !== password2) setContainsLowercase(true)
     else setContainsLowercase(false)
 
     // has lowercase letter
-    if (password.toUpperCase() !== password) setContainsUppercase(true)
+    if (password2.toUpperCase() !== password2) setContainsUppercase(true)
     else setContainsUppercase(false)
 
     // has special character
-    if (/[~`!#$%^&*+=\-[@';,/{}|":<>?]/g.test(password)) setContainsCharacter(true)
+    if (/[~`!#$%^&*+=\-[@';,/{}|":<>?]/g.test(password2)) setContainsCharacter(true)
     else setContainsCharacter(false)
 
     // has number
-    if (/\d/.test(password)) setContainsNumber(true)
+    if (/\d/.test(password2)) setContainsNumber(true)
     else setContainsNumber(false)
 
     // has 8 characters
-    if (password.length >= 8) setContains8Characters(true)
+    if (password2.length >= 8) setContains8Characters(true)
     else setContains8Characters(false)
 
     // all validations passed

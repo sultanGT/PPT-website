@@ -1,49 +1,52 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveDeliveryAddress } from '../actions/shoppingActions';
-import PurchaseProgress from '../components/PurchaseProgress';
+import { saveDeliveryAddress } from '../actions/shoppingActions'; //reused edited
+import PurchaseProgress from '../components/PurchaseProgress'; //reused edited
 
 
-export default function DeliveryAddressPage(props) {
-  const customerLogin = useSelector((state) => state.customerLogin);
-  const { pptUserDetails } = customerLogin;
-  const shopping = useSelector((state) => state.shopping);
-  const { delivery_address } = shopping;
-  if (!pptUserDetails) {
-    props.history.push('/login');
+
+// https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
+export default function DeliveryAddressPage(props) { //reused edited
+  const customerLogin = useSelector((state) => state.customerLogin);//reused edited
+  const { userDetails } = customerLogin;//reused edited
+  const shopping = useSelector((state) => state.shopping);//reused edited
+  const { delivery_address } = shopping;//reused edited
+  if (!userDetails) {//reused edited
+    props.history.push('/login');//reused edited
   }
 
   //
-  const [fullName, setFullName] = useState(delivery_address.fullName);
-  const [address, setAddress] = useState(delivery_address.address);
-  const [city, setCity] = useState(delivery_address.city);
+  const [fullName, setFullName] = useState(delivery_address.fullName);//edited
+  const [address, setAddress] = useState(delivery_address.address);//edited
+  const [city, setCity] = useState(delivery_address.city); //edited
   const [post_code, setPostCode] = useState(delivery_address.post_code);
-  const [county, setCountry] = useState(delivery_address.county);
-  const [contactNumber, setContactNumber] = useState(delivery_address.contactNumber);
+  const [county, setCountry] = useState(delivery_address.county); //self coded
+  const [contactNumber, setContactNumber] = useState(delivery_address.contactNumber); //self coded
   const dispatch = useDispatch();
 
 
   //
   const submitHandler = (e) => {
-    if (contactNumber.length < 11) {
-      alert('Contact Number Is Not Valid');
+    if (contactNumber.length < 11) { //selfcoded
+      alert('Contact Number Is Not Valid'); //selfcoded
       e.preventDefault();
-    } else if (post_code.length < 7) {
+    } else if (post_code.length < 7) { //self coded
       e.preventDefault();
-      alert('Post Code Is Not Valid');
+      alert('Post Code Is Not Valid'); //self coded
     } else {
     e.preventDefault();
     dispatch(
-      saveDeliveryAddress({ fullName, address, city, post_code, county, contactNumber })
+      saveDeliveryAddress({ fullName, address, city, post_code, //reused edited
+        county, contactNumber }) //county and contactNumber self coded
     );
-    props.history.push('/orderpurchase');
+    props.history.push('/orderpurchase'); //edited
   };
 }
 
 //
   return (
-    <div className="pager">
-      <PurchaseProgress progress_signin progress_shipping></PurchaseProgress>
+    <div className="pager"> {/* selfcoded */}
+      <PurchaseProgress progress_signin progress_shipping></PurchaseProgress> {/* reused edited */}
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Shipping Address</h1>
@@ -93,7 +96,7 @@ export default function DeliveryAddressPage(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="county">Country</label>
+          <label htmlFor="county">Country</label> {/* selfcoded */}
           <input
             type="text"
             id="county"
@@ -104,7 +107,7 @@ export default function DeliveryAddressPage(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="contactNumber">Contact Number</label>
+          <label htmlFor="contactNumber">Contact Number</label> {/* selfcoded */}
           <input
             type="text"
             id="contactNumber"
@@ -115,7 +118,7 @@ export default function DeliveryAddressPage(props) {
         </div>
         <div>
           <label />
-          <button className="primary" type="submit" >
+          <button className="primary" type="submit" > 
             Continue
           </button>
         </div>

@@ -13,10 +13,10 @@ routeItem.get(
   '/',
   expressAsyncHandler(async (req, res) => {
     const pageLength = 8;
-    const pptpage = Number(req.query.page_number) || 1;
+    const page = Number(req.query.page_number) || 1;
     const name = req.query.name || '';
     const item_category = req.query.item_category || '';
-    const item_brand = req.query.item_brand || '';
+    const item_brand = req.query.item_brand || ''; //self coded
     const customer_order = req.query.customer_order || '';
     const minimum =
       req.query.minimum && Number(req.query.minimum) !== 0 ? Number(req.query.minimum) : 0;
@@ -29,7 +29,7 @@ routeItem.get(
 // Search bar filters - reused copied
     const filter_item_names = name ? { name: { $regex: name, $options: 'i' } } : {};
     const filter_item_categories = item_category ? { item_category } : {};
-    const filter_item_brands = item_brand ? { item_brand } : {};
+    const filter_item_brands = item_brand ? { item_brand } : {}; //selfcoded
     const filter_item_cost = minimum && maximum ? { cost: { $gte: minimum, $lte: maximum } } : {};
     const filter_item_ratings = user_rating ? { user_rating: { $gte: user_rating } } : {};
     const sortOrder =
@@ -44,7 +44,7 @@ routeItem.get(
     const count = await Item.count({
       ...filter_item_names,
       ...filter_item_categories,
-      ...filter_item_brands,
+      ...filter_item_brands, //self coded
       ...filter_item_cost,
       ...filter_item_ratings,
       
@@ -53,14 +53,14 @@ routeItem.get(
     const PPTitems = await Item.find({
       ...filter_item_names,
       ...filter_item_categories,
-      ...filter_item_brands,
+      ...filter_item_brands,  //self coded
       ...filter_item_cost,
       ...filter_item_ratings,
     })
       .sort(sortOrder)
-      .skip(pageLength * (pptpage - 1))
+      .skip(pageLength * (page - 1))
       .limit(pageLength);
-    res.send({ PPTitems, pptpage, pages: Math.ceil(count / pageLength) });
+    res.send({ PPTitems, page, pages: Math.ceil(count / pageLength) });
   })
 );
 

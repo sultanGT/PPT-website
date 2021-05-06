@@ -27,12 +27,12 @@ const {
   ITEM_REVIEW_NEW_COMPLETE,
   ITEM_REVIEW_NEW_ERROR,
   ITEM_REVIEW_CREATE_REFRESH,
-  ITEM_COST_FILTER_REQUEST,
-  ITEM_COST_FILTER_COMPLETE,
-  ITEM_COST_FILTER_ERROR,
+  ITEM_OUR_PRODUCT_FILTER_REQUEST,
+  ITEM_OUR_PRODUCT_FILTER_COMPLETE,
+  ITEM_OUR_PRODUCT_FILTER_ERROR,
 } = require('../constants/itemConstants');
 
-export const productListReducer = (
+export const itemListReducer = (
   state = { loading: true, PPTitems: [] },
   action
 ) => {
@@ -41,10 +41,9 @@ export const productListReducer = (
       return { loading: true };
     case ITEM_HISTORY_COMPLETE:
       return {
-        loading: false,
-        PPTitems: action.payload.PPTitems,
+        loading: false, PPTitems: action.payload.PPTitems,
         pages: action.payload.pages,
-        pptpage: action.payload.pptpage,
+        page: action.payload.page,
       };
     case ITEM_HISTORY_ERROR:
       return { loading: false, error: action.payload };
@@ -53,7 +52,7 @@ export const productListReducer = (
   }
 };
 
-export const productCategoryListReducer = (
+export const itemCategoryListReducer = (
   state = { loading: true, PPTitems: [] },
   action
 ) => {
@@ -69,7 +68,7 @@ export const productCategoryListReducer = (
   }
 };
 
-export const productBrandListReducer = (
+export const itemBrandListReducer = (
   state = { loading: true, PPTitems: [] },
   action
 ) => {
@@ -85,23 +84,23 @@ export const productBrandListReducer = (
   }
 };
 
-export const productCostListReducer = (
+export const itemOurProductReducer = (
   state = { loading: true, PPTitems: [] },
   action
 ) => {
   switch (action.type) {
-    case ITEM_COST_FILTER_REQUEST:
+    case ITEM_OUR_PRODUCT_FILTER_REQUEST:
       return { loading: true };
-    case ITEM_COST_FILTER_COMPLETE:
+    case ITEM_OUR_PRODUCT_FILTER_COMPLETE:
       return { loading: false, our_products: action.payload };
-    case ITEM_COST_FILTER_ERROR:
+    case ITEM_OUR_PRODUCT_FILTER_ERROR:
       return { loading: false, error: action.payload };
     default:
       return state;
   }
 };
 
-export const productDetailsReducer = (state = { loading: true }, action) => {
+export const itemInfoReducer = (state = { loading: true }, action) => {
   switch (action.type) {
     case ITEM_INFO_REQUEST:
       return { loading: true };
@@ -113,7 +112,7 @@ export const productDetailsReducer = (state = { loading: true }, action) => {
       return state;
   }
 };
-export const productCreateReducer = (state = {}, action) => {
+export const itemCreateReducer = (state = {}, action) => {
   switch (action.type) {
     case ITEM_NEW_REQUEST:
       return { loading: true };
@@ -127,7 +126,7 @@ export const productCreateReducer = (state = {}, action) => {
       return state;
   }
 };
-export const productUpdateReducer = (state = {}, action) => {
+export const itemAmmendReducer = (state = {}, action) => {
   switch (action.type) {
     case ITEM_AMMEND_REQUEST:
       return { loading: true };
@@ -141,7 +140,7 @@ export const productUpdateReducer = (state = {}, action) => {
       return state;
   }
 };
-export const productDeleteReducer = (state = {}, action) => {
+export const itemRemoveReducer = (state = {}, action) => {
   switch (action.type) {
     case ITEM_REMOVE_REQUEST:
       return { loading: true };
@@ -155,7 +154,7 @@ export const productDeleteReducer = (state = {}, action) => {
       return state;
   }
 };
-export const productReviewCreateReducer = (state = {}, action) => {
+export const itemReviewNewReducer = (state = {}, action) => {
   switch (action.type) {
     case ITEM_REVIEW_NEW_REQUEST:
       return { loading: true };

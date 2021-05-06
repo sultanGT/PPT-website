@@ -1,42 +1,40 @@
 import React, { useEffect } from 'react';
-import Item from '../components/Item';
+import Item from '../components/Item'; //edited
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { useDispatch, useSelector } from 'react-redux';
-import { displayItems } from '../actions/itemActions';
-import ImageCarousel from '../components/ImageCarousel';
-import { ImageSlides } from '../components/ImageSlides';
+import { displayItems } from '../actions/itemActions'; //edited
+import ImageCarousel from '../components/ImageCarousel'; //edited
+import { ImageSlides } from '../components/ImageSlides'; //edited
 
 
-//
-export default function HomePage() {
+// Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
+//Reused edited
+export default function HomePage() { //edited
   const dispatch = useDispatch();
-  const displayProducts = useSelector((state) => state.displayProducts);
-  const { loading, error, PPTitems } = displayProducts;
+  const displayProducts = useSelector((state) => state.displayProducts); //edited
+  const { loading, error, PPTitems } = displayProducts; //edited
   
   useEffect(() => {
-    dispatch(displayItems({}));
+    dispatch(displayItems({})); //edited
   }, [dispatch]);
 //
   return (
     <div>
 {/* Carousel Slider */}
-<div className="row center responsive"> 
-<ImageCarousel slides={ImageSlides} />
+<div className="row center responsive"> {/* Styling responsive self coded */}
+<ImageCarousel slides={ImageSlides} /> {/* edited */}
 </div>
-<h1 className='row center container-box-hc-title'>Our Newest Products!</h1>
+<h1 className='row center container-box-hc-title'>Our Newest Products!</h1> {/* self coded */}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          {PPTitems.length === 0 && <MessageBox>No Item Found</MessageBox>}
-          <div className="row center">
-            {PPTitems.map((item) => (
-              <Item key={item._id} item={item}></Item>
-            ))}
-          </div>
+      {PPTitems.length === 0 &&
+      <MessageBox>No Item Found</MessageBox>}
+      <div className="row center"> {PPTitems.map((item) => ( <Item key={item._id} item={item}></Item>))}</div> {/* edited */}
         </>
       )}
     </div>

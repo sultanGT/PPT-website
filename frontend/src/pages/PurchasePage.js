@@ -22,7 +22,7 @@ export default function PurchasePage(props) {
   const { customer_order, loading, error } = purchaseDetails;
   //
   const customerLogin = useSelector((state) => state.customerLogin);
-  const { pptUserDetails } = customerLogin;
+  const { userDetails } = customerLogin;
 
   //
   const purchasePayment = useSelector((state) => state.purchasePayment);
@@ -213,7 +213,7 @@ export default function PurchasePage(props) {
                   )}
                 </li>
               )}
-              {pptUserDetails.userCredentialsAdministrator && customer_order.purchase_confirmed && !customer_order.delivery_confirmed && (
+              {userDetails.userCredentialsAdministrator && customer_order.purchase_confirmed && !customer_order.delivery_confirmed && (
                 <li>
                   {loadingShipping && <LoadingBox></LoadingBox>}
                   {errorShipping && (

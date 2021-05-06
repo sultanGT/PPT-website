@@ -4,83 +4,84 @@ import Axios from 'axios';
 import { itemInfo, ammendItem } from '../actions/itemActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { ITEM_AMMEND_REFRESH } from '../constants/itemConstants';
+import { ITEM_AMMEND_REFRESH } from '../constants/itemConstants';//Reused edited
 
 
-//
+// Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
+//Reused edited
 export default function ItemAmmendPage(props) {
 
   //
-  const itemId = props.match.params.id;
+  const itemId = props.match.params.id;//Reused edited
   const [name, setName] = useState('');
-  const [cost, setPrice] = useState('');
-  const [picture, setPicture] = useState('');
+  const [cost, setPrice] = useState('');//Reused edited
+  const [picture, setPicture] = useState('');//Reused edited
   const [item_category, setCategory] = useState('');
-  const [stock_number, setstock_count] = useState('');
-  const [item_brand, setproduct_brand] = useState('');
-  const [item_info, setInfo] = useState('');
+  const [stock_number, setstock_count] = useState('');//Reused edited
+  const [item_brand, setproduct_brand] = useState('');//Reused edited
+  const [item_info, setInfo] = useState('');//Reused edited
 
   //
-  const itemDetails = useSelector((state) => state.itemDetails);
-  const { loading, error, item } = itemDetails;
+  const itemDetails = useSelector((state) => state.itemDetails);//Reused edited
+  const { loading, error, item } = itemDetails;//Reused edited
 
-  const itemAmmend = useSelector((state) => state.itemAmmend);
+  const itemAmmend = useSelector((state) => state.itemAmmend);//Reused edited
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
-  } = itemAmmend;
+  } = itemAmmend;//Reused edited
 
   //
   const dispatch = useDispatch();
   useEffect(() => {
     if (successUpdate) {
-      props.history.push('/productlist');
+      props.history.push('/displayItems');//Reused edited
     }
-    if (!item || item._id !== itemId || successUpdate) {
-      dispatch({ type: ITEM_AMMEND_REFRESH });
-      dispatch(itemInfo(itemId));
+    if (!item || item._id !== itemId || successUpdate) {//Reused edited
+      dispatch({ type: ITEM_AMMEND_REFRESH });//Reused edited
+      dispatch(itemInfo(itemId));//Reused edited
     } else {
       setName(item.name);
-      setPrice(item.cost);
-      setPicture(item.picture);
+      setPrice(item.cost);//Reused edited
+      setPicture(item.picture);//Reused edited
       setCategory(item.item_category);
-      setstock_count(item.stock_number);
+      setstock_count(item.stock_number);//Reused edited
       setproduct_brand(item.item_brand);
-      setInfo(item.item_info);
+      setInfo(item.item_info);//Reused edited
     }
   }, [item, dispatch, itemId, successUpdate, props.history]);
   const submitHandler = (e) => {
     e.preventDefault();
     // TODO: dispatch update item
     dispatch(
-      ammendItem({
-        _id: itemId,
+      ammendItem({//Reused edited
+        _id: itemId,//Reused edited
         name,
-        cost,
-        picture,
+        cost,//Reused edited
+        picture,//Reused edited
         item_category,
         item_brand,
-        stock_number,
-        item_info,
+        stock_number,//Reused edited
+        item_info,//Reused edited
       })
     );
   };
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [errorUpload, setErrorUpload] = useState('');
 
-  const customerLogin = useSelector((state) => state.customerLogin);
-  const { pptUserDetails } = customerLogin;
-  const pictureUploadHandler = async (e) => {
+  const customerLogin = useSelector((state) => state.customerLogin);//Reused edited
+  const { userDetails } = customerLogin;//Reused edited
+  const pictureUploadHandler = async (e) => {//Reused edited
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('image', file);
     setLoadingUpload(true);
     try {
-      const { data } = await Axios.post('/api/saver', bodyFormData, {
+      const { data } = await Axios.post('/api/saver', bodyFormData, {//Reused edited
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${pptUserDetails.token}`,
+          Authorization: `Bearer ${userDetails.token}`,
         },
       });
       setPicture(data);
@@ -153,7 +154,7 @@ export default function ItemAmmendPage(props) {
               <input
                 id="item_category"
                 type="text"
-                placeholder="Enter item_category"
+                placeholder="Enter item category"
                 value={item_category}
                 onChange={(e) => setCategory(e.target.value)}
               ></input>
@@ -169,13 +170,13 @@ export default function ItemAmmendPage(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="stock_number">Stock Count</label>
+              <label htmlFor="stock_number">Stock Count</label>  {/* edited */}
               <input
-                id="stock_number"
+                id="stock_number" 
                 type="text"
-                placeholder="Enter stock_number"
-                value={stock_number}
-                onChange={(e) => setstock_count(e.target.value)}
+                placeholder="Enter stock amount"  
+                value={stock_number}  
+                onChange={(e) => setstock_count(e.target.value)} 
               ></input>
             </div>
             <div>
@@ -184,7 +185,7 @@ export default function ItemAmmendPage(props) {
                 id="item_info"
                 rows="3"
                 type="text"
-                placeholder="Enter item_info"
+                placeholder="Enter item description"
                 value={item_info}
                 onChange={(e) => setInfo(e.target.value)}
               ></textarea>

@@ -22,7 +22,7 @@ import {
   CUSTOMER_AMMEND_ACCOUNT_REQUEST,
   CUSTOMER_AMMEND_PROFILE_REFRESH,
   CUSTOMER_AMMEND_ACCOUNT_COMPLETE,
-  USER_UPDATE_REQUEST,
+  CUSTOMER_AMMEND_REQUEST,
   CUSTOMER_AMMEND_REFRESH,
   CUSTOMER_AMMEND_SUCCESS,
 } from '../constants/customerConstants';
@@ -32,7 +32,7 @@ export const userRegisterReducer = (state = {}, action) => {
     case CUSTOMER_SIGNUP_REQUEST:
       return { loading: true };
     case CUSTOMER_SIGNUP_COMPLETE:
-      return { loading: false, pptUserDetails: action.payload };
+      return { loading: false, userDetails: action.payload };
     case CUSTOMER_SIGNUP_ERROR:
       return { loading: false, error: action.payload };
     default:
@@ -45,7 +45,7 @@ export const userSigninReducer = (state = {}, action) => {
     case CUSTOMER_LOGIN_REQUEST:
       return { loading: true };
     case CUSTOMER_LOGIN_COMPLETE:
-      return { loading: false, pptUserDetails: action.payload };
+      return { loading: false, userDetails: action.payload };
     case CUSTOMER_LOGIN_ERROR:
       return { loading: false, error: action.payload };
     case CUSTOMER_LOGOUT:
@@ -84,7 +84,7 @@ export const userUpdateProfileReducer = (state = {}, action) => {
 };
 export const userUpdateReducer = (state = {}, action) => {
   switch (action.type) {
-    case USER_UPDATE_REQUEST:
+    case CUSTOMER_AMMEND_REQUEST:
       return { loading: true };
     case CUSTOMER_AMMEND_SUCCESS:
       return { loading: false, success: true };

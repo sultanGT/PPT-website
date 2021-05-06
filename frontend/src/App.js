@@ -8,7 +8,7 @@ import ShoppingPage from './pages/ShoppingPage';
 import HomePage from './pages/HomePage';
 import PurchaseHistoryPage from './pages/PurchaseHistoryPage';
 import PurchasePage from './pages/PurchasePage';
-import PurchaseOrderPage from './pages/CustomersDisplayPage';
+import PurchaseOrderPage from './pages/PurchaseOrderPage';
 import ItemsDisplayPage from './pages/ItemsDisplayPage';
 import ItemPage from './pages/ItemPage';
 import MyAccountPage from './pages/MyAccountPage';
@@ -35,7 +35,7 @@ function App(props) {
   //
   const [sidebarDisplay, setSidebarDisplay] = useState(false);
   const customerLogin = useSelector((state) => state.customerLogin);
-  const { pptUserDetails } = customerLogin;
+  const { userDetails } = customerLogin;
   const dispatch = useDispatch();
   const signoutHandler = () => {
     dispatch(logout());
@@ -170,6 +170,7 @@ function App(props) {
                               <div>
                                 <button
                                   type="button"
+                                  className='primary'
                                   onClick={() => removeProductHandler(item.item)}
                                 >
                                   Delete
@@ -212,10 +213,10 @@ function App(props) {
                 </div>
             </div>
 
-            {pptUserDetails ? (
+            {userDetails ? (
               <div className="dropdown">
                 <Link to="#">
-                <i className="far fa-user icon-large"></i>{'  '}<i className="username">{ pptUserDetails.name }</i>
+                <i className="far fa-user icon-large"></i>{'  '}<i className="username">{ userDetails.name }</i>
                 </Link>
                 <ul className="dropdown-content">
                   <li>
@@ -235,7 +236,7 @@ function App(props) {
               <Link to="/signup"><i className="far fa-user icon-large"></i></Link>
             )}
 
-            {pptUserDetails && pptUserDetails.userCredentialsAdministrator && (
+            {userDetails && userDetails.userCredentialsAdministrator && (
               <div className="dropdown">
                 <Link to="#admin">
                 <i className="fas fa-user-shield icon-large"></i> {/*admin*/}
@@ -245,13 +246,13 @@ function App(props) {
                     <Link to="/dashboard">Dashboard</Link>
                   </li>
                   <li>
-                    <Link to="/productlist">PPT Items List</Link>
+                    <Link to="/displayItems">PPT Items List</Link>
                   </li>
                   <li>
                     <Link to="/orderlist">PPT Orders List</Link>
                   </li>
                   <li>
-                    <Link to="/userlist">PPT Users List</Link>
+                    <Link to="/customerdisplay">PPT Users List</Link>
                   </li>
                 </ul>
               </div>
@@ -372,21 +373,21 @@ function App(props) {
             component={MyAccountPage}
           ></PrivateRoute>
           <AdminRoute
-            path="/productlist"
+            path="/displayItems"
             component={ItemsDisplayPage}
             exact
           ></AdminRoute>
           <AdminRoute
-            path="/productlist/page_number/:page_number"
+            path="/displayItems/page_number/:page_number"
             component={ItemsDisplayPage}
             exact
           ></AdminRoute>
           <AdminRoute
             path="/orderlist"
-            component={PurchasesDisplayPage.js}
+            component={PurchasesDisplayPage}
             exact
           ></AdminRoute>
-          <AdminRoute path="/userlist" component={CustomersDisplayPage}></AdminRoute>
+          <AdminRoute path="/customerdisplay" component={CustomersDisplayPage}></AdminRoute>
           <AdminRoute
             path="/pptuser/:id/ammend"
             component={CustomerAmmendPage}

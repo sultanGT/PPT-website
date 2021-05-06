@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 
 
 
-//
-export default function Item(props) {
+// Reused code from Video tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29
+export default function Item(props) { //Reused edited code
   
-  const { item } = props;
-  const [viewItem, setViewItem] = useState(false);
+  const { item } = props; // Reused edited code
+  const [viewItem, setViewItem] = useState(false);  //self coded
 
-  //
+  // Returns all the item boxes with the information the items and a button overlay
   return (
-
   <div>
-    <div key={item._id} className="container-box-hc" onMouseEnter={() => setViewItem(true)}
-        onMouseLeave={() => setViewItem(false)}>
+    {/* selfcoded */}
+    <div key={item._id} 
+    className="container-box-hc" onMouseEnter={() => setViewItem(true)} 
+        onMouseLeave={() => setViewItem(false)}>  
       <Link to={`/item/${item._id}`}>
         <img className="medium" src={item.picture} alt={item.name} />
       </Link>

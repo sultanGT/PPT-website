@@ -29,11 +29,11 @@ export const newPurchase = (customer_order) => async (dispatch, getState) => { /
 dispatch({ type: PURCHASE_NEW_REQUEST, payload: customer_order }); // Reused, edited
   try {
     const {
-      customerLogin: { pptUserDetails }, // Reused, edited
+      customerLogin: { userDetails }, // Reused, edited
     } = getState();
     const { data } = await Axios.post('/api/pptpuchase', customer_order, { // Reused, edited
       headers: {
-        Authorization: `Bearer ${pptUserDetails.token}`, // Reused, edited
+        Authorization: `Bearer ${userDetails.token}`, // Reused, edited
       },
     });
 dispatch({ 
@@ -59,11 +59,11 @@ export const purchaseInfo = (purchaseId) => async (dispatch, getState) => { // R
 dispatch({ 
   type: PURCHASE_INFO_REQUEST, payload: purchaseId }); // Reused, edited
   const {
-    customerLogin: { pptUserDetails }, // Reused, edited
+    customerLogin: { userDetails }, // Reused, edited
   } = getState();
   try {
     const { data } = await Axios.get(`/api/pptpuchase/${purchaseId}`, { // Reused, edited
-      headers: { Authorization: `Bearer ${pptUserDetails.token}` }, // Reused, edited
+      headers: { Authorization: `Bearer ${userDetails.token}` }, // Reused, edited
     });
 dispatch({ 
   type: PURCHASE_INFO_COMPLETE, payload: data }); // Reused, edited
@@ -85,11 +85,11 @@ export const purchasePayPal = (customer_order, purchase_complete) => async ( // 
 dispatch({ 
   type: PURCHASE_PAYPAL_REQUEST, payload: { customer_order, purchase_complete } }); // Reused, edited
   const {
-    customerLogin: { pptUserDetails }, // Reused, edited
+    customerLogin: { userDetails }, // Reused, edited
   } = getState();
   try {
     const { data } = Axios.put(`/api/pptpuchase/${customer_order._id}/payment`, purchase_complete, { // Reused, edited
-      headers: { Authorization: `Bearer ${pptUserDetails.token}` }, // Reused, edited
+      headers: { Authorization: `Bearer ${userDetails.token}` }, // Reused, edited
     });
 dispatch({ type: PURCHASE_PAYPAL_COMPLETE, payload: data }); // Reused, edited
   } catch (error) {
@@ -107,12 +107,12 @@ export const accountHistory = () => async (dispatch, getState) => { // Reused, e
 dispatch({ 
   type: PURCHASE_ACCOUNT_HISTORY_REQUEST }); // Reused, edited
   const {
-  customerLogin: { pptUserDetails },// Reused, edited
+  customerLogin: { userDetails },// Reused, edited
   } = getState();
   try {
     const { data } = await Axios.get('/api/pptpuchase/myaccount', {// Reused, edited
       headers: {
-        Authorization: `Bearer ${pptUserDetails.token}`,// Reused, edited
+        Authorization: `Bearer ${userDetails.token}`,// Reused, edited
       },
     });
 dispatch({ 
@@ -133,11 +133,11 @@ export const puchasesHistory = () => async (dispatch, getState) => {
 dispatch({ 
   type: PURCHASE_HISTORY_REQUEST });// Reused, edited
   const {
-    customerLogin: { pptUserDetails },// Reused, edited
+    customerLogin: { userDetails },// Reused, edited
   } = getState();
   try {
     const { data } = await Axios.get('/api/pptpuchase', {// Reused, edited
-      headers: { Authorization: `Bearer ${pptUserDetails.token}` }
+      headers: { Authorization: `Bearer ${userDetails.token}` }
     });
 console.log(data);
 dispatch({ 
@@ -157,11 +157,11 @@ export const removePurchase = (purchaseId) => async (dispatch, getState) => {// 
 dispatch({ 
   type: PURCHASE_REMOVE_REQUEST, payload: purchaseId });// Reused, edited
   const {
-    customerLogin: { pptUserDetails },// Reused, edited
+    customerLogin: { userDetails },// Reused, edited
   } = getState();
   try {
     const { data } = Axios.delete(`/api/pptpuchase/${purchaseId}`, {// Reused, edited
-      headers: { Authorization: `Bearer ${pptUserDetails.token}` },// Reused, edited
+      headers: { Authorization: `Bearer ${userDetails.token}` },// Reused, edited
     });
 dispatch({ 
   type: PURCHASE_REMOVE_COMPLETE, payload: data });// Reused, edited
@@ -179,14 +179,14 @@ dispatch({
 export const shippingPurchase = (purchaseId) => async (dispatch, getState) => { // Reused, edited
   dispatch({ type: PURCHASE_SHIPPING_REQUEST, payload: purchaseId });// Reused, edited
   const {
-    customerLogin: { pptUserDetails },// Reused, edited
+    customerLogin: { userDetails },// Reused, edited
   } = getState();
   try {
     const { data } = Axios.put(
       `/api/pptpuchase/${purchaseId}/deliver`,// Reused, edited
       {},
       {
-        headers: { Authorization: `Bearer ${pptUserDetails.token}` },// Reused, edited
+        headers: { Authorization: `Bearer ${userDetails.token}` },// Reused, edited
       }
     );
     dispatch({ 

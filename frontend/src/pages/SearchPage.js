@@ -21,7 +21,7 @@ export default function SearchPage(props) {
   } = useParams();
   const dispatch = useDispatch();
   const displayProducts = useSelector((state) => state.displayProducts);
-  const { loading, error, PPTitems, pptpage, pages } = displayProducts;
+  const { loading, error, PPTitems, page, pages } = displayProducts;
 //
   const displayCategories = useSelector((state) => state.displayCategories);
   const {
@@ -64,7 +64,7 @@ export default function SearchPage(props) {
 
   //
   const getFilterUrl = (filter) => {
-    const filterPage = filter.pptpage || page_number;
+    const filterPage = filter.page || page_number;
     const filterCategory = filter.item_category || item_category;
     const filterBrand = filter.item_brand || item_brand;
     const filterName = filter.name || name;
@@ -221,9 +221,9 @@ export default function SearchPage(props) {
               <div className="row center pagination blackout">
                 {[...Array(pages).keys()].map((x) => (
                   <Link
-                    className={x + 1 === pptpage ? 'active' : ''}
+                    className={x + 1 === page ? 'active' : ''}
                     key={x + 1}
-                    to={getFilterUrl({ pptpage: x + 1 })}
+                    to={getFilterUrl({ page: x + 1 })}
                   >
                     {x + 1}
                   </Link>

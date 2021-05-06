@@ -79,6 +79,7 @@ export default function ShoppingPage(props) {
                   <div>
                     <button
                       type="button"
+                      className='primary'
                       onClick={() => removeProductHandler(item.item)}
                     >
                       Delete

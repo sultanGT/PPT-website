@@ -20,12 +20,12 @@ export default function PurchasesDisplayPage(props) {
 
   //
   const customerLogin = useSelector((state) => state.customerLogin);
-  const { pptUserDetails } = customerLogin;
+  const { userDetails } = customerLogin;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: PURCHASE_REMOVE_REFRESH });
-    dispatch(puchasesHistory( pptUserDetails._id ));
-  }, [dispatch, successRemove, pptUserDetails._id]);
+    dispatch(puchasesHistory( userDetails._id ));
+  }, [dispatch, successRemove, userDetails._id]);
 
   //
   const removeHandler = (customer_order) => {
@@ -82,7 +82,7 @@ export default function PurchasesDisplayPage(props) {
                   </button>
                   <button
                     type="button"
-                    className="small"
+                    className="small primary"
                     onClick={() => removeHandler(customer_order)}
                   >
                     Delete

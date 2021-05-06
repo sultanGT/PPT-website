@@ -1,6 +1,6 @@
 import React from 'react';
 
-//styling
+//Code used for security password from: https://github.com/cooljasonmelton/password-checklist/tree/master/src/components
 import './UpdatePasswordContainer.css';
 
 const MustContainItem = props => {
@@ -25,3 +25,4 @@ const MustContainItem = props => {
 }
 
 export default MustContainItem;
+
