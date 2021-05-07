@@ -1,36 +1,27 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'; //edited
 import { removePurchase, puchasesHistory } from '../actions/purchaseActions';
+import { PURCHASE_REMOVE_REFRESH } from '../constants/purchaseConstants'; //edited
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { PURCHASE_REMOVE_REFRESH } from '../constants/purchaseConstants';
 
-
-//
+//Reused code edited from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
+//function to show all purchases that have been made on the web app - only accessable by administrators
 export default function PurchasesHistoryPage(props) {
-  //
-  const displayPurchase = useSelector((state) => state.displayPurchase);
-  const { loading, error, ppt_orders } = displayPurchase;
-  const purchaseRemove = useSelector((state) => state.purchaseRemove);
-  const {
-    loading: loadingRemove,
-    error: errorRemove,
-    success: successRemove,
-  } = purchaseRemove;
-
-  //
-  const customerLogin = useSelector((state) => state.customerLogin);
-  const { userDetails } = customerLogin;
+  const displayPurchase = useSelector((state) => state.displayPurchase);//edited
+  const { loading, error, ppt_orders } = displayPurchase;//edited
+  const purchaseRemove = useSelector((state) => state.purchaseRemove);//edited
+  const {loading: loadingRemove,error: errorRemove,success: successRemove,} = purchaseRemove;//edited
+  const customerLogin = useSelector((state) => state.customerLogin);//edited
+  const { userDetails } = customerLogin;//edited
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({ type: PURCHASE_REMOVE_REFRESH });
-    dispatch(puchasesHistory( userDetails._id ));
-  }, [dispatch, successRemove, userDetails._id]);
-
-  //
-  const removeHandler = (customer_order) => {
-    if (window.confirm('Confirm removal of purchase')) {
-      dispatch(removePurchase(customer_order._id));
+    dispatch({ type: PURCHASE_REMOVE_REFRESH });//edited
+    dispatch(puchasesHistory( userDetails._id ));//edited
+  }, [dispatch, successRemove, userDetails._id]);//edited
+  const removeHandler = (customer_order) => {//edited
+    if (window.confirm('Confirm removal of purchase')) {//edited
+      dispatch(removePurchase(customer_order._id));//edited
     }
   };
 
@@ -40,11 +31,7 @@ export default function PurchasesHistoryPage(props) {
       <h1>Orders</h1>
       {loadingRemove && <LoadingBox></LoadingBox>}
       {errorRemove && <MessageBox variant="danger">{errorRemove}</MessageBox>}
-      {loading ? (
-        <LoadingBox></LoadingBox>
-      ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
-      ) : (
+      {loading ? (<LoadingBox></LoadingBox>) : error ? (<MessageBox variant="danger">{error}</MessageBox>) : (
         <table className="table">
           <thead>
             <tr>
@@ -58,33 +45,20 @@ export default function PurchasesHistoryPage(props) {
             </tr>
           </thead>
           <tbody>
-            {ppt_orders.map((customer_order) => (
-              <tr key={customer_order._id}>
-                <td>{customer_order._id}</td>
-                <td>{customer_order.pptuser.username}</td>
-                <td>{customer_order.createdAt.substring(0, 10)}</td>
-                <td>{customer_order.total_cost.toFixed(2)}</td>
-                <td>{customer_order.purchase_confirmed ? customer_order.purchase_date.substring(0, 10) : 'No'}</td>
-                <td>
-                  {customer_order.delivery_confirmed
-                    ? customer_order.delivery_date.substring(0, 10)
-                    : 'No'}
+            {ppt_orders.map((customer_order) => ( //map purchase infomation from customer purchases in table
+              <tr key={customer_order._id}>{/*edited*/}
+                <td>{customer_order._id}</td>{/*edited*/}
+                <td>{customer_order.pptuser.username}</td>{/*edited*/}
+                <td>{customer_order.createdAt.substring(0, 10)}</td>{/*edited*/}
+                <td>{customer_order.total_cost.toFixed(2)}</td>{/*edited*/}
+                <td>{customer_order.purchase_confirmed ? customer_order.purchase_date.substring(0, 10) : 'No'}</td>{/*edited*/}
+                <td>{customer_order.delivery_confirmed ? customer_order.delivery_date.substring(0, 10) : 'No'}{/*edited*/}
                 </td>
                 <td>
-                  <button
-                    type="button"
-                    className="small primary"
-                    onClick={() => {
-                      props.history.push(`/customer_order/${customer_order._id}`);
-                    }}
-                  >
+                  <button type="button" className="small primary" onClick={() => { props.history.push(`/customer_order/${customer_order._id}`);}}>{/*edited*/}
                     Details
                   </button>
-                  <button
-                    type="button"
-                    className="small primary"
-                    onClick={() => removeHandler(customer_order)}
-                  >
+                  <button type="button" className="small primary" onClick={() => removeHandler(customer_order)}>{/*edited*/}
                     Delete
                   </button>
                 </td>

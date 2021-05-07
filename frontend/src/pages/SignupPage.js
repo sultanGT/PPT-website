@@ -8,74 +8,52 @@ import PasswordSecurity from './PasswordSecurity';
 import GoogleLogin from 'react-google-login';
 
 
-//
+//Reused code edited from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
+//function for registering users on the PPT web app and signin for users
+//variable declarations 
 export default function SignupPage(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
-  const [password2, setPassword2] = useState("")
+  const [password3, setPassword3] = useState("")//selfcoded
+  const [password2, setPassword2] = useState("") //selfcoded
   const [confirmPassword, setConfirmPassword] = useState("")
-
-  
-
-  const redirect = props.location.search
-    ? props.location.search.split('=')[1]
-    : '/';
-
-  const userRegister = useSelector((state) => state.userRegister);
-  const { 
-    userDetails:  user1, 
-    loading: load1, 
-    error:  error1,
-
-  } = userRegister;
-
-  const customerLogin = useSelector((state) => state.customerLogin);
-  
-  const { 
-    userDetails:  user2, 
-    loading: load2, 
-    error: error2,
-   } = customerLogin;
-
+  const redirect = props.location.search ? props.location.search.split('=')[1]: '/';
+  const userRegister = useSelector((state) => state.userRegister);//edited
+  const { userDetails:  user1, loading: load1, error:  error1, } = userRegister;//edited
+  const customerLogin = useSelector((state) => state.customerLogin);//edited
+  const { userDetails:  user2, loading: load2, error: error2,} = customerLogin;//edited
   const dispatch = useDispatch();
-  
+
   const signuploginSubmitHandler = (e) => {
-    if (password2 !==  confirmPassword) {
+    if (password2 !==  confirmPassword) {//self coded
       alert('Password and confirm password are not matching');
-    } else {
-    e.preventDefault();
-    dispatch(signup(name, email, password2));
+    } else {e.preventDefault();
+    dispatch(signup(name, email, password2));//self coded
     }
   }
 
-  const loginSubmitHandler = (e) => {
-      e.preventDefault();
-      dispatch(login(email, password));
+  const loginSubmitHandler = (e) => { e.preventDefault();
+dispatch(login(email, password));
   };
 
   useEffect(() => {
-    if (user2 || user1) {
-      props.history.push(redirect);
-    }
-  }, [props.history, redirect, user2, user1]);
+    if (user2 || user1) {props.history.push(redirect);}}, [props.history, redirect, user2, user1]);
 
   //Validate Password code used from https://github.com/cooljasonmelton/password-checklist
 
-
-
   // booleans for password validations
-  const [containsLowercase, setContainsLowercase] = useState(false) // lowercase letter
-  const [containsUppercase, setContainsUppercase] = useState(false) // uppercase letter
-  const [containsNumber, setContainsNumber] = useState(false) // number
-  const [containsCharacter, setContainsCharacter] = useState(false) // special character
-  const [contains8Characters, setContains8Characters] = useState(false) // min 8 characters
+  const [containsLowercase, setContainsLowercase] = useState(false) // lowercase letter //edited
+  const [containsUppercase, setContainsUppercase] = useState(false) // uppercase letter //edited
+  const [containsNumber, setContainsNumber] = useState(false) // number //edited
+  const [containsCharacter, setContainsCharacter] = useState(false) // special character //edited
+  const [contains8Characters, setContains8Characters] = useState(false) // min 8 characters //edited
 
   // checks all validations are true
-  const [allValid, setAllValid] = useState(false)
+  const [allValid, setAllValid] = useState(false) //edited
 
   // labels and state boolean corresponding to each validation
-  const mustContainData = [
+  const mustContainData = [ //edited
     ["An uppercase letter (A-Z)", containsLowercase],
     ["A lowercase letter (a-z)", containsUppercase],
     ["A special character (!@#$...)", containsCharacter],
@@ -84,8 +62,8 @@ export default function SignupPage(props) {
   ]
 
   
-
-  const validatePassword = () => {
+  //Validate Password code used from https://github.com/cooljasonmelton/password-checklist
+  const validatePassword = () => { //edited
     // has uppercase letter
     if (password2.toLowerCase() !== password2) setContainsLowercase(true)
     else setContainsLowercase(false)
@@ -113,15 +91,14 @@ export default function SignupPage(props) {
 
   //google id
 
-
+//self coded
   const loginResponseGoogle = (response) => {
     
     setEmail(response.profileObj.email);
-    setPassword(response.profileObj.googleId);
-    dispatch(login(email, password));
+    setPassword3(response.profileObj.googleId);
+    dispatch(login(email, password3));
 
   }
-
 
   const signupResponseGoogle = (response) => {
     setName(response.profileObj.givenName);
@@ -131,14 +108,8 @@ export default function SignupPage(props) {
     dispatch(signup(name, email, password2));
   }
 
-
-
-  
   return (
-
-    
-    
-    <div className='row pager'>
+    <div className='row pager'> {/*styling self coded*/}
       <form autoComplete="username" className="form wide" onSubmit={loginSubmitHandler}>
       <div className='row center'>
           <h1>Sign In</h1> 
@@ -147,29 +118,18 @@ export default function SignupPage(props) {
         {error2 && <MessageBox variant="danger">{error2}</MessageBox>}
         <div className=''>
           <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter email"
-            autoComplete="username"
-            required
-            onChange={(e) => setEmail(e.target.value)}
+          <input type="email" id="email" placeholder="Enter email" autoComplete="username" required onChange={(e) => setEmail(e.target.value)} //edited
           ></input>
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter password"
-            autoComplete="username"
-            required
-            onChange={(e) => setPassword(e.target.value)}
+          <input type="password" id="password" placeholder="Enter password" autoComplete="username" required onChange={(e) => setPassword(e.target.value)} //edited
           ></input>
         </div>
         <div>
           <label />
         <div className='row google-form'>
+          {/* selfcoded*/}
         <GoogleLogin className='google-button'
           clientId="714794464338-1d4era4sfqk47117qvk53deeiujvu68h.apps.googleusercontent.com"
           buttonText="Login with Google"
@@ -182,10 +142,10 @@ export default function SignupPage(props) {
             Sign In
           </button>
         </div>
-        </div>
+        </div>   {/* selfcoded*/}
       </form>
 
-      <form autoComplete="new-password" className="form wide" onSubmit={signuploginSubmitHandler}>
+      <form autoComplete="new-password" className="form wide" onSubmit={signuploginSubmitHandler}>   {/* edited*/}
         <div className='row center'>
           <h1>Create Account</h1>
         </div>
@@ -193,55 +153,39 @@ export default function SignupPage(props) {
         {error1 && <MessageBox variant="danger">{error1}</MessageBox>}
         <div>
           <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            autoComplete="new-password"
-            placeholder="Enter name"
-            required
-            onChange={(e) => setName(e.target.value)}
+          <input type="text" id="name" autoComplete="new-password" placeholder="Enter name" required onChange={(e) => setName(e.target.value)}  //edited
           ></input>
         </div>
         <div>
           <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter email"
-            autoComplete="new-password"
-            required
-            onChange={(e) => setEmail(e.target.value)}
+          <input type="email" id="email" placeholder="Enter email" autoComplete="new-password" required onChange={(e) => setEmail(e.target.value)}  //edited
           ></input>
         </div>
+           {/* selfcoded*/}
         <div>
           <label htmlFor="password2">Password</label>
           <input
             type="password"
             id="password2"
-            value={password2}
-            autoComplete="new-password"
+            value={password2} autoComplete="new-password"
             onKeyUp={validatePassword}
             placeholder="Enter password"
             required
             onChange={(e) => setPassword2(e.target.value)}
           ></input>
         </div>
+           {/* edited*/}
         <div>
           <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            autoComplete="new-password"
-            placeholder="Enter confirm password"
-            onKeyUp={validatePassword}
+          <input type="password" id="confirmPassword" value={confirmPassword} autoComplete="new-password" placeholder="Enter confirm password" onKeyUp={validatePassword} //edited
             required
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={(e) => setConfirmPassword(e.target.value)}//edited
           ></input>
         </div>
         <div>
 
           <label />
+             {/* selfcoded*/}
         <div className='row google-form'>
         <GoogleLogin className='google-button'
           clientId="714794464338-1d4era4sfqk47117qvk53deeiujvu68h.apps.googleusercontent.com"
@@ -255,7 +199,7 @@ export default function SignupPage(props) {
             Sign up
           </button>
         </div>
-        </div>
+        </div>   {/* selfcoded*/}
         <div className='row center'>
                 <div>
               {mustContainData.map(data=> <PasswordSecurity data={data}/>)}
