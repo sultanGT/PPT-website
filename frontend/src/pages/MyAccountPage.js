@@ -1,60 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { customerInfo, ammendCustomerAccount } from '../actions/customerActions';
+import { customerInfo, ammendCustomerAccount } from '../actions/customerActions';//edited coded 
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { CUSTOMER_AMMEND_PROFILE_REFRESH } from '../constants/customerConstants';
+import { CUSTOMER_AMMEND_PROFILE_REFRESH } from '../constants/customerConstants'; //edited coded 
 import PasswordSecurity from './PasswordSecurity';
 
 
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
-export default function MyAccountPage() {
+export default function MyAccountPage() {//edited coded 
   const [name, setName] = useState(false);
   const [email, setEmail] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const customerLogin = useSelector((state) => state.customerLogin);
+  const customerLogin = useSelector((state) => state.customerLogin);//edited coded 
   const { userDetails } = customerLogin;
   const userInfo = useSelector((state) => state.userInfo);
-  const { loading, error, pptuser } = userInfo;
-  const userAmmendAccount = useSelector((state) => state.userAmmendAccount);
-  const userAmmendAccount2 = useSelector((state) => state.userAmmendAccount);
-
-  const {
-    success: successUpdate,
-    error: errorAmmend,
-    loading: loadingAmmend,
-  } = userAmmendAccount;
-
-  const {
-    success: successUpdate2,
-    error: errorAmmend2,
-    loading: loadingAmmend2,
-  } = userAmmendAccount2;
-
+  const { loading, error, pptuser } = userInfo;//edited coded 
+  const userAmmendAccount = useSelector((state) => state.userAmmendAccount);//edited coded 
+  const userAmmendAccount2 = useSelector((state) => state.userAmmendAccount);//edited coded 
+  const {success: successUpdate, error: errorAmmend, loading: loadingAmmend, } = userAmmendAccount;
+  const {success: successUpdate2, error: errorAmmend2, loading: loadingAmmend2, } = userAmmendAccount2;
   const dispatch = useDispatch();
+  
   useEffect(() => {
-    if (!pptuser) {
-      dispatch({ type: CUSTOMER_AMMEND_PROFILE_REFRESH });
-      dispatch(customerInfo(userDetails._id));
-    } else {
-      setName(pptuser.name);
-      setEmail(pptuser.email);
+    if (!pptuser) { dispatch({ type: CUSTOMER_AMMEND_PROFILE_REFRESH });//edited coded 
+      dispatch(customerInfo(userDetails._id));//edited coded 
+    } else { setName(pptuser.name);//edited coded 
+      setEmail(pptuser.email);//edited coded 
     }
-  }, [dispatch, userDetails._id, pptuser]);
+  }, [dispatch, userDetails._id, pptuser]);//edited coded 
 
-  const profileSubmitHandler = (e) => {
-      e.preventDefault();
-      dispatch(
-        ammendCustomerAccount({
-          customerId: pptuser._id,
-          name,
-          email,    
+  const profileSubmitHandler = (e) => {e.preventDefault();//edited coded 
+      dispatch(ammendCustomerAccount({customerId: pptuser._id, name, email,   //edited coded  
         })
       );
     };
 
-  const passwordSubmitHandler = (e) => {
+  const passwordSubmitHandler = (e) => {//edited coded 
     e.preventDefault();
     if (password !==  confirmPassword) {
       e.preventDefault();
@@ -62,8 +45,8 @@ export default function MyAccountPage() {
     } 
      else {
       dispatch(
-        ammendCustomerAccount({
-          customerId: pptuser._id,
+        ammendCustomerAccount({//edited coded 
+          customerId: pptuser._id,//edited coded 
           name,
           email,
           password,
@@ -76,8 +59,6 @@ export default function MyAccountPage() {
   
 
 //Validate Password code used from https://github.com/cooljasonmelton/password-checklist
-
-
 
   // booleans for password validations
   const [containsLowercase, setContainsLowercase] = useState(false) // lowercase letter
@@ -126,43 +107,27 @@ export default function MyAccountPage() {
 
   return (
     <div className='row pager'>
-      <form className="form wide" onSubmit={profileSubmitHandler}>
+      <form className="form wide" onSubmit={profileSubmitHandler}>{/*edited*/}
         <div className='row center'>
           <h1>My Account</h1>
         </div>
-        {loading ? (
-          <LoadingBox></LoadingBox>
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
+        {loading ? (<LoadingBox></LoadingBox>) : error ? (<MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <>
             {loadingAmmend && <LoadingBox></LoadingBox>}
-            {errorAmmend && (
-              <MessageBox variant="danger">{errorAmmend}</MessageBox>
+            {errorAmmend && (<MessageBox variant="danger">{errorAmmend}</MessageBox>
             )}
             {successUpdate && (
-              <MessageBox variant="success">
-                Profile Updated Successfully
-              </MessageBox>
+              <MessageBox variant="success">Profile Updated Successfully</MessageBox>//edited
             )}
-      <div>
+        <div>
               <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Enter name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+              <input id="name" type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
             <div>
               <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+              <input id="email" type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>
             <div>
@@ -176,45 +141,25 @@ export default function MyAccountPage() {
           </>
         )}
       </form>
-      <form className="form wide" onSubmit={passwordSubmitHandler}>
+      <form className="form wide" onSubmit={passwordSubmitHandler}>{/* self coded*/}
       <div className='row center'>
-          <h1>My Account Password</h1>
+          <h1>My Account Password</h1>{/*self coded*/}
         </div>
-        {loading ? (
-          <LoadingBox></LoadingBox>
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
+        {loading ? ( <LoadingBox></LoadingBox> ) : error ? ( <MessageBox variant="danger">{error}</MessageBox>) : (
           <>
             {loadingAmmend2 && <LoadingBox></LoadingBox>}
-            {errorAmmend2 && (
-              <MessageBox variant="danger">{errorAmmend2}</MessageBox>
-            )}
-            {successUpdate2 && (
-              <MessageBox variant="success">
-                Password Updated Successfully
-              </MessageBox>
-            )}
+            {errorAmmend2 && ( <MessageBox variant="danger">{errorAmmend2}</MessageBox>
+            )} {/*self coded*/}
+            {successUpdate2 && (<MessageBox variant="success"> Password Updated Successfully</MessageBox>
+            )} {/* self coded */}
             <div>
               <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onKeyUp={validatePassword}
-                placeholder="Enter password"
-                onChange={(e) => setPassword(e.target.value)}
-              ></input>
+              <input id="password"  type="password" value={password}  onKeyUp={validatePassword} placeholder="Enter password"qonChange={(e) => setPassword(e.target.value)}
+              ></input> {/* edited*/}
             </div>
             <div>
-              <label htmlFor="confirmPassword">confirm Password</label>
-              <input
-                id="confirmPassword"
-                type="password"
-                value={confirmPassword}
-                onKeyUp={validatePassword}
-                placeholder="Enter confirm password"
-                onChange={(e) => setConfirmPassword(e.target.value)}
+              <label htmlFor="confirmPassword">confirm Password</label> {/* edited*/}
+              <input id="confirmPassword"type="password" value={confirmPassword} onKeyUp={validatePassword} placeholder="Enter confirm password" onChange={(e) => setConfirmPassword(e.target.value)}
               ></input>
             </div>
                 <div>
@@ -227,7 +172,7 @@ export default function MyAccountPage() {
             </div>
           </>
         )}
-                <div className='row center'>
+                <div className='row center'>{/* edited*/}
                 <div>
                 {mustContainData.map(data=> <PasswordSecurity data={data}/>)}
               </div>

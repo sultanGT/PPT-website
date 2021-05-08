@@ -2,137 +2,104 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 import Item from '../ppt-templates/itemTemplate.js';
-import { userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
+import { userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js'; //edited
 
 
+//Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb
+const routeItem = express.Router(); //edited
 
-const routeItem = express.Router();
-
-// Function for displaying item details - selfcoded
-routeItem.get(
-  '/',
-  expressAsyncHandler(async (req, res) => {
-    const pageLength = 8;
+// Function for displaying item details 
+routeItem.get('/', expressAsyncHandler(async (req, res) => {
+    const pageLength = 8; 
     const page = Number(req.query.page_number) || 1;
     const name = req.query.name || '';
-    const item_category = req.query.item_category || '';
+    const item_category = req.query.item_category || '';//edited
     const item_brand = req.query.item_brand || ''; //self coded
     const customer_order = req.query.customer_order || '';
-    const minimum =
-      req.query.minimum && Number(req.query.minimum) !== 0 ? Number(req.query.minimum) : 0;
-    const maximum =
-      req.query.maximum && Number(req.query.maximum) !== 0 ? Number(req.query.maximum) : 0;
-    const user_rating =
-      req.query.user_rating && Number(req.query.user_rating) !== 0
-        ? Number(req.query.user_rating)
-        : 0;
+    const minimum = req.query.minimum && Number(req.query.minimum) !== 0 ? Number(req.query.minimum) : 0;
+    const maximum = req.query.maximum && Number(req.query.maximum) !== 0 ? Number(req.query.maximum) : 0;
+    const user_rating = req.query.user_rating && Number(req.query.user_rating) !== 0 ? Number(req.query.user_rating) : 0;
 // Search bar filters - reused copied
     const filter_item_names = name ? { name: { $regex: name, $options: 'i' } } : {};
     const filter_item_categories = item_category ? { item_category } : {};
     const filter_item_brands = item_brand ? { item_brand } : {}; //selfcoded
     const filter_item_cost = minimum && maximum ? { cost: { $gte: minimum, $lte: maximum } } : {};
     const filter_item_ratings = user_rating ? { user_rating: { $gte: user_rating } } : {};
-    const sortOrder =
-      customer_order === 'lowest'
-        ? { cost: 1 }
-        : customer_order === 'highest'
-        ? { cost: -1 }
-        : customer_order === 'toprated'
-        ? { user_rating: -1 }
-        : { _id: -1 };
+    const sortOrder = customer_order === 'lowest' ? { cost: 1 } : customer_order === 'highest' ? { cost: -1 }
+        : customer_order === 'toprated' ? { user_rating: -1 } : { _id: -1 };
 // Filter for counting PPTitems for filter results - reused copied
     const count = await Item.count({
       ...filter_item_names,
       ...filter_item_categories,
       ...filter_item_brands, //self coded
-      ...filter_item_cost,
+      ...filter_item_cost, //self coded
       ...filter_item_ratings,
-      
     });
 // Function for finding PPTitems by filtered option - reused copied
     const PPTitems = await Item.find({
       ...filter_item_names,
       ...filter_item_categories,
       ...filter_item_brands,  //self coded
-      ...filter_item_cost,
+      ...filter_item_cost,//self coded
       ...filter_item_ratings,
     })
-      .sort(sortOrder)
-      .skip(pageLength * (page - 1))
-      .limit(pageLength);
+      .sort(sortOrder).skip(pageLength * (page - 1)).limit(pageLength);
     res.send({ PPTitems, page, pages: Math.ceil(count / pageLength) });
   })
 );
 
-// Filter for counting PPTitems for filter results - reused copied
-routeItem.get(
-  '/item_categories',
-  expressAsyncHandler(async (req, res) => {
+// Filter for counting PPTitems for filter results - reused edited
+routeItem.get('/item_categories',expressAsyncHandler(async (req, res) => {
     const categories = await Item.find().distinct('item_category');
     res.send(categories);
   })
 );
 
-// Filter for counting PPTitems for filter results - reused copied
+// Filter for counting PPTitems for filter results - self coded
 routeItem.get(
   '/our_products',
-  expressAsyncHandler(async (req, res) => {
-    const our_products = await Item.find().distinct('item_brand', {"item_brand" : "Peak Performance"});
-    res.send(our_products);
+  expressAsyncHandler(async (req, res) => 
+  {
+  const our_products = await Item.find()
+  .distinct('item_brand', 
+  {"item_brand" : "Peak Performance"});
+  res.send(our_products);
   })
 );
 
-// Filter for counting PPTitems for filter results - reused copied
+// Filter for counting PPTitems for filter results - self coded
 routeItem.get( 
-  '/item_brands', 
-  expressAsyncHandler(async (req, res) => { 
-    const brands = await Item.find().distinct('item_brand'); 
-    res.send(brands);
-  }));
+'/item_brands', 
+expressAsyncHandler(async (req, res) => 
+{ 
+const brands = await Item.find()
+.distinct('item_brand'); 
+res.send(brands);
+}));
 
-// Function for initialising PPT PPTitems into the web application
+// Function for initialising PPT PPTitems into the web application //edited
 routeItem.get(
-  '/PPTitemlist',
-  expressAsyncHandler(async (req, res) => {
-    const PPTitems = data.PPTitems.map((item) => ({
-        ...item,
-        
-      }));
-      const ppt_products = await Item.insertMany(PPTitems);
-      res.send({ ppt_products });
+'/PPTitemlist',
+expressAsyncHandler(async (req, res) => {
+const PPTitems = data.PPTitems.map((item) => ({...item,
+}));
+const ppt_products = await Item.insertMany(PPTitems);
+res.send({ ppt_products });
 
   })
 );
 
-
-// routeItem.get(
-//   '/our_brands',
-//   expressAsyncHandler(async (req, res) => {
-//     const our_brands = await Item.find().distinct('item_brand', {"item_brand" : "Nike"});
-//     res.send(our_brands);
-//   })
-// );
-
-// Function for getting item by item id
-routeItem.get(
-  '/:id',
-  expressAsyncHandler(async (req, res) => {
-    const item = await Item.findById(req.params.id);
-    if (item) {
-      res.send(item);
-    } else {
-      res.status(404).send({ message: 'Item cannot be found on the PPT web application' });
+//find item by item id - edited
+routeItem.get('/:id',expressAsyncHandler(async (req, res) => {
+const item = await Item.findById(req.params.id);
+    if (item) {res.send(item);} else {es.status(404).send({ message: 'Item cannot be found on the PPT web application' });
     }
   })
 );
 
 // API for creating a new item in the PPT web app
-routeItem.post(
-  '/',
-  userCredentialsAuthenticated,
-  userCredentialsAdministrator,
-  expressAsyncHandler(async (req, res) => {
-    const item = new Item({
+routeItem.post('/',userCredentialsAuthenticated,userCredentialsAdministrator, expressAsyncHandler(async (req, res) => {
+const item = new Item({
       name: 'Example: Karate Suit... ' + Date.now(),
       picture: '/images/p1.jpg',
       cost: 0,
@@ -143,20 +110,17 @@ routeItem.post(
       review_count: 0,
       item_info: 'Example: This product is an excellent...',
     });
-    const new_item = await item.save();
-    res.send({ message: 'New PPT Item Has Now Been Created', item: new_item });
+  const new_item = await item.save();
+  res.send({ message: 'New PPT Item Has Now Been Created',
+  item: new_item });
   })
 );
 
-// API for updating PPT Items
-routeItem.put(
-  '/:id',
-  userCredentialsAuthenticated,
-  userCredentialsAdministrator,
-  expressAsyncHandler(async (req, res) => {
-    const itemId = req.params.id;
-    const item = await Item.findById(itemId);
-    if (item) {
+// API for updating PPT Items - edited code
+routeItem.put('/:id', userCredentialsAuthenticated, userCredentialsAdministrator, expressAsyncHandler(async (req, res) => {
+const itemId = req.params.id;
+const item = await Item.findById(itemId);
+if (item) {
       item.name = req.body.name;
       item.cost = req.body.cost;
       item.picture = req.body.picture;
@@ -165,36 +129,26 @@ routeItem.put(
       item.stock_number = req.body.stock_number;
       item.item_info = req.body.item_info;
       const item_ammended = await item.save();
-      res.send({ message: 'Item Has Now Been Updated On the PPT Web App', item: item_ammended });
-    } else {
+res.send({ message: 'Item Has Now Been Updated On the PPT Web App', item: item_ammended }); } else {
+res.status(404).send({ message: 'Item Cannot Be Found On The PPT Web App' });
+}
+})
+);
+
+// API for deleting PPT Items -- edited
+routeItem.delete( '/:id',userCredentialsAuthenticated,userCredentialsAdministrator, expressAsyncHandler(async (req, res) => {
+const item = await Item.findById(req.params.id);
+    if (item) {const removeItem = await item.remove();
+      res.send({ message: 'Item Has Now Been Deleted From The PPT Web App', item: removeItem }); } else {
       res.status(404).send({ message: 'Item Cannot Be Found On The PPT Web App' });
     }
   })
 );
 
-// API for deleting PPT Items
-routeItem.delete(
-  '/:id',
-  userCredentialsAuthenticated,
-  userCredentialsAdministrator,
-  expressAsyncHandler(async (req, res) => {
-    const item = await Item.findById(req.params.id);
-    if (item) {
-      const removeItem = await item.remove();
-      res.send({ message: 'Item Has Now Been Deleted From The PPT Web App', item: removeItem });
-    } else {
-      res.status(404).send({ message: 'Item Cannot Be Found On The PPT Web App' });
-    }
-  })
-);
-
-//API for user review and rating PPT Items
-routeItem.post(
-  '/:id/reviews',
-  userCredentialsAuthenticated,
-  expressAsyncHandler(async (req, res) => {
-    const itemId = req.params.id;
-    const item = await Item.findById(itemId);
+//API for user review and rating PPT Items - edited
+routeItem.post('/:id/reviews',userCredentialsAuthenticated,expressAsyncHandler(async (req, res) => {
+const itemId = req.params.id;
+const item = await Item.findById(itemId);
     if (item) {
       const review = {
         name: req.pptuser.name,
@@ -203,18 +157,14 @@ routeItem.post(
       };
       item.reviews.push(review);
       item.review_count = item.reviews.length;
-      item.user_rating =
-        item.reviews.reduce((a, c) => c.user_rating + a, 0) /
-        item.reviews.length;
+      item.user_rating = item.reviews.reduce((a, c) => c.user_rating + a, 0) / item.reviews.length;
       const item_ammended = await item.save();
       res.status(201).send({
         message: 'Item Review and Rating Has Now Been Published',
         review: item_ammended.reviews[item_ammended.reviews.length - 1],
       });
-    } else {
-      res.status(404).send({ message: 'Item Cannot Be Found On The PPT Web App' });
+    } else { res.status(404).send({ message: 'Item Cannot Be Found On The PPT Web App' });
     }
   })
 );
-
 export default routeItem;

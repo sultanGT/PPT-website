@@ -36,7 +36,7 @@ export default function ItemAmmendPage(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     if (successUpdate) {
-      props.history.push('/displayItems');//Reused edited
+      props.history.push('/iteminventory');//Reused edited
     }
     if (!item || item._id !== itemId || successUpdate) {//Reused edited
       dispatch({ type: ITEM_AMMEND_REFRESH });//Reused edited

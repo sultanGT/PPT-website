@@ -99,7 +99,7 @@ export default function ItemInventoryPage(props) {// Reused edited
           </table>
           <div className="row center pagination blackout">{/* Styling blackout self coded*/}
          {[...Array(pages).keys()].map((x) => (
-          <Link className={x + 1 === page ? 'active' : ''} key={x + 1} to={`/displayItems/page_number/${x + 1}`}>
+          <Link className={x + 1 === page ? 'active' : ''} key={x + 1} to={`/iteminventory/page_number/${x + 1}`}>
               {x + 1}
           </Link>
          ))}

@@ -1,39 +1,35 @@
 import {
-  SHOPPING_ADD_PRODUCT,
-  SHOPPING_NO_ITEMS,
   SHOPPING_REMOVE_PRODUCT,
   SHOPPING_PAYPAL,
   SHOPPING_DELIVERY_ADDRESS,
-} from '../constants/shoppingConstants';
+  SHOPPING_ADD_PRODUCT, 
+  SHOPPING_NO_ITEMS, 
+} from '../constants/shoppingConstants';//self coded
 
-export const cartReducer = (state = { shoppingItems: [] }, action) => {
+//Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
+//Redux reducers help display the state management of the web app with requests, errors and complete
+//edited
+export const cartReducer = (state = { shoppingItems: [] }, action) => {//edited 
   switch (action.type) {
-    case SHOPPING_ADD_PRODUCT:
+    case SHOPPING_ADD_PRODUCT://edited 
       const item = action.payload;
-      const existItem = state.shoppingItems.find((x) => x.item === item.item);
-      if (existItem) {
-        return {
-          ...state,
-          error: '',
-          shoppingItems: state.shoppingItems.map((x) =>
-            x.item === existItem.item ? item : x
-          ),
+      const existItem = state.shoppingItems.find((x) => x.item === item.item);//edited 
+      if (existItem) {//edited 
+        return {...state, error: '', shoppingItems: state.shoppingItems.map((x) =>//edited 
+            x.item === existItem.item ? item : x),//edited 
         };
       } else {
-        return { ...state, error: '', shoppingItems: [...state.shoppingItems, item] };
+        return { ...state, error: '', shoppingItems: [...state.shoppingItems, item] };//edited 
       }
-    case SHOPPING_REMOVE_PRODUCT:
-      return {
-        ...state,
-        error: '',
-        shoppingItems: state.shoppingItems.filter((x) => x.item !== action.payload),
+    case SHOPPING_REMOVE_PRODUCT://edited 
+      return {...state, error: '', shoppingItems: state.shoppingItems.filter((x) => x.item !== action.payload),//edited 
       };
-    case SHOPPING_DELIVERY_ADDRESS:
-      return { ...state, delivery_address: action.payload };
-    case SHOPPING_PAYPAL:
-      return { ...state, purchase_method: action.payload };
-    case SHOPPING_NO_ITEMS:
-      return { ...state, error: '', shoppingItems: [] };
+    case SHOPPING_DELIVERY_ADDRESS://edited 
+      return { ...state, delivery_address: action.payload };//edited 
+    case SHOPPING_PAYPAL://edited 
+      return { ...state, purchase_method: action.payload };//edited 
+    case SHOPPING_NO_ITEMS://edited 
+      return { ...state, error: '', shoppingItems: [] };//edited 
     default:
       return state;
   }

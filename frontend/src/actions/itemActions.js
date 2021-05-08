@@ -100,11 +100,11 @@ const { data } = await Axios.get(
 };
 
 //Function for displaying PPT items in sidemenu, searchbar and footer - // Self coded
-export const displayItemCosts = () => async (dispatch) => { // Reused, edited
-dispatch({ type: ITEM_OUR_PRODUCT_FILTER_REQUEST, }); // Reused, edited
+export const displayOurItems = () => async (dispatch) => { 
+dispatch({ type: ITEM_OUR_PRODUCT_FILTER_REQUEST, }); //
 try {
 const { data } = await Axios.get(
-  `/api/pptitems/our_products` // Reused, edited
+  `/api/pptitems/our_products` 
   );
     dispatch({ type: 
       ITEM_OUR_PRODUCT_FILTER_COMPLETE, // Reused, edited
