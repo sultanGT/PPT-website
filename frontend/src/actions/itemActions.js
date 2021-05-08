@@ -37,7 +37,7 @@ export const displayItems = ({
   item_category = '',
   item_brand = '', //Self coded
   our_products = '', //Self coded
-  customer_order = '',
+  customer_purchase = '',
   minimum = 0,
   maximum = 0,
   user_rating = 0,
@@ -47,7 +47,7 @@ export const displayItems = ({
   });
 try {
     const { data } = await Axios.get( //Self coded - item_brand - our_brand
-      `/api/pptitems?page_number=${page_number}&name=${name}&item_category=${item_category}&item_brand=${item_brand}&our_products=${our_products}&minimum=${minimum} &maximum=${maximum}&user_rating=${user_rating}&customer_order=${customer_order}`
+      `/api/pptitems?page_number=${page_number}&name=${name}&item_category=${item_category}&item_brand=${item_brand}&our_products=${our_products}&minimum=${minimum} &maximum=${maximum}&user_rating=${user_rating}&customer_purchase=${customer_purchase}`
     );
     dispatch({ 
       type: ITEM_HISTORY_COMPLETE, // Reused, edited

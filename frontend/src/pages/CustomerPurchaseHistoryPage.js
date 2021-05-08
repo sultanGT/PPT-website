@@ -27,19 +27,19 @@ export default function CustomerPurchaseHistoryPage(props) {
             </tr>
           </thead>
           <tbody>
-            {ppt_orders.map((customer_order) => (//Reused edited
-              <tr key={customer_order._id}> {/* reused edited*/}
-                <td>{customer_order._id}</td>{/* reused edited*/}
-                <td>{customer_order.createdAt.substring(0, 10)}</td>{/* reused edited*/}
-                <td>{customer_order.total_cost.toFixed(2)}</td>{/* reused edited*/}
-                <td>{customer_order.purchase_confirmed ? customer_order.purchase_date.substring(0, 10) : 'No'}</td>{/* reused edited*/}
-                <td>{customer_order.delivery_confirmed //reused edited
-                    ? customer_order.delivery_date.substring(0, 10) //reused edited
+            {ppt_orders.map((customer_purchase) => (//Reused edited
+              <tr key={customer_purchase._id}> {/* reused edited*/}
+                <td>{customer_purchase._id}</td>{/* reused edited*/}
+                <td>{customer_purchase.createdAt.substring(0, 10)}</td>{/* reused edited*/}
+                <td>{customer_purchase.total_cost.toFixed(2)}</td>{/* reused edited*/}
+                <td>{customer_purchase.purchase_confirmed ? customer_purchase.purchase_date.substring(0, 10) : 'No'}</td>{/* reused edited*/}
+                <td>{customer_purchase.delivery_confirmed //reused edited
+                    ? customer_purchase.delivery_date.substring(0, 10) //reused edited
                     : 'No'}
                 </td>
                 <td>
                   <button type="button" className="small primary" onClick={() => {  //primary styling selfcoded
-                      props.history.push(`/customer_order/${customer_order._id}`);}}>
+                      props.history.push(`/customer_purchase/${customer_purchase._id}`);}}>
                     Details
                   </button>
                 </td>

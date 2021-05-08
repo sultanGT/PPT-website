@@ -15,7 +15,7 @@ routeItem.get('/', expressAsyncHandler(async (req, res) => {
     const name = req.query.name || '';
     const item_category = req.query.item_category || '';//edited
     const item_brand = req.query.item_brand || ''; //self coded
-    const customer_order = req.query.customer_order || '';
+    const customer_purchase = req.query.customer_purchase || '';//edited
     const minimum = req.query.minimum && Number(req.query.minimum) !== 0 ? Number(req.query.minimum) : 0;
     const maximum = req.query.maximum && Number(req.query.maximum) !== 0 ? Number(req.query.maximum) : 0;
     const user_rating = req.query.user_rating && Number(req.query.user_rating) !== 0 ? Number(req.query.user_rating) : 0;
@@ -25,8 +25,8 @@ routeItem.get('/', expressAsyncHandler(async (req, res) => {
     const filter_item_brands = item_brand ? { item_brand } : {}; //selfcoded
     const filter_item_cost = minimum && maximum ? { cost: { $gte: minimum, $lte: maximum } } : {};
     const filter_item_ratings = user_rating ? { user_rating: { $gte: user_rating } } : {};
-    const sortOrder = customer_order === 'lowest' ? { cost: 1 } : customer_order === 'highest' ? { cost: -1 }
-        : customer_order === 'toprated' ? { user_rating: -1 } : { _id: -1 };
+    const sortOrder = customer_purchase === 'lowest' ? { cost: 1 } : customer_purchase === 'highest' ? { cost: -1 }
+        : customer_purchase === 'toprated' ? { user_rating: -1 } : { _id: -1 };
 // Filter for counting PPTitems for filter results - reused copied
     const count = await Item.count({
       ...filter_item_names,

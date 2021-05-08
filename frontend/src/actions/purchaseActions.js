@@ -25,20 +25,20 @@ import {
 
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb
 // function for a new customer purchase - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
-export const newPurchase = (customer_order) => async (dispatch, getState) => { // Reused, edited
-dispatch({ type: PURCHASE_NEW_REQUEST, payload: customer_order }); // Reused, edited
+export const newPurchase = (customer_purchase) => async (dispatch, getState) => { // Reused, edited
+dispatch({ type: PURCHASE_NEW_REQUEST, payload: customer_purchase }); // Reused, edited
   try {
     const {
       customerLogin: { userDetails }, // Reused, edited
     } = getState();
-    const { data } = await Axios.post('/api/pptpuchase', customer_order, { // Reused, edited
+    const { data } = await Axios.post('/api/pptpuchase', customer_purchase, { // Reused, edited
       headers: {
         Authorization: `Bearer ${userDetails.token}`, // Reused, edited
       },
     });
 dispatch({ 
       type: PURCHASE_NEW_COMPLETE, // Reused, edited
-      payload: data.customer_order }); // Reused, edited
+      payload: data.customer_purchase }); // Reused, edited
 dispatch({ 
       type: SHOPPING_NO_ITEMS // Reused, edited
     });
@@ -78,17 +78,17 @@ dispatch({ type: PURCHASE_INFO_ERROR, payload: message }); // Reused, edited
 };
 
 //Funcion to make payment with PayPal API and customer puchase info - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
-export const purchasePayPal = (customer_order, purchase_complete) => async ( // Reused, edited
+export const purchasePayPal = (customer_purchase, purchase_complete) => async ( // Reused, edited
   dispatch,
   getState
 ) => {
 dispatch({ 
-  type: PURCHASE_PAYPAL_REQUEST, payload: { customer_order, purchase_complete } }); // Reused, edited
+  type: PURCHASE_PAYPAL_REQUEST, payload: { customer_purchase, purchase_complete } }); // Reused, edited
   const {
     customerLogin: { userDetails }, // Reused, edited
   } = getState();
   try {
-    const { data } = Axios.put(`/api/pptpuchase/${customer_order._id}/payment`, purchase_complete, { // Reused, edited
+    const { data } = Axios.put(`/api/pptpuchase/${customer_purchase._id}/payment`, purchase_complete, { // Reused, edited
       headers: { Authorization: `Bearer ${userDetails.token}` }, // Reused, edited
     });
 dispatch({ type: PURCHASE_PAYPAL_COMPLETE, payload: data }); // Reused, edited

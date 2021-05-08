@@ -51,12 +51,12 @@ export const userCredentialsAdministrator = (req, res, next) => {
 //     domain: process.env.MAILGUN_DOMAIN,
 //   });
 
-export const orderCompletionEmail = (customer_order) => {
+export const orderCompletionEmail = (customer_purchase) => {
   return `<h1>Thanks for shopping with us</h1>
   <p>
-  Hi ${customer_order.pptuser.name},</p>
-  <p>We have finished processing your customer_order.</p>
-  <h2>[Order ${customer_order._id}] (${customer_order.createdAt.toString().substring(0, 10)})</h2>
+  Hi ${customer_purchase.pptuser.name},</p>
+  <p>We have finished processing your customer_purchase.</p>
+  <h2>[Order ${customer_purchase._id}] (${customer_purchase.createdAt.toString().substring(0, 10)})</h2>
   <table>
   <thead>
   <tr>
@@ -65,7 +65,7 @@ export const orderCompletionEmail = (customer_order) => {
   <td><strong align="right">Price</strong></td>
   </thead>
   <tbody>
-  ${customer_order.items_order
+  ${customer_purchase.items_order
     .map(
       (item) => `
     <tr>
@@ -80,25 +80,25 @@ export const orderCompletionEmail = (customer_order) => {
   <tfoot>
   <tr>
   <td colspan="2">Items Price:</td>
-  <td align="right"> $${customer_order.items_cost.toFixed(2)}</td>
+  <td align="right"> $${customer_purchase.items_cost.toFixed(2)}</td>
   </tr>
   <tr>
   <tr>
   <td colspan="2">Shipping Price:</td>
-  <td align="right"> $${customer_order.delivery_cost.toFixed(2)}</td>
+  <td align="right"> $${customer_purchase.delivery_cost.toFixed(2)}</td>
   </tr>
   <tr>
   <td colspan="2"><strong>Total Price:</strong></td>
-  <td align="right"><strong> $${customer_order.total_cost.toFixed(2)}</strong></td>
+  <td align="right"><strong> $${customer_purchase.total_cost.toFixed(2)}</strong></td>
   </tr>
   </table>
   <h2>Shipping address</h2>
   <p>
-  ${customer_order.delivery_address.fullName},<br/>
-  ${customer_order.delivery_address.address},<br/>
-  ${customer_order.delivery_address.city},<br/>
-  ${customer_order.delivery_address.county},<br/>
-  ${customer_order.delivery_address.post_code}<br/>
+  ${customer_purchase.delivery_address.fullName},<br/>
+  ${customer_purchase.delivery_address.address},<br/>
+  ${customer_purchase.delivery_address.city},<br/>
+  ${customer_purchase.delivery_address.county},<br/>
+  ${customer_purchase.delivery_address.post_code}<br/>
   </p>
   <hr/>
   <p>

@@ -32,7 +32,7 @@ import {
 export const purchaseNewReducer = (state = {}, action) => {
   switch (action.type) {
     case PURCHASE_NEW_REQUEST: return { loading: true };
-    case PURCHASE_NEW_COMPLETE:return { loading: false, success: true, customer_order: action.payload };
+    case PURCHASE_NEW_COMPLETE:return { loading: false, success: true, customer_purchase: action.payload };
     case PURCHASE_NEW_ERROR: return { loading: false, error: action.payload };
     case PURCHASE_NEW_REFRESH: return {};
     default: return state;
@@ -42,7 +42,7 @@ export const purchaseNewReducer = (state = {}, action) => {
 //edited
 export const purchaseInfoReducer = (state = { loading: true }, action) => {
   switch (action.type) { case PURCHASE_INFO_REQUEST: return { loading: true };
-    case PURCHASE_INFO_COMPLETE: return { loading: false, customer_order: action.payload };
+    case PURCHASE_INFO_COMPLETE: return { loading: false, customer_purchase: action.payload };
     case PURCHASE_INFO_ERROR: return { loading: false, error: action.payload };
     default: return state;
   }

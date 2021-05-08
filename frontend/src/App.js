@@ -299,7 +299,7 @@ function App(props) {
           <Route path="/signup" component={SignupPage}></Route>
           <Route path="/delivery" component={DeliveryAddressPage}></Route>
           <Route path="/orderpurchase" component={PlaceOrderPage}></Route>
-          <Route path="/customer_order/:id" component={PurchasePage}></Route>
+          <Route path="/customer_purchase/:id" component={PurchasePage}></Route>
           <Route path="/purchasehistory" component={CustomerPurchaseHistoryPage}></Route>
           <Route path="/search/name/:name?" component={SearchPage} exact ></Route>
           <Route path="/search/item_category/:item_category" component={SearchPage} exact></Route>
@@ -316,7 +316,7 @@ function App(props) {
             component={SearchPage}
             exact
           ></Route>{/*self coded 186*/}
-          <Route path="/search/item_category/:item_category/item_brand/:item_brand/name/:name/minimum/:minimum/maximum/:maximum/user_rating/:user_rating/customer_order/:customer_order/page_number/:page_number" component={SearchPage} exact></Route>
+          <Route path="/search/item_category/:item_category/item_brand/:item_brand/name/:name/minimum/:minimum/maximum/:maximum/user_rating/:user_rating/customer_purchase/:customer_purchase/page_number/:page_number" component={SearchPage} exact></Route>
           <PrivateRoute path="/credentials" component={MyAccountPage}></PrivateRoute>
           <AdminRoute path="/iteminventory" component={ItemInventoryPage} exact></AdminRoute>
           <AdminRoute path="/iteminventory/page_number/:page_number" component={ItemInventoryPage} exact></AdminRoute>

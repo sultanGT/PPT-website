@@ -11,7 +11,7 @@ import { prices } from '../utils';
 //function for search page and filters
 //variable declaations
 export default function SearchPage(props) {
-  const { name = 'all',item_category = 'all',item_brand = 'all', minimum = 0, maximum = 0, user_rating = 0,  customer_order = 'newest', page_number = 1,
+  const { name = 'all',item_category = 'all',item_brand = 'all', minimum = 0, maximum = 0, user_rating = 0,  customer_purchase = 'newest', page_number = 1,
 } = useParams();
   const dispatch = useDispatch();
   const displayProducts = useSelector((state) => state.displayProducts); //edited
@@ -51,10 +51,10 @@ export default function SearchPage(props) {
         minimum,
         maximum,
         user_rating,
-        customer_order,
+        customer_purchase,
       })
     );
-  }, [item_category, item_brand, dispatch, maximum, minimum, name, customer_order, user_rating, page_number]); //item_brand self coded
+  }, [item_category, item_brand, dispatch, maximum, minimum, name, customer_purchase, user_rating, page_number]); //item_brand self coded
 
   //variables for filtering react router pages URL's 
   const getFilterUrl = (filter) => {
@@ -63,10 +63,10 @@ export default function SearchPage(props) {
     const filterBrand = filter.item_brand || item_brand; //selfcoded
     const filterName = filter.name || name;
     const filterRating = filter.user_rating || user_rating;
-    const sortOrder = filter.customer_order || customer_order;
+    const sortOrder = filter.customer_purchase || customer_purchase;
     const filterMin = filter.minimum ? filter.minimum : filter.minimum === 0 ? 0 : minimum;
     const filterMax = filter.maximum ? filter.maximum : filter.maximum === 0 ? 0 : maximum;
-    return `/search/item_category/${filterCategory}/item_brand/${filterBrand}/name/${filterName}/minimum/${filterMin}/maximum/${filterMax}/user_rating/${filterRating}/customer_order/${sortOrder}/page_number/${filterPage}`;
+    return `/search/item_category/${filterCategory}/item_brand/${filterBrand}/name/${filterName}/minimum/${filterMin}/maximum/${filterMax}/user_rating/${filterRating}/customer_purchase/${sortOrder}/page_number/${filterPage}`;
   };
   return (
     <div>
@@ -74,7 +74,7 @@ export default function SearchPage(props) {
         <div>
           Sort by{' '}
           <select
-            value={customer_order} onChange={(e) => {props.history.push(getFilterUrl({ customer_order: e.target.value })); //edited
+            value={customer_purchase} onChange={(e) => {props.history.push(getFilterUrl({ customer_purchase: e.target.value })); //edited
             }}
           >
             <option value="newest">Newest Arrivals</option>

@@ -15,7 +15,7 @@ export default function PlaceOrderPage(props) {
   if (!shopping.purchase_method) {//edited
     props.history.push('/payment');}
   const newCustomerPurchase = useSelector((state) => state.newCustomerPurchase);//edited
-  const { loading, success, error, customer_order } = newCustomerPurchase;//edited
+  const { loading, success, error, customer_purchase } = newCustomerPurchase;//edited
   const decimalCost = (num) => Number(num.toFixed(2));
   shopping.items_cost = decimalCost(//edited
   shopping.shoppingItems.reduce((a, c) => a + c.quantity * c.cost, 0));//edited
@@ -27,10 +27,10 @@ export default function PlaceOrderPage(props) {
     dispatch(newPurchase({ ...shopping, items_order: shopping.shoppingItems }));//edited
   };
   useEffect(() => {
-    if (success) {  props.history.push(`/customer_order/${customer_order._id}`);//edited
+    if (success) {  props.history.push(`/customer_purchase/${customer_purchase._id}`);//edited
       dispatch({ type: PURCHASE_NEW_REFRESH });//edited
 }
-  }, [dispatch, customer_order, props.history, success]);
+  }, [dispatch, customer_purchase, props.history, success]);
 
   //
   return (

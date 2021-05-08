@@ -19,9 +19,9 @@ export default function PurchasesHistoryPage(props) {
     dispatch({ type: PURCHASE_REMOVE_REFRESH });//edited
     dispatch(puchasesHistory( userDetails._id ));//edited
   }, [dispatch, successRemove, userDetails._id]);//edited
-  const removeHandler = (customer_order) => {//edited
+  const removeHandler = (customer_purchase) => {//edited
     if (window.confirm('Confirm removal of purchase')) {//edited
-      dispatch(removePurchase(customer_order._id));//edited
+      dispatch(removePurchase(customer_purchase._id));//edited
     }
   };
 
@@ -45,20 +45,20 @@ export default function PurchasesHistoryPage(props) {
             </tr>
           </thead>
           <tbody>
-            {ppt_orders.map((customer_order) => ( //map purchase infomation from customer purchases in table
-              <tr key={customer_order._id}>{/*edited*/}
-                <td>{customer_order._id}</td>{/*edited*/}
-                <td>{customer_order.pptuser.username}</td>{/*edited*/}
-                <td>{customer_order.createdAt.substring(0, 10)}</td>{/*edited*/}
-                <td>{customer_order.total_cost.toFixed(2)}</td>{/*edited*/}
-                <td>{customer_order.purchase_confirmed ? customer_order.purchase_date.substring(0, 10) : 'No'}</td>{/*edited*/}
-                <td>{customer_order.delivery_confirmed ? customer_order.delivery_date.substring(0, 10) : 'No'}{/*edited*/}
+            {ppt_orders.map((customer_purchase) => ( //map purchase infomation from customer purchases in table
+              <tr key={customer_purchase._id}>{/*edited*/}
+                <td>{customer_purchase._id}</td>{/*edited*/}
+                <td>{customer_purchase.pptuser.username}</td>{/*edited*/}
+                <td>{customer_purchase.createdAt.substring(0, 10)}</td>{/*edited*/}
+                <td>{customer_purchase.total_cost.toFixed(2)}</td>{/*edited*/}
+                <td>{customer_purchase.purchase_confirmed ? customer_purchase.purchase_date.substring(0, 10) : 'No'}</td>{/*edited*/}
+                <td>{customer_purchase.delivery_confirmed ? customer_purchase.delivery_date.substring(0, 10) : 'No'}{/*edited*/}
                 </td>
                 <td>
-                  <button type="button" className="small primary" onClick={() => { props.history.push(`/customer_order/${customer_order._id}`);}}>{/*edited*/}
+                  <button type="button" className="small primary" onClick={() => { props.history.push(`/customer_purchase/${customer_purchase._id}`);}}>{/*edited*/}
                     Details
                   </button>
-                  <button type="button" className="small primary" onClick={() => removeHandler(customer_order)}>{/*edited*/}
+                  <button type="button" className="small primary" onClick={() => removeHandler(customer_purchase)}>{/*edited*/}
                     Delete
                   </button>
                 </td>
