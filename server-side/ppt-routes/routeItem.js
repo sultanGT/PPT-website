@@ -43,7 +43,9 @@ routeItem.get('/', expressAsyncHandler(async (req, res) => {
       ...filter_item_cost,//self coded
       ...filter_item_ratings,
     })
-      .sort(sortOrder).skip(pageLength * (page - 1)).limit(pageLength);
+      .sort(sortOrder)
+      .skip(pageLength * (page - 1))
+      .limit(pageLength);
     res.send({ PPTitems, page, pages: Math.ceil(count / pageLength) });
   })
 );

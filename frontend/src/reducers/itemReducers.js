@@ -97,7 +97,7 @@ export const itemListReducer = (//edited
   state = { loading: true, PPTitems: [] }, action
 ) => {
   switch (action.type) { case ITEM_HISTORY_REQUEST: return { loading: true };
-    case ITEM_HISTORY_COMPLETE: return { loading: false, PPTitems: action.payload.PPTitems,pages: action.payload.pages,page: action.payload.page,};
+    case ITEM_HISTORY_COMPLETE: return { loading: false, PPTitems: action.payload.PPTitems, pages: action.payload.pages, page: action.payload.page};
     case ITEM_HISTORY_ERROR: return { loading: false, error: action.payload };
     default:return state;
   }
