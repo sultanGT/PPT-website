@@ -38,11 +38,7 @@ export default function ItemPage(props) {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    if (user_comment && user_rating) {
-    dispatch(
-      newReview(itemId, { user_rating, 
-        user_comment, 
-        name: userDetails.name }) //Reused edited
+    if (user_comment && user_rating) {dispatch(newReview(itemId, { user_rating, user_comment, name: userDetails.name }) //Reused edited
       );
     } else {
       alert('Please enter a review of the item and rating');//Reused edited

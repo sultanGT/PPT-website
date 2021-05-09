@@ -9,7 +9,7 @@ import GoogleLogin from 'react-google-login';
 
 
 //Reused code edited from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
-//function for registering users on the PPT web app and signin for users
+//function for registering users on the PPT web app and signin for users 
 //variable declarations 
 export default function SignupPage(props) {
   const [name, setName] = useState("");
@@ -118,12 +118,12 @@ dispatch(login(email, password));
         {error2 && <MessageBox variant="danger">{error2}</MessageBox>}
         <div className=''>
           <label htmlFor="email">Email address</label>
-          <input type="email" id="email" placeholder="Enter email" autoComplete="username" required onChange={(e) => setEmail(e.target.value)} //edited
+          <input type="email" id="email" placeholder="Enter email" autoComplete="username" required onChange={(e) => setEmail(e.target.value)} 
           ></input>
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" placeholder="Enter password" autoComplete="username" required onChange={(e) => setPassword(e.target.value)} //edited
+          <input type="password" id="password" placeholder="Enter password" autoComplete="username" required onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
         <div>
@@ -153,12 +153,12 @@ dispatch(login(email, password));
         {error1 && <MessageBox variant="danger">{error1}</MessageBox>}
         <div>
           <label htmlFor="name">Name</label>
-          <input type="text" id="name" autoComplete="new-password" placeholder="Enter name" required onChange={(e) => setName(e.target.value)}  //edited
+          <input type="text" id="name" autoComplete="new-password" placeholder="Enter name" required onChange={(e) => setName(e.target.value)} 
           ></input>
         </div>
         <div>
           <label htmlFor="email">Email address</label>
-          <input type="email" id="email" placeholder="Enter email" autoComplete="new-password" required onChange={(e) => setEmail(e.target.value)}  //edited
+          <input type="email" id="email" placeholder="Enter email" autoComplete="new-password" required onChange={(e) => setEmail(e.target.value)}  
           ></input>
         </div>
            {/* selfcoded*/}

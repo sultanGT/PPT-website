@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; 
-
-
-
-// Reused code from Video tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29
-export default function Item(props) { //Reused edited code
-  
-  const { item } = props; // Reused edited code
+//self coded
+export default function Item(props) { 
+  const { item } = props; 
   const [viewItem, setViewItem] = useState(false);  //self coded
-
-  // Returns all the item boxes with the information the items and a button overlay
+  // Returns all the item boxes with the information of the items and a button overlay link to product page
   return (
   <div>
     {/* selfcoded */}

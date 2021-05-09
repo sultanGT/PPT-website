@@ -1,6 +1,5 @@
 import React from 'react';
-
-// Reused code from Video tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29
+// Reused code from Video tutorials - https://github.com/basir/amazona/blob/master/frontend/src/components/CheckoutSteps.js, https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29
 export default function PurchaseProgress(props) { //resued edited code
   return (
     <div className="row purchase-progress">   {/* reused edited code */}

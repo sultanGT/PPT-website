@@ -1,4 +1,4 @@
-//self coded
+//self coded constants
 export const PURCHASE_NEW_REQUEST = 'PURCHASE_NEW_REQUEST';
 export const PURCHASE_NEW_COMPLETE = 'PURCHASE_NEW_COMPLETE';
 export const PURCHASE_NEW_ERROR = 'PURCHASE_NEW_ERROR';

@@ -1,11 +1,12 @@
 import React from 'react';
+import { CUSTOMER_AMMEND_REFRESH } from '../constants/customerConstants'; 
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { customerInfo, ammendCustomer } from '../actions/customerActions'; //Reused edited
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { CUSTOMER_AMMEND_REFRESH } from '../constants/customerConstants'; 
+
 
 // Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
 //Reused edited
@@ -47,43 +48,23 @@ export default function CustomerAmmendPage(props) {
         <div>
           <h1>Edit User {name}</h1>
           {loadingAmmend && <LoadingBox></LoadingBox>}     {/* edited coded */}
-          {errorAmmend && ( //edited code
-            <MessageBox variant="danger">{errorAmmend}</MessageBox>
-          )}
+          {errorAmmend && (<MessageBox variant="danger">{errorAmmend}</MessageBox>)} {/* //edited code */}
         </div>
-        {loading ? (
-          <LoadingBox />
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
+        {loading ? (<LoadingBox />) : error ? (<MessageBox variant="danger">{error}</MessageBox>) : (
           <>
             <div>
               <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Enter name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+              <input id="name" type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
             <div>
               <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+              <input id="email" type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}
               ></input>
-            </div>
+            </div> 
             <div>
               <label htmlFor="userCredentialsAdministrator">Set User As Admnistrator</label>  {/* edited coded */}
-              <input
-                id="userCredentialsAdministrator" //edited
-                type="checkbox"
-                checked={userCredentialsAdministrator} //edited
-                onChange={(e) => setCredentialsAdministrator(e.target.checked)} //edited
+              <input id="userCredentialsAdministrator" type="checkbox" checked={userCredentialsAdministrator} onChange={(e) => setCredentialsAdministrator(e.target.checked)} //edited
               ></input>
             </div>
             <div>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { customerInfo, ammendCustomerAccount } from '../actions/customerActions';//edited coded 
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import { CUSTOMER_AMMEND_PROFILE_REFRESH } from '../constants/customerConstants'; //edited coded 
+import { CUSTOMER_AMMEND_ACCOUNT_REFRESH } from '../constants/customerConstants'; //edited coded 
 import PasswordSecurity from './PasswordSecurity';
 
 
@@ -24,7 +24,7 @@ export default function MyAccountPage() {//edited coded
   const dispatch = useDispatch();
   
   useEffect(() => {
-    if (!pptuser) { dispatch({ type: CUSTOMER_AMMEND_PROFILE_REFRESH });//edited coded 
+    if (!pptuser) { dispatch({ type: CUSTOMER_AMMEND_ACCOUNT_REFRESH });//edited coded 
       dispatch(customerInfo(userDetails._id));//edited coded 
     } else { setName(pptuser.name);//edited coded 
       setEmail(pptuser.email);//edited coded 
@@ -47,9 +47,7 @@ export default function MyAccountPage() {//edited coded
       dispatch(
         ammendCustomerAccount({//edited coded 
           customerId: pptuser._id,//edited coded 
-          name,
-          email,
-          password,
+          name,email,password,
      
         })
       );
@@ -133,9 +131,7 @@ export default function MyAccountPage() {//edited coded
             <div>
               <label />
               <div className='row center'>
-              <button className="primary half" type="submit">
-                Update Profile
-              </button>
+              <button className="primary half" type="submit">Update Profile</button>
               </div>
             </div>
           </>
@@ -154,7 +150,7 @@ export default function MyAccountPage() {//edited coded
             )} {/* self coded */}
             <div>
               <label htmlFor="password">Password</label>
-              <input id="password"  type="password" value={password}  onKeyUp={validatePassword} placeholder="Enter password"qonChange={(e) => setPassword(e.target.value)}
+              <input id="password"  type="password" value={password}  onKeyUp={validatePassword} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)}
               ></input> {/* edited*/}
             </div>
             <div>
@@ -165,9 +161,7 @@ export default function MyAccountPage() {//edited coded
                 <div>
               <label />
               <div className='row center'>
-              <button className="primary half" type="submit" disabled={!allValid}>
-                Update Password
-              </button>
+              <button className="primary half" type="submit" disabled={!allValid}>Update Password </button>
               </div>
             </div>
           </>

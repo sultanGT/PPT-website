@@ -10,7 +10,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { ITEM_CREATE_REFRESH, ITEM_REMOVE_REFRESH,// Reused edited
 } from '../constants/itemConstants';
-
+//https://github.com/basir/amazona/blob/master/frontend/src/screens/ProductListScreen.js
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
 export default function ItemInventoryPage(props) {// Reused edited
   const { page_number = 2 } = useParams();
@@ -28,20 +28,12 @@ export default function ItemInventoryPage(props) {// Reused edited
       dispatch({ type: ITEM_CREATE_REFRESH });// Reused edited
       props.history.push(`/item/${new_item._id}/ammend`);// Reused edited
     }
-    if (successRemove) {
-      dispatch({ type: ITEM_REMOVE_REFRESH });// Reused edited
+    if (successRemove) { dispatch({ type: ITEM_REMOVE_REFRESH });
     }
-    dispatch(
-      displayItems(userDetails._id, page_number)// Reused edited
+    dispatch(displayItems(userDetails._id, page_number)
     );
   }, [
-    new_item,// Reused edited
-    dispatch,
-    props.history,
-    successNew,// Reused edited
-    successRemove,// Reused edited
-    userDetails._id,// Reused edited
-    page_number,
+    new_item,dispatch,props.history,successNew,successRemove,userDetails._id,page_number,// Reused edited
   ]);
 
   const removeHandler = (item) => {// Reused edited

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addShoppingItem, deleteShoppingItem } from '../actions/shoppingActions';
 import MessageBox from '../components/MessageBox';
-
+//https://github.com/basir/amazona/blob/master/frontend/src/screens/CartScreen.js
 //Reused code edited from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
 //Function for disolaying shopping page with items in cart - can also be seen from top navigation bar
 export default function ShoppingPage(props) { //edited

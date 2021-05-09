@@ -5,7 +5,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { CUSTOMER_INFO_REFRESH } from '../constants/customerConstants'; //edited
 
-// Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
+// Reused code from tutorials - https://github.com/basir/amazona/blob/master/frontend/src/screens/UserListScreen.js, https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
 //Reused edited
 export default function CustomersRegisterPage(props) {//edited
   const userList = useSelector((state) => state.userList); //edited
@@ -24,7 +24,7 @@ export default function CustomersRegisterPage(props) {//edited
       dispatch(removeCustomer(pptuser._id)); //edited
     }
   };
-  //Displays Customers registered on PPT web application https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
+  //Displays Customers registered on PPT web application
   return (
     <div className="pager"> {/*self coded*/}
       <h1>Users</h1>
@@ -49,25 +49,17 @@ export default function CustomersRegisterPage(props) {//edited
             </tr>
           </thead>
           <tbody>
-            {pptusers.map((pptuser) => (  //edited
-              <tr key={pptuser._id}>  
+            {pptusers.map((pptuser) => (  
+              <tr key={pptuser._id}>
                 <td>{pptuser._id}</td>
                 <td>{pptuser.name}</td>
                 <td>{pptuser.email}</td>
                 <td>{pptuser.userCredentialsAdministrator ? 'YES' : 'NO'}</td>  {/*edited*/}
                 <td>
-                  <button
-                    type="button"
-                    className="small primary" //styling self coded
-                    onClick={() => props.history.push(`/pptuser/${pptuser._id}/ammend`)} //edited
-                  >
+                  <button type="button" className="small primary" onClick={() => props.history.push(`/pptuser/${pptuser._id}/ammend`)}>{/* styling self coded */}
                     Edit
                   </button>
-                  <button
-                    type="button"
-                    className="small primary" // styling self voded
-                    onClick={() => removeHandler(pptuser)}
-                  >
+                  <button type="button" className="small primary" onClick={() => removeHandler(pptuser)}>{/* styling self coded */}
                     remove
                   </button>
                 </td>

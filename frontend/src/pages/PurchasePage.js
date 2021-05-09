@@ -111,13 +111,11 @@ export default function PurchasePage(props) {//Reused code edited
                   {customer_purchase.items_order.map((item) => ( //edited
                     <li key={item.item}>{/*edited*/}
                       <div className="row">
-                        <div>
-                          <img src={item.picture} alt={item.name} className="small"></img>
-                        </div>
+                        <div><img src={item.picture} alt={item.name} className="small"></img></div>
                         <div className="min-30">
                           <Link to={`/item/${item.item}`}>{item.name}</Link>{/*edited*/}
                         </div>
-                        <div>{item.quantity} x ${item.cost} = ${item.quantity * item.cost}</div>{/*edited*/}</div>
+                        <div>{item.quantity} x £{item.cost} = £{item.quantity * item.cost}</div>{/*edited*/}</div>
                     </li>
                   ))}
                 </ul>
@@ -132,13 +130,15 @@ export default function PurchasePage(props) {//Reused code edited
               <li>
                 <div className="row">
                   <div>Items</div>
-                  <div>£{customer_purchase.items_cost.toFixed(2)}</div>{/* sedited */}
+                  <div>£{customer_purchase
+                  .items_cost.toFixed(2)}</div>{/* sedited */}
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Shipping</div>
-                  <div>£{customer_purchase.delivery_cost.toFixed(2)}</div>{/* sedited */}
+                  <div>£{customer_purchase
+                  .delivery_cost.toFixed(2)}</div>{/* sedited */}
                 </div>
               </li>
               <li>

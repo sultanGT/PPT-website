@@ -7,9 +7,9 @@ import { PURCHASE_NEW_REFRESH } from '../constants/purchaseConstants'; //edited
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
-
+//https://github.com/basir/amazona/blob/master/frontend/src/screens/PlaceOrderScreen.js
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
-export default function PlaceOrderPage(props) {
+export default function PlacePurchasePage(props) {
 
   const shopping = useSelector((state) => state.shopping);
   if (!shopping.purchase_method) {//edited
@@ -89,28 +89,22 @@ export default function PlaceOrderPage(props) {
                 <h2>Order Summary</h2>
               </li>
               <li>
-                <div className="row">
-                  <div>Items</div>
-                  <div>£{shopping.items_cost.toFixed(2)}</div>{/* edited*/}
+                <div className="row"><div>Items</div><div>£{shopping.items_cost.toFixed(2)}</div>{/* edited*/}
+                </div>
+              </li>
+              <li>
+                <div className="row"><div>Shipping</div><div>£{shopping.delivery_cost.toFixed(2)}</div>{/* edited*/}
                 </div>
               </li>
               <li>
                 <div className="row">
-                  <div>Shipping</div>
-                  <div>£{shopping.delivery_cost.toFixed(2)}</div>{/* edited*/}
+                  <div><strong> Order Total</strong></div><div><strong>£{shopping.total_cost.toFixed(2)}</strong>{/* edited*/}</div>
                 </div>
               </li>
               <li>
-                <div className="row">
-                  <div><strong> Order Total</strong></div>
-                  <div><strong>£{shopping.total_cost.toFixed(2)}</strong>{/* edited*/}</div>
-                </div>
-              </li>
-              <li>
-                <button type="button" onClick={placePurchaseHandler}  className="primary block" //{/*Styling self coded */}
-                  disabled={shopping.shoppingItems.length === 0}>{/* edited*/}
+                <button type="button" onClick={placePurchaseHandler}  className="primary block"disabled={shopping.shoppingItems.length === 0}>{/* edited*/}
                   Place Order
-                </button>
+                </button> {/*Styling self coded */}
               </li>
               {loading && <LoadingBox></LoadingBox>}
               {error && <MessageBox variant="danger">{error}</MessageBox>}

@@ -146,7 +146,7 @@ const data = {
             item_info: 'Light, WTF approved head guard, perfect for Tae Kwon Do training sessions.'
         },
         {
-            name: 'Peak Performance Head Guards',
+            name: 'Peak Performance Head Guards XL',
             item_category: 'Head Guards',
             picture: '/images/p8.jpg',
             cost:49,

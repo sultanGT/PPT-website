@@ -55,16 +55,8 @@ export default function ItemAmmendPage(props) {
     e.preventDefault();
     // TODO: dispatch update item
     dispatch(
-      ammendItem({//Reused edited
-        _id: itemId,//Reused edited
-        name,
-        cost,//Reused edited
-        picture,//Reused edited
-        item_category,
-        item_brand,
-        stock_number,//Reused edited
-        item_info,//Reused edited
-      })
+      ammendItem({
+        _id: itemId,name,cost,picture,item_category,item_brand,stock_number,item_info,})
     );
   };
   const [loadingUpload, setLoadingUpload] = useState(false);
@@ -80,8 +72,7 @@ export default function ItemAmmendPage(props) {
     try {
       const { data } = await Axios.post('/api/saver', bodyFormData, {//Reused edited
         headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${userDetails.token}`,
+          'Content-Type': 'multipart/form-data', Authorization: `Bearer ${userDetails.token}`,
         },
       });
       setPicture(data);
@@ -108,86 +99,44 @@ export default function ItemAmmendPage(props) {
           <>
             <div>
               <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Enter name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+              <input id="name" type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
             <div>
               <label htmlFor="cost">Price</label>
-              <input
-                id="cost"
-                type="text"
-                placeholder="Enter cost"
-                value={cost}
-                onChange={(e) => setPrice(e.target.value)}
+              <input id="cost" type="text" placeholder="Enter cost" value={cost} onChange={(e) => setPrice(e.target.value)}
               ></input>
             </div>
             <div>
             <label htmlFor="picture">Image</label>
-              <input
-                id="picture"
-                type="text"
-                placeholder="Enter picture"
-                value={picture}
-                onChange={(e) => setPicture(e.target.value)}
+              <input id="picture" type="text" placeholder="Enter picture" value={picture} onChange={(e) => setPicture(e.target.value)}
               ></input>
             </div>
             <div>
               <label htmlFor="imageFile">Image File</label>
-              <input
-                type="file"
-                id="imageFile"
-                label="Choose Picture"
-                onChange={pictureUploadHandler}
+              <input type="file" id="imageFile" label="Choose Picture" onChange={pictureUploadHandler}
               ></input>
               {loadingUpload && <LoadingBox></LoadingBox>}
-              {errorUpload && (
-                <MessageBox variant="danger">{errorUpload}</MessageBox>
-              )}
+              {errorUpload && (<MessageBox variant="danger">{errorUpload}</MessageBox>)}
             </div>
             <div>
             <label htmlFor="item_category">Category</label>
-              <input
-                id="item_category"
-                type="text"
-                placeholder="Enter item category"
-                value={item_category}
-                onChange={(e) => setCategory(e.target.value)}
+              <input id="item_category" type="text" placeholder="Enter item category" value={item_category} onChange={(e) => setCategory(e.target.value)}
               ></input>
             </div>
             <div>
               <label htmlFor="item_brand">Brand</label>
-              <input
-                id="item_brand"
-                type="text"
-                placeholder="Enter brand"
-                value={item_brand}
-                onChange={(e) => setproduct_brand(e.target.value)}
+              <input id="item_brand" type="text" placeholder="Enter brand" value={item_brand} onChange={(e) => setproduct_brand(e.target.value)}
               ></input>
             </div>
             <div>
               <label htmlFor="stock_number">Stock Count</label>  {/* edited */}
-              <input
-                id="stock_number" 
-                type="text"
-                placeholder="Enter stock amount"  
-                value={stock_number}  
-                onChange={(e) => setstock_count(e.target.value)} 
+              <input id="stock_number"  type="text" placeholder="Enter stock amount"   value={stock_number}  onChange={(e) => setstock_count(e.target.value)} 
               ></input>
             </div>
             <div>
             <label htmlFor="item_info">Description</label>
-              <textarea
-                id="item_info"
-                rows="3"
-                type="text"
-                placeholder="Enter item description"
-                value={item_info}
-                onChange={(e) => setInfo(e.target.value)}
+              <textarea id="item_info" rows="3" type="text" placeholder="Enter item description" value={item_info} onChange={(e) => setInfo(e.target.value)}
               ></textarea>
             </div>
             <div>

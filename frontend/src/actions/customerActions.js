@@ -21,24 +21,22 @@ import {
   CUSTOMER_AMMEND_ACCOUNT_ERROR,
   CUSTOMER_AMMEND_ACCOUNT_REQUEST,
   CUSTOMER_AMMEND_ACCOUNT_COMPLETE,
-} from '../constants/customerConstants'; //Self coded
+} from '../constants/customerConstants'; //Constants Self coded
 
+// https://github.com/basir/amazona/blob/master/frontend/src/actions/userActions.js
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb
 //Function for customer to signup on the PPT web app - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
-export const signup = ( // Reused, edited
-  name, 
-  email, 
-  password) => async (dispatch) => {
+export const signup = ( name, email, password) => async (dispatch) => {//edited
 
 dispatch({ 
   type: CUSTOMER_SIGNUP_REQUEST, // Reused, edited
   payload: { email, password } });
 try {const { data } = await Axios.post('/api/pptusers/signup', {name, email, password,}); // Reused, edited
-
+//dispatches signup if user details is entered correctly
 dispatch({ 
   type: CUSTOMER_SIGNUP_COMPLETE, // Reused, edited
   payload: data });
-
+//dispatches login if user details is correct
 dispatch({ 
   type: CUSTOMER_LOGIN_COMPLETE, // Reused, edited
   payload: data });
@@ -46,13 +44,10 @@ dispatch({
 localStorage.setItem('userDetails', JSON.stringify(data)); // Reused, edited
 
 } catch (error) {
-
+//dispatches error if user sign up fails
 dispatch({
   type: CUSTOMER_SIGNUP_ERROR,  // Reused, edited
-  payload: error.response 
-  && error.response.data.message 
-  ? error.response.data.message 
-  : error.message,});
+  payload: error.response && error.response.data.message ? error.response.data.message : error.message,});
 }};
 
 //Function for customer to signip on the PPT web app - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
@@ -68,11 +63,7 @@ localStorage.setItem('userDetails', JSON.stringify(data)); // Reused, edited
 
 } catch (error) {
 dispatch({
-  type: CUSTOMER_LOGIN_ERROR, // Reused, edited
-  payload: error.response 
-  && error.response.data.message 
-  ? error.response.data.message 
-  : error.message,});
+  type: CUSTOMER_LOGIN_ERROR,payload: error.response && error.response.data.message ? error.response.data.message : error.message,}); // Reused, edited
 }};
 
 //Functions for removing account data from logged in session - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
@@ -103,9 +94,7 @@ dispatch({
 } catch (error) {
 
 //Send Error message if cannot find customer info - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
-const message = 
-error.response && error.response.data.message 
-? error.response.data.message : error.message;
+const message = error.response && error.response.data.message ? error.response.data.message : error.message;
 
 dispatch({ type: CUSTOMER_INFO_ERROR, payload: message });}}; // Reused, edited
 
@@ -113,12 +102,10 @@ dispatch({ type: CUSTOMER_INFO_ERROR, payload: message });}}; // Reused, edited
 export const ammendCustomerAccount = (pptuser) => async (dispatch, getState) => {
   dispatch({ type: CUSTOMER_AMMEND_ACCOUNT_REQUEST, payload: pptuser });
   const { customerLogin: { userDetails }, } = getState();
-  
   try {
   const { data } = await Axios.put(`/api/pptusers/credentials`, pptuser, { headers: // Reused, edited
     { Authorization: `Bearer ${userDetails.token}` }, // Reused, edited
     });
-
     dispatch({ 
       type: CUSTOMER_AMMEND_ACCOUNT_COMPLETE, // Reused, edited
       payload: data });
@@ -128,10 +115,7 @@ export const ammendCustomerAccount = (pptuser) => async (dispatch, getState) => 
       payload: data });
       localStorage.setItem('userDetails', JSON.stringify(data));
   } catch (error) {
-    const message = 
-    error.response && error.response.data.message
-    ? error.response.data.message
-    : error.message;
+    const message = error.response && error.response.data.message ? error.response.data.message: error.message;
 
     dispatch({ 
       type: CUSTOMER_AMMEND_ACCOUNT_ERROR, // Reused, edited
@@ -154,12 +138,7 @@ export const ammendCustomer = (pptuser) => async (dispatch, getState) => {
       CUSTOMER_AMMEND_SUCCESS, // Reused, edited
       payload: data });
     } catch (error) {
-    const message = 
-      error.response 
-       && error.response.data.message
-       ? error.response.data.message
-       : error.message;
-
+    const message = error.response && error.response.data.message ? error.response.data.message: error.message;
     dispatch({ 
       type: CUSTOMER_AMMEND_ERROR, // Reused, edited
       payload: message });
@@ -182,10 +161,7 @@ export const customerHistory = () => async (dispatch, getState) => {
     });
   } catch (error) {
     const message =
-    error.response 
-    && error.response.data.message
-    ? error.response.data.message
-    : error.message;
+    error.response && error.response.data.message ? error.response.data.message: error.message;
     dispatch({ type: CUSTOMER_HISTORY_ERROR, payload: message }); // Reused, edited
   }
 };
@@ -202,11 +178,7 @@ export const removeCustomer = (customerId) => async (dispatch, getState) => { //
     });
     dispatch({ type: CUSTOMER_REMOVE_COMPLETE, payload: data });// Reused, edited
   } catch (error) {
-    const message =
-    error.response 
-    && error.response.data.message
-    ? error.response.data.message
-    : error.message;
+    const message = error.response && error.response.data.message ? error.response.data.message : error.message;
     dispatch({ type: CUSTOMER_REMOVE_ERROR, payload: message });// Reused, edited
   }
 };

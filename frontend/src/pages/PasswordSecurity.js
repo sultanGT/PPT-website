@@ -9,8 +9,8 @@ const PasswordSecurity = props => {//Reused edited code
     const meetsReq = data[1]
     const setActive = () => {//Reused edited code
     const classArr = ["must-line"]
-        if (meetsReq) classArr.push('cross-out')
-        return classArr.join(' ')
+if (meetsReq) classArr.push('cross-out')
+return classArr.join(' ')
     }
 
     return (

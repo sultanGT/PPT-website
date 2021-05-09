@@ -8,7 +8,7 @@ import ShoppingPage from './pages/ShoppingPage';
 import HomePage from './pages/HomePage';
 import CustomerPurchaseHistoryPage from './pages/CustomerPurchaseHistoryPage';
 import PurchasePage from './pages/PurchasePage';
-import PlaceOrderPage from './pages/PlaceOrderPage';
+import PlacePurchasePage from './pages/PlacePurchasePage';
 import ItemInventoryPage from './pages/ItemInventoryPage';
 import ItemPage from './pages/ItemPage';
 import MyAccountPage from './pages/MyAccountPage';
@@ -23,11 +23,11 @@ import SearchPage from './pages/SearchPage';
 import { displayItemBrands, displayItemCategories, displayOurItems } from './actions/itemActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
-import '@fortawesome/fontawesome-free/js/all.js';
+import '@fortawesome/fontawesome-free/js/all.js';//selfcoded
 import img from './pptmenuicon.png';//selfcoded
 import { addShoppingItem, deleteShoppingItem } from './actions/shoppingActions';//selfcoded
 
-
+// https://github.com/basir/amazona/blob/master/frontend/src/App.js
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
 
 //Main function for running the PPT App
@@ -50,8 +50,8 @@ function App(props) {
 
   window.addEventListener('scroll', changeNavbar);//self coded
 
-  const displayCategories = useSelector((state) => state.displayCategories);//edited
-  const { loading: loadingCategories, error: errorCategories, categories,} = displayCategories;//edited
+  const displayCategories = useSelector((state) => state.displayCategories);
+  const { loading: loadingCategories, error: errorCategories, categories,} = displayCategories;
 
   //self coded
   const displayBrands = useSelector((state) => state.displayBrands);
@@ -112,13 +112,13 @@ function App(props) {
           <div>
           <div className="dropdown"> 
             <Link to="/cart">
-              {/* Cart*/}
+              {/* Shopping */}
               <i className="fas fa-shopping-cart icon-large"></i>{/*self coded*/}
               {shoppingItems.length > 0 && (
                 <span className="badge">{shoppingItems.length}</span>
               )}
             </Link>
-{/* 72 DROPDOWN CART self coded SCREEN */}
+{/* 72 DROPDOWN shopping self coded SCREEN */}
             <div className="dropdown-content shopping-dropdown responsive">{/*self coded shopping cart displayed from navmenu */}
                 {
                   <div className="row top pager">
@@ -200,7 +200,7 @@ function App(props) {
                   </li>
                   <li>
                     <Link to="#signout" onClick={signoutHandler} >
-                      Sign Out  <i className="fa fa-sign-out-alt"></i>
+                      Sign Out  <i className="fa fa-sign-out-alt"></i>{/*self coded icons */}
                     </Link>
                   </li>
                 </ul>
@@ -230,6 +230,7 @@ function App(props) {
           </div>
         </header>
         <aside className={sidebarDisplay ? 'open' : ''}>
+          {/*reused*/}
           <ul className="categories">
             <li>
               <strong>Categories</strong>
@@ -298,7 +299,7 @@ function App(props) {
           <Route path="/item/:id/ammend" component={ItemAmmendPage} exact></Route>
           <Route path="/signup" component={SignupPage}></Route>
           <Route path="/delivery" component={DeliveryAddressPage}></Route>
-          <Route path="/orderpurchase" component={PlaceOrderPage}></Route>
+          <Route path="/orderpurchase" component={PlacePurchasePage}></Route>
           <Route path="/customer_purchase/:id" component={PurchasePage}></Route>
           <Route path="/purchasehistory" component={CustomerPurchaseHistoryPage}></Route>
           <Route path="/search/name/:name?" component={SearchPage} exact ></Route>

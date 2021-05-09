@@ -2,7 +2,7 @@ import multer from 'multer';
 import express from 'express';
 import { userCredentialsAuthenticated } from '../utils.js';
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb
-
+//https://github.com/basir/amazona/blob/master/backend/routers/uploadRouter.js
 //Variable Declarations - //edited
 const routeSaver = express.Router();
 // API for uploading image to local save_localy in uploads folder

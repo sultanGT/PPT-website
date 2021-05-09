@@ -38,7 +38,15 @@ export const purchaseNewReducer = (state = {}, action) => {
     default: return state;
   }
 };
-
+//edited
+export const purchaseHistoryReducer = (state = { ppt_orders: [] }, action) => {
+  switch (action.type) {
+    case PURCHASE_HISTORY_REQUEST: return { loading: true };
+    case PURCHASE_HISTORY_COMPLETE: return { loading: false, ppt_orders: action.payload };
+    case PURCHASE_HISTORY_ERROR: return { loading: false, error: action.payload };
+    default: return state;
+  }
+};
 //edited
 export const purchaseInfoReducer = (state = { loading: true }, action) => {
   switch (action.type) { case PURCHASE_INFO_REQUEST: return { loading: true };
@@ -57,25 +65,7 @@ export const purchasePayPalReducer = (state = {}, action) => {
     case PURCHASE_PAYPAL_REFRESH: return {};
     default: return state;
   }
-};
-//edited
-export const purchaseAccountHistoryReducer = (state = { ppt_orders: [] }, action) => {
-  switch (action.type) {
-    case PURCHASE_ACCOUNT_HISTORY_REQUEST: return { loading: true };
-    case PURCHASE_ACCOUNT_HISTORY_COMPLETE: return { loading: false, ppt_orders: action.payload };
-    case PURCHASE_ACCOUNT_HISTORY_ERROR: return { loading: false, error: action.payload };
-    default: return state;
-  }
-};
-//edited
-export const purchaseHistoryReducer = (state = { ppt_orders: [] }, action) => {
-  switch (action.type) {
-    case PURCHASE_HISTORY_REQUEST: return { loading: true };
-    case PURCHASE_HISTORY_COMPLETE: return { loading: false, ppt_orders: action.payload };
-    case PURCHASE_HISTORY_ERROR: return { loading: false, error: action.payload };
-    default: return state;
-  }
-};
+}; 
 //edited
 export const purchaseRemoveReducer = (state = {}, action) => {
   switch (action.type) {
@@ -96,3 +86,13 @@ export const purchaseShippingReducer = (state = {}, action) => {
     default: return state;
   }
 };
+//edited
+export const purchaseAccountHistoryReducer = (state = { ppt_orders: [] }, action) => {
+  switch (action.type) {
+    case PURCHASE_ACCOUNT_HISTORY_REQUEST: return { loading: true };
+    case PURCHASE_ACCOUNT_HISTORY_COMPLETE: return { loading: false, ppt_orders: action.payload };
+    case PURCHASE_ACCOUNT_HISTORY_ERROR: return { loading: false, error: action.payload };
+    default: return state;
+  }
+};
+

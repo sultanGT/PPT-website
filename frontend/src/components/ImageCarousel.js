@@ -7,54 +7,34 @@ import { BsCircle } from 'react-icons/bs'; //self coded
 // function and variable declarations
 const ImageCarousel = ({ slides }) => { // Reused edited
 const [slideImage, setSlideImage] = useState(0);
-const length = slides.length;
-  
+const length = slides.length
+
 //function to move to the next slide in the carousel // Reused edited
   const nextSlide = () => {
-    setSlideImage(
-      slideImage === -1 
-      ? length - 1 : slideImage - 1 
-      || slideImage === -2 
-      ? 0 : slideImage - 1 
-      || slideImage === 0 
-      ? 0 : slideImage - 1);
+setSlideImage(slideImage === -1 ? length - 1 : slideImage - 1 || slideImage === -2 ? 0 : slideImage - 1 || slideImage === 0 ? 0 : slideImage - 1);
   };
 
 //function to move to the next slide in the carousel // Reused edited
   const previousSlide = () => {
-    setSlideImage(
-      slideImage === 0 
-      ? length - 2 : slideImage + 1 
-      || slideImage === 0 
-      ? length - 2 : slideImage + 1);
+    setSlideImage(slideImage === 0 ? length - 2 : slideImage + 1 || slideImage === 0 ? length - 2 : slideImage + 1);
   };
 
 // function for middle carousel indicatior on click to the middle carousel_picture - selfcoded
   const midSlide = () => 
   {
-    setSlideImage(
-      slideImage === -2 
-      ? length - 1 : slideImage - 1 
-      || slideImage === -2 
-      ? length - 1 : slideImage + 1 );
+    setSlideImage( slideImage === -2 ? length - 1 : slideImage - 1 || slideImage === -2 ? length - 1 : slideImage + 1 );
   };
 
 // function for right arrow carousel on click to the next carousel_picture - selfcoded
   const nextImage = () => 
   {
-      setSlideImage(
-        slideImage === length - 1 
-        ? 0 : slideImage + 1);
+      setSlideImage( slideImage === length - 1 ? 0 : slideImage + 1);
   };
 
 // function for left arrow carousel on click to the previous carousel_picture - selfcoded
   const previousImage = () => {
-      setSlideImage(
-        slideImage === 0 
-        ? length - 1 : slideImage 
-        - 1);
+      setSlideImage( slideImage === 0 ? length - 1 : slideImage - 1);
   };
-
 // Reused edited
   if (!Array.isArray(slides) || slides.length <= 0) {
     return null;

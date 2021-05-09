@@ -1,4 +1,4 @@
-// Selfcoded
+// Selfcoded Constants
 export const ITEM_HISTORY_REQUEST = 'ITEM_HISTORY_REQUEST';
 export const ITEM_HISTORY_COMPLETE = 'ITEM_HISTORY_COMPLETE';
 export const ITEM_HISTORY_ERROR = 'ITEM_HISTORY_ERROR';

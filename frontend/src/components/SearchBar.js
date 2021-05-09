@@ -12,12 +12,7 @@ export default function SearchBar(props) {
   return (
     <form className="search" onSubmit={submitHandler}>
       <div className="row">
-        <input
-          type="text"
-          name="q"
-          id="q"
-          placeholder="Search Peak Perfomance Website..." //reuesed, edited
-          onChange={(e) => setName(e.target.value)}
+        <input type="text" name="q" id="q" placeholder="Search Peak Perfomance Website..." onChange={(e) => setName(e.target.value)}//reuesed, edited
         ></input>
         <button className="primary" type="submit">
            <FaSearch />  {/* self coded */}
