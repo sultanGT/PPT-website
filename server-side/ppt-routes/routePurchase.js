@@ -1,6 +1,6 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
-import PPTPurchases from '../ppt-templates/purchaseTemplate.js';
+import Purchases from '../ppt-templates/purchaseTemplate.js';
 import { userCredentialsAdministrator, userCredentialsAuthenticated, } from '../utils.js';
 
 //Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb
@@ -10,26 +10,26 @@ const routePurchase = express.Router();
 
 //Function for finding customer_purchase details - edited
 routePurchase.get( '/', userCredentialsAuthenticated, userCredentialsAdministrator, expressAsyncHandler(async (req, res) => { 
-  const ppt_orders = await PPTPurchases.find({})
-  .populate('pptuser', 'name');
+  const ppt_orders = await Purchases.find({})
+  .populate('customer', 'name');
   res.send(ppt_orders);}));
 
 
 //Function for authentication user - edited
 routePurchase.get('/myaccount', userCredentialsAuthenticated, expressAsyncHandler(async (req, res) => { 
-  const ppt_orders = await PPTPurchases.find({ pptuser: req.pptuser._id });
+  const ppt_orders = await Purchases.find({ customer: req.customer._id });
 res.send(ppt_orders);}));
 
 //Function for completion of payment edited
 routePurchase.post('/', 
 userCredentialsAuthenticated, 
 expressAsyncHandler(async (req, res) => {
-if (req.body.items_order.length === 0) {
+if (req.body.pptpurchase.length === 0) {
 res.status(400).send({ message: 'Please Add Items To Your Cart' });} 
   else {
 //New customer_purchase details edited
-const customer_purchase = new PPTPurchases({
-  items_order: req.body.items_order, delivery_address: req.body.delivery_address, purchase_method: req.body.purchase_method, items_cost: req.body.items_cost, delivery_cost: req.body.delivery_cost, total_cost: req.body.total_cost, pptuser: req.pptuser._id,});
+const customer_purchase = new Purchases({
+  pptpurchase: req.body.pptpurchase, delivery_address: req.body.delivery_address, purchase_method: req.body.purchase_method, items_cost: req.body.items_cost, delivery_cost: req.body.delivery_cost, total_cost: req.body.total_cost, customer: req.customer._id,});
 
 //Save customer_purchase details in datbase edited
 const new_customer_order = await customer_purchase.save();
@@ -37,14 +37,14 @@ const new_customer_order = await customer_purchase.save();
 res.status(201).send({ message: 'A New Order Has Been Created', customer_purchase: new_customer_order });}}));
 
 //Function to find customer_purchase using user id  edited
-routePurchase.get('/:id', userCredentialsAuthenticated, expressAsyncHandler(async (req, res) => { const customer_purchase = await PPTPurchases.findById(req.params.id);
+routePurchase.get('/:id', userCredentialsAuthenticated, expressAsyncHandler(async (req, res) => { const customer_purchase = await Purchases.findById(req.params.id);
 if (customer_purchase) { res.send(customer_purchase); } else { res.status(404).send({ message: 'PPT Order Cannot Be Found In The PPT Database. For Enquiries Please Contact Admin' });}}));
 
 //Update customer_purchase details to payment is confirmed once payment has been confirmed  edited
 routePurchase.put(
   '/:id/payment',
   userCredentialsAuthenticated,expressAsyncHandler(async (req, res) => {
-  const customer_purchase = await PPTPurchases.findById(req.params.id).populate('pptuser','email name');
+  const customer_purchase = await Purchases.findById(req.params.id).populate('customer','email name');
 if (customer_purchase) {
 customer_purchase.purchase_confirmed = true;
 customer_purchase.purchase_date = Date.now();
@@ -62,7 +62,7 @@ res.status(404).send({ message: 'Order Cannot Be Found On The PPT Web Applicatio
 routePurchase.delete('/:id', 
 userCredentialsAuthenticated, 
 userCredentialsAdministrator, 
-expressAsyncHandler(async (req, res) => {const customer_purchase = await PPTPurchases.findById(req.params.id);
+expressAsyncHandler(async (req, res) => {const customer_purchase = await Purchases.findById(req.params.id);
 if (customer_purchase) { 
   const removePurchase = await customer_purchase.remove();
 res.send({ 
@@ -72,7 +72,7 @@ res.send({
 
 //Function to mark and update customer_purchase as delivered
 routePurchase.put('/:id/deliver', userCredentialsAuthenticated, userCredentialsAdministrator, expressAsyncHandler(async (req, res) => {
-const customer_purchase = await PPTPurchases.findById(req.params.id);
+const customer_purchase = await Purchases.findById(req.params.id);
 if (customer_purchase) { customer_purchase.delivery_confirmed = true; 
 customer_purchase.delivery_date = Date.now();
 const save_customer_order = await customer_purchase.save();

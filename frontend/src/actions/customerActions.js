@@ -31,7 +31,7 @@ export const signup = ( name, email, password) => async (dispatch) => {//edited
 dispatch({ 
   type: CUSTOMER_SIGNUP_REQUEST, // Reused, edited
   payload: { email, password } });
-try {const { data } = await Axios.post('/api/pptusers/signup', {name, email, password,}); // Reused, edited
+try {const { data } = await Axios.post('/api/PPTusers/signup', {name, email, password,}); // Reused, edited
 //dispatches signup if user details is entered correctly
 dispatch({ 
   type: CUSTOMER_SIGNUP_COMPLETE, // Reused, edited
@@ -56,7 +56,7 @@ export const login = (email, password) => async (dispatch) => {
 dispatch({ 
   type: CUSTOMER_LOGIN_REQUEST, // Reused, edited
   payload: { email, password } });
-try { const { data } = await Axios.post('/api/pptusers/login', { email, password }); // Reused, edited
+try { const { data } = await Axios.post('/api/PPTusers/login', { email, password }); // Reused, edited
 
 dispatch({ type: CUSTOMER_LOGIN_COMPLETE, payload: data }); // Reused, edited
 localStorage.setItem('userDetails', JSON.stringify(data)); // Reused, edited
@@ -85,7 +85,7 @@ const { customerLogin: { userDetails }, } = getState();
 
 try { 
 
-const { data } = await Axios.get(`/api/pptusers/${customerId}`, { // Reused, edited
+const { data } = await Axios.get(`/api/PPTusers/${customerId}`, { // Reused, edited
 headers: { Authorization: `Bearer ${userDetails.token}` },}); // Reused, edited
 
 dispatch({ 
@@ -99,11 +99,11 @@ const message = error.response && error.response.data.message ? error.response.d
 dispatch({ type: CUSTOMER_INFO_ERROR, payload: message });}}; // Reused, edited
 
 //Function for updating customers account details - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
-export const ammendCustomerAccount = (pptuser) => async (dispatch, getState) => {
-  dispatch({ type: CUSTOMER_AMMEND_ACCOUNT_REQUEST, payload: pptuser });
+export const ammendCustomerAccount = (customer) => async (dispatch, getState) => {
+  dispatch({ type: CUSTOMER_AMMEND_ACCOUNT_REQUEST, payload: customer });
   const { customerLogin: { userDetails }, } = getState();
   try {
-  const { data } = await Axios.put(`/api/pptusers/credentials`, pptuser, { headers: // Reused, edited
+  const { data } = await Axios.put(`/api/PPTusers/credentials`, customer, { headers: // Reused, edited
     { Authorization: `Bearer ${userDetails.token}` }, // Reused, edited
     });
     dispatch({ 
@@ -124,14 +124,14 @@ export const ammendCustomerAccount = (pptuser) => async (dispatch, getState) => 
 };
 
 //Function for ammending customers account details - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
-export const ammendCustomer = (pptuser) => async (dispatch, getState) => {
+export const ammendCustomer = (customer) => async (dispatch, getState) => {
   dispatch({ type: 
     CUSTOMER_AMMEND_ACCOUNT_REQUEST, // Reused, edited
-    payload: pptuser }); // Reused, edited
+    payload: customer }); // Reused, edited
   const { customerLogin: { userDetails },} = getState(); // Reused, edited
   try {
-    const { data } = await Axios.put(`/api/pptusers/${pptuser._id}`, // Reused, edited
-    pptuser, { headers: { Authorization: `Bearer ${userDetails.token}` }, // Reused, edited
+    const { data } = await Axios.put(`/api/PPTusers/${customer._id}`, // Reused, edited
+    customer, { headers: { Authorization: `Bearer ${userDetails.token}` }, // Reused, edited
     });
 
     dispatch({ type: 
@@ -151,7 +151,7 @@ export const customerHistory = () => async (dispatch, getState) => {
     type: CUSTOMER_HISTORY_REQUEST }); // Reused, edited
   try {
     const { customerLogin: { userDetails },} = getState(); // Reused, edited
-    const { data } = await Axios.get('/api/pptusers', { // Reused, edited
+    const { data } = await Axios.get('/api/PPTusers', { // Reused, edited
     headers: { Authorization: `Bearer ${userDetails.token}`,}, // Reused, edited
     });
 
@@ -173,7 +173,7 @@ export const removeCustomer = (customerId) => async (dispatch, getState) => { //
     customerLogin: { userDetails }, // Reused, edited
   } = getState();
   try {
-    const { data } = await Axios.delete(`/api/pptusers/${customerId}`, { // Reused, edited
+    const { data } = await Axios.delete(`/api/PPTusers/${customerId}`, { // Reused, edited
       headers: { Authorization: `Bearer ${userDetails.token}` },// Reused, edited
     });
     dispatch({ type: CUSTOMER_REMOVE_COMPLETE, payload: data });// Reused, edited

@@ -24,7 +24,7 @@ export default function PlacePurchasePage(props) {
   const dispatch = useDispatch();
 
   const placePurchaseHandler = () => {
-    dispatch(newPurchase({ ...shopping, items_order: shopping.shoppingItems }));//edited
+    dispatch(newPurchase({ ...shopping, pptpurchase: shopping.shoppingItems }));//edited
   };
   useEffect(() => {
     if (success) {  props.history.push(`/customer_purchase/${customer_purchase._id}`);//edited

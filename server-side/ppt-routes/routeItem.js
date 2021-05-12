@@ -131,7 +131,7 @@ routeItem.post('/:id/reviews',userCredentialsAuthenticated,expressAsyncHandler(a
 const itemId = req.params.id;
 const item = await Item.findById(itemId);
     if (item) {
-      const review = {name: req.pptuser.name,user_rating: Number(req.body.user_rating),user_comment: req.body.user_comment,
+      const review = {name: req.customer.name,user_rating: Number(req.body.user_rating),user_comment: req.body.user_comment,
       };
       item.reviews.push(review);
       item.review_count = item.reviews.length;

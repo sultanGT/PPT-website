@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/PPT-website', {useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true,});
 //PPT web application API's for routers and PayPal //edited
 app.use('/api/saver', routeSaver);//edited
-app.use('/api/pptusers', routeCustomer);//edited
+app.use('/api/PPTusers', routeCustomer);//edited
 app.use('/api/pptitems', routeItem);//edited
 app.use('/api/pptpuchase', routePurchase);//edited
 app.get('/api/config/paypal', (req, res) => {res.send(process.env.PAYPAL_CLIENT_ID || 'sb');});

@@ -323,7 +323,7 @@ function App(props) {
           <AdminRoute path="/iteminventory/page_number/:page_number" component={ItemInventoryPage} exact></AdminRoute>
           <AdminRoute path="/purchaseshistory" component={PurchasesHistoryPage} exact></AdminRoute>
           <AdminRoute path="/customerdisplay" component={CustomersRegisterPage}></AdminRoute>
-          <AdminRoute path="/pptuser/:id/ammend" component={CustomerAmmendPage}></AdminRoute>
+          <AdminRoute path="/customer/:id/ammend" component={CustomerAmmendPage}></AdminRoute>
           </div><Route path="/" component={HomePage} exact></Route>
         </main>
          {/* edited code */}

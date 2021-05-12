@@ -108,7 +108,7 @@ export default function PurchasePage(props) {//Reused code edited
               <div className="container-box container-box-info">{/*styling self coded*/}
                 <h2>Order Items</h2>
                 <ul>
-                  {customer_purchase.items_order.map((item) => ( //edited
+                  {customer_purchase.pptpurchase.map((item) => ( //edited
                     <li key={item.item}>{/*edited*/}
                       <div className="row">
                         <div><img src={item.picture} alt={item.name} className="small"></img></div>

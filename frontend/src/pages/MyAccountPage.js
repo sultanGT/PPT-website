@@ -16,7 +16,7 @@ export default function MyAccountPage() {//edited coded
   const customerLogin = useSelector((state) => state.customerLogin);//edited coded 
   const { userDetails } = customerLogin;
   const userInfo = useSelector((state) => state.userInfo);
-  const { loading, error, pptuser } = userInfo;//edited coded 
+  const { loading, error, customer } = userInfo;//edited coded 
   const userAmmendAccount = useSelector((state) => state.userAmmendAccount);//edited coded 
   const userAmmendAccount2 = useSelector((state) => state.userAmmendAccount);//edited coded 
   const {success: successUpdate, error: errorAmmend, loading: loadingAmmend, } = userAmmendAccount;
@@ -24,15 +24,15 @@ export default function MyAccountPage() {//edited coded
   const dispatch = useDispatch();
   
   useEffect(() => {
-    if (!pptuser) { dispatch({ type: CUSTOMER_AMMEND_ACCOUNT_REFRESH });//edited coded 
+    if (!customer) { dispatch({ type: CUSTOMER_AMMEND_ACCOUNT_REFRESH });//edited coded 
       dispatch(customerInfo(userDetails._id));//edited coded 
-    } else { setName(pptuser.name);//edited coded 
-      setEmail(pptuser.email);//edited coded 
+    } else { setName(customer.name);//edited coded 
+      setEmail(customer.email);//edited coded 
     }
-  }, [dispatch, userDetails._id, pptuser]);//edited coded 
+  }, [dispatch, userDetails._id, customer]);//edited coded 
 
   const profileSubmitHandler = (e) => {e.preventDefault();//edited coded 
-      dispatch(ammendCustomerAccount({customerId: pptuser._id, name, email,   //edited coded  
+      dispatch(ammendCustomerAccount({customerId: customer._id, name, email,   //edited coded  
         })
       );
     };
@@ -46,7 +46,7 @@ export default function MyAccountPage() {//edited coded
      else {
       dispatch(
         ammendCustomerAccount({//edited coded 
-          customerId: pptuser._id,//edited coded 
+          customerId: customer._id,//edited coded 
           name,email,password,
      
         })

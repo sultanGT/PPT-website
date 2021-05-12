@@ -48,7 +48,7 @@ export default function PurchasesHistoryPage(props) {
             {ppt_orders.map((customer_purchase) => ( //map purchase infomation from customer purchases in table
               <tr key={customer_purchase._id}>{/*edited*/}
                 <td>{customer_purchase._id}</td>{/*edited*/}
-                <td>{customer_purchase.pptuser.username}</td>{/*edited*/}
+                <td>{customer_purchase.customer.username}</td>{/*edited*/}
                 <td>{customer_purchase.createdAt.substring(0, 10)}</td>{/*edited*/}
                 <td>{customer_purchase.total_cost.toFixed(2)}</td>{/*edited*/}
                 <td>{customer_purchase.purchase_confirmed ? customer_purchase.purchase_date.substring(0, 10) : 'No'}</td>{/*edited*/}

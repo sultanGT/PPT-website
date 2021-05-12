@@ -17,7 +17,7 @@ export default function CustomerAmmendPage(props) {
   const [email, setEmail] = useState('');
   const [userCredentialsAdministrator, setCredentialsAdministrator] = useState(false);  //Reused edited
   const userInfo = useSelector((state) => state.userInfo);
-  const { loading, error, pptuser } = userInfo;  //Reused edited
+  const { loading, error, customer } = userInfo;  //Reused edited
   const userAmmend = useSelector((state) => state.userAmmend);  //Reused edited
   const { loading: loadingAmmend, error: errorAmmend, success: successAmmend, } = userAmmend;  //Reused edited
   const dispatch = useDispatch();
@@ -27,14 +27,14 @@ export default function CustomerAmmendPage(props) {
       dispatch({ type: CUSTOMER_AMMEND_REFRESH });  //Reused edited
       props.history.push('/customerdisplay');  //Reused edited
     }
-    if (!pptuser) {  //Reused edited
+    if (!customer) {  //Reused edited
       dispatch(customerInfo(customerId));  //Reused edited
     } else {
-      setName(pptuser.name);  //Reused edited
-      setEmail(pptuser.email);  //Reused edited
-      setCredentialsAdministrator(pptuser.userCredentialsAdministrator);  //Reused edited
+      setName(customer.name);  //Reused edited
+      setEmail(customer.email);  //Reused edited
+      setCredentialsAdministrator(customer.userCredentialsAdministrator);  //Reused edited
     }
-  }, [dispatch, props.history, successAmmend, pptuser, customerId]);  //Reused edited
+  }, [dispatch, props.history, successAmmend, customer, customerId]);  //Reused edited
  
   const submitHandler = (e) => {
     e.preventDefault();

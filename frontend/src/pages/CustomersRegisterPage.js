@@ -9,7 +9,7 @@ import { CUSTOMER_INFO_REFRESH } from '../constants/customerConstants'; //edited
 //Reused edited
 export default function CustomersRegisterPage(props) {//edited
   const userList = useSelector((state) => state.userList); //edited
-  const { loading, error, pptusers } = userList; //edited
+  const { loading, error, PPTusers } = userList; //edited
   const userDelete = useSelector((state) => state.userDelete); //edited
   const { loading: loadingDelete, error: errorDelete, success: successDelete, } = userDelete; 
   const dispatch = useDispatch();
@@ -19,9 +19,9 @@ export default function CustomersRegisterPage(props) {//edited
       type: CUSTOMER_INFO_REFRESH, //edited
     });
   }, [dispatch, successDelete]); //edited
-  const removeHandler = (pptuser) => { //edited
+  const removeHandler = (customer) => { //edited
     if (window.confirm('Confirm removal of customer?')) { //edited
-      dispatch(removeCustomer(pptuser._id)); //edited
+      dispatch(removeCustomer(customer._id)); //edited
     }
   };
   //Displays Customers registered on PPT web application
@@ -49,17 +49,17 @@ export default function CustomersRegisterPage(props) {//edited
             </tr>
           </thead>
           <tbody>
-            {pptusers.map((pptuser) => (  
-              <tr key={pptuser._id}>
-                <td>{pptuser._id}</td>
-                <td>{pptuser.name}</td>
-                <td>{pptuser.email}</td>
-                <td>{pptuser.userCredentialsAdministrator ? 'YES' : 'NO'}</td>  {/*edited*/}
+            {PPTusers.map((customer) => (  
+              <tr key={customer._id}>
+                <td>{customer._id}</td>
+                <td>{customer.name}</td>
+                <td>{customer.email}</td>
+                <td>{customer.userCredentialsAdministrator ? 'YES' : 'NO'}</td>  {/*edited*/}
                 <td>
-                  <button type="button" className="small primary" onClick={() => props.history.push(`/pptuser/${pptuser._id}/ammend`)}>{/* styling self coded */}
+                  <button type="button" className="small primary" onClick={() => props.history.push(`/customer/${customer._id}/ammend`)}>{/* styling self coded */}
                     Edit
                   </button>
-                  <button type="button" className="small primary" onClick={() => removeHandler(pptuser)}>{/* styling self coded */}
+                  <button type="button" className="small primary" onClick={() => removeHandler(customer)}>{/* styling self coded */}
                     remove
                   </button>
                 </td>

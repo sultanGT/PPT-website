@@ -35,7 +35,7 @@ import {
 export const customerInfoReducer = (state = { loading: true }, action) => {
   switch (action.type) { 
     case CUSTOMER_INFO_REQUEST: return { loading: true };
-    case CUSTOMER_INFO_COMPLETE: return { loading: false, pptuser: action.payload };
+    case CUSTOMER_INFO_COMPLETE: return { loading: false, customer: action.payload };
     case CUSTOMER_INFO_ERROR: return { loading: false, error: action.payload };
     case CUSTOMER_INFO_REFRESH: return { loading: true };
     default: return state;
@@ -85,7 +85,7 @@ export const customerAmmendReducer = (state = {}, action) => {
 export const customerHistoryReducer = (state = { loading: true }, action) => {
   switch (action.type) {
     case CUSTOMER_HISTORY_REQUEST:return { loading: true };
-    case CUSTOMER_HISTORY_COMPLETE:return { loading: false, pptusers: action.payload };
+    case CUSTOMER_HISTORY_COMPLETE:return { loading: false, PPTusers: action.payload };
     case CUSTOMER_HISTORY_ERROR:return { loading: false, error: action.payload };
     default:return state;
   }

@@ -2,7 +2,7 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
-import PPTUser from '../ppt-templates/customerTemplate.js';
+import Customer from '../ppt-templates/customerTemplate.js';
 import { generateToken, userCredentialsAdministrator, userCredentialsAuthenticated } from '../utils.js';
 
 //https://github.com/basir/amazona/blob/master/backend/routers/userRouter.js
@@ -11,20 +11,20 @@ import { generateToken, userCredentialsAdministrator, userCredentialsAuthenticat
 const routeCustomer = express.Router();
 
 
-//Function to insert commisioned pptusers into PPT web application - //reused edited
+//Function to insert commisioned PPTusers into PPT web application - //reused edited
 routeCustomer.get('/PPTuserlist',expressAsyncHandler(async (req, res) => {
-  const insert_pptusers = await PPTUser.insertMany(data.pptusers);
+  const insert_pptusers = await Customer.insertMany(data.PPTusers);
   res.send({ insert_pptusers });
   })
 );
 
-//Function for to login in pptuser from PPT web application - //reused edited
+//Function for to login in customer from PPT web application - //reused edited
 routeCustomer.post('/login',expressAsyncHandler(async (req, res) => {
-  const pptuser = await PPTUser.findOne({ email: req.body.email });
-  if (pptuser) {
-      // Decrypt bcrypted user_password to match with pptuser entered user_password
-  if (bcrypt.compareSync(req.body.password, pptuser.password)) {
-  res.send({_id: pptuser._id,name: pptuser.name,email: pptuser.email,userCredentialsAdministrator: pptuser.userCredentialsAdministrator,token: generateToken(pptuser),
+  const customer = await Customer.findOne({ email: req.body.email });
+  if (customer) {
+      // Decrypt bcrypted user_password to match with customer entered user_password
+  if (bcrypt.compareSync(req.body.password, customer.password)) {
+  res.send({_id: customer._id,name: customer.name,email: customer.email,userCredentialsAdministrator: customer.userCredentialsAdministrator,token: generateToken(customer),
         });
         return;
       }
@@ -33,35 +33,35 @@ routeCustomer.post('/login',expressAsyncHandler(async (req, res) => {
   })
 );
 
-//Function to signup a new pptuser on the PPT database - //reused edited
+//Function to signup a new customer on the PPT database - //reused edited
 routeCustomer.post('/signup',expressAsyncHandler(async (req, res) => {
-  const pptuser = new PPTUser({name: req.body.name,email: req.body.email,password: bcrypt.hashSync(req.body.password, 8),
+  const customer = new Customer({name: req.body.name,email: req.body.email,password: bcrypt.hashSync(req.body.password, 8),
     });
-  const new_pptuser = await pptuser.save();
+  const new_pptuser = await customer.save();
     res.send({_id: new_pptuser._id,name: new_pptuser.name,email: new_pptuser.email,userCredentialsAdministrator: new_pptuser.userCredentialsAdministrator,token: generateToken(new_pptuser),
     });
   })
 );
 
-//Function for authenticating pptuser id - //reused edited
+//Function for authenticating customer id - //reused edited
 routeCustomer.get('/:id',expressAsyncHandler(async (req, res) => {
-const pptuser = await PPTUser.findById(req.params.id);
-    if (pptuser) {res.send(pptuser);} else {
+const customer = await Customer.findById(req.params.id);
+    if (customer) {res.send(customer);} else {
     res.status(404).send({ message: 'User Not Found' });
     }
   })
 );
 
-//Function for updating pptuser credentials - //reused edited
+//Function for updating customer credentials - //reused edited
 routeCustomer.put('/credentials',userCredentialsAuthenticated,expressAsyncHandler(async (req, res) => {
-const pptuser = await PPTUser.findById(req.pptuser._id);
-    if (pptuser) {
-      pptuser.name = req.body.name || pptuser.name;
-      pptuser.email = req.body.email || pptuser.email;
+const customer = await Customer.findById(req.customer._id);
+    if (customer) {
+      customer.name = req.body.name || customer.name;
+      customer.email = req.body.email || customer.email;
       if (req.body.password) {
-        pptuser.password = bcrypt.hashSync(req.body.password, 8);
+        customer.password = bcrypt.hashSync(req.body.password, 8);
       }
-      const ammend_pptuser = await pptuser.save();
+      const ammend_pptuser = await customer.save();
       res.send({_id: ammend_pptuser._id,name: ammend_pptuser.name,email: ammend_pptuser.email,userCredentialsAdministrator: ammend_pptuser.userCredentialsAdministrator,token: generateToken(ammend_pptuser),
       });
     }
@@ -70,33 +70,33 @@ const pptuser = await PPTUser.findById(req.pptuser._id);
 
 //F//reused edited
 routeCustomer.get('/',userCredentialsAuthenticated,userCredentialsAdministrator,expressAsyncHandler(async (req, res) => {
-    const pptusers = await PPTUser.find({});
-    res.send(pptusers);
+    const PPTusers = await Customer.find({});
+    res.send(PPTusers);
   })
 );
-//Function for deleting pptusers from PPT web application with the exception of the owners email - //reused edited
+//Function for deleting PPTusers from PPT web application with the exception of the owners email - //reused edited
 routeCustomer.delete('/:id',userCredentialsAuthenticated,userCredentialsAdministrator,
-expressAsyncHandler(async (req, res) => {const pptuser = await PPTUser.findById(req.params.id);
-    if (pptuser) {
-      if (pptuser.email === 'sultan.malik@city.ac.uk') {
+expressAsyncHandler(async (req, res) => {const customer = await Customer.findById(req.params.id);
+    if (customer) {
+      if (customer.email === 'sultan.malik@city.ac.uk') {
         res.status(400).send({ message: 'Cannot delete PPT Adminisrators account' });
         return;
       }
-      const removeCustomer = await pptuser.remove();
-      res.send({ message: 'User has now been removed from PPT web application', pptuser: removeCustomer });
+      const removeCustomer = await customer.remove();
+      res.send({ message: 'User has now been removed from PPT web application', customer: removeCustomer });
     } else {
       res.status(404).send({ message: 'User cannot be found on the PPT web application' });
     }
   })
 );
 
-//Function for updating pptuser credential in the PPT web application - //  reused edited
+//Function for updating customer credential in the PPT web application - //  reused edited
 routeCustomer.put('/:id',userCredentialsAuthenticated,userCredentialsAdministrator,expressAsyncHandler(async (req, res) => {
-  const pptuser = await PPTUser.findById(req.params.id);
-    if (pptuser) {
-      pptuser.name = req.body.name || pptuser.name;pptuser.email = req.body.email || pptuser.email;pptuser.userCredentialsAdministrator = Boolean(req.body.userCredentialsAdministrator);
-      const ammend_pptuser = await pptuser.save();
-      res.send({ message: 'User Updated', pptuser: ammend_pptuser });
+  const customer = await Customer.findById(req.params.id);
+    if (customer) {
+      customer.name = req.body.name || customer.name;customer.email = req.body.email || customer.email;customer.userCredentialsAdministrator = Boolean(req.body.userCredentialsAdministrator);
+      const ammend_pptuser = await customer.save();
+      res.send({ message: 'User Updated', customer: ammend_pptuser });
     } else {
       res.status(404).send({ message: 'User cannot be found on the PPT web application' });
     }
