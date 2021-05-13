@@ -131,7 +131,7 @@ dispatch(login(email, password));
         <div className='row google-form'>
           {/* selfcoded*/}
         <GoogleLogin className='google-button'
-          clientId="714794464338-1d4era4sfqk47117qvk53deeiujvu68h.apps.googleusercontent.com"
+          clientId="716649543205-n2eogpdbatti5515opg1frnvu024ae3o.apps.googleusercontent.com"
           buttonText="Login with Google"
           onSuccess={loginResponseGoogle}
           onFailure={loginResponseGoogle}
@@ -188,7 +188,7 @@ dispatch(login(email, password));
              {/* selfcoded*/}
         <div className='row google-form'>
         <GoogleLogin className='google-button'
-          clientId="714794464338-1d4era4sfqk47117qvk53deeiujvu68h.apps.googleusercontent.com"
+          clientId="716649543205-n2eogpdbatti5515opg1frnvu024ae3o.apps.googleusercontent.com"
           buttonText="Signup with Google"
           onSuccess={signupResponseGoogle}
           onFailure={signupResponseGoogle}
