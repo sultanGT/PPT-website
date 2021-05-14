@@ -93,19 +93,12 @@ dispatch(login(email, password));
 
 //self coded
   const loginResponseGoogle = (response) => {
-    
-    setEmail(response.profileObj.email);
-    setPassword3(response.profileObj.googleId);
-    dispatch(login(email, password3));
+    dispatch(login(response.profileObj.email, response.profileObj.googleId));
 
   }
 
   const signupResponseGoogle = (response) => {
-    setName(response.profileObj.givenName);
-    setEmail(response.profileObj.email);
-    setPassword2(response.profileObj.googleId);
-    setConfirmPassword(response.profileObj.googleId);
-    dispatch(signup(name, email, password2));
+    dispatch(signup(response.profileObj.givenName, response.profileObj.email, response.profileObj.googleId));
   }
 
   return (
