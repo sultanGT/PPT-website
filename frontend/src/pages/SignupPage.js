@@ -125,7 +125,7 @@ dispatch(login(email, password));
           <label htmlFor="password">Password</label>
           <input type="password" id="password" placeholder="Enter password" autoComplete="username" required onChange={(e) => setPassword(e.target.value)}
           ></input>
-        </div>
+        </div>{/*s*/}
         <div>
           <label />
         <div className='row google-form'>

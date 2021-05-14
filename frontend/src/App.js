@@ -231,32 +231,32 @@ function App(props) {
         </header>
         <aside className={sidebarDisplay ? 'open' : ''}>
           {/*reused*/}
-          <ul className="categories">
-            <li>
-              <strong>Categories</strong>
-              <button onClick={() => setSidebarDisplay(false)} className="close-sidebar" type="button">
-                <i className="fas fa-times"></i>
+          <button onClick={() => setSidebarDisplay(false)} className="close-sidebar" type="button">
+              <img className='menu-Icon-Small top15 responsive row center' src={img} alt="PPTmenuIcon"></img>
               </button>
+              <li className='row center'>
+              <strong>Categories</strong>
             </li>
+          <ul className="categories">
             {loadingCategories ? (<LoadingBox></LoadingBox>) : errorCategories ? ( <MessageBox variant="danger">{errorCategories}</MessageBox>
             ) : (
-              categories.map((c) => (<li key={c}>
-                  <Link to={`/search/item_category/${c}`} onClick={() => setSidebarDisplay(false)}>
+              categories.map((c) => (<li className='row center' key={c}>
+                  <Link className='row center' to={`/search/item_category/${c}`} onClick={() => setSidebarDisplay(false)}>
                     {c}
                   </Link>
                 </li>
               ))
             )}
             {/* 140 self coded brands */}
-            <li>
+            <li className='row center'>
               <strong>Brands</strong>
             </li>
             {loadingBrands ? (<LoadingBox></LoadingBox>) : errorBrands ? (
               <MessageBox variant="danger">{errorBrands}</MessageBox>
             ) : (
               brands.map((a) => (
-                <li key={a}>
-                  <Link to={`/search/item_brand/${a}`}
+                <li className='row center' key={a}>
+                  <Link className='row center' to={`/search/item_brand/${a}`}
                     onClick={() => setSidebarDisplay(false)}
                   >
                     {a}
@@ -266,7 +266,7 @@ function App(props) {
             )}   {/* self coded brands */}
 
               {/* self coded Our Products */}
-            <li>
+            <li className='row center' >
               <strong>Our Products</strong>
             </li>
             {loadingOurProducts ? (
@@ -275,8 +275,9 @@ function App(props) {
               <MessageBox variant="danger">{errorOurProducts}</MessageBox>
             ) : (
               our_products.map((q) => (
-                <li key={q}>
+                <li className='row center' key={q}>
                   <Link
+                  className='row center'
                     to={`/search/item_brand/${q}`}
                     onClick={() => setSidebarDisplay(false)}
                   >
@@ -337,7 +338,7 @@ function App(props) {
           <h2>Address: Wimbeldon Park Hall,<br/> 170 Arthur Rd, Wimbledon Park,<br/> London SW19 8AQ</h2>
           </div>
           <div className='footerbox-2 responsive'>
-          <ul className="categories">
+          <ul className="">
             <li>
               <h1>Item Categories</h1>
             </li>
@@ -353,7 +354,7 @@ function App(props) {
           </ul>
           </div>
           <div className='footerbox-2 responsive'>
-          <ul className="categories">
+          <ul className="">
           <li>
               <h1>Brands</h1>
             </li>
@@ -374,7 +375,7 @@ function App(props) {
             </ul>
           </div>
           <div>
-          <ul className="categories responsive">
+          <ul className=" responsive">
           <li>
               <strong>Our Products</strong>
             </li>
