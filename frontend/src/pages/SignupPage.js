@@ -15,7 +15,6 @@ export default function SignupPage(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
-  const [password3, setPassword3] = useState("")//selfcoded
   const [password2, setPassword2] = useState("") //selfcoded
   const [confirmPassword, setConfirmPassword] = useState("")
   const redirect = props.location.search ? props.location.search.split('=')[1]: '/';
