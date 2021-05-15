@@ -459,7 +459,7 @@ button.close-sidebar {
   background: #000;
 }
  
- @media only screen and (max-width: 600px) {
+ @media only screen and (max-width: 890px) {
   .responsive {
       display: none;
   }
@@ -468,7 +468,6 @@ button.close-sidebar {
 .pager {
   padding: 5rem;
 }
-
 
 @media only screen and (max-width: 600px) {
   .responsiveCart {

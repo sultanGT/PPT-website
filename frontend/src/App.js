@@ -332,10 +332,10 @@ function App(props) {
         {/* self coded*/}
         <footer className="row">
           <div className='footerbox-1'>
-          <Link className="footerbrand" to="/">
+          <Link className="footerbrand responsive" to="/">
               PEAK PERFORMANCE TAEKWONDO
             </Link>
-          <h2>Address: Wimbeldon Park Hall,<br/> 170 Arthur Rd, Wimbledon Park,<br/> London SW19 8AQ</h2>
+          <h2 className='responsive'>Address: Wimbeldon Park Hall,<br/> 170 Arthur Rd, Wimbledon Park,<br/> London SW19 8AQ</h2>
           </div>
           <div className='footerbox-2 '>
           <ul className="">
@@ -364,7 +364,7 @@ function App(props) {
             ) : (
               brands.map((a) => (
                 <li key={a}>
-                  <Link className='white-links'
+                  <Link className='white-links responsive'
                     to={`/search/item_brand/${a}`}
                   >
                     {a}
@@ -385,7 +385,7 @@ function App(props) {
               our_products.map((q) => (
                 <li key={q}>
                   <Link
-                  className='white-links' to={`/search/item_brand/${q}`}
+                  className='white-links responsive' to={`/search/item_brand/${q}`}
                     onClick={() => setSidebarDisplay(false)}
                   >
                     {q}
