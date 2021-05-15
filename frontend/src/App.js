@@ -95,7 +95,7 @@ function App(props) {
               onClick={() => setSidebarDisplay(true)}
             >
               {/* <i className={ navbar ? 'fa fa-bars' : 'deactive'}></i> */}
-              <img className={ navbar ? 'menu-Icon-Small responsive' : ' menu-Icon-large responsive'} src={img} alt="PPTmenuIcon"></img>
+              <img className={ navbar ? 'menu-Icon-Small ' : ' menu-Icon-large'} src={img} alt="PPTmenuIcon"></img>
             </button>
             <Link className="Brand" to="/">
               PEAK PERFORMANCE TAEKWONDO
@@ -232,7 +232,7 @@ function App(props) {
         <aside className={sidebarDisplay ? 'open' : ''}>
           {/*reused*/}
           <button onClick={() => setSidebarDisplay(false)} className="close-sidebar" type="button">
-              <img className='menu-Icon-Small top15 responsive row center' src={img} alt="PPTmenuIcon"></img>
+              <img className='menu-Icon-Small top15 row center' src={img} alt="PPTmenuIcon"></img>
               </button>
               <li className='row center'>
               <strong>Categories</strong>
