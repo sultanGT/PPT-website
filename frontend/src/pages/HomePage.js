@@ -20,10 +20,11 @@ export default function HomePage() { //edited
   }, [dispatch]);
 //
   return (
-    <div>
+    <div className=''>
 {/* Carousel Slider */}
-<div className="row center responsive"> {/* Styling responsive self coded */}
-<ImageCarousel slides={ImageSlides} /> {/* edited */}
+
+<div className="row center carousel-box"> {/* Styling responsive self coded */}
+<ImageCarousel className='row center'slides={ImageSlides} /> {/* edited */}
 </div>
 <h1 className='row center container-box-hc-title'>Our Newest Products!</h1> {/* self coded */}
       {loading ? (
