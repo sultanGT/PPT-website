@@ -61,8 +61,8 @@ const customer = await Customer.findById(req.customer._id);
       if (req.body.password) {
         customer.password = bcrypt.hashSync(req.body.password, 8);
       }
-      const ammend_pptuser = await customer.save();
-      res.send({_id: ammend_pptuser._id,name: ammend_pptuser.name,email: ammend_pptuser.email,userCredentialsAdministrator: ammend_pptuser.userCredentialsAdministrator,token: generateToken(ammend_pptuser),
+      const amend_pptuser = await customer.save();
+      res.send({_id: amend_pptuser._id,name: amend_pptuser.name,email: amend_pptuser.email,userCredentialsAdministrator: amend_pptuser.userCredentialsAdministrator,token: generateToken(amend_pptuser),
       });
     }
   })
@@ -95,8 +95,8 @@ routeCustomer.put('/:id',userCredentialsAuthenticated,userCredentialsAdministrat
   const customer = await Customer.findById(req.params.id);
     if (customer) {
       customer.name = req.body.name || customer.name;customer.email = req.body.email || customer.email;customer.userCredentialsAdministrator = Boolean(req.body.userCredentialsAdministrator);
-      const ammend_pptuser = await customer.save();
-      res.send({ message: 'User Updated', customer: ammend_pptuser });
+      const amend_pptuser = await customer.save();
+      res.send({ message: 'User Updated', customer: amend_pptuser });
     } else {
       res.status(404).send({ message: 'User cannot be found on the PPT web application' });
     }

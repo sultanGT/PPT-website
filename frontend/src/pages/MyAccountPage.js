@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { customerInfo, ammendCustomerAccount } from '../actions/customerActions';//edited coded 
+import { customerInfo, amendCustomerAccount } from '../actions/customerActions';//edited coded 
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { CUSTOMER_AMMEND_ACCOUNT_REFRESH } from '../constants/customerConstants'; //edited coded 
@@ -17,10 +17,10 @@ export default function MyAccountPage() {//edited coded
   const { userDetails } = customerLogin;
   const userInfo = useSelector((state) => state.userInfo);
   const { loading, error, customer } = userInfo;//edited coded 
-  const userAmmendAccount = useSelector((state) => state.userAmmendAccount);//edited coded 
-  const userAmmendAccount2 = useSelector((state) => state.userAmmendAccount);//edited coded 
-  const {success: successUpdate, error: errorAmmend, loading: loadingAmmend, } = userAmmendAccount;
-  const {success: successUpdate2, error: errorAmmend2, loading: loadingAmmend2, } = userAmmendAccount2;
+  const userAmendAccount = useSelector((state) => state.userAmendAccount);//edited coded 
+  const userAmendAccount2 = useSelector((state) => state.userAmendAccount);//edited coded 
+  const {success: successUpdate, error: errorAmend, loading: loadingAmend, } = userAmendAccount;
+  const {success: successUpdate2, error: errorAmend2, loading: loadingAmend2, } = userAmendAccount2;
   const dispatch = useDispatch();
   
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function MyAccountPage() {//edited coded
   }, [dispatch, userDetails._id, customer]);//edited coded 
 
   const profileSubmitHandler = (e) => {e.preventDefault();//edited coded 
-      dispatch(ammendCustomerAccount({customerId: customer._id, name, email,   //edited coded  
+      dispatch(amendCustomerAccount({customerId: customer._id, name, email,   //edited coded  
         })
       );
     };
@@ -45,7 +45,7 @@ export default function MyAccountPage() {//edited coded
     } 
      else {
       dispatch(
-        ammendCustomerAccount({//edited coded 
+        amendCustomerAccount({//edited coded 
           customerId: customer._id,//edited coded 
           name,email,password,
      
@@ -112,8 +112,8 @@ export default function MyAccountPage() {//edited coded
         {loading ? (<LoadingBox></LoadingBox>) : error ? (<MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <>
-            {loadingAmmend && <LoadingBox></LoadingBox>}
-            {errorAmmend && (<MessageBox variant="danger">{errorAmmend}</MessageBox>
+            {loadingAmend && <LoadingBox></LoadingBox>}
+            {errorAmend && (<MessageBox variant="danger">{errorAmend}</MessageBox>
             )}
             {successUpdate && (
               <MessageBox variant="success">Profile Updated Successfully</MessageBox>//edited
@@ -143,8 +143,8 @@ export default function MyAccountPage() {//edited coded
         </div>
         {loading ? ( <LoadingBox></LoadingBox> ) : error ? ( <MessageBox variant="danger">{error}</MessageBox>) : (
           <>
-            {loadingAmmend2 && <LoadingBox></LoadingBox>}
-            {errorAmmend2 && ( <MessageBox variant="danger">{errorAmmend2}</MessageBox>
+            {loadingAmend2 && <LoadingBox></LoadingBox>}
+            {errorAmend2 && ( <MessageBox variant="danger">{errorAmend2}</MessageBox>
             )} {/*self coded*/}
             {successUpdate2 && (<MessageBox variant="success"> Password Updated Successfully</MessageBox>
             )} {/* self coded */}

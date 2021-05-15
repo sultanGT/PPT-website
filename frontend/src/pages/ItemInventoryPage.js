@@ -22,7 +22,7 @@ export default function ItemInventoryPage(props) {
   useEffect(() => {
     if (successNew) {
       dispatch({ type: ITEM_CREATE_REFRESH });// Reused edited
-      props.history.push(`/item/${new_item._id}/ammend`);// Reused edited
+      props.history.push(`/item/${new_item._id}/amend`);// Reused edited
     }
     if (successRemove) {
       dispatch({ type: ITEM_REMOVE_REFRESH });// Reused edited
@@ -75,7 +75,7 @@ export default function ItemInventoryPage(props) {
                   <td>{item.item_category}</td>
                   <td>{item.item_brand}</td>
                   <td>
-                    <button type="button" className="small primary" onClick={() =>   props.history.push(`/item/${item._id}/ammend`)}>{/* edited */}
+                    <button type="button" className="small primary" onClick={() =>   props.history.push(`/item/${item._id}/amend`)}>{/* edited */}
                       Edit
                     </button>
                     <button type="button" className="small primary"onClick={() => removeHandler(item)}>{/* edited */}

@@ -56,7 +56,7 @@ export default function CustomersRegisterPage(props) {//edited
                 <td>{customer.email}</td>
                 <td>{customer.userCredentialsAdministrator ? 'YES' : 'NO'}</td>  {/*edited*/}
                 <td>
-                  <button type="button" className="small primary" onClick={() => props.history.push(`/customer/${customer._id}/ammend`)}>{/* styling self coded */}
+                  <button type="button" className="small primary" onClick={() => props.history.push(`/customer/${customer._id}/amend`)}>{/* styling self coded */}
                     Edit
                   </button>
                   <button type="button" className="small primary" onClick={() => removeHandler(customer)}>{/* styling self coded */}

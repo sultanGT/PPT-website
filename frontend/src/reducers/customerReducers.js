@@ -43,7 +43,7 @@ export const customerInfoReducer = (state = { loading: true }, action) => {
 };
 
 //edited
-export const customerAmmendAccountReducer = (state = {}, action) => {
+export const customerAmendAccountReducer = (state = {}, action) => {
   switch (action.type) {
     case CUSTOMER_AMMEND_ACCOUNT_REQUEST: return { loading: true };
     case CUSTOMER_AMMEND_ACCOUNT_COMPLETE: return { loading: false, success: true };
@@ -72,7 +72,7 @@ export const customerLoginReducer = (state = {}, action) => {
   }
 };
 //edited
-export const customerAmmendReducer = (state = {}, action) => {
+export const customerAmendReducer = (state = {}, action) => {
   switch (action.type) {
     case CUSTOMER_AMMEND_REQUEST:return { loading: true };
     case CUSTOMER_AMMEND_SUCCESS:return { loading: false, success: true };

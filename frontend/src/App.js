@@ -14,10 +14,10 @@ import ItemPage from './pages/ItemPage';
 import MyAccountPage from './pages/MyAccountPage';
 import SignupPage from './pages/SignupPage';
 import DeliveryAddressPage from './pages/DeliveryAddressPage';
-import ItemAmmendPage from './pages/ItemAmmendPage';
+import ItemAmendPage from './pages/ItemAmendPage';
 import PurchasesHistoryPage from './pages/PurchasesHistoryPage';
 import CustomersRegisterPage from './pages/CustomersRegisterPage';
-import CustomerAmmendPage from './pages/CustomerAmmendPage';
+import CustomerAmendPage from './pages/CustomerAmendPage';
 import SearchBar from './components/SearchBar';
 import SearchPage from './pages/SearchPage';
 import { displayItemBrands, displayItemCategories, displayOurItems } from './actions/itemActions';
@@ -297,7 +297,7 @@ function App(props) {
         <div className="pages">
           <Route path="/shopping/:id?" component={ShoppingPage}></Route>
           <Route path="/item/:id" component={ItemPage} exact></Route>
-          <Route path="/item/:id/ammend" component={ItemAmmendPage} exact></Route>
+          <Route path="/item/:id/amend" component={ItemAmendPage} exact></Route>
           <Route path="/signup" component={SignupPage}></Route>
           <Route path="/delivery" component={DeliveryAddressPage}></Route>
           <Route path="/orderpurchase" component={PlacePurchasePage}></Route>
@@ -324,7 +324,7 @@ function App(props) {
           <AdminRoute path="/iteminventory/page_number/:page_number" component={ItemInventoryPage} exact></AdminRoute>
           <AdminRoute path="/purchaseshistory" component={PurchasesHistoryPage} exact></AdminRoute>
           <AdminRoute path="/customerdisplay" component={CustomersRegisterPage}></AdminRoute>
-          <AdminRoute path="/customer/:id/ammend" component={CustomerAmmendPage}></AdminRoute>
+          <AdminRoute path="/customer/:id/amend" component={CustomerAmendPage}></AdminRoute>
           </div><Route path="/" component={HomePage} exact></Route>
         </main>
          {/* edited code */}

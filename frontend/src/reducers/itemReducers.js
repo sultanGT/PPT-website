@@ -55,7 +55,7 @@ export const itemBrandListReducer = (
   }
 };
 //edited
-export const itemAmmendReducer = (state = {}, action) => {// reused edited
+export const itemAmendReducer = (state = {}, action) => {// reused edited
   switch (action.type) {case ITEM_AMMEND_REQUEST:// reused edited
       return { loading: true }; case ITEM_AMMEND_COMPLETE:// reused edited
       return { loading: false, success: true };

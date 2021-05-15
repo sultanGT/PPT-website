@@ -3,14 +3,14 @@ import { CUSTOMER_AMMEND_REFRESH } from '../constants/customerConstants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { customerInfo, ammendCustomer } from '../actions/customerActions'; //Reused edited
+import { customerInfo, amendCustomer } from '../actions/customerActions'; //Reused edited
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 
 // Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
 //Reused edited
-export default function CustomerAmmendPage(props) {
+export default function CustomerAmendPage(props) {
   
   const customerId = props.match.params.id;
   const [name, setName] = useState(''); 
@@ -18,12 +18,12 @@ export default function CustomerAmmendPage(props) {
   const [userCredentialsAdministrator, setCredentialsAdministrator] = useState(false);  //Reused edited
   const userInfo = useSelector((state) => state.userInfo);
   const { loading, error, customer } = userInfo;  //Reused edited
-  const userAmmend = useSelector((state) => state.userAmmend);  //Reused edited
-  const { loading: loadingAmmend, error: errorAmmend, success: successAmmend, } = userAmmend;  //Reused edited
+  const userAmend = useSelector((state) => state.userAmend);  //Reused edited
+  const { loading: loadingAmend, error: errorAmend, success: successAmend, } = userAmend;  //Reused edited
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (successAmmend) {  //Reused edited
+    if (successAmend) {  //Reused edited
       dispatch({ type: CUSTOMER_AMMEND_REFRESH });  //Reused edited
       props.history.push('/customerdisplay');  //Reused edited
     }
@@ -34,11 +34,11 @@ export default function CustomerAmmendPage(props) {
       setEmail(customer.email);  //Reused edited
       setCredentialsAdministrator(customer.userCredentialsAdministrator);  //Reused edited
     }
-  }, [dispatch, props.history, successAmmend, customer, customerId]);  //Reused edited
+  }, [dispatch, props.history, successAmend, customer, customerId]);  //Reused edited
  
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(ammendCustomer({ _id: customerId, name, email, userCredentialsAdministrator }));  //Reused edited
+    dispatch(amendCustomer({ _id: customerId, name, email, userCredentialsAdministrator }));  //Reused edited
   };
 
   return (
@@ -47,8 +47,8 @@ export default function CustomerAmmendPage(props) {
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Edit User {name}</h1>
-          {loadingAmmend && <LoadingBox></LoadingBox>}     {/* edited coded */}
-          {errorAmmend && (<MessageBox variant="danger">{errorAmmend}</MessageBox>)} {/* //edited code */}
+          {loadingAmend && <LoadingBox></LoadingBox>}     {/* edited coded */}
+          {errorAmend && (<MessageBox variant="danger">{errorAmend}</MessageBox>)} {/* //edited code */}
         </div>
         {loading ? (<LoadingBox />) : error ? (<MessageBox variant="danger">{error}</MessageBox>) : (
           <>

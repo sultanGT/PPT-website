@@ -99,7 +99,7 @@ const message = error.response && error.response.data.message ? error.response.d
 dispatch({ type: CUSTOMER_INFO_ERROR, payload: message });}}; // Reused, edited
 
 //Function for updating customers account details - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
-export const ammendCustomerAccount = (customer) => async (dispatch, getState) => {
+export const amendCustomerAccount = (customer) => async (dispatch, getState) => {
   dispatch({ type: CUSTOMER_AMMEND_ACCOUNT_REQUEST, payload: customer });
   const { customerLogin: { userDetails }, } = getState();
   try {
@@ -123,8 +123,8 @@ export const ammendCustomerAccount = (customer) => async (dispatch, getState) =>
   }
 };
 
-//Function for ammending customers account details - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
-export const ammendCustomer = (customer) => async (dispatch, getState) => {
+//Function for amending customers account details - Reused code from tutorial - all names, variables, functions etc. have been optimised for the PPT website
+export const amendCustomer = (customer) => async (dispatch, getState) => {
   dispatch({ type: 
     CUSTOMER_AMMEND_ACCOUNT_REQUEST, // Reused, edited
     payload: customer }); // Reused, edited

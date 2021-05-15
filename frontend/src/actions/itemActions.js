@@ -150,8 +150,8 @@ dispatch({ type: ITEM_NEW_REQUEST });
   }
 };
 
-//function for administrator to ammend item details
-export const ammendItem = (item) => async (dispatch, getState) => { 
+//function for administrator to amend item details
+export const amendItem = (item) => async (dispatch, getState) => { 
 dispatch({ 
   type: ITEM_AMMEND_REQUEST, // Reused, edited
   payload: item }); 

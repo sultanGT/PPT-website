@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Axios from 'axios';
-import { itemInfo, ammendItem } from '../actions/itemActions';
+import { itemInfo, amendItem } from '../actions/itemActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { ITEM_AMMEND_REFRESH } from '../constants/itemConstants';//Reused edited
@@ -9,7 +9,7 @@ import { ITEM_AMMEND_REFRESH } from '../constants/itemConstants';//Reused edited
 
 // Reused code from tutorials - https://github.com/basir/amazona , https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb , https://www.youtube.com/watch?v=TRCDsB9i3bI&list=PLSV-EvELRCzBvF5d0IQGnD9m5dnvKrJ8K&index=29c
 //Reused edited
-export default function ItemAmmendPage(props) {
+export default function ItemAmendPage(props) {
 
   //
   const itemId = props.match.params.id;//Reused edited
@@ -25,12 +25,12 @@ export default function ItemAmmendPage(props) {
   const itemDetails = useSelector((state) => state.itemDetails);//Reused edited
   const { loading, error, item } = itemDetails;//Reused edited
 
-  const itemAmmend = useSelector((state) => state.itemAmmend);//Reused edited
+  const itemAmend = useSelector((state) => state.itemAmend);//Reused edited
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
-  } = itemAmmend;//Reused edited
+  } = itemAmend;//Reused edited
 
   //
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ export default function ItemAmmendPage(props) {
     e.preventDefault();
     // TODO: dispatch update item
     dispatch(
-      ammendItem({
+      amendItem({
         _id: itemId,name,cost,picture,item_category,item_brand,stock_number,item_info,})
     );
   };

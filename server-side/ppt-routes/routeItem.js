@@ -109,8 +109,8 @@ routeItem.post('/',userCredentialsAuthenticated,userCredentialsAdministrator, ex
 routeItem.put('/:id', userCredentialsAuthenticated, userCredentialsAdministrator, expressAsyncHandler(async (req, res) => {
 const itemId = req.params.id;
 const item = await Item.findById(itemId);
-if (item) { item.name = req.body.name; item.cost = req.body.cost; item.picture = req.body.picture; item.item_category = req.body.item_category; item.item_brand = req.body.item_brand; item.stock_number = req.body.stock_number; item.item_info = req.body.item_info; const item_ammended = await item.save();
-res.send({ message: 'Item Has Now Been Updated On the PPT Web App', item: item_ammended }); } else {
+if (item) { item.name = req.body.name; item.cost = req.body.cost; item.picture = req.body.picture; item.item_category = req.body.item_category; item.item_brand = req.body.item_brand; item.stock_number = req.body.stock_number; item.item_info = req.body.item_info; const item_amended = await item.save();
+res.send({ message: 'Item Has Now Been Updated On the PPT Web App', item: item_amended }); } else {
 res.status(404).send({ message: 'Item Cannot Be Found On The PPT Web App' });
 }
 })
@@ -136,8 +136,8 @@ const item = await Item.findById(itemId);
       item.reviews.push(review);
       item.review_count = item.reviews.length;
       item.user_rating = item.reviews.reduce((a, c) => c.user_rating + a, 0) / item.reviews.length;
-      const item_ammended = await item.save();
-      res.status(201).send({ message: 'Item Review and Rating Has Now Been Published',review: item_ammended.reviews[item_ammended.reviews.length - 1],
+      const item_amended = await item.save();
+      res.status(201).send({ message: 'Item Review and Rating Has Now Been Published',review: item_amended.reviews[item_amended.reviews.length - 1],
       });
     } else { res.status(404).send({ message: 'Item Cannot Be Found On The PPT Web App' });
     }
