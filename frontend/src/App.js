@@ -119,7 +119,7 @@ function App(props) {
               )}
             </Link>
 {/* 72 DROPDOWN shopping self coded SCREEN */}
-            <div className="dropdown-content shopping-dropdown responsive">{/*self coded shopping cart displayed from navmenu */}
+            <div className="dropdown-content shopping-dropdown responsiveCart">{/*self coded shopping cart displayed from navmenu */}
                 {
                   <div className="row top pager">
                   <div className="col-2">
@@ -337,7 +337,7 @@ function App(props) {
             </Link>
           <h2>Address: Wimbeldon Park Hall,<br/> 170 Arthur Rd, Wimbledon Park,<br/> London SW19 8AQ</h2>
           </div>
-          <div className='footerbox-2 responsive'>
+          <div className='footerbox-2 '>
           <ul className="">
             <li>
               <h1>Item Categories</h1>
