@@ -8,26 +8,26 @@ You will need to clone the repo for PPT-website from this link: https://github.c
 // 3. Run Npm install
 You will then need to open a new terminal and run: 
 
-npm install 
+$ npm install 
 
 (you will need to install node.js to run npm install)
-
 once completed you will need to open a new terminal and then run:
 
-cd frontend
-npm install
+$ cd frontend
+$ npm install
 
 (this is to install node_modules folder for application to work)
 
-// 4. Run Npm start from root folder (run server-side on localhost:5000)
+// 4. Run Npm start from root folder
 you will then need to open a new terminal and run:
 
 npm start
 
+this runs the server-side on localhost:5000
 then open a new terminal and run:
 
-cd frontend
-npm start
+$ cd frontend
+$ npm start
 
 this will then open up the app in the chrome browser at localhost:3000
 
