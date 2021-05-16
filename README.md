@@ -10,7 +10,7 @@ http://www.pptwebsite.co.uk/
 go to https://docs.mongodb.com/manual/installation/ and choose the community edition for either MAC or Windows, follow the default instructions for installing
 MongoDB
 
-// 2. Clone Reposeitory
+// 2. Clone Repository
 You will need to open Visual Studio Code app and select file then clone the repo for PPT-website from this link: https://github.com/sultanGT/PPT-website.git
 
 // 3. Run Npm install
