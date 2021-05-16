@@ -1,3 +1,11 @@
+Installing the PPT web application
+
+If there is difficulty installing the web application using the isntructions below a working verion of the web app is being hosted via this url:
+http://www.pptwebsite.co.uk/
+
+(it may take 1min for it to initialy load on the web page)
+
+
 // 1.Install MongoDB
 go to https://docs.mongodb.com/manual/installation/ and choose the community edition for either MAC or Windows, follow the default instructions for installing
 MongoDB
@@ -55,6 +63,5 @@ email: user@ppt
 or you can register your details on to the web app and sign-up.
 
 the PPT web application is currently hosted online at:
-
 http://www.pptwebsite.co.uk/
 
