@@ -55,10 +55,12 @@ Default user logins are:
 Admin user account :
  name: admin
  email: admin@ppt  
+ Password: admin
 
 Normal user account :
 name: user
 email: user@ppt
+Password: user
 
 or you can register your details on to the web app and sign-up.
 
